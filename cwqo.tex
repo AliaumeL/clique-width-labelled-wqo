@@ -1,0 +1,30 @@
+% !TeX document-id = {8cab1ed7-6690-4820-80f7-c18b55f758a8}
+% !BIB program = bibtex
+\documentclass[11pt,a4paper,twosided]{article}
+\usepackage{geometry}
+\geometry{margin=3.5cm}
+
+\input{lib/packages}     % packages needed for this paper
+\input{lib/aliaume}      % aliaume’s custom macros
+
+\input{lib/maths}        % custom math commands specific to this paper
+\input{knowledges.kl}    % textual knowledges
+
+\input{src/metadata.tex} % metadata of the paper (generated)
+
+
+\begin{document}
+\maketitle
+\makeabstract
+
+% main content
+\input{src/introduction}
+
+% bibliographies
+\bibliographystyle{plainurl}
+\bibliography{papers.bib}
+
+% appendices
+\appendix
+
+\end{document}
