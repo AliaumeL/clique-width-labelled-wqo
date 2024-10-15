@@ -1,0 +1,28 @@
+\section{Existentially Interpreting Finite Paths}
+\label{sec:interpreting-paths}
+
+TODO:
+\begin{itemize}
+    \item If not WQO, then arbitrarily large bad branches.
+    \item Color the nodes of this bad branch using their type (relative to the branch)
+    \item Without loss of generality, assume that the branch is super long, and that
+        we do not have a lot of different types of nodes inside each bag.
+        (uniform bound $K$)
+    \item Take a large bad branch, and define 
+        $\psi(x,y) \defined E(x,y) \neq E(l(x), r(y))$ where
+        $l(x)$ and $r(y)$ respectively "putting to the left" or 
+        "putting to the right" of the branch in a (non-existing) "good decomposition".
+    \item Witness that $\psi$ defines \emph{almost} a directed path, except
+        that it may have back edges due to the non-commutativity of the idempotent node.
+    \item If there are no back edges, we just defined a long induced path.
+    \item If there were some back edges, there were \emph{a lot of them}.
+    \item Define $\phi(x,y)$ if there exists a directed edge $x \to y$
+        \textbf{AND} a node $z$ such that $z \to z_1$, $z \to z_2$
+        and a path of length at most $2K$ from $z_1$  to $z_2$
+        that goes through $x$ and $y$ (in this order).
+    \item Prove that $\phi$ defines a directed path.
+    \item Take the symmetric version of $\phi$ and conclude.
+\end{itemize}
+
+
+

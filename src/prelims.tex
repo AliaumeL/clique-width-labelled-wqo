@@ -1,0 +1,53 @@
+\section{Preliminaries}
+\label{sec:preliminaries}
+
+\paragraph*{Graphs.} A \intro{graph} is a pair $G = (V, E)$ where $V$ is a set
+of \intro{vertices} and $E \subseteq V \times V$ is a set of \intro{edges}. A
+graph is \intro{undirected} if $(u, v) \in E$ implies $(v, u) \in E$ for all
+$u, v \in V$. In this paper we will focus on finite undirected graphs. Given a
+set $X$, an \intro{$X$-labelled graph} is a graph equipped with a function
+$\ell \colon V \to X$ that assigns a label to each vertex. Given a class $\Cls$
+of finite undirected graphs, write $\Label{X}{\Cls}$ for the class of freely
+$X$-labelled graphs in $\Cls$, i.e., the class of all \kl{$X$-labelled graphs}
+$G = (V, E, \ell)$ such that $G \in \Cls$.
+
+
+\paragraph*{Well-quasi-orderings.} A quasi-ordered set $(X, \leq)$ is a set $X$
+equipped with a reflexive and transitive relation $\leq$. A sequence
+$\seqof{x_i}$ of elements in $X$ is \intro(sequence){good} if there exist $i <
+j$ such that $x_i \leq x_j$. A quasi-ordered set is \intro{well-quasi-ordered}
+(\reintro{wqo}) if every infinite sequence is \kl(sequence){good}.
+
+\AP
+Let $(X, \leq)$ be a quasi-order, and let $\Cls$ be a class of \kl{$X$-labelled
+graphs}. Then, we define the \intro{$X$-induced quasi-order} on $\Cls$ as
+follows: for $G, H \in \Cls$, we write $G \leq H$ if there exists a
+\kl{monomorphism} $f \colon G \to H$ such that for all $v \in V$, we have
+$\ell_G(v) \leq \ell_H(f(v))$. 
+
+\AP
+A class $\Cls$ of finite undirected graphs is
+\intro{labelled-well-quasi-ordered} (\reintro{labelled-wqo}) if for every finite set
+$(X,=)$, the class $\Label{X}{\Cls}$ is \kl{well-quasi-ordered} using the
+\kl{$X$-induced quasi-order}. A class of graph is
+\intro{wqo-well-quasi-ordered} (\reintro{wqo-wqo}) if for every \kl{well-quasi-order}
+$(X, \leq)$, the class $\Label{X}{\Cls}$ is \kl{well-quasi-ordered} using the
+\kl{$X$-induced quasi-order}.
+
+\paragraph*{Transductions.} An \intro{$\MSO$-interpretation} between two
+classes $X$ and $Y$ of finite relational structures is given by formulii
+$\phi_{\Delta}, \phi_{\delta}, \phi_{R}$ in \kl{monadic second-order logic}.
+The interpretation defines a relation between structures of $X$ and $Y$ as
+follows: ... We define similarly the notion of \intro{existential
+transduction}.
+
+\paragraph*{Bounded clique-width.} A class of graph has \intro{bounded
+clique-width} if it is included in the image of some \kl{$\MSO$-interpretation}
+from finite trees to finite undirected graphs.
+
+\paragraph*{Automata Theoretical Results.}
+Simon's factorisation theorem.
+
+
+
+
