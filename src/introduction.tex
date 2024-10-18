@@ -1,10 +1,125 @@
 \section{Introduction}
 \label{sec:introduction}
 
-\paragraph*{Contributions.}
-We prove the following theorems
+% Context:
+% - WQOs are cool (graph theory, verification of infinite systems (abdulla et al.),
+%                  lossy channel systems (etessami et al.), etc.)
+% - Composition of wqos (sum, products, finite words, finite trees, etc.)
+% - Graphs: not clear for induced substructure, lot of literature on the subject, seems
+%   somehow orthogonal to the usual notions of "well-structured" classes of graphs (sparsity)
+% - Two conjectures by Pouzet:
+%       2-wqo => labelled-wqo
+%       labelled-wqo => wqo-wqo
+% - Tree decompositions of graphs and *gap-embedding relation*
+%   - gap embedding relation  -> Dershowitz and Manna
+%   - priority chanel systems -> nested higman ~ gap embedding relation on "linear trees"
+%   - gap embedding -> nested higman in general [Freund 2020]
+% - Connection between gap embedding and tree decompositions has already been 
+%   established [LOPEZ24], exploring again a paper of \cite{DRT10}
+% 
+% Contributions:
+% We connect two deep results in the literature: the *gap embedding*
+% and the existence of *forward ramseyan factorisations* in trees.
+% These two technical results were meant to be used together, as we will try to
+% demonstrate in this paper.
+% This allows us to answer positively to the weak First Pouzet conjecture on
+% classes of graphs of bounded clique-width, and to the strong Second Pouzet conjecture
+% on classes of graphs of bounded clique-width.
+%
+% This analysis also connects to the sturcural graph theory, because we 
+% are able to show the following conjecture due to Sylvain Schmitz
+% in the context of bounded clique-width calsses of graphs:
+%
+% A class of graphs is labelled-wqo if and only if it does not FOexistentially-transduce
+% the class of all paths.
+%
+% We also prove htat 
+% Well-quasi-ordered classes of graphs  are NIP
+%
+% and conjecture that 
+% NIP classes that are labelled-wqo are of bounded clique-width.
+%
+% This would imply the *strong Pouzet conjecture* for every class of graphs.
+%
 
-\begin{theorem}
+\subparagraph{Context.} The theory of well-quasi-orderings (WQOs) is a powerful
+combinatorial setting that has found applications in various areas of
+mathematics and computer science. In graph theory, the celebrated result of
+Robertson and Seymour~\cite{ROBSEY04} states that the class of all finite
+graphs is well-quasi-ordered under the minor relation. WQOs are also at the
+heart of \emph{well-structured transition systems}, infinite state transitions
+systems over which verification algorithms can be
+designed~\cite{ABDU96,ABDU98}.
+
+One of the appeal of WQOs is that they are closed under various operations,
+such as the sum and the product of WQOs. As an example, the closure of WQOs
+under the finite words, also known as Higman's lemma \cite{HIG52}, has been
+used in the verification of so-called \emph{lossy channel
+systems}~\cite{ABDU93}. 
+
+In the context of graphs, there is a theoretical interest in understanding
+which classes of finite graphs are WQOs when endowed with the induced subgraph
+relation. Ding \cite{DING95}, the study of WQOs on classes of
+
+
+\begin{conjecture}
+    \label{pouzet1:conj}
+    Let $\Cls$ be a class of finite graphs.
+    Then, $\Cls$ is 2-well-quasi-ordered
+    if and only if
+    $\Cls$ is labelled-well-quasi-ordered.
+\end{conjecture}
+
+\begin{conjecture}
+    \label{pouzet2:conj}
+    Let $\Cls$ be a class of finite graphs.
+    Then, $\Cls$ is labelled-well-quasi-ordered
+    if and only if
+    $\Cls$ is wqo-well-quasi-ordered.
+\end{conjecture}
+
+Classes of graphs that are labelled-wqo are of interest because they remains
+stable under monadic colorings, an operation that is omnipresent in the
+structrual graph theory community. Classes of graphs that are wqo-wqo are of
+interest because they can be understood as \emph{operators} on
+well-quasi-orders, much like the finite word and finite tree constructions. In
+the case of (ordered) graphs, these two constructions are special cases of the
+induced substructure relation on the class of linear orders and tree orders.
+
+Attempts to prove these conjectures often relied on assuming some kind of
+structural property of the class of graphs, such as enjoying suitable
+\emph{tree decompositions}. Now, to work on those trees, one needs to place a
+well-quasi-ordered relation on them. This is usually done using the tree
+embedding relation, also known as Kruskal's embedding relation, which is a
+well-quasi-ordering on trees \cite{KRU72}. This works when the function that
+maps a tree to a graph is simple enough, but more often than not, this is not
+the case. In \cite{DRT10}, the authors introduce a \emph{tailored} embedding
+relation on trees, and prove that it is a well-quasi-ordering under certain
+hypotheses, leveraging a tedious and error-prone proof using a \emph{minimal
+bad sequence argument} \cite{NASH65}.
+
+We know since \cite{FREU20} and \cite{LOPEZ23a} that one can easily inductively
+define well-quasi-orderings of increasing complexity on a given set. One
+example of such a construction is the \emph{gap embedding relation} of
+Derhowitz and Tzameret \cite{DERSHOWITZ200380}. This relation was already at
+the core of \emph{priority channel systems}, although in a somewhat hidden form
+\cite{HSS13}.  It was also noticed in \cite{LOPEZ24} that the \emph{ad-hoc}
+construction of \cite{DRT10} was in fact a particular instance of the gap
+embedding relation on trees.
+
+\paragraph*{Contributions.} We continue the line of research initiated in
+\cite{LOPEZ24} and explore the \emph{automata theoretic} approach to the Pouzet
+conjectures. At the core of our analysis is the fundamental connection between
+a deep automata theoretic construction (\emph{forward ramseyan factorisations}
+on trees) and a deep combinatorial construction (\emph{gap embedding} on
+trees). These two constructions were meant to be used together, as we will try
+to advocate in this paper.
+
+We are also interested in the \emph{decidability} of the WQO property. This is
+a question that has recently gained traction in the community, and is of
+practical interest.
+
+\begin{theorem}[restate=effective-image:thm,title={}]
     \label{effective-image:thm}
     Let $I$ be an $\MSO$ interpretation
     from finite trees to undirected graphs.
@@ -15,7 +130,7 @@ We prove the following theorems
     $\image{I}$ is wqo-well-quasi-ordered.
 \end{theorem}
 
-\begin{theorem}
+\begin{theorem}[restate=pouzet2:thm]
     \label{pouzet-2:thm}
     Let $\Cls$ be a class of finite graphs of bounded clique-width.
     Then, $\Cls$ is labelled-well-quasi-ordered
@@ -23,7 +138,7 @@ We prove the following theorems
     $\Cls$ is wqo-well-quasi-ordered.
 \end{theorem}
 
-\begin{theorem}
+\begin{theorem}[restate=transductions-paths:thm]
     \label{transductions-paths:thm}
     Let $\Cls$ be a class of bounded clique-width.
     Then $\Cls$ is labelled-well-quasi-ordered
@@ -41,5 +156,12 @@ We prove the following theorems
 \begin{remark}
     If $\Cls$ is labelled-wqo, then it is NIP.
 \end{remark}
+
+\begin{conjecture}
+    \label{nip-cw:conj}
+    Let $\Cls$ be a class of graphs.
+    If $\Cls$ is NIP and labelled-wqo,
+    then $\Cls$ is of bounded clique-width.
+\end{conjecture}
 
 \paragraph*{Outline.}
