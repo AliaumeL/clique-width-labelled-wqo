@@ -24,7 +24,7 @@
         \def\isInsideRestatedTheorem{1}
         \csname #1\endcsname*
     \fi
-    \begin{proof}[Proof of {\cref{#1}} as stated on page {\pageref{#1}}]
+    \begin{proof}[Proof of {\cref{#1}} as introduced on page {\pageref{#1}}]
         \phantomsection
         \label{#1:proof}
 }{
@@ -101,3 +101,5 @@
         (#2)!
     \fi
 }
+
+\NewDocumentCommand{\restate}{ m }{\ifcsname #1\endcsname\csname #1\endcsname*\fi}

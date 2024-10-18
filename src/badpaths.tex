@@ -4,6 +4,8 @@
 
 We will make heavy usage of the results of \cite{COLC07} on trees.
 
+\subsection{From Interpretation to Monoids}
+
 \AP We use unranked ordered trees $T$ with labels taken from a finite alphabet
 $\Sigma$ placed on the nodes of the trees. These trees are denoted using
 $\Trees{\Sigma}$. In a tree, the root is denoted by $\treeRoot$, and the set of
@@ -31,6 +33,12 @@ path from $x$ to $y$ in $T$.
     \end{align*}
 \end{lemma}
 
+\begin{figure}
+    \centering
+    \todo[inline]{Draw the tree and how we compute the existence of an edge}
+    \caption{The interpretation of a tree using a monoid and an accepting part.}
+    \label{interpretation-to-monoid:fig}
+\end{figure}
 
 \AP This combinatorial description of the interpretation in terms of a monoid
 allows us to introduce the notion of \emph{edge labelled tree}. We use the
@@ -38,6 +46,22 @@ notation $\Trees[M]{\Sigma}$ for the trees where the vertices are labelled by
 elements of $\Sigma$ and the edges are labelled by elements of $M$. To simplify
 notations, we will allow ourselves to write $\mu[T](x,y)$ for $\mu(T[x \colon
 y])$ and omit $T$ when it is clear from the context.
+
+\todo[inline]{Explain how the new tree interpretation works, using 
+    the so-called \emph{composition ordering} on trees labelled by
+    a finite monoid}
+
+\begin{figure}
+    \centering
+    \todo[inline]{Draw the composition ordering on trees}
+    \caption{The composition ordering on trees}
+    \label{composition-ordering:fig}
+\end{figure}
+
+\subsection{Forward Ramseyan Splits and Bad Branches}
+
+\todo[inline]{Recall that in the case of words, there exists a factorisation theorem
+    due to Simon, explain that this will be an equivalent for trees.}
 
 \AP
 A \intro{split of height $N$} in a tree $T$ is a mapping $s$ from the nodes
@@ -53,6 +77,20 @@ y$ and $x' \treelt y'$, we have
 where the product is the product in the monoid $M$.
 So in particular, $s(x, y)$ is an idempotent, but $s(x, y)$ and $s(x', y')$ may be
 different idempotents.
+
+\todo[inline]{
+    Explain that using the \emph{gap embedding relation}, we almost
+    have a monotone surjective map! But not quite because of
+    adjacent idempotent nodes. + drawing
+}
+
+\begin{figure}
+    \centering
+    \todo[inline]{A gap embedding relation between two small trees where we
+    break an edge because of the separation of two idempotent nodes.}
+    \caption{The gap embedding relation vs the composition ordering}
+    \label{gap-embedding-composition-diff:fig}
+\end{figure}
 
 \begin{definition}
     \label{ramseyan-branch:def}
@@ -142,11 +180,10 @@ otherwise. To every leaf $x$ of $B(T)$, we associate a triple $(\mu(x, B(x)),
     with the same "local types" for every edges.
 \end{proof}
 
-\begin{theorem}
-    Given an $\MSO$ interpretation $I$ from trees to graphs, there exists a computable
-    $k$ such that the class of images is $k$-well-quasi-ordered if and only if
-    the class of images is wqo-well-quasi-ordered. Furthermore, both properties are decidable.
-\end{theorem}
+
+\begin{proofof}{effective-image:thm}[main]
+    Test
+\end{proofof}
 
 TODOs:
 \begin{itemize}

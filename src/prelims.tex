@@ -1,6 +1,17 @@
 \section{Preliminaries}
 \label{sec:preliminaries}
 
+\paragraph*{Relational Structures.} A \intro{relational signature} is a tuple
+$\sigma = (R_1, \ldots, R_k)$ where each $R_i$ is a relation symbol of arity $1
+\leq n_i < \omega$. A \kl{(finite) relational structure} over $\sigma$ is a tuple $A
+= (U, R_1^A, \ldots, R_k^A)$ where $U$ is a finite set and each $R_i^A
+\subseteq U^{n_i}$.
+
+\begin{itemize}
+    \item first order logic 
+    \item monadic second order logic
+\end{itemize}
+
 \paragraph*{Graphs.} A \intro{graph} is a pair $G = (V, E)$ where $V$ is a set
 of \intro{vertices} and $E \subseteq V \times V$ is a set of \intro{edges}. A
 graph is \intro{undirected} if $(u, v) \in E$ implies $(v, u) \in E$ for all
@@ -11,27 +22,10 @@ of finite undirected graphs, write $\Label{X}{\Cls}$ for the class of freely
 $X$-labelled graphs in $\Cls$, i.e., the class of all \kl{$X$-labelled graphs}
 $G = (V, E, \ell)$ such that $G \in \Cls$.
 
-
-\paragraph*{Well-quasi-orderings.} A quasi-ordered set $(X, \leq)$ is a set $X$
-equipped with a reflexive and transitive relation $\leq$. A sequence
-$\seqof{x_i}$ of elements in $X$ is \intro(sequence){good} if there exist $i <
-j$ such that $x_i \leq x_j$. A quasi-ordered set is \intro{well-quasi-ordered}
-(\reintro{wqo}) if every infinite sequence is \kl(sequence){good}.
-
-\AP
-Let $(X, \leq)$ be a quasi-order, and let $\Cls$ be a class of \kl{$X$-labelled
-graphs}. Then, we define the \intro{$X$-induced quasi-order} on $\Cls$ as
-follows: for $G, H \in \Cls$, we write $G \leq H$ if there exists a
-\kl{monomorphism} $f \colon G \to H$ such that for all $v \in V$, we have
-$\ell_G(v) \leq \ell_H(f(v))$. 
-
-\AP A class $\Cls$ of finite undirected graphs is
-\intro{labelled-well-quasi-ordered} (\reintro{labelled-wqo}) if for every
-finite set $(X,=)$, the class $\Label{X}{\Cls}$ is \kl{well-quasi-ordered}
-using the \kl{$X$-induced quasi-order}. A class of graph is
-\intro{wqo-well-quasi-ordered} (\reintro{wqo-wqo}) if for every
-\kl{well-quasi-order} $(X, \leq)$, the class $\Label{X}{\Cls}$ is
-\kl{well-quasi-ordered} using the \kl{$X$-induced quasi-order}.
+\paragraph*{Trees.} In this paper, trees are finite, unranked, and ordered.
+They are understood as \kl{relational structures} over the \kl{signature}
+$\sigma = (\leq_1, \leq_2)$ where $\leq_1$ is the \kl{ancestor relation} and
+$\leq_2$ is the \kl{sibling relation}.
 
 \paragraph*{Transductions.} An \intro{$\MSO$-interpretation} between two
 classes $X$ and $Y$ of finite relational structures is given by formulii
@@ -42,11 +36,35 @@ transduction}.
 
 \paragraph*{Bounded clique-width.} A class of graph has \intro{bounded
 clique-width} if it is included in the image of some \kl{$\MSO$-interpretation}
-from finite trees to finite undirected graphs \cite{COUR91}.
+from finite trees to finite undirected graphs \cite{COUR91}
 
-\paragraph*{Automata Theoretical Results.} 
-Monoid morphism, idempotents,
-factorisation. Simon's factorisation theorem.
+\paragraph*{Automata Theory.} We assume basic familiarity with
+automata theoretic concepts such as finite monoids, bottom-up tree automata,
+$\MSO$ on trees, and the connection between these three items. We refer to
+\textbf{TODO: cite} for a comprehensive introduction to these topics.
+
+
+\paragraph*{Well-quasi-orderings.} A quasi-ordered set $(X, \leq)$ is a set $X$
+equipped with a reflexive and transitive relation $\leq$. A sequence
+$\seqof{x_i}$ of elements in $X$ is \intro(sequence){good} if there exist $i <
+j$ such that $x_i \leq x_j$. A quasi-ordered set is \intro{well-quasi-ordered}
+(\reintro{wqo}) if every infinite sequence is \kl(sequence){good}.
+
+\AP Let $(X, \leq)$ be a quasi-order, and let $\Cls$ be a class of
+\kl{$X$-labelled graphs}. Then, we define the \intro{$X$-induced quasi-order}
+on $\Cls$ as follows: for $G, H \in \Cls$, we write $G \leq H$ if there exists
+a \kl{monomorphism} $f \colon G \to H$ such that for all $v \in V$, we have
+$\ell_G(v) \leq \ell_H(f(v))$. 
+
+\AP A class $\Cls$ of finite undirected graphs is
+\intro{labelled-well-quasi-ordered} (\reintro{labelled-wqo}) if for every
+finite set $(X,=)$, the class $\Label{X}{\Cls}$ is \kl{well-quasi-ordered}
+using the \kl{$X$-induced quasi-order}. A class of graph is
+\intro{wqo-well-quasi-ordered} (\reintro{wqo-wqo}) if for every
+\kl{well-quasi-order} $(X, \leq)$, the class $\Label{X}{\Cls}$ is
+\kl{well-quasi-ordered} using the \kl{$X$-induced quasi-order}.
+
+
 
 
 
