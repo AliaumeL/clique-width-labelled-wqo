@@ -1,11 +1,18 @@
 \section{Preliminaries}
 \label{sec:preliminaries}
 
+\paragraph*{Automata Theory.} We assume basic familiarity with
+automata theoretic concepts such as finite monoids, bottom-up tree automata,
+$\MSO$ on trees, and the connection between these three items. We refer to
+\textbf{TODO: cite} for a comprehensive introduction to these topics
+ \cite{THOM97}.
+
 \paragraph*{Relational Structures.} A \intro{relational signature} is a tuple
 $\sigma = (R_1, \ldots, R_k)$ where each $R_i$ is a relation symbol of arity $1
 \leq n_i < \omega$. A \kl{(finite) relational structure} over $\sigma$ is a tuple $A
 = (U, R_1^A, \ldots, R_k^A)$ where $U$ is a finite set and each $R_i^A
-\subseteq U^{n_i}$.
+\subseteq U^{n_i}$. We refer to \cite{EBBFLU95} for a comprehensive introduction
+to finite model theory.
 
 \begin{itemize}
     \item first order logic 
@@ -22,10 +29,14 @@ of finite undirected graphs, write $\Label{X}{\Cls}$ for the class of freely
 $X$-labelled graphs in $\Cls$, i.e., the class of all \kl{$X$-labelled graphs}
 $G = (V, E, \ell)$ such that $G \in \Cls$.
 
-\paragraph*{Trees.} In this paper, trees are finite, unranked, and ordered.
+\paragraph*{Trees.} In this paper, trees are finite, unranked, and unordered.
 They are understood as \kl{relational structures} over the \kl{signature}
-$\sigma = (\leq_1, \leq_2)$ where $\leq_1$ is the \kl{ancestor relation} and
-$\leq_2$ is the \kl{sibling relation}.
+$\sigma = (\treeleq)$ where $\treeleq$ is the \kl{ancestor relation} and Trees
+can be edge-labelled using a finite monoid $M$, where the labelling is
+compatible with the transitivity of the ancestor relation.
+
+\AP
+A \intro{branch} of a tree $T$ is a maximal totally ordered subset of $T$.
 
 \paragraph*{Transductions.} An \intro{$\MSO$-interpretation} between two
 classes $X$ and $Y$ of finite relational structures is given by formulii
@@ -37,11 +48,6 @@ transduction}.
 \paragraph*{Bounded clique-width.} A class of graph has \intro{bounded
 clique-width} if it is included in the image of some \kl{$\MSO$-interpretation}
 from finite trees to finite undirected graphs \cite{COUR91}
-
-\paragraph*{Automata Theory.} We assume basic familiarity with
-automata theoretic concepts such as finite monoids, bottom-up tree automata,
-$\MSO$ on trees, and the connection between these three items. We refer to
-\textbf{TODO: cite} for a comprehensive introduction to these topics.
 
 
 \paragraph*{Well-quasi-orderings.} A quasi-ordered set $(X, \leq)$ is a set $X$

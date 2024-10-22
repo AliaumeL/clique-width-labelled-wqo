@@ -15,6 +15,7 @@ such that $y$ is an ancestor of $x$, the notation $T[x:y]$ denotes the
 \emph{word} in $\Sigma^*$ obtained by reading the labels of the nodes on the
 path from $x$ to $y$ in $T$. 
 
+
 \begin{lemma}
     \label{interpretation-to-monoid:lem}
     Let $\Sigma$ be a finite alphabet, and $I$ be an $\MSO$ interpretation
@@ -27,15 +28,51 @@ path from $x$ to $y$ in $T$.
         \forall x,y \in \Leaves{T}, \\
         &\varphi(x,y) = \top \\
         &\iff \\
-        &(\mu(T[x \colon \lca(x,y)]), 
-          \mu(T[\lca(x,y) \colon \treeRoot]), 
-          \mu(T[y \colon \lca(x,y)])) \in P
+        &(\mu(T[\lca(x,y) \colon x]), 
+          \mu(T[\treeRoot \colon \lca(x,y)]), 
+          \mu(T[\lca(x,y) \colon y])) \in P
     \end{align*}
 \end{lemma}
 
 \begin{figure}
     \centering
-    \todo[inline]{Draw the tree and how we compute the existence of an edge}
+    \begin{tikzpicture}[
+        leaf/.style={
+            color=Prune
+        },
+        lca/.style={
+            color=A1
+        },
+        edge/.style={
+            color=A2
+        },
+        root/.style={
+            color=Prune
+        },
+        gedge/.style={
+            color=A4
+        },
+        ]
+        \node[root] (root) at (0,1) {$\treeRoot$};
+        \node[leaf] (x) at (-1,-1) {$x$};
+        \node[leaf] (y) at (1,-1) {$y$};
+        \node[lca] (lca) at (0,0) {$\lca(x,y)$};
+        \coordinate (tl) at ($(x.south west)+(-0.2,0)$);
+        \coordinate (tr) at ($(y.south east)+(0.2,0) $);
+        \coordinate (t)  at ($(root.north)+(0, 1)$);
+        \draw[edge,->] (root) to node[midway, left]        {$a$}  (lca);
+        \draw[edge,->] (lca)  to node[midway, above  left] {$b$} (x);
+        \draw[edge,->] (lca)  to node[midway, above right] {$c$} (y);
+        \draw (tl) -- (tr) -- (t) -- cycle;
+
+        \node (maps-to) at (3,0) {$\mapsto$};
+
+        \begin{scope}[xshift=4cm]
+            \node[leaf] (nx) at (0,0) {$x$};
+            \node[leaf] (ny) at (5,0) {$y$};
+            \draw[gedge] (nx) to node[midway, above] {$(a,b,c) \in P$?} (ny);
+        \end{scope}
+    \end{tikzpicture}
     \caption{The interpretation of a tree using a monoid and an accepting part.}
     \label{interpretation-to-monoid:fig}
 \end{figure}
@@ -47,9 +84,27 @@ elements of $\Sigma$ and the edges are labelled by elements of $M$. To simplify
 notations, we will allow ourselves to write $\mu[T](x,y)$ for $\mu(T[x \colon
 y])$ and omit $T$ when it is clear from the context.
 
+
+It is quite clear how one interprets a graph using such a tree and a subset $P
+\subseteq M^3$. One simply takes as vertices the leaves of the tree, and adds
+an edge between two vertices $x$ and $y$ if the ``triangle condition'' is
+satisfied. 
+
 \todo[inline]{Explain how the new tree interpretation works, using 
     the so-called \emph{composition ordering} on trees labelled by
     a finite monoid}
+
+\AP
+\begin{definition}
+    \label{composition-ordering:def}
+    Let $T$ and $T'$ be two trees in $\Trees[M]{\Sigma}$. We say that $T \cmpleq T'$
+    if there exists a map $h \colon T \to T'$ such that
+    for any pair $x \leq_T y$ of nodes in $T$,
+    we have $h(x) \leq_{T'} h(y)$ and
+    $\mu(x,y) = \mu(h(x), h(y))$.
+\end{definition}
+
+
 
 \begin{figure}
     \centering
@@ -63,20 +118,55 @@ y])$ and omit $T$ when it is clear from the context.
 \todo[inline]{Recall that in the case of words, there exists a factorisation theorem
     due to Simon, explain that this will be an equivalent for trees.}
 
-\AP
-A \intro{split of height $N$} in a tree $T$ is a mapping $s$ from the nodes
-of $T$ to $\set{1, \dots, N}$. Given a split, two elements $x \treelt y$ such
-that $s(x) = s(y) = k$ are \intro{$k$-neighbours} if $s(z) \geq k$ for all
-$z$ in the path from $x$ to $y$.
-A split $s$ is \intro{forward Ramseyan} if for every $k = 1, \dots, N$ and
-and every $x, y, x', y'$ in the same class of $k$-neighbourhood with $x \treelt
-y$ and $x' \treelt y'$, we have
-\[
-    s(x,y) = s(x,y) s(x',y')
-\]
-where the product is the product in the monoid $M$.
-So in particular, $s(x, y)$ is an idempotent, but $s(x, y)$ and $s(x', y')$ may be
-different idempotents.
+\def\t{\aTree}
+
+\AP Let $\t$ be a finite tree with edges labelled by elements of a finite
+monoid $M$. We write $\tlbl{\t}{x}{y}$ whenever $x \treelt[\t] y$ for the
+product of the edge labels on the path from $x$ to $y$ in $\t$.
+
+A \intro{split of height $N$} of $\t$ is a mapping $\spt$ from the
+nodes of $T$ to $\set{1, \dots, N}$. Given a split $\spt$, two elements $x
+\treelt[\t] y$ such that $\spt(x) = \spt(y) = k$ are \intro{$k$-neighbours} if
+$\spt(z) \geq k$ for all $z$ in the \kl(tree){path} from $x$ to $y$ in $\t$. A
+split $s$ is \intro{forward Ramseyan} if for every $k \in \set{1, \dots, N}$ and
+every $x, y, x', y'$ in the same class of $k$-neighbourhood with $x \treelt[\t] y$
+and $x' \treelt[\t] y'$, we have 
+\begin{equation} 
+    \label{fake-idempotent:eq}
+    \tlbl{\t}{x}{y} = \tlbl{\t}{x}{y} \cdot \tlbl{\t}{x'}{y'} \quad ,
+\end{equation}
+In particular, $\tlbl{\t}{x}{y}$ is an idempotent,
+but $\tlbl{\t}{x}{y}$ and $\tlbl{\t}{x'}{y'}$ may be different idempotents.
+
+
+Let us illustrate how one can use \kl{forward Ramseyan splits} to compute
+efficiently the value of $\tlbl{\t}{x}{y}$ for any pair of nodes $x \treelt[\t]
+y$. What we are going to restate is precisely the content of \cite[Lemma
+3]{COLC07} without the need for talking about first-order logic on trees.
+
+We define by induction the value $\tlbl{\t}{x}{y}^k$ as follows
+\begin{align*}
+    \tlbl{\t}{x}{y}^{N+1} &= \tlbl{\t}{y-1}{y} \\
+    \tlbl{\t}{x}{y}^{k} &=
+    \begin{cases}
+        \tlbl{\t}{x}{y}^{k+1} & \text{ if } \spt(x:y) \geq k + 1 \\
+        \tlbl{\t}{x}{z}^{k+1} \cdot \tlbl{\t}{z}{y}^{k+1} 
+                              & \text{ if } \existsu x \treelt z \treeleq y, \spt(z) = k
+        \\
+        \tlbl{\t}{x}{z_1}^{k+1} 
+        \tlbl{\t}{z_1}{z_2}^{k+1} 
+        \tlbl{\t}{z_3}{y}^{k+1} 
+                              & \text{ if } \exists x \treelt z_1 \treelt z_2 \treelt z_3 \treeleq y, \\
+                              &
+        \spt(z_1) = \spt(z_2) = \spt(z_3) = k
+        \wedge  \\
+                              &
+        \spt]x : z_1[ > k, \spt]z_1:z_2[ > k, \spt]z_3:y[ > k
+    \end{cases}
+\end{align*}
+
+Note that the value $\tlbl{\t}{x}{y}^k$ coincides with the value of
+$\tlbl{\t}{x}{y}$ if $\spt]x:y[ \geq k$.
 
 \todo[inline]{
     Explain that using the \emph{gap embedding relation}, we almost
@@ -92,31 +182,172 @@ different idempotents.
     \label{gap-embedding-composition-diff:fig}
 \end{figure}
 
+
 \begin{definition}
     \label{ramseyan-branch:def}
-    Let $T$ be a tree and $s$ be a \kl{forward Ramseyan split} of height $N$.
-    A branch $B$ has depth $k$ if its root has depth $k$ in $T$,
-    and all nodes of $B$ have depth at most $k$.
-    The $k$-length of a branch $B$ of depth $k$ is the number of nodes in $B$
-    at depth $k$.
+    Let $T$ be a tree and $\spt$ be a \kl{forward Ramseyan split} of height $N$.
+    A \intro{bough of level $k$} in $T$ is an infix of a branch of $T$
+    satisfying:
+    \begin{enumerate}
+        \item Its maximal and and minimal elements have level $k$
+        \item All elements of the bough have level greater or equal to $k$
+    \end{enumerate}
+    The \intro{size of a bough} is the number of elements of depth $k$
+    in the \kl{bough}.
 \end{definition}
 
-\AP Let $B$ be a branch of depth $k$ in $T$. We define $B(T)$ the complete
-subtree of $T$ rooted at the root of $B$. A branch $B$ of depth $k$, defines a
-partition of the nodes in $B(T)$ as follows: for every node $x$ of $T$, we
-define $B_l(x)$ be the least ancestor of $x$ that belongs to $B$ and has depth
-$k$, $B(x)$ be the least ancestor of $x$ that belongs to $B$, and $B_r(x)$ be
-the $k$-neighbour of $B_l(x)$ in $B$ if it exists, and the last node of $B$
-otherwise. To every leaf $x$ of $B(T)$, we associate a triple $(\mu(x, B(x)),
-\mu(x,B(x)), \mu(B_l(x), B(x)), \mu(B(x), B_r(x)))$.
+\AP Let $B$ be a \kl{bough of level $k$} in $T$.
+Given two nodes $b_1$ and $b_2$ in $B$ such that $\spt(b_1) = \spt(b_2) = k$,
+we define the $T_{b_1:b_2}$ as the set of nodes $x$ in $T$ such that
+$b_1 \treeleq x$ and $\neg (b_2 \treeleq x)$.
+
+For every leaf $x \in T$, we
+define $\Bt(x)$ to be the least ancestor of $x$ that belongs to $B$. Similarly,
+we define $\Bl(x)$ to be the least element of $B$ that is greater or equal to
+$\Bt(x)$, and $\Br(x)$ to be the greatest element of $B$ that is less or equal
+to $\Bt(x)$. Given a \kl{bough} $B$, we will only be interested in those leaves
+$x$ such that all of these elements are defined. We will refer to these nodes
+and leaves as $B(T)$ which is a subset of $T$.
+
+To every leaf $x$ of $B(T)$, we can therefore associate a triple of values:
+$\BtL(x) \defined \tlbl{\t}{\Bt(x)}{x}$, $\BlL(x) \defined
+\tlbl{\t}{\Bl(x)}{\Bt(x)}$, and $\BrL(x) \defined \tlbl{\t}{\Bt(x)}{\Br(x)}$.
+We refer to \cref{type-of-a-leaf-in-branch:fig}
+for an
+illustration.
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[
+        branch/.style={
+            color=Prune,
+            inner sep=0pt,
+            minimum size=4pt,
+            fill,
+            circle
+        },
+        inner/.style={
+            color=A1,
+            inner sep=0pt,
+            minimum size=4pt,
+            draw,
+            circle
+        },
+        staredge/.style={
+            color=A1,
+            ->,
+            dashed
+        },
+        root/.style={
+            color=Prune,
+        },
+        leaf/.style={
+            color=Prune,
+        },
+        monoid/.style={
+            color=A2
+        },
+        ]
+        % first draw the branch 
+        \node[root]   (root) at (-2,0) {$\treeRoot$};
+        \node[branch] (b0) at (0,0) {};
+        \node[branch] (b1) at (4,0) {};
+        \node[inner]  (t)  at (2,0) {};
+        \node[leaf]   (x)  at (3.5,-2) {$x$};
+
+        \node[above=0.1cm of b0] {$\Bl(x)$};
+        \node[above=0.1cm of t]  {$\Bt(x)$};
+        \node[above=0.1cm of b1] {$\Br(x)$};
+
+        \draw[staredge] (root) -- (b0);
+        \draw[staredge] (b0) -- node[monoid, midway, below] {$\BlL(x)$} (t);
+        \draw[staredge] (t)  -- node[monoid, midway, below] {$\BrL(x)$} (b1);
+        \draw[staredge] (b1) -- (5,0);
+
+        \draw[staredge] (t)  -- node[monoid, midway, below left] {$\BtL(x)$} (x);
+    \end{tikzpicture}
+    \caption{The type of a leaf with respect to a given \kl{bough} $B$.}
+    \label{type-of-a-leaf-in-branch:fig}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[
+        localType/.style={
+            color=C3,
+            thick
+        },
+        branchProj/.style = {
+            color=Prune,
+            inner sep=0pt,
+            minimum size=4pt,
+            fill,
+            circle
+        },
+        leaf/.style={
+            color=Prune,
+        },
+        ]
+        \draw (0,0) rectangle (8,2);
+        \node (root) at (-2,2) {$\treeRoot$};
+        \foreach \x in {0,1,2,3,4} {
+            \coordinate (n\x) at ({ 2 * \x},0);
+            \coordinate (pb\x) at ({ 2 * \x},2);
+            \node[branchProj] (b\x) at (pb\x) {};
+            \node (lb\x) at ({ 2 * \x},2.4) {$b_{\x}$};
+            \draw (n\x) -- (b\x);
+        }
+        \draw[dashed,<-] (b0) -- (root);
+        \draw[dashed] (b4) -- (9,2);
+        \draw[dashed] (n4) -- (9,0);
+
+        \foreach[count=\x] \y in {0,1,2,3} {
+            \node (E\x) at ({ 2 * \x - 1},2.6) {$e_{\y}$};
+            \draw[->,thick] (b\y) to[bend left=40] (b\x);
+        }
+        
+        \node (x) at (3,0.2)  {$x$};
+        \node (y) at (7,0.2)  {$y$};
+        \node[branchProj] (tx) at (3,2) {};
+        \node[branchProj] (ty) at (7,2) {};
+
+        \draw[localType, <-] (x)  -- 
+        node[midway, left] {$t_x$} (tx);
+        (tx);
+        \draw[localType, ->] (tx) -- 
+        node[midway, below] {$r_x$}
+        (b2);
+        \draw[localType, <-] (tx) -- 
+        node[midway, below] {$l_x$}
+        (b1);
+
+        \draw[localType, <-] (y)  -- 
+        node[midway, left] {$t_y$} 
+        (ty);
+        \draw[localType, ->] (ty) -- 
+        node[midway, below] {$r_y$}
+        (b4);
+        \draw[localType, <-] (ty) --
+        node[midway, below] {$l_y$}
+        (b3);
+
+
+    \end{tikzpicture}
+    \caption{Partitionning a graph using a branch.}
+    \label{partitionning-a-graph:fig}
+\end{figure}
+
+\AP
+To compute the presence of an edge between two leaves $x$ and $y$
+in $B(T)$, we only need to know their respective \kl{bough types}
+the order in which they appear in the \kl{bough}, 
+and whether or not there is an idempotent. \cref{partitionning-a-graph:fig}.
 
 \begin{definition}
-    \label{good-branch:def}
-    Let $\Sigma$ be a finite alphabet, $M$ be a finite monoid, 
-    $T$ be a tree in $\Trees[M]{\Sigma}$, $s$ be a 
-    \kl{forward Ramseyan split} of height $N$ in $T$,
-    and $B$ be a branch of depth $k$ in $T$.
-    The branch $B$ is a \intro{good branch} if, for every element $m \in M$,
+    \label{good-bough:def}
+    Let $T$ be an edge-$M$-labelled tree, $\spt$ be a \kl{forward Ramseyan split}
+    of height $N$, and $B$ be a \kl{bough} of level $k$ in $T$.
+    The \kl{bough $B$} is a \intro{good bough} if, for every element $m \in M$,
     there exists a branch $H$ of depth $k$ in some other tree $T'$ in $\Trees[M]{\Sigma}$
     and a function $h \colon B(T) \to H(T')$ such that
     \begin{itemize}
@@ -153,6 +384,17 @@ otherwise. To every leaf $x$ of $B(T)$, we associate a triple $(\mu(x, B(x)),
     TODO. Be careful about idempotents but it should be ok.
 \end{proof}
 
+
+\todo[inline]{This is not clear at all}
+
+\begin{equation*}
+    T_{k+1}^N (X) \defined
+    \mu Y. T_{k}^N( \cdots T_k^N(Y) \cdots ) + X
+\end{equation*}
+
+And then we use \cite{LOPEZ23} to conclude that it is a WQO + induction 
+to prove that it respects the "first-$N$-neighbours".
+
 \begin{lemma}
     Assume that there is a bound $N_0$ on the length of bad branches, then
     one can embed any tree $T$ into a tree $T'$ with a ramseyan split of height $XXX$
@@ -167,7 +409,7 @@ otherwise. To every leaf $x$ of $B(T)$, we associate a triple $(\mu(x, B(x)),
     The gap ordering associated to the ramseyan split of height $XXX$ is a well-quasi-ordering.
 \end{lemma}
 \begin{proof}
-    Trivial.
+    Trivial. \todo{Not at all!!}
 \end{proof}
 
 \begin{theorem}
@@ -201,3 +443,45 @@ TODOs:
         suitable gap embedding.
     \item Conclude that the class of images is WQO.
 \end{itemize}
+
+\begin{lemma}
+    \label{gap-embedding-ramseyan:lem}
+    Let $(\t, \spt)$ be a tree with a forward Ramseyan split of height $N$,
+    and $(\t', \spt')$ be another tree with a forward Ramseyan split of height $N$.
+    Let $h \colon \t \to \t'$ be a map such that for every $x,y \in \t$
+    we have 
+    \begin{itemize}
+        \item $h$ maps leaves to leaves. (respects the tree shape)
+        \item $h(\lca(x,y)) = \lca(h(x), h(y))$  (respects the tree shape)
+        \item $h(\spt(x)) = \spt'(h(x))$ (locally respects splits)
+        \item on every branch, for every node $x$ that has a successor 
+            $\tlbl{\t}{x}{x+1} = \tlbl{\t'}{h(x)}{h(x)+1}$ (locally respects edges)
+        \item $\min\setof{ \spt(z) }{x \treeleq[\t] z \treeleq[\t] y} = \min\setof{ \spt'(z) }{h(x) \treeleq[\t'] z \treeleq[\t'] h(y)}$
+            (globally respects nestings)
+    \end{itemize}
+    Then the embedding $h$ satisfies for all $x,y$ such that
+    there exists $x \treeleq[\t] z_1 \treelt[\t] z_2 \treeleq[\t] y$, 
+    with $\spt(z_1) = \spt(z_2) = \min\setof{\spt(z)}{x \treeleq[\t] z \treeleq[\t] y}$, we have
+    \begin{equation*}
+        \tlbl{\t}{x}{y} = \tlbl{\t'}{h(x)}{h(y)} \quad .
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    We prove this by induction on $k = \min\setof{\spt(z)}{x \treeleq[\t] z \treeleq[\t] y}$.
+    The base case is when $k = N$.
+    In this case, every node on the path from $x$ to $y$ has \kl{split value} $N$.
+    In particular, $\tlbl{\t}{x}{y} = \tlbl{\t}{x}{x+1}$. Now, because $h$ locally 
+    respects the edges, we have $\tlbl{\t'}{h(x)}{h(x)+1} = \tlbl{\t'}{h(x)}{h(y)}$,
+    and we are done.
+
+    Now, assume that the property holds for $k+1$. Let $x,y$ be such that there
+    exists $x \treeleq[\t] z_1 \treelt[\t] z_2 \treeleq[\t] y$ with $\spt(z_1)
+    = \spt(z_2) = k$. Let us write $z_3$ for the last node on the path from
+    $z_2$ to $y$ such that $\spt(z_3) = k$, and assume that between $x$ and
+    $z_1$ there is no node with split value $k$, similarly between $z_1$ and
+    $z_2$ and  $z_3$ and $y$.
+
+    By induction hypothesis, we know that $\tlbl{\t}{x}{z_1} =
+    \tlbl{\t'}{h(z_2)}{h(z_3)}$. Now, we
+
+\end{proof}

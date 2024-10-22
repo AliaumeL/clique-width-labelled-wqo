@@ -5,8 +5,33 @@
 \NewDocumentCommand{\treeRoot}{}{\mathsf{root}}
 \NewDocumentCommand{\lca}{}{\mathop{\mathsf{lca}}}
 
-\NewDocumentCommand{\treeleq}{}{\sqsubseteq}
-\NewDocumentCommand{\treelt}{}{\sqsubset}
+\NewDocumentCommand{\treeleq}{ O{} }{\sqsubseteq_{#1}}
+\NewDocumentCommand{\treelt}{ O{} }{\sqsubset_{#1}}
 \NewDocumentCommand{\Trees}{ m }{\mathsf{Trees}_{#1}}
 \NewDocumentCommand{\Leaves}{ m }{\mathsf{Leaves}(#1)}
 \NewDocumentCommand{\Graphs}{ O{} }{\mathsf{Graphs}_{#1}}
+
+\NewDocumentCommand{\tlbl}{ m m m }{ [{#2}{\colon}\!{#3}]_{#1}}
+
+
+\NewDocumentCommand{\cmpleq}{}{\preceq}
+\NewDocumentCommand{\cmplt}{}{\prec}
+
+\NewDocumentCommand{\isubleq}{}{\subseteq_i}
+\NewDocumentCommand{\isublt}{}{\subset_i}
+
+% Projections on a branch
+\NewDocumentCommand{\Br}{}{\mathop{\mathsf{B}_r}}
+\NewDocumentCommand{\Bl}{}{\mathop{\mathsf{B}_l}}
+\NewDocumentCommand{\Bt}{}{\mathop{\mathsf{B}_t}}
+
+% Monoid labels based on a branch
+\NewDocumentCommand{\BrL}{}{\mathop{\mu_{\mathsf{B}}^r}}
+\NewDocumentCommand{\BlL}{}{\mathop{\mu_{\mathsf{B}}^l}}
+\NewDocumentCommand{\BtL}{}{\mathop{\mu_{\mathsf{B}}^t}}
+
+\NewDocumentCommand{\spt}{}{\mathfrak{s}}
+
+\NewDocumentCommand{\aTree}{O{T}}{\mathcal{#1}}
+
+\newcommand{\existsu}{\exists!}
