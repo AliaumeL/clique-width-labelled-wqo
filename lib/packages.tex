@@ -45,6 +45,10 @@
 \usepackage[composition,hyperref,xcolor,cleveref]{knowledge}
 \knowledgeconfigure{notion}
 
+% cleveref for conjectures
+\crefname{conjecture}{Conjecture}{Conjectures}
+\Crefname{conjecture}{Conjecture}{Conjectures}
+
 % Tables 
 \usepackage{booktabs}
 \usepackage{varwidth}
@@ -60,6 +64,13 @@
 
 % Colors 
 \usepackage{ensps-colorscheme}
+
+\hypersetup{
+    colorlinks,
+    linkcolor={A4},
+    citecolor={Prune},
+    urlcolor={A3}
+}
 
 % Misc
 \usepackage{todonotes}

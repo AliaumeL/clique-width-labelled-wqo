@@ -14,55 +14,63 @@ the sum and the product of WQOs. As an example, the closure of WQOs under the
 finite words, also known as Higman's lemma \cite{HIG52}, has been used in the
 verification of so-called \emph{lossy channel systems}~\cite{ABDU93}. 
 
-This explains one research direction in the field of WQOs, which is to
-understand which \emph{constructors} preserve the WQO property: finite sums,
-finite products, finite words, finite trees, finite graphs \emph{with the minor
-relation} etc. It is motivated by the idea that one can build complex orderings
-to model a concrete system by combining simpler ones, and has empirically shown
-to be a fruitful approach (see \cite{HSS13} for an example of nesting Higman's
-orderings). One other research direction is to devise \emph{decision
-procedures} that take as input a set and decide whether it is WQO or not, and
-whether classical decision algorithm on well-structured transition systems can
-be applied to the concrete model one has. This dual approach that is more
-\emph{top-down} also had its recent share of successes \cite{FINGU19,LOPEZ24}.
-
-One particular constructor has remained quite elusive in the context of WQOs:
-the (labelled) finite graphs equipped with the induced subgraph relation. Let
-us first explain why it is believed to be of particular interest. The seminal
-results of Higman and Kruskal show that finite words and finite trees are
-well-quasi-ordered under the subword and subtree relations, respectively
-\cite{HIG52,KRU72}. Considering finite words and finite trees as labelled
-orderings (i.e., labelled \emph{directed graphs}), one immediately sees that
-the seemingly \emph{ad-hoc} constructions of Higman and Kruskal are in fact
-instances of the induced subgraph relation on labelled graphs. However, their
-proof rely on the specific structure of trees and words, using so-called
-\emph{minimal bad sequence arguments} \cite{NASH65}. In general, the class of
-all finite graphs (even undirected and unlabelled) is not well-quasi-ordered
-under the induced subgraph relation (for instance, the class of finite cycles
-forms an infinite antichain).
+This explains the \emph{bottom-up} research direction in the field of WQOs,
+which is to understand which \emph{constructors} preserve the WQO property:
+finite sums, finite products, finite words, finite trees, finite graphs
+\emph{with the minor relation} etc. It is motivated by the idea that one can
+build complex orderings to model a concrete system by combining simpler ones,
+and has empirically shown to be a fruitful approach (see \cite{HSS13} for an
+example of nesting Higman's orderings). One other research direction is to
+devise \emph{decision procedures} that take as input a set and decide whether
+it is WQO or not, and whether classical decision algorithm on well-structured
+transition systems can be applied to the concrete model one has. This dual
+\emph{top-down} approach also had its recent share of successes
+\cite{FINGU19,LOPEZ24}.
 
 
-There have been many attempts to understand which classes of (finite) graphs
-are WQOs when endowed with the induced subgraph relation. One can think of the
-work of Ding on classes of bounded tree-depth \cite{DING92}, or more recent
-approaches \cite{DLP17,POZA22}. In general, one studies the simpler class of
-\emph{undirected} finite graphs, where a lot of the complexity of the induced
-subgraph relation already lies. In this context, there are \emph{four}
-properties of interest: being \kl{well-quasi-orderded} (WQO), being
-\kl{$k$-well-quasi-ordered} ($k$-WQO) for some finite $k$, being
-\kl{labelled-well-quasi-ordered} (labelled-WQO), and being
-\kl{wqo-well-quasi-ordered} (wqo-WQO). All of those properties stem from
-different motivations. Being \kl{WQO} is a fundamental property but in concrete
-applications, one often needs to add some colouring to the graphs (for instance
-in the context of structural graph theory). But being \kl{labelled-WQO} is not
-strong enough if one wants to consider a class of graphs as an \emph{operator}
-to construct new WQOs.
+\subparagraph{A Model-Theoretic Approach to WQOs.}
+\AP 
+While finite products and sums are natural algebraic constructions on sets, the
+cornerstone results of Higman and Kruskal showing that well-quasi-ordered sets
+are closed under \emph{finite words} \cite{HIG52} and \emph{finite trees}
+\cite{KRU72} require a careful definition of the ordering on those structures,
+together with a non-trivial and tailored proof that they are
+well-quasi-ordered, often requiring the use of a so-called \emph{minimal bad
+sequence argument} \cite{NASH65}. We argue that the better way to introduce
+these orderings stems from a model-theoretic approach to WQOs, where one
+considers subsets of \emph{finite structures} endowed with the usual notion of
+\emph{embedding} (of models). Considering finite words as labelled total orders
+one immediately sees that the seemingly \emph{ad-hoc} definition of the
+\emph{subword ordering} powering Higman's lemma is in fact an instance of the
+usual embedding relation from logic. A similar observation can be made for
+Kruskal's tree theorem, where structures are labelled trees equipped with the
+least common ancestor relation. These are folklore results, but we believe that
+they are a strong motivation for a more systematic study of the embedding
+relation on classes of finite structures.
 
-Two conjectures of Pouzet claim that these potentially distinct notions all
-collapse to either being \kl{WQO} or \kl{wqo-WQO}. We state them separately
-because only the first one is explicitly found in \cite{POUZ72}.
+\AP In this context, the simplest (non-trivial) structures one can consider are
+\emph{finite undirected graphs}. The corresponding notion of embedding is the
+\emph{induced subgraph relation} that is well-known from graph theory. Given a
+class $\Cls$ of finite undirected graphs, one can as whether $\Cls$ is
+well-quasi-ordered under the induced subgraph relation. One can also consider
+$\Cls$ as a \emph{constructor} for new WQOs, mapping $(X, \leq)$ to
+$\Label{X}{\Cls}$, the class of graphs in $\Cls$ labelled using elements of
+$X$, this is how one obtains $X^*$ from $X$ in Higman's lemma. The natural
+question is then, whether $\Label{X}{\Cls}$ is WQO when $X$ itself is WQO.
+Freely labeling classes of graph is an operation that is prominent in the field
+of \emph{structural graph theory}: this is for instance the difference between
+being NIP and being \emph{monadically} NIP \todo{cite}. However, in this
+context,  the set $X$ of labels is equipped with the equality relation and is
+finite. Of course, one can also consider further restrictions on $X$, such as
+requiring that $X$ is of size at most $k$ for some $k \in \Nat$. We  depicted
+in
+\cref{graph-properties:fig},
+these various properties, and the two conjectures of Pouzet claiming that these
+potentially distinct notions all collapse to either being \kl{WQO} or
+\kl{wqo-WQO}. We state the two conjectures separately because only the first
+one is explicitly found in \cite{POUZ72}.
 
-\begin{conjecture}
+\begin{conjecture}[Pouzet \cite{POUZ72}]
     \label{pouzet1:conj}
     Let $\Cls$ be a class of finite graphs.
     Then, $\Cls$ is 2-well-quasi-ordered
@@ -78,6 +86,47 @@ because only the first one is explicitly found in \cite{POUZ72}.
     $\Cls$ is wqo-well-quasi-ordered.
 \end{conjecture}
 
+
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[
+        conj/.style={rounded corners, thick, dashed, 
+            opacity=0.5
+        },
+        impl/.style={->, double},
+        constr/.style={rounded corners,minimum width=1.7cm,minimum height=1cm,draw,rectangle,align=center}]
+        \node[constr] (1w) at (0,0) {One \\ label};
+        \node[constr] (2w) at (2,0) {Two \\ labels};
+        \node[constr] (kw) at (4,0) {$k < \infty$ \\ labels};
+        \node[constr] (lw) at (6,0) {Finite set \\ of labels};
+        \node[constr] (ww) at (8,0) {WQO set    \\ of labels};
+
+        \draw[conj]
+        ($(lw.south west) + (-0.1, -1.1)$) rectangle ($(ww.north east) + (0.1, 0.1)$);
+
+        \draw[conj]
+        ($(2w.north west) + (-0.1, 1.1)$) rectangle ($(lw.south east) + (0.1, -0.1)$);
+        \coordinate (P1m) at ($(2w.north)!0.5!(lw.north)$);
+        \coordinate (P2m) at ($(lw.south)!0.5!(ww.south)$);
+        \node (P1) at ($(P1m) + (0, 0.7)$) {\cref{pouzet1:conj}};
+        \node (P2) at ($(P2m) + (0, -0.7)$) {\cref{pouzet2:conj}};
+
+    \end{tikzpicture}
+    \caption{The four well-quasi-ordering properties one can consider
+             on classes of finite graphs.}
+    \label{graph-properties:fig}
+\end{figure}
+
+In general, the class of all finite graphs (even undirected and unlabelled) is
+not well-quasi-ordered under the induced subgraph relation (for instance, the
+class of finite cycles forms an infinite antichain).
+
+There have been many attempts to understand
+which classes of (finite) graphs are WQOs when endowed with the induced
+subgraph relation. One can think of the early work of Ding on classes of
+bounded tree-depth \cite{DING92}, or more recent approaches
+\cite{DRT10,DLP17,POZA22}.
 Typical proofs that a set is well-quasi-ordered can be clustered into two
 categories: \emph{structural proofs} that exhibit an encoding of the set into a
 well-quasi-ordered set built from simpler elements, and \emph{minimal bad
