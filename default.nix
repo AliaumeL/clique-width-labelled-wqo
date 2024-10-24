@@ -1,6 +1,6 @@
 { pkgs ? import <nixpkgs> {} }:
 pkgs.buildEnv {
-  name = "polyregular-model-checking";
+  name = "clique-width-wqo";
   paths = [
     # pytest
     (pkgs.python3.withPackages (python-pkgs: [
