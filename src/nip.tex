@@ -1,12 +1,27 @@
 \section{Structural Graph Theory}
 
-\begin{remark}
-    \label{transductions-paths:rem}
-    If $\Cls$ is labelled-wqo, then it cannot transduce
-    the class of all finite paths.
-\end{remark}
+There have been recent results in structural graph theory.
 
-\begin{remark}
-    If $\Cls$ is labelled-wqo, then it cannot (FO)-transduce 
-    the class of all graphs (also known as monadically NIP).
-\end{remark}
+\begin{theorem}[{\cite[Theorem 2.6]{DMT24}}]
+    \label{monadically-dependent-patterns:thm}
+    Let $\Cls$ be a graph class. Then $\Cls$ is \kl{monadically dependent}
+    if and only if for every $r \geq 1$ there exists $k \in \Nat$ such that
+    $\Cls$ excludes as \kl{induced subgraphs}:
+    \begin{itemize}
+        \item all flipped star $r$-crossings of order $k$,
+        \item all flipped clique $r$-crossings of order $k$,
+        \item all flipped half-graph $r$-crossings of order $k$, and
+        \item the comparability grid of order $k$.
+    \end{itemize}
+\end{theorem}
+
+\begin{corollary}
+    \label{wqo-mon-independent:cor}
+    Let $\Cls$ be a class of graphs that is 
+    \kl{labelled-wqo}. 
+    Then $\Cls$ is \kl{monadically dependent}.
+\end{corollary}
+
+We go beyond and prove the following class inclusions \kl{labelled-wqo} is
+included in \kl{monadically existentially-path free} included in
+\kl{monadically dependent}.

@@ -1,9 +1,17 @@
 
 \NewDocumentCommand{\Cls}{}{\mathcal{C}}
 
-\NewDocumentCommand{\Label}{ m m }{\mathsf{Label}_{#1}(#2)}
+
+%\NewDocumentCommand{\Label}{ m m }{\mathsf{Label}_{#1}(#2)}
+% with knowledge
+\NewDocumentCommand{\Label}{ m m }{\withkl{\kl[\Label]}{\cmdkl{\mathsf{Label}}_{#1}\mathopen{\cmdkl{(}}#2\mathclose{\cmdkl{)}}}}
+\knowledge{\Label}{notion}
+
 \NewDocumentCommand{\treeRoot}{}{\mathsf{root}}
-\NewDocumentCommand{\lca}{}{\mathop{\mathsf{lca}}}
+% \NewDocumentCommand{\lca}{}{\mathop{\mathsf{lca}}}
+% with knowledge
+\NewDocumentCommand{\lca}{}{\mathop{\kl[\lca]{\mathsf{lca}}}}
+\knowledge{\lca}{notion}
 
 \NewDocumentCommand{\treeleq}{ O{} }{\sqsubseteq_{#1}}
 \NewDocumentCommand{\treelt}{ O{} }{\sqsubset_{#1}}
@@ -26,9 +34,9 @@
 \NewDocumentCommand{\Bt}{}{\mathop{\mathsf{B}_t}}
 
 % Monoid labels based on a branch
-\NewDocumentCommand{\BrL}{}{\mathop{\mu_{\mathsf{B}}^r}}
-\NewDocumentCommand{\BlL}{}{\mathop{\mu_{\mathsf{B}}^l}}
-\NewDocumentCommand{\BtL}{}{\mathop{\mu_{\mathsf{B}}^t}}
+\NewDocumentCommand{\BrL}{}{\mathop{\mathcal{B}}_r}
+\NewDocumentCommand{\BlL}{}{\mathop{\mathcal{B}}_l}
+\NewDocumentCommand{\BtL}{}{\mathop{\mathcal{B}}_t}
 
 \NewDocumentCommand{\spt}{}{\mathfrak{s}}
 

@@ -4,6 +4,10 @@
 
 We will make heavy usage of the results of \cite{COLC07} on trees.
 
+\todo[inline]{First, we restrict ourselves to simple interpretations, i.e.,
+    those that are defined solely by a formula $\varphi_E(x,y)$ defining
+the edge relation}
+
 \subsection{From Interpretation to Monoids}
 
 \AP We use unranked ordered trees $T$ with labels taken from a finite alphabet
@@ -128,60 +132,86 @@ A \intro{split of height $N$} of $\t$ is a mapping $\spt$ from the
 nodes of $T$ to $\set{1, \dots, N}$. Given a split $\spt$, two elements $x
 \treelt[\t] y$ such that $\spt(x) = \spt(y) = k$ are \intro{$k$-neighbours} if
 $\spt(z) \geq k$ for all $z$ in the \kl(tree){path} from $x$ to $y$ in $\t$. A
-split $s$ is \intro{forward Ramseyan} if for every $k \in \set{1, \dots, N}$ and
+split $\spt$ is \intro{forward Ramseyan} if for every $k \in \set{1, \dots, N}$ and
 every $x, y, x', y'$ in the same class of $k$-neighbourhood with $x \treelt[\t] y$
 and $x' \treelt[\t] y'$, we have 
 \begin{equation} 
     \label{fake-idempotent:eq}
     \tlbl{\t}{x}{y} = \tlbl{\t}{x}{y} \cdot \tlbl{\t}{x'}{y'} \quad ,
 \end{equation}
-In particular, $\tlbl{\t}{x}{y}$ is an idempotent,
-but $\tlbl{\t}{x}{y}$ and $\tlbl{\t}{x'}{y'}$ may be different idempotents.
+In particular, $\tlbl{\t}{x}{y}$ is an \kl{idempotent},
+but $\tlbl{\t}{x}{y}$ and $\tlbl{\t}{x'}{y'}$ may be different \kl{idempotents}.
 
-
-Let us illustrate how one can use \kl{forward Ramseyan splits} to compute
+\AP Let us illustrate how one can use \kl{forward Ramseyan splits} to compute
 efficiently the value of $\tlbl{\t}{x}{y}$ for any pair of nodes $x \treelt[\t]
-y$. What we are going to restate is precisely the content of \cite[Lemma
-3]{COLC07} without the need for talking about first-order logic on trees.
-
-We define by induction the value $\tlbl{\t}{x}{y}^k$ as follows
-\begin{align*}
-    \tlbl{\t}{x}{y}^{N+1} &= \tlbl{\t}{y-1}{y} \\
-    \tlbl{\t}{x}{y}^{k} &=
-    \begin{cases}
-        \tlbl{\t}{x}{y}^{k+1} & \text{ if } \spt(x:y) \geq k + 1 \\
-        \tlbl{\t}{x}{z}^{k+1} \cdot \tlbl{\t}{z}{y}^{k+1} 
-                              & \text{ if } \existsu x \treelt z \treeleq y, \spt(z) = k
-        \\
-        \tlbl{\t}{x}{z_1}^{k+1} 
-        \tlbl{\t}{z_1}{z_2}^{k+1} 
-        \tlbl{\t}{z_3}{y}^{k+1} 
-                              & \text{ if } \exists x \treelt z_1 \treelt z_2 \treelt z_3 \treeleq y, \\
-                              &
-        \spt(z_1) = \spt(z_2) = \spt(z_3) = k
-        \wedge  \\
-                              &
-        \spt]x : z_1[ > k, \spt]z_1:z_2[ > k, \spt]z_3:y[ > k
-    \end{cases}
-\end{align*}
-
-Note that the value $\tlbl{\t}{x}{y}^k$ coincides with the value of
-$\tlbl{\t}{x}{y}$ if $\spt]x:y[ \geq k$.
-
-\todo[inline]{
-    Explain that using the \emph{gap embedding relation}, we almost
-    have a monotone surjective map! But not quite because of
-    adjacent idempotent nodes. + drawing
-}
+y$. We are going to paraphrase the actual content of \cite[Lemma 3]{COLC07},
+using the drawing of \cref{fast-computation:fig}
+to
+explain the idea. Given two nodes $x \treelt[\t] y$ in a tree $\t$, let us
+define $\spt(x:y)$ to be the minimal value of $\spt(z)$ for $x \treelt[\t] z
+\treelt[\t] y$, and $N+1$ if there is no such $z$. We claim that to compute the
+value of $\tlbl{\t}{x}{y}$, one can restrict the computation to specific
+segments of the path with a \emph{strictly larger} value of $\spt$. The reason
+is that whenever $x$ and $y$ are separated by many nodes $z$ such that $\spt(z)
+= \spt(x:y)$, one can essentially ignore all but the first and last such nodes
+to speed up computation. This of course can be applied recursively leading to a
+fast (and first-order definable, provided the split $\spt$ is known) algorithm
+to compute the value of $\tlbl{\t}{x}{y}$.
 
 \begin{figure}
     \centering
-    \todo[inline]{A gap embedding relation between two small trees where we
-    break an edge because of the separation of two idempotent nodes.}
-    \caption{The gap embedding relation vs the composition ordering}
-    \label{gap-embedding-composition-diff:fig}
+    \begin{tikzpicture}
+        \node (s) at (-1,-1) {$\spt \colon $};
+        \node (x) at (0,0) {$x$};
+        \node (z1) at (2,0) {$z_1$};
+        \node (z2) at (4,0) {$z_2$};
+        \node (z3) at (6,0) {$\cdots$};
+        \node (z4) at (8,0) {$z_3$};
+        \node (y) at (10,0) {$y$};
+
+        \node[below of=z1] {$k$};
+        \node[below of=z2] {$k$};
+        \node[below of=z4] {$k$};
+        \node (xz1) at (1,-1) {$> k$};
+        \node (z1z2) at (3,-1) {$> k$};
+        \node (z4y) at (9,-1) {$> k$};
+
+        \draw (0.2,-0.5) rectangle (9.8,-1.5);
+        \draw (1.7,-0.5) -- (1.7, -1.5);
+        \draw (2.3,-0.5) -- (2.3, -1.5);
+
+        \draw (3.7,-0.5) -- (3.7, -1.5);
+        \draw (4.3,-0.5) -- (4.3, -1.5);
+
+        \draw (7.7,-0.5) -- (7.7, -1.5);
+        \draw (8.3,-0.5) -- (8.3, -1.5);
+
+
+        \draw[->] (x) -- 
+        node[midway, above] {$\tlbl{\t}{x}{z_1}$}
+        (z1);
+        \draw[->] (z1) --
+        node[midway, above] {$\tlbl{\t}{z_1}{z_2}$}
+        (z2);
+        \draw[->] (z2) -- (z3);
+        \draw[->] (z3) -- (z4);
+        \draw[->] (z4) -- 
+        node[midway, above] {$\tlbl{\t}{z_3}{y}$}
+        (y);
+        \draw[->] (z1) to[bend left=60] 
+        node[midway, above] {$\tlbl{\t}{z_1}{z_2} = \tlbl{\t}{z_1}{z_3}$}
+        (z4);
+
+    \end{tikzpicture}
+    \caption{Fast computation of the value $\tlbl{\t}{x}{y}$
+        provided a forward Ramseyan split.}
+    \label{fast-computation:fig}
 \end{figure}
 
+
+\AP This idea can be refined to understand the behavior of leaves in the tree
+with respect to a given branch. This is the motivation for the following
+definition of \kl{boughs}, which are specific slices of a branch the tree.
 
 \begin{definition}
     \label{ramseyan-branch:def}
@@ -189,32 +219,28 @@ $\tlbl{\t}{x}{y}$ if $\spt]x:y[ \geq k$.
     A \intro{bough of level $k$} in $T$ is an infix of a branch of $T$
     satisfying:
     \begin{enumerate}
-        \item Its maximal and and minimal elements have level $k$
+        \item Its maximal and minimal elements have level $k$
         \item All elements of the bough have level greater or equal to $k$
     \end{enumerate}
     The \intro{size of a bough} is the number of elements of depth $k$
     in the \kl{bough}.
 \end{definition}
 
-\AP Let $B$ be a \kl{bough of level $k$} in $T$.
-Given two nodes $b_1$ and $b_2$ in $B$ such that $\spt(b_1) = \spt(b_2) = k$,
-we define the $T_{b_1:b_2}$ as the set of nodes $x$ in $T$ such that
-$b_1 \treeleq x$ and $\neg (b_2 \treeleq x)$.
-
-For every leaf $x \in T$, we
-define $\Bt(x)$ to be the least ancestor of $x$ that belongs to $B$. Similarly,
-we define $\Bl(x)$ to be the least element of $B$ that is greater or equal to
-$\Bt(x)$, and $\Br(x)$ to be the greatest element of $B$ that is less or equal
-to $\Bt(x)$. Given a \kl{bough} $B$, we will only be interested in those leaves
-$x$ such that all of these elements are defined. We will refer to these nodes
-and leaves as $B(T)$ which is a subset of $T$.
-
-To every leaf $x$ of $B(T)$, we can therefore associate a triple of values:
-$\BtL(x) \defined \tlbl{\t}{\Bt(x)}{x}$, $\BlL(x) \defined
-\tlbl{\t}{\Bl(x)}{\Bt(x)}$, and $\BrL(x) \defined \tlbl{\t}{\Bt(x)}{\Br(x)}$.
-We refer to \cref{type-of-a-leaf-in-branch:fig}
-for an
-illustration.
+\AP Let $B$ be a \kl{bough of level $k$} in $T$. Given two nodes $b_1$ and
+$b_2$ in $B$ such that $\spt(b_1) = \spt(b_2) = k$, we define the $T_{b_1:b_2}$
+as the set of nodes $x$ in $T$ such that $b_1 \treeleq x$ and $\neg (b_2
+\treeleq x)$. For every leaf $x \in T_{b_0: b_n}$ where $n$ is the size of the
+bough $B$, we define $\Bt(x)$ to be the least ancestor of $x$ that belongs to
+$B$. Similarly, we define $\Bl(x)$ to be the least element of $B$ that is
+greater or equal to $\Bt(x)$, and $\Br(x)$ to be the greatest element of $B$
+that is less or equal to $\Bt(x)$. To every leaf $x$ of $B(T)$, we can
+therefore associate a triple of values: $\BtL(x) \defined
+\tlbl{\t}{\Bt(x)}{x}$, $\BlL(x) \defined \tlbl{\t}{\Bl(x)}{\Bt(x)}$, and
+$\BrL(x) \defined \tlbl{\t}{\Bt(x)}{\Br(x)}$. We refer to
+\cref{type-of-a-leaf-in-branch:fig} for an
+illustration of the type of a leaf with respect to a given \kl{bough} $B$.
+We also refer to \cref{partitionning-a-graph:fig} for an illustration of the
+resulting partition of the tree $T$ with respect to a given \kl{bough} $B$.
 
 \begin{figure}
     \centering
@@ -304,6 +330,7 @@ illustration.
         \foreach[count=\x] \y in {0,1,2,3} {
             \node (E\x) at ({ 2 * \x - 1},2.6) {$e_{\y}$};
             \draw[->,thick] (b\y) to[bend left=40] (b\x);
+            \node (T\x) at ({ 2 * \x - 1},-0.6) {$T_{b_{\y}:b_{\x}}$};
         }
         
         \node (x) at (3,0.2)  {$x$};
@@ -312,23 +339,23 @@ illustration.
         \node[branchProj] (ty) at (7,2) {};
 
         \draw[localType, <-] (x)  -- 
-        node[midway, left] {$t_x$} (tx);
+        node[midway, left] {$\BtL(x)$} (tx);
         (tx);
         \draw[localType, ->] (tx) -- 
-        node[midway, below] {$r_x$}
+        node[midway, below] {$\BrL(x)$}
         (b2);
         \draw[localType, <-] (tx) -- 
-        node[midway, below] {$l_x$}
+        node[midway, below] {$\BlL(x)$}
         (b1);
 
         \draw[localType, <-] (y)  -- 
-        node[midway, left] {$t_y$} 
+        node[midway, left] {$\BtL(y)$} 
         (ty);
         \draw[localType, ->] (ty) -- 
-        node[midway, below] {$r_y$}
+        node[midway, below] {$\BrL(y)$}
         (b4);
         \draw[localType, <-] (ty) --
-        node[midway, below] {$l_y$}
+        node[midway, below] {$\BlL(y)$}
         (b3);
 
 
@@ -380,6 +407,16 @@ and whether or not there is an idempotent. \cref{partitionning-a-graph:fig}.
     One can decide whether there exists unbounded
     bad branches.
 \end{lemma}
+\begin{proof}
+    We consider the automaton that reads from a decorated tree
+    the bough $B$, the partition, the type of the leaves. 
+    It first checks that the decoration is correct, and then
+    guesses whether the decoration would still be good when
+    mapping every leaf of the bough to either a "left" or a "right"
+    duplicate of this branch. This is an $\MSO$-definable property.
+    It suffices to check that the corresponding automaton
+    has an unbounded language, which is decidable.
+\end{proof}
 
 \subsection{Good Expansion of A Tree}
 
@@ -396,15 +433,15 @@ embeddings.
 \end{proof}
 
 \begin{definition}
-    The \intro{gap embedding relation}
+    The \intro{generalized gap embedding relation}
+    between trees.
     between two trees and a dependency relation $\Delta$
     is ...
 \end{definition}
 
 \begin{lemma}
-    If $T$ embeds into $T'$ via the gap embedding relation
-    with dependency relation $\Delta$ then 
-    the graph generated by $T$ embeds into the graph generated by $T'$
+    If $T$ embeds into $T'$ via the \kl{generalized gap embedding relation}
+    then their \kl{marked subgraphs} embed into each other.
 \end{lemma}
 \begin{proof}
     To prove that, consider $x,y$ two leaves
@@ -413,34 +450,67 @@ embeddings.
     $\tlbl{\t}{z}{x} = \tlbl{\t'}{h(z)}{h(x)}$.
 \end{proof}
 
-
-
 \begin{lemma}
     Assume that there is a bound $N_0$ on the length of bad branches, then
     one can embed any tree $T$ into a tree $T'$ with a ramseyan split of height $XXX$
-    such that all idempotent nodes are "distance insensitive".
+    with a dependency relation of length at most $XXX$.
 \end{lemma}
 \begin{proof}
     This is done by grouping the $k$-neighbours of the tree $T$ into buckets of length $N_0 + 1$, and then
     splitting those buckets. 
 \end{proof}
 
-\begin{theorem}
-    Assume that there is a bound $N_0$ on the length of bad branches, then
-    the class of images is wqo-well-quasi-ordered for induced substructures.
-\end{theorem}
-\begin{proof}
-    This is a direct consequence of the fact that the idempotent nodes are distance insensitive.
-    The gap embedding immediately proves that we have the same forward Ramseyan split,
-    with the same "local types" for every edges.
-\end{proof}
+The proof of the following theorem is now straightforward, provided that one
+knows that the \kl{generalized gap embedding relation} is a
+well-quasi-ordering. This is not true in general
+(\cref{bad-generalized-gap:ex}), but it will be true when the
+dependency relation is bounded (\cref{good-generalized-gap:thm}).
+Note that this is not a direct consequence of the classical result of
+\cite{DERSHOWITZ200380}, precisely because of the presence of the dependency
+relation. At a high level though, this is the same idea.
+
+\begin{example}
+    \label{bad-generalized-gap:ex}
+    todo
+\end{example}
 
 
 \begin{proofof}{effective-image:thm}[main]
     Test
 \end{proofof}
 
-\subsection{Neighbour Respecting Gap-Embedding}
+\begin{corollary}
+    \label{effective-image:cor}
+    A class of graphs $\Cls$ of \kl{bounded clique width} 
+    is \kl{labelled-well-quasi-ordered}
+    if and only if it is \kl{wqo-well-quasi-ordered}.
+\end{corollary}
+\begin{proof}
+    Consider a class $\Cls$ of graphs having bounded clique width.
+    There is an interpretation from trees to a superset of this class $\Cls$.
+    Because $\Cls$ is \kl{labelled-well-quasi-ordered}, the class of images
+    can be described using finitely many forbidden patterns,
+    and we can assume that we do not take subsets.
+    Furthermore, we can also encode the node selection into the edges.
+    As a consequence, we can assume that there exists a $\varphi$
+    such that $\Cls \subseteq \varphi(\Trees{\Sigma}) \subseteq \dwset{\Cls}$.
+    Now, because $\Cls$ is \kl{labelled-well-quasi-ordered}, we can assume that
+    $\dwset{\Cls}$ is \kl{labelled-well-quasi-ordered} as well.
+    This proves that $\varphi(\Trees{\Sigma})$ is \kl{labelled-well-quasi-ordered},
+    hence \kl{wqo-well-quasi-ordered},
+    and as a consequence so is $\Cls$.
+\end{proof}
+
+\section{Neighbour Respecting Gap-Embedding}
+\label{sec:neighbour-respecting-gap-embedding}
+
+The goal of this subsection is to prove that the gap-embedding relation with a
+bounded dependency relation is well-quasi-ordered. Unfortunately, encoding the
+dependency inside the usual notion of gap-embedding (the one without
+dependencies) is non-trivial. We will instead leverage the recent advances in
+inductively defined well-quasi-orderings \cite{FREU20,LOPEZ23}, and the
+characterization of the gap-embedding relation as an inductive Kruskal
+construction \cite{FREU20} to conclude.
 
 \begin{equation*}
     T_{k+1}^N (X) \defined
@@ -449,9 +519,10 @@ embeddings.
 
 And then we use \cite{LOPEZ23} to conclude that it is a WQO + induction 
 to prove that it respects the "first-$N$-neighbours".
-\begin{lemma}
+\begin{theorem}
+    \label{good-generalized-gap:thm}
     The gap ordering associated to the ramseyan split of height $XXX$ is a well-quasi-ordering.
-\end{lemma}
+\end{theorem}
 \begin{proof}
     Trivial. \todo{Not at all!!}
 \end{proof}
