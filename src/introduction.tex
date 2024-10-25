@@ -194,18 +194,6 @@ We are also interested in the \emph{decidability} of the WQO property. This is
 a question that has recently gained traction in the community, and is of
 practical interest.
 
-\begin{theorem}[restate=effective-image:thm,label={effective-image:thm}]
-    \label{effective-image:thm}
-    Let $I$ be an $\MSO$ interpretation
-    from finite trees to undirected graphs.
-    There exists a computable $k \in \Nat$
-    such that $\image{I}$
-    is $k$-well-quasi-ordered
-    if and only if 
-    $\image{I}$ is wqo-well-quasi-ordered.
-    These properties are furthermore decidable.
-\end{theorem}
-
 \begin{theorem}[restate=pouzet2:thm]
     \label{pouzet-2:thm}
     Let $\Cls$ be a class of finite graphs of bounded clique-width.
@@ -214,12 +202,15 @@ practical interest.
     $\Cls$ is wqo-well-quasi-ordered.
 \end{theorem}
 
+An interpretation is monotone if it is monotone with respect to the
+embedding relation.
+
 \begin{theorem}[restate=transductions-paths:thm,label={transductions-paths:thm}]
     \label{transductions-paths:thm}
     Let $\Cls$ be a class of \kl{bounded clique-width}.
     Then $\Cls$ is \kl{labelled-well-quasi-ordered}
     if and only if
-    it does not \kl{existentially transduce}
+    it does not \kl{monotonely transduce}
     all \kl{finite paths}.
 \end{theorem}
 

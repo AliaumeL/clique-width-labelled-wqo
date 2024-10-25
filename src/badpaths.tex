@@ -2,41 +2,95 @@
 \section{Bad Patterns In Tree Decompositions}
 \label{sec:bad-patterns}
 
-We will make heavy usage of the results of \cite{COLC07} on trees.
+In this section, we will prove the main theorem of this paper, which provides
+an effective algorithm to decide if a class of graphs of bounded clique-width
+is well-quasi-ordered. 
 
-\todo[inline]{First, we restrict ourselves to simple interpretations, i.e.,
-    those that are defined solely by a formula $\varphi_E(x,y)$ defining
-the edge relation}
+\begin{theorem}[restate=effective-image:thm,label={effective-image:thm}]
+    \label{effective-image:thm}
+    Let $I$ be an $\MSO$ interpretation
+    from finite trees to undirected graphs.
+    There exists a computable $k \in \Nat$
+    such that $\image{I}$
+    is $k$-well-quasi-ordered
+    if and only if 
+    $\image{I}$ is wqo-well-quasi-ordered.
+    These properties are furthermore decidable.
+\end{theorem}
+
+From this theorem, we immediately provide a positive answer to
+\cref{pouzet2:conj} for classes of graphs of \kl{bounded clique-width}.
+
+\begin{corollary}
+    \label{effective-image:cor}
+    A class of graphs $\Cls$ of \kl{bounded clique width} 
+    is \kl{labelled-well-quasi-ordered}
+    if and only if it is \kl{wqo-well-quasi-ordered}.
+\end{corollary}
+\begin{proof}
+    Consider a class $\Cls$ of graphs having bounded clique width.
+    There is an interpretation from trees to a superset of this class $\Cls$.
+    Because $\Cls$ is \kl{labelled-well-quasi-ordered}, the class of images
+    can be described using finitely many forbidden patterns,
+    and we can assume that we do not take subsets.
+    As a consequence, we can assume that there exists a $\varphi$
+    such that $\Cls \subseteq \varphi(\Trees{\Sigma}) \subseteq \dwset{\Cls}$.
+    Now, because $\Cls$ is \kl{labelled-well-quasi-ordered}, we can assume that
+    $\dwset{\Cls}$ is \kl{labelled-well-quasi-ordered} as well.
+    This proves that $\varphi(\Trees{\Sigma})$ is \kl{labelled-well-quasi-ordered},
+    hence \kl{wqo-well-quasi-ordered},
+    and as a consequence so is $\Cls$.
+\end{proof}
+
+Before proving \cref{effective-image:thm}, let us focus our attention on
+\intro{simple interpretations}, i.e., those that are defined solely by a
+formula $\varphi_E(x,y)$.
+This is not a restriction, as the following lemma
+shows.
+
+\begin{lemma}
+    \label{simple-interpretation:lem}
+    Let $I$ be an $\MSO$ interpretation from finite trees to undirected graphs.
+    There exists a (computable) simple interpretation $I'$ such that
+    for all $k \geq 1$,
+    $\image{I}$ is \kl{$k$-well-quasi-ordered} if and only if
+    $\image{I'}$ is \kl{$k$-well-quasi-ordered}.
+\end{lemma}
+\begin{proof}
+\end{proof}
 
 \subsection{From Interpretation to Monoids}
 
-\AP We use unranked ordered trees $T$ with labels taken from a finite alphabet
-$\Sigma$ placed on the nodes of the trees. These trees are denoted using
-$\Trees{\Sigma}$. In a tree, the root is denoted by $\treeRoot$, and the set of
-leaves is denoted by $\Leaves{T}$. Given two nodes $x$ and $y$ in a tree $T$,
-their least common ancestor is denoted by $\lca(x,y)$. Given two nodes $x,y$
-such that $y$ is an ancestor of $x$, the notation $T[x:y]$ denotes the
-\emph{word} in $\Sigma^*$ obtained by reading the labels of the nodes on the
-path from $x$ to $y$ in $T$. 
+\AP In this section, we will use standard construction from automata theory,
+and especially the equivalence between $\MSO$-formulas on trees and bottom-up
+deterministic tree-automata. We refer to the book on Tree Automata Techniques
+and Applications for a comprehensive overview of this topic \cite{TATA08}. It
+follows from standard arguments that to a formula $\varphi(x,y)$ over binary
+trees labelled using letters in $\Sigma$ one can associate a monoid $M$ and a
+morphism $\mu \colon \Sigma^* \to M$ such that for any tree $T$ and any pair of
+leaves $x,y$ in $T$, whether $T \models \varphi(x,y)$ is entirely determined by
+the values of $\mu(T[z \colon x])$, $\mu(T[z \colon y])$ and $\mu(T[\treeRoot
+\colon z])$ where $z = \lca(x,y)$ is the \kl{ least common ancestor} of $x$ and
+$y$.
+As a consequence,
+one can collect in a subset $P \subseteq M^3$ all the triples $(a,b,c)$ such
+that this triple corresponds to a satisfying assignment of the formula
+$\varphi(x,y)$.
+This is illustrated in \cref{interpretation-to-monoid:fig}. 
 
-
-\begin{lemma}
-    \label{interpretation-to-monoid:lem}
-    Let $\Sigma$ be a finite alphabet, and $I$ be an $\MSO$ interpretation
-    from $\Trees{\Sigma}$ to $\Graphs$.
-    There exists a finite monoid $M$, a morphism
-    $\mu \colon \Sigma \to M$,
-    and a subset $P \subseteq M^3$ such that
-    \begin{align*}
-        &\forall T \in \Trees{\Sigma},
-        \forall x,y \in \Leaves{T}, \\
-        &\varphi(x,y) = \top \\
-        &\iff \\
-        &(\mu(T[\lca(x,y) \colon x]), 
-          \mu(T[\treeRoot \colon \lca(x,y)]), 
-          \mu(T[\lca(x,y) \colon y])) \in P
-    \end{align*}
-\end{lemma}
+\AP In order to simplify notations and better distinguish between the labels of
+the nodes (in a finite alphabet $\Sigma$) and their corresponding elements in
+the monoid $M$, we will label the \emph{edges} of the trees by the elements of
+$M$, having a special treatment for the root of the tree. Given two nodes $x
+\treelt[T] y$ in a tree $T$, we will write $\tlbl{T}{x}{y}$ for the product of
+the edge labels on the path from $x$ to $y$ in $T$.  Furthermore, we assume for
+the rest of the section that the monoid $M$ and the morphism $\mu$ are fixed,
+together with the accepting part $P \subseteq M^3$. As a consequence, when we
+refer to trees in this subsection, they have nodes labelled by $\Sigma$ and
+edges labelled by $M$. Given such a tree $T$, we define $\treeSem{T}$ as the
+graph obtained by considering leaves of $T$ as vertices, and placing an edge
+between two leaves $x$ and $y$ if and only if $(\tlbl{T}{z}{x}, \tlbl{T}{z}{y},
+\tlbl{T}{\treeRoot}{z}) \in P$ where $z = \lca(x,y)$.
 
 \begin{figure}
     \centering
@@ -81,32 +135,41 @@ path from $x$ to $y$ in $T$.
     \label{interpretation-to-monoid:fig}
 \end{figure}
 
-\AP This combinatorial description of the interpretation in terms of a monoid
-allows us to introduce the notion of \emph{edge labelled tree}. We use the
-notation $\Trees[M]{\Sigma}$ for the trees where the vertices are labelled by
-elements of $\Sigma$ and the edges are labelled by elements of $M$. To simplify
-notations, we will allow ourselves to write $\mu[T](x,y)$ for $\mu(T[x \colon
-y])$ and omit $T$ when it is clear from the context.
+The main idea of using monoids to encode the truth value of $\varphi(x,y)$ is
+that one can then use a suitable notion of tree embeddings makes the
+interpretation from trees to graphs \emph{monotone}.
 
-
-It is quite clear how one interprets a graph using such a tree and a subset $P
-\subseteq M^3$. One simply takes as vertices the leaves of the tree, and adds
-an edge between two vertices $x$ and $y$ if the ``triangle condition'' is
-satisfied. 
-
-\todo[inline]{Explain how the new tree interpretation works, using 
-    the so-called \emph{composition ordering} on trees labelled by
-    a finite monoid}
-
-\AP
 \begin{definition}
     \label{composition-ordering:def}
-    Let $T$ and $T'$ be two trees in $\Trees[M]{\Sigma}$. We say that $T \cmpleq T'$
-    if there exists a map $h \colon T \to T'$ such that
-    for any pair $x \leq_T y$ of nodes in $T$,
-    we have $h(x) \leq_{T'} h(y)$ and
-    $\mu(x,y) = \mu(h(x), h(y))$.
+    Let $T_1$ and $T_2$ be two trees. 
+    A map $h \colon T_1 \to T_2$ is an \intro{compositional tree embedding}
+    if it is a \kl{tree embedding} and
+    for all pairs of nodes $x \treelt[T_1] y$ in $T_1$, 
+    we have $\tlbl{T_1}{x}{y} = \tlbl{T_2}{h(x)}{h(y)}$.
 \end{definition}
+
+\begin{lemma}
+    \label{composition-ordering:lem}
+    Let $T_1$ and $T_2$ be two trees such that
+    $h \colon T_1 \to T_2$ is a \kl{compositional tree embedding}.
+    Then, $h \colon \treeSem{T_1} \to \treeSem{T_2}$
+    is a \kl{labelled graph embedding}.
+\end{lemma}
+\begin{proof}
+\end{proof}
+
+\AP As a consequence, it is sufficient to understand when the \kl{composition
+ordering} on trees is well-quasi-ordered to understand when the \kl{labelled
+graph embedding} is well-quasi-ordered. Historically, this was (although not
+explicitly) the approach taken by \cite{DRT10}. Unfortunately, the composition
+ordering on trees is more often than not way more strict than the \kl{induced
+subgraph} ordering. It was already observed that the composition ordering on
+trees is \kl{well-quasi-ordered} if and only if \emph{for every} $Q \subseteq
+M^3$, the class of graphs obtained from trees by considering only the triples
+in $Q$ is \kl{labelled-well-quasi-ordered} \cite{LOPEZ24}. To understand what
+happens for a precise choice of $Q$, we need to have a finer understanding of
+the way trees can be decomposed.
+
 
 
 
@@ -119,44 +182,41 @@ satisfied.
 
 \subsection{Forward Ramseyan Splits and Bad Branches}
 
-\todo[inline]{Recall that in the case of words, there exists a factorisation theorem
-    due to Simon, explain that this will be an equivalent for trees.}
+\def\t{\aTree} \AP The crucial combinatorial ingredient to understand how to
+decompose further the trees will come from an adaptation of the classical Simon
+Factorisation Theorem for semigroups \cite{SIMO90}, adapted to trees by
+Colcombet \cite{COLC07}. A \intro{split of height $N$} of a tree $\t$ is a
+mapping $\spt$ from the nodes of $T$ to $\set{1, \dots, N}$. Given a split
+$\spt$ and two nodes $x \treelt[\t] y$, we define $\spt(x \colon y)$ to be the
+minimal value of $\spt(z)$ for $x \treelt[\t] z \treelt[\t] y$, and $\infty$
+otherwise. Two elements $x \treelt[\t] y$ such that $\spt(x) = \spt(y) = k$ are
+\intro{$k$-neighbours} if $\spt(x \colon y) \geq k$.
 
-\def\t{\aTree}
+\AP A split $\spt$ is \intro{forward Ramseyan} if for every $k \in \set{1,
+\dots, N}$ and every $x, y, x', y'$ in the same class of \kl{$k$-neighbourhood}
+with $x \treelt[\t] y$ and $x' \treelt[\t] y'$, we have:
+\begin{equation}
+    \label{fake-idempotent:eq} 
+    \tlbl{\t}{x}{y} = \tlbl{\t}{x}{y} \cdot \tlbl{\t}{x'}{y'} \quad .
+\end{equation} 
 
-\AP Let $\t$ be a finite tree with edges labelled by elements of a finite
-monoid $M$. We write $\tlbl{\t}{x}{y}$ whenever $x \treelt[\t] y$ for the
-product of the edge labels on the path from $x$ to $y$ in $\t$.
-
-A \intro{split of height $N$} of $\t$ is a mapping $\spt$ from the
-nodes of $T$ to $\set{1, \dots, N}$. Given a split $\spt$, two elements $x
-\treelt[\t] y$ such that $\spt(x) = \spt(y) = k$ are \intro{$k$-neighbours} if
-$\spt(z) \geq k$ for all $z$ in the \kl(tree){path} from $x$ to $y$ in $\t$. A
-split $\spt$ is \intro{forward Ramseyan} if for every $k \in \set{1, \dots, N}$ and
-every $x, y, x', y'$ in the same class of $k$-neighbourhood with $x \treelt[\t] y$
-and $x' \treelt[\t] y'$, we have 
-\begin{equation} 
-    \label{fake-idempotent:eq}
-    \tlbl{\t}{x}{y} = \tlbl{\t}{x}{y} \cdot \tlbl{\t}{x'}{y'} \quad ,
-\end{equation}
-In particular, $\tlbl{\t}{x}{y}$ is an \kl{idempotent},
-but $\tlbl{\t}{x}{y}$ and $\tlbl{\t}{x'}{y'}$ may be different \kl{idempotents}.
+\AP
+In particular, $\tlbl{\t}{x}{y}$ is an \kl{idempotent}, since $\tlbl{\t}{x}{y}
+\cdot \tlbl{\t}{x}{y} = \tlbl{\t}{x}{y}$, but $\tlbl{\t}{x}{y}$ and
+$\tlbl{\t}{x'}{y'}$ may be different \kl{idempotents}. 
 
 \AP Let us illustrate how one can use \kl{forward Ramseyan splits} to compute
 efficiently the value of $\tlbl{\t}{x}{y}$ for any pair of nodes $x \treelt[\t]
 y$. We are going to paraphrase the actual content of \cite[Lemma 3]{COLC07},
-using the drawing of \cref{fast-computation:fig}
-to
-explain the idea. Given two nodes $x \treelt[\t] y$ in a tree $\t$, let us
-define $\spt(x:y)$ to be the minimal value of $\spt(z)$ for $x \treelt[\t] z
-\treelt[\t] y$, and $N+1$ if there is no such $z$. We claim that to compute the
-value of $\tlbl{\t}{x}{y}$, one can restrict the computation to specific
-segments of the path with a \emph{strictly larger} value of $\spt$. The reason
-is that whenever $x$ and $y$ are separated by many nodes $z$ such that $\spt(z)
-= \spt(x:y)$, one can essentially ignore all but the first and last such nodes
-to speed up computation. This of course can be applied recursively leading to a
-fast (and first-order definable, provided the split $\spt$ is known) algorithm
-to compute the value of $\tlbl{\t}{x}{y}$.
+using the drawing of \cref{fast-computation:fig} to explain the idea. We claim
+that to compute the value of $\tlbl{\t}{x}{y}$, one can restrict the
+computation to \emph{few} specific segments of the path from $x$ to $y$ with a
+\emph{strictly larger} value of $\spt$. The reason is that whenever $x$ and $y$
+are separated by many nodes $z$ such that $\spt(z) = \spt(x:y)$, one can
+essentially ignore all but the first and last such nodes to speed up
+computation. This of course can be applied recursively leading to a fast (and
+first-order definable, provided the split $\spt$ is known) algorithm to compute
+the value of $\tlbl{\t}{x}{y}$.
 
 \begin{figure}
     \centering
@@ -208,10 +268,45 @@ to compute the value of $\tlbl{\t}{x}{y}$.
     \label{fast-computation:fig}
 \end{figure}
 
+\AP The main theorem of \cite{COLC07} is that for every finite monoid $M$,
+there exists a finite depth $N$ such that for every tree $T$ labelled using
+$M$, there exists a forward Ramseyan split of height $N$ for $T$. We can
+therefore assume that our trees are always equipped with a forward Ramseyan
+split of height $N$.
 
-\AP This idea can be refined to understand the behavior of leaves in the tree
-with respect to a given branch. This is the motivation for the following
-definition of \kl{boughs}, which are specific slices of a branch the tree.
+\AP One can define a notion of embedding between two trees equipped with their
+respective \kl{forward Ramseyan splits}. Given two trees $\t_1$ and $\t_2$ with
+their respective splits $\spt_1$ and $\spt_2$, a map $h \colon \t_1 \to \t_2$
+is a \intro{gap embedding} if it is a \kl{tree embedding} and for all
+\kl{$k$-neighbouring} nodes $x \treelt[\t_1] y$ in $\t_1$, $h(x) \treelt[\t_2]
+h(y)$ are \kl{$k$-neighbouring} nodes in $\t_2$. Trees equipped with
+\kl{forward Ramseyan splits} form a \kl{well-quasi-ordered} set with respect to
+the \kl{gap embedding} relation \cite{DERSHOWITZ200380}.
+
+\AP Let us introduce a notion of dependency between nodes that will allow us to
+explain how the \kl{gap embedding} relation preserves \emph{some} of the monoid
+products in the trees. A node $x$ is \intro{independent at level $k$} from a
+node $y$, written $x \bot_k y$ if $x$ is \kl{independent at level $k+1$} and
+$\spt(x:y) \geq k+1$ or if there exist three nodes $z_1, z_2, z_3$ such that
+$x \treelt[\t] z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treelt[\t] y$ such that
+$\spt(z_1) = \spt(z_2) = \spt(z_3) = k$, $x \bot_{k+1} z_1$, $z_1 \bot_{k+1}
+z_2$, and $z_3 \bot_{k+1} y$. If $k = N+1$, then $x \bot_{N+1} y$ if $x$ is the
+immediate ancestor of $y$ in the tree.
+
+\begin{lemma}
+    Let $h \colon (T, \spt) \to (T', \spt')$ be a \kl{gap embedding} between two
+    trees equipped with \kl{forward Ramseyan splits}. Then, for all $x \bot_k y$
+    in $T$, we have $\tlbl{T}{x}{y} = \tlbl{T'}{h(x)}{h(y)}$.
+\end{lemma}
+\begin{proof}
+    By immediate induction on $\spt(x:y)$.
+\end{proof}
+
+\AP Therefore, the main combinatorial obstacle to understanding whether or not
+a class is \kl{labelled-well-quasi-ordered} is to understand the behaviour of
+pairs of nodes $x$ and $y$ that are \kl{dependent}. This is the motivation
+for the following construction that studies the behaviour of
+consecutive \kl{$k$-neighbourhoods} in a tree.
 
 \begin{definition}
     \label{ramseyan-branch:def}
@@ -372,40 +467,98 @@ and whether or not there is an idempotent. \cref{partitionning-a-graph:fig}.
 
 \begin{definition}
     \label{good-bough:def}
-    Let $T$ be an edge-$M$-labelled tree, $\spt$ be a \kl{forward Ramseyan split}
-    of height $N$, and $B$ be a \kl{bough} of level $k$ in $T$.
-    The \kl{bough $B$} is a \intro{good bough} if, for every element $m \in M$,
-    there exists a branch $H$ of depth $k$ in some other tree $T'$ in $\Trees[M]{\Sigma}$
-    and a function $h \colon B(T) \to H(T')$ such that
-    \begin{itemize}
-        \item The subgraph generated by $m B(T)$ embeds into the subgraph generated by $m H(T')$ via $h$.
-        \item The image of the root of $B$ by $h$ is the root of $H$.
-        \item The image of the last element of $B$ by $h$ the last element of $H$.
-        \item The map $h$ respects the $3$-types of the leaves.
-    \end{itemize}
+    Let $B$ be a \kl{bough} of level $k$ in $T$.
+    We say that $B$ is a \intro{good bough} if, for every element $m \in M$,
+    there exists a \kl{bough} $H$ of level $k$ in some other tree $T'$,
+    and a function $h \colon B(T) \to H(T')$ (from leaves to leaves) such that
+    \begin{enumerate}
+        \item The subgraph generated by $m B(T)$ 
+            is an \kl{induced subgraph} of $H(T')$
+            via $h$.
+        \item The image of the first block of $B$ by $h$
+            is contained in the first block of $H$.
+        \item The image of the last block of $B$ by $h$
+            is contained in the last block of $H$.
+        \item The map $h$ respects the \kl{bough-types} of the leaves.
+        \item The map $h$ respects the \kl{idempotent} directly on the left
+            and \emph{directly on the right of the leaves}.
+        \item There exists a block of $H$ that does not intersect
+            the image of $B$ by $h$.
+    \end{enumerate}
 \end{definition}
 
 \begin{lemma}
-    Assume that there are no bounds on the $k$-length of bad branches, then 
-    the class of images is not $(3 \times \card{M}^3)$-well-quasi-ordered.
+    \label{bad-bough-wqo:lem}
+    Assume that there are no bounds on the $k$-length of \kl{bad boughs}, then 
+    the class of images is not $(3 \times \card{M}^3 + 1)$-well-quasi-ordered.
 \end{lemma}
 \begin{proof}
     Let $\seqof{B_i}$ be an infinite sequence of bad branches of strictly increasing $k$-length.
     This means that for every $i$ there exists an $m_i \in M$ such that
-    no branch $H$ can contain $m B_i(T)$. By extracting a subsequence, we can assume that $m$ is constant.
+    no other \kl{bough} $H$ can contain $m B_i(T)$. 
+    By extracting a subsequence, we can assume that $m$ is constant.
     Extracting more, we can assume that the $k$-length of $B_i$ is greater than three times the
     number of nodes in $B_{i-1}$.
 
-    Look at the generated graphs, colored by the $3$-types of the leaves plus
-    distinguishing colors for the root and last elements of the branches. Assume by contradiction that
-    there exists an embedding from $T_i$ to $T_j$ for some $i < j$. Then,
-    this is also an embedding between $B_i(T_i)$ and $B_i(T_j)$, and
-    shows that $B_i(T_i)$ is a \kl{good branch} which is a contradiction.
+    Look at the generated graphs, where nodes are labelled by the \kl{bough
+    types} of the leaves plus distinguishing colors for the first and last
+    elements of the branches if it is defined, and a special color otherwise.
+    That is, we have $3 \times \card{M}^3 + 1$ different labels.
+
+    Assume by contradiction that there exists an embedding from $T_i$ to $T_j$
+    for some $i < j$. Then, this is also an embedding between $B_i(T_i)$ and
+    $B_i(T_j)$, and shows that $B_i(T_i)$ is a \kl{good branch} which is a
+    contradiction.
 \end{proof}
 
+\AP What \cref{bad-bough-wqo:lem} shows is that the presence of arbitrarily
+long ``unbreakable" \kl{boughs} prenvents the class of images from being
+\kl{labelled-well-quasi-ordered}. The next step will be to show that provided a
+bound on the length of the \kl{bad boughs}, the class of images is
+\kl{labelled-well-quasi-ordered}.  To that end, we will 
+prove that \kl{good boughs} are in fact easily recognizable
+using $\MSO$, hence obtain a decidability result.
+
 \begin{lemma}
+    \label{good-bough-recognizable:lem}
+    Let $T$ be a tree and let $B$ be a \kl{good bough}.
+    Then one can assume that $H$ is three copies of $B$.
+\end{lemma}
+\begin{proof}
+    Let $H$ together with $h$ be a witness that $B$ is a \kl{good bough}.
+    Let us define the following embedding $k \colon B \to BBB$.
+    For every leaf $x$ in $B$, if $h(x)$ is \emph{before} the untouched graph
+    of $H$, then $k(x) = (x,1)$ the first copy of $B$.
+    Otherwise, $k(x) = (x,3)$ the third copy of $B$.
+
+    Let us check that $k$ respects the required properties.
+    First, $k$ respects the \kl{bough-types} of the leaves by construction.
+    Second, $k$ respects the \kl{idempotent} directly on the left and right
+    by construction too.
+    Third $k$ respects the last block and first-block conditions, because $h$
+    did.
+
+    Finally, the only thing left to check is that $(x,y)$ is an edge in the
+    graph $B$ if and only if $(k(x), k(y))$ is one in $BBB$.
+    If $x$ and $y$ are sent on the same copy, there is nothing to be done.
+    If $x$ and $y$ are separated, then
+    they were already separated in $H$.
+    As a consequence, the presence of an edge between $x$ and $y$ in $B$ is
+    equivalent to the presence of an edge between $h(x)$ and $h(y)$,
+    but these introduce an idempotent node between them,
+    and therefore the same thing holds between $k(x)$ and $k(y)$: indeed,
+    the inserted idempotent node \emph{must have the same value}
+    because $h$ preserved this!
+\end{proof}
+
+As a consequence, checking whether a \kl{bough} is \kl{good} is $\MSO$
+definable, one simply has to guess a partition of $B$ into two different
+copies.
+
+\begin{lemma}
+    \label{bad-boughs-decidable:lem}
     One can decide whether there exists unbounded
-    bad branches.
+    \kl{bad boughs}.
 \end{lemma}
 \begin{proof}
     We consider the automaton that reads from a decorated tree
@@ -420,23 +573,32 @@ and whether or not there is an idempotent. \cref{partitionning-a-graph:fig}.
 
 \subsection{Good Expansion of A Tree}
 
-The idea now is to use the uniform bound on bad branches to construct an
-\emph{expanded} version of any tree, allowing us to correctly use gap
-embeddings.
 
-\begin{lemma}
-    Let $T$ be a tree and let $B$ be a good branch. Then, one can embed     
-    $B$ into three copies of itself.
-\end{lemma}
-\begin{proof}
-    TODO. Be careful about idempotents but it should be ok.
-\end{proof}
+In this subsection, we will prove the converse of \cref{bad-bough-wqo:lem},
+i.e., we are going to build a suitable embedding provided that the length of
+the \kl{bad boughs} is bounded.
+To that end, let us first define the \kl{good expansion} of a tree.
+
+\AP Assume that there is a bound $K$ on the length of \kl{bad boughs}, then one
+can embed any Ramseyan tree $(T, \spt)$ into a Ramseyan tree $(T',\spt')$ such
+that every \kl{$k$-neighbourhood} in $T'$ is \emph{split}. We will therefore
+work on trees $(T, \spt, \Delta)$ where $\Delta$ is a subtree of $T$ consisting
+of \emph{important nodes}.
+We can refine our notion of \kl{gap embedding} to respect important nodes.
 
 \begin{definition}
     The \intro{generalized gap embedding relation}
     between trees.
-    between two trees and a dependency relation $\Delta$
-    is ...
+    It is a map $h \colon T \to T'$ such that
+    $h$ is a \kl{gap embedding} between $(T, \spt)$
+    and $(T', \spt')$,
+    and furthermore if $x \treelt y$ are such that
+    $\spt(x) = \spt(y)$ and $\spt(x:y) > k$,
+    then $h(x) \treelt h(y)$ are such that
+    $\spt'(h(x)) = \spt'(h(y))$ and $\spt'(h(x):h(y)) > k$.
+    Furthermore, every node $x$ is labelled 
+    with the values of $\tlbl{\t}{z}{x}$ for the first nodes
+    $z$ of depth $k$ among ancestors of $x$.
 \end{definition}
 
 \begin{lemma}
@@ -444,62 +606,35 @@ embeddings.
     then their \kl{marked subgraphs} embed into each other.
 \end{lemma}
 \begin{proof}
-    To prove that, consider $x,y$ two leaves
-    in $T$, and their least common ancestor $z$.
-    We want to prove that
-    $\tlbl{\t}{z}{x} = \tlbl{\t'}{h(z)}{h(x)}$.
+    We prove by induction on $\spt(x:y)$ that
+    $\tlbl{\t}{z}{x} = \tlbl{\t'}{h(z)}{h(x)}$ for marked nodes.
+    If $\spt(x:y) = \infty$, then the result is immediate.
+    If $\spt(x:y) = k$, then
+    either $x$ and $y$ are separated by some $z$ that is unmarked
+    and the result is immediate, or $x$ and $y$ are only separated by
+
+    \todo[inline]{proof}
 \end{proof}
 
-\begin{lemma}
-    Assume that there is a bound $N_0$ on the length of bad branches, then
-    one can embed any tree $T$ into a tree $T'$ with a ramseyan split of height $XXX$
-    with a dependency relation of length at most $XXX$.
-\end{lemma}
-\begin{proof}
-    This is done by grouping the $k$-neighbours of the tree $T$ into buckets of length $N_0 + 1$, and then
-    splitting those buckets. 
-\end{proof}
 
-The proof of the following theorem is now straightforward, provided that one
-knows that the \kl{generalized gap embedding relation} is a
-well-quasi-ordering. This is not true in general
-(\cref{bad-generalized-gap:ex}), but it will be true when the
-dependency relation is bounded (\cref{good-generalized-gap:thm}).
-Note that this is not a direct consequence of the classical result of
-\cite{DERSHOWITZ200380}, precisely because of the presence of the dependency
-relation. At a high level though, this is the same idea.
+In general, it is not true that the \kl{generalized gap embedding relation}
+is a \kl{well-quasi-ordering}. However, we have a bound on the maximal
+distance between two marked nodes, and this allows us to prove the following
+theorem.
 
-\begin{example}
-    \label{bad-generalized-gap:ex}
-    todo
-\end{example}
+\begin{theorem}
+    Let $d$ be a number. The class of all $(T, \spt, \Delta)$
+    such that the distance between two marked nodes at level $k$
+    is either at most $d$, or they are separated by at least $2$ unmarked nodes
+    at level $k$ is \kl{labelled-well-quasi-ordered}.
+\end{theorem}
 
+Using this theorem, we conclude this section.
 
 \begin{proofof}{effective-image:thm}[main]
     Test
 \end{proofof}
 
-\begin{corollary}
-    \label{effective-image:cor}
-    A class of graphs $\Cls$ of \kl{bounded clique width} 
-    is \kl{labelled-well-quasi-ordered}
-    if and only if it is \kl{wqo-well-quasi-ordered}.
-\end{corollary}
-\begin{proof}
-    Consider a class $\Cls$ of graphs having bounded clique width.
-    There is an interpretation from trees to a superset of this class $\Cls$.
-    Because $\Cls$ is \kl{labelled-well-quasi-ordered}, the class of images
-    can be described using finitely many forbidden patterns,
-    and we can assume that we do not take subsets.
-    Furthermore, we can also encode the node selection into the edges.
-    As a consequence, we can assume that there exists a $\varphi$
-    such that $\Cls \subseteq \varphi(\Trees{\Sigma}) \subseteq \dwset{\Cls}$.
-    Now, because $\Cls$ is \kl{labelled-well-quasi-ordered}, we can assume that
-    $\dwset{\Cls}$ is \kl{labelled-well-quasi-ordered} as well.
-    This proves that $\varphi(\Trees{\Sigma})$ is \kl{labelled-well-quasi-ordered},
-    hence \kl{wqo-well-quasi-ordered},
-    and as a consequence so is $\Cls$.
-\end{proof}
 
 \section{Neighbour Respecting Gap-Embedding}
 \label{sec:neighbour-respecting-gap-embedding}

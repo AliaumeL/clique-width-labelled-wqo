@@ -19,7 +19,19 @@
 \NewDocumentCommand{\Leaves}{ m }{\mathsf{Leaves}(#1)}
 \NewDocumentCommand{\Graphs}{ O{} }{\mathsf{Graphs}_{#1}}
 
-\NewDocumentCommand{\tlbl}{ m m m }{ [{#2}{\colon}\!{#3}]_{#1}}
+%\NewDocumentCommand{\tlbl}{ m m m }{ [{#2}{\colon}\!{#3}]_{#1}}
+\NewDocumentCommand{\tlbl}{ m m m }{
+    \withkl{\kl[\tlbl]}{
+        \cmdkl{[}
+        #2
+        \cmdkl{\colon}\!
+        #3
+        \cmdkl{]}
+        _{#1}
+    }
+}
+\knowledge{\tlbl}{notion}
+
 
 
 \NewDocumentCommand{\cmpleq}{}{\preceq}
@@ -43,3 +55,6 @@
 \NewDocumentCommand{\aTree}{O{T}}{\mathcal{#1}}
 
 \newcommand{\existsu}{\exists!}
+
+\NewDocumentCommand{\treeSem}{ m }{\withkl{\kl[\treeSem]}{\cmdkl{\llbracket}#1\cmdkl{\rrbracket}}}
+\knowledge{\treeSem}{notion}

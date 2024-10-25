@@ -35,6 +35,15 @@ $\sigma = (\treeleq)$ where $\treeleq$ is the \kl{ancestor relation} and Trees
 can be edge-labelled using a finite monoid $M$, where the labelling is
 compatible with the transitivity of the ancestor relation.
 
+\AP We use ordered binary trees $T$ with labels taken from a finite alphabet
+$\Sigma$ placed on the nodes of the trees. These trees are denoted using
+$\Trees{\Sigma}$. In a tree, the root is denoted by $\treeRoot$, and the set of
+leaves is denoted by $\Leaves{T}$. Given two nodes $x$ and $y$ in a tree $T$,
+their least common ancestor is denoted by $\lca(x,y)$. Given two nodes $x,y$
+such that $y$ is an ancestor of $x$, the notation $T[x:y]$ denotes the
+\emph{word} in $\Sigma^*$ obtained by reading the labels of the nodes on the
+path from $x$ to $y$ in $T$. 
+
 \AP
 A \intro{branch} of a tree $T$ is a maximal totally ordered subset of $T$.
 
