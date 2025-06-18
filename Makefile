@@ -1,20 +1,25 @@
-.PHONY: clean
+.PHONY: clean all
 
 PAPER=cwqo
 SRC=src/*.tex             \
-	lib/*.tex             \
-	papers.bib            \
-	knowledges.kl         \
-	ensps-colorscheme.sty \
-	plainurl.bst		  \
-	cwqo.tex
+    lib/*.tex             \
+    papers.bib            \
+    lib/knowledges.kl     \
+    ensps-colorscheme.sty \
+    plainurl.bst	  \
+    $(PAPER).md
+
+TEMPLATES=templates/plain-article.tex \
+	  templates/git-meta.lua      \
+	  templates/lipics/lipics.tex 
 
 FIGURES=
 
-# Default target: create the pdf file
-$(PAPER).pdf: $(SRC) $(FIGURES)
-	latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" $(PAPER).tex
+all: $(PAPER).pdf
 
+# Default target: create the pdf file
+%.pdf: %.tex $(FIGURES)
+	latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" $<
 
 # How to create standalone versions of the pictures
 fig/%.pdf: fig/%.tex
@@ -23,12 +28,38 @@ fig/%.pdf: fig/%.tex
 	@mv $(notdir $@) $@
 	@rm $(notdir $^)
 
+$(PAPER).tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
+	pandoc --template=templates/plain-article.tex \
+		   --lua-filter=templates/git-meta.lua \
+		   --metadata-file=./paper-meta.yaml \
+		   --wrap=none \
+		   -o $(PAPER).tex \
+		   $(PAPER).md
+
+# Create a lipics document for submission
+$(PAPER).lipics.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
+	pandoc --template=templates/lipics/lipics.tex \
+		   --lua-filter=templates/git-meta.lua \
+		   --metadata-file=./paper-meta.yaml \
+		   --wrap=none \
+		   -o $(PAPER).lipics.tex \
+		   $(PAPER).md
+
 # Create a single file tex document for arXiv
-$(PAPER).arxiv.tex: $(PAPER).pdf
-	latexpand -o $(PAPER).arxiv.tex     \
-			  --empty-comments          \
-		      --expand-bbl $(PAPER).bbl \
-              $(PAPER).tex
+$(PAPER).arxiv.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
+	pandoc --template=templates/plain-article.tex \
+		   --lua-filter=templates/git-meta.lua \
+		   --metadata-file=./paper-meta.yaml \
+		   --metadata=arxiv:true \
+		   --wrap=none \
+		   -o $(PAPER)-arxiv-tmp.tex \
+		   $(PAPER).md
+	latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" $(PAPER)-arxiv-tmp.tex
+	latexpand -o $(PAPER).arxiv.tex         \
+		      --empty-comments          \
+		      --expand-bbl $(PAPER)-arxiv-tmp.bbl \
+              $(PAPER)-arxiv-tmp.tex
+	@rm $(PAPER)-arxiv-tmp.*
 
 # Create an archive with the single file tex document and the license
 $(PAPER).arxiv.tar.gz: $(PAPER).arxiv.tex
@@ -36,9 +67,8 @@ $(PAPER).arxiv.tar.gz: $(PAPER).arxiv.tex
              $(PAPER).arxiv.tex    \
 			 plainurl.bst          \
 			 ensps-colorscheme.sty \
-             LICENSE
+             ../LICENSE
 
-# Use a docker container to compile the arXiv version
 $(PAPER).arxiv.pdf: $(PAPER).arxiv.tar.gz
 	# create temporary directory
 	@mkdir -p /tmp/$(PAPER).arxiv
@@ -51,14 +81,6 @@ $(PAPER).arxiv.pdf: $(PAPER).arxiv.tar.gz
 	# delete the temporary directory
 	@rm -rf /tmp/$(PAPER).arxiv/
 
-# If someone really wants to generate the metadata file
-src/metadata.tex: paper-meta.yaml templates/plain-metadata.tex
-	echo "" | pandoc -t latex \
-		   --template=templates/plain-metadata.tex \
-		   --lua-filter=templates/git-meta.lua \
-		   -o src/metadata.tex \
-		   --metadata-file=paper-meta.yaml
-
 clean: 
 	latexmk -C
-	rm -f $(PAPER).arxiv.tex $(PAPER).arxiv.tar.gz $(PAPER).arxiv.pdf
+	rm -f *.tex *.tar.gz *.aux *.bbl *.kaux *.blg *.log *.out *.fls *.fdb_latexmk *.synctex.gz

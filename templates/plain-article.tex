@@ -24,9 +24,11 @@
 % microtype for better typography
 \usepackage{microtype}
 
+$if(draft)$
 \usepackage{todonotes}
 \usepackage{lineno}
 \linenumbers
+$endif$
 
 
 % math packages
@@ -69,7 +71,7 @@
 \usepackage{hyperref}
 \usepackage[capitalise,noabbrev,nameinlink]{cleveref}
 \Crefname{assumption}{Assumption}{Assumptions}
-\usepackage[composition,hyperref,xcolor,cleveref]{knowledge}
+\usepackage[$if(draft)$composition$else$electronic$endif$,hyperref,xcolor,cleveref]{knowledge}
 \knowledgeconfigure{notion}
 
 % Tables 
@@ -110,26 +112,42 @@
 
 
 % we include whatever the user wants to include in the header
+$for(header-includes)$
+$header-includes$
+$endfor$
 
 % we include libraries (tex files) usually written in the `lib` directory
-\input{lib/aliaume.tex}
-\input{lib/maths.tex}
-\input{lib/knowledges.kl}
+$for(libraries)$
+\input{$libraries$}
+$endfor$
 
 % We include the title and author information based on the 
 % `paper-meta.yaml` file.
- 
-\title{Well-quasi-ordered classes of bounded clique-width}
-
+$if(title)$ 
+\title{$title$}
+$endif$
 \author{
-Aliaume Lopez\thanks{}
+$for(author)$
+$author.name$$for(author.affiliation)$\thanks{$author.affiliation.name$}$endfor$
+$sep$ \and
+$endfor$
 }
 
 % For the date, we first check if the user has provided a date,
 % and otherwise use the git meta inforamtion (if available).
-\date{2025-04-22 10:41:30 +0200\footnote{c9130a596aefa5c256de1775c2cf7727b09d6f14 -- branch main at git@github.com:AliaumeL/clique-width-labelled-wqo.git}}
+$if(date)$
+\date{$date$$if(git-meta)$ --- $git-meta.commit$$endif$}
+$else$
+$if(git-meta)$
+\date{$git-meta.date$\footnote{$git-meta.commit$ -- branch $git-meta.branch$ at $git-meta.origin$}}
+$endif$
+$endif$
 
-\newcommand{\repositoryUrl}{\url{}}
+$if(anonymous)$
+\newcommand{\repositoryUrl}{$if(repository.anonymous)$$repository.anonymous$$else$Undefined Anonymous Repository$endif$}
+$else$
+\newcommand{\repositoryUrl}{\url{$if(repository.url)$$repository.url$$else$$repository$$endif$}}
+$endif$
 
 \knowledge{notion}
  | kl-usage
@@ -140,7 +158,15 @@ Aliaume Lopez\thanks{}
 \maketitle
 % Print the abstract
 \begin{abstract}
-    From words to trees.
+$if(abstract)$
+    $abstract$
+$else$
+    Please write an abstract in the \texttt{paper-meta.yaml} file.
+$endif$
+$if(keywords)$
+    \paragraph{Keywords:}
+    $for(keywords)$$it$$sep$, $endfor$
+$endif$
 \paragraph{Repository:} \repositoryUrl
 \end{abstract}
 
@@ -149,11 +175,24 @@ Aliaume Lopez\thanks{}
 
 
 % Include the content of the paper
-\% main content \input{src/introduction} \input{src/prelims} \input{src/badpaths} \input{src/interpreting} \input{src/nip} \input{src/conclusion}
+$body$
 
 % Include the bibliography
+$if(bibliography)$
+\bibliographystyle{plainurl}
+\bibliography{$for(bibliography)$$it$$sep$,$endfor$}
+$endif$
 
 % If there are any appendices, we include them here.
+$if(appendix)$
+\appendix
+$for(appendix)$
+\input{$appendix$}
+$endfor$
+$endif$
 
+$for(include-after)$
+$include-after$
+$endfor$
 
 \end{document}
