@@ -1,0 +1,33 @@
+# Continuous integration and building of the
+# PDF files using the GitHub Actions
+# 1) checkout
+# 2) install texlive
+# 3) build the PDFs
+# 4) upload the PDFs as artifacts
+
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Compile Latex Document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: |
+            atomic.tex
+            atomic.lipics.tex
+      - name: Upload PDFs
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdfs
+          path: |
+            atomic.pdf
+            atomic.lipics.pdf
