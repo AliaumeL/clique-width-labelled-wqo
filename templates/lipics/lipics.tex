@@ -15,6 +15,12 @@
     autoref,$if(review)$anonymous,$endif$$if(arxiv)$pdfa,$endif$
     thm-restate]{lipics-v2021}
 
+$if(draft)$
+\usepackage{todonotes}
+\usepackage{lineno}
+\linenumbers
+$endif$
+
 $if(arxiv)$
 \hideLIPIcs
 \pdfoutput=1
@@ -29,11 +35,16 @@ $if(final)$
 \nolinenumbers
 $endif$
 
+% math packages
+\usepackage{stmaryrd,thmtools,upgreek}
+\usepackage{amsmath,amssymb,amsfonts}
+
 % graphics packages
 \usepackage{graphicx}
 \usepackage[obeyclassoptions,mode=tex]{standalone}
 \usepackage{tikz}
 \usetikzlibrary{backgrounds}
+\usetikzlibrary{calc}
 \usetikzlibrary{shapes.geometric}
 \usetikzlibrary{positioning}
 \usetikzlibrary{automata}

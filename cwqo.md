@@ -2,6 +2,7 @@
 draft: true
 final: false
 anonymous: false
+arxiv: false
 libraries:
   - lib/aliaume.tex
   - lib/maths.tex

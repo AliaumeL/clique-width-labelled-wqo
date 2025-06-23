@@ -44,6 +44,7 @@ $(PAPER).lipics.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
 		   --wrap=none \
 		   -o $(PAPER).lipics.tex \
 		   $(PAPER).md
+	stow --target="." --dir="templates" lipics
 
 # Create a single file tex document for arXiv
 $(PAPER).arxiv.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
