@@ -22,12 +22,12 @@ jobs:
         uses: xu-cheng/latex-action@v3
         with:
           root_file: |
-            atomic.tex
-            atomic.lipics.tex
+            cwqo.tex
+            cwqo.lipics.tex
       - name: Upload PDFs
         uses: actions/upload-artifact@v4
         with:
           name: pdfs
           path: |
-            atomic.pdf
-            atomic.lipics.pdf
+            cwqo.pdf
+            cwqo.lipics.pdf
