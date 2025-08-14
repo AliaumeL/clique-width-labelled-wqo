@@ -33,7 +33,7 @@ devise \emph{decision procedures} that take as input a set and decide whether
 it is WQO or not, and whether classical decision algorithm on well-structured
 transition systems can be applied to the concrete model one has. This dual
 \emph{top-down} approach also had its recent share of successes
-\cite{FINGU19,LOPEZ24}.
+\cite{ALM17,FINGU19,LOPEZ24}.
 
 
 \subparagraph{A Model-Theoretic Approach to WQOs.}
@@ -190,38 +190,6 @@ class that are ``first-order well-behaved''.
 \end{conjecture}
 
 
-\paragraph*{Contributions.} At the core of our analysis is the fundamental
-connection between a deep automata theoretic construction (the existence of
-\emph{forward ramseyan factorisations} on trees \cite{COLC07}) and a deep
-combinatorial construction (\emph{gap embedding} on trees
-\cite{DERSHOWITZ200380}). These two constructions were meant to be used
-together, as we will try to advocate in this paper.
-
-We are also interested in the \emph{decidability} of the WQO property. This is
-a question that has recently gained traction in the community, and is of
-practical interest.
-
-\begin{theorem}[restate=pouzet2:thm]
-    \label{pouzet-2:thm}
-    Let $\Cls$ be a class of finite graphs of bounded clique-width.
-    Then, $\Cls$ is labelled-well-quasi-ordered
-    if and only if 
-    $\Cls$ is wqo-well-quasi-ordered.
-\end{theorem}
-
-An interpretation is monotone if it is monotone with respect to the
-embedding relation.
-
-\begin{theorem}[restate=transductions-paths:thm,label={transductions-paths:thm}]
-    \label{transductions-paths:thm}
-    Let $\Cls$ be a class of \kl{bounded clique-width}.
-    Then $\Cls$ is \kl{labelled-well-quasi-ordered}
-    if and only if
-    it does not \kl{monotonely transduce}
-    all \kl{finite paths}.
-\end{theorem}
-
-
 \begin{conjecture}[Szymon's Collapsing Conjecture]
     \label{nip-cw:conj}
     Let $\Cls$ be a class of graphs.
@@ -232,5 +200,86 @@ embedding relation.
 The motto would then be ``the only well-quasi-orderings on graphs are the gap
 embeddings'' and would provide a fundamental barrier to the complexity of
 induced subgraph well-quasi-orderings.
+
+\clearpage
+
+\paragraph*{Contributions.}
+
+At the core of our analysis is the fundamental connection between a deep
+automata theoretic construction (the existence of \emph{forward ramseyan
+factorisations} on trees \cite{COLC07}) and a deep combinatorial construction
+(\emph{gap embedding} on trees \cite{DERSHOWITZ200380}). These two
+constructions were meant to be used together, as we will try to advocate in
+this paper. This allows us to prove the following result:
+
+\begin{theorem}
+  Let $\Cls$ be a class of graphs having \kl{bounded clique-width}.
+  The following are equivalent:
+  \begin{enumerate}
+    \item $\Cls$ is \kl{wqo-well-quasi-ordered}
+    \item For every class $\Cls[D] \subseteq \Cls$ of graphs of \kl{bounded linear clique-width},
+      $\Cls[D]$ is \kl{wqo-well-quasi-ordered}
+  \end{enumerate}
+  Furthermore, this properties are decidable when $\Cls$ is given 
+  by an $\MSO$ interpretation from finite trees to undirected graphs.
+\end{theorem}
+
+By carefully analysing the proof of \cite{LOPEZ24}, we are able to reformulate
+their main result in terms of \kl{bounded one-dimensional-linear-clique-width},
+a very strong restriction on the class of graphs, which is defined below.
+
+\begin{definition}
+  A class of graphs $\Cls$ has \intro{bounded one-dimensional-linear-clique-width}
+  if there exists a word $w \in \Sigma^*$, where $\Sigma$ is a finite alphabet,
+  and an $\MSO$ interpretation $\phi$ from finite words to undirected graphs
+  such that $\Cls \subseteq \phi(w^*)$.
+\end{definition}
+
+\begin{theorem}
+  Let $\Cls$ be a class of graphs having \kl{bounded linear-clique-width}.
+  The following are equivalent:
+  \begin{enumerate}
+    \item $\Cls$ is \kl{wqo-well-quasi-ordered}
+    \item For every class $\Cls[D] \subseteq \Cls$ of graphs of
+      \kl{bounded one-dimensional-linear-clique-width},
+      $\Cls[D]$ is \kl{wqo-well-quasi-ordered}
+  \end{enumerate}
+  Furthermore, this properties are decidable when $\Cls$ is given 
+  by an $\MSO$ interpretation from finite trees to undirected graphs.
+\end{theorem}
+
+On these very restricted classes, it becomes easy to witness the truth of all
+the Pouzet conjectures, and as well as the Schmitz transduction conjecture in a
+weak from.
+
+\begin{theorem}
+  Let $G$ be an idempotent graph,
+  and $\Cls \defined \setof{ G^n }{n \in \Nat}$.
+  Then, the following are equivalent:
+  \begin{enumerate}
+    \item $\Cls$ is \kl{wqo-well-quasi-ordered}
+    \item $\Cls$ is \kl{labelled-well-quasi-ordered}
+    \item $\Cls$ is \kl{2-well-quasi-ordered}
+    \item $\Cls$ is \kl{pointed-well-quasi-ordered}
+    \item $\Cls$ does not existentially transduce
+      graphs of arbitrarily large diameter.
+  \end{enumerate}
+\end{theorem}
+
+As a consequence of these results,
+we obtain 
+
+\begin{theorem}
+  Let $\Cls$ be a \emph{hereditary} class of \kl{bounded clique-width}.
+  Then, the following are equivalent:
+  \begin{enumerate}
+    \item $\Cls$ is \kl{wqo-well-quasi-ordered}
+    \item $\Cls$ is \kl{pointed-well-quasi-ordered}
+    \item $\Cls$ does not existentially transduce
+      the class of all finite paths.
+  \end{enumerate}
+  Furthermore, this properties are decidable when $\Cls$ is given
+  by an $\MSO$ interpretation from finite trees to undirected graphs.
+\end{theorem}
 
 \paragraph*{Outline.}

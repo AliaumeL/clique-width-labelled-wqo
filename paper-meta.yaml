@@ -4,6 +4,29 @@ abstract: |
   From words to trees.
 author:
   - name: "Aliaume Lopez"
+    initials: "A. Lopez"
     orcid: "0000-0002-4205-327X"
-    affiliation: "University of Warsaw"
+    affiliation: 
+      - name: "University of Warsaw"
     email: ad.lopez@uw.edu.pl
+  - name: "Maël Dumas"
+    initials: "M. Dumas"
+    affiliation: 
+      - name: "University of Warsaw"
+    email: m.dumas2@uw.edu.pl
+keywords:
+  - "well-quasi-ordering"
+  - "clique-width"
+  - "automata theory"
+  - "monoids"
+  - "factorization forests"
+  - "gap embedding"
+classification:
+  acm_98:
+  - id: "G.2.1"
+    desc: "Combinatorics"
+  acm_12:
+  - id: "10003752.10003766"
+    desc: "Formal languages and automata theory"
+  - id: "10002950.10003624.10003633"
+    desc: "Graph theory"

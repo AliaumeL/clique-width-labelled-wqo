@@ -3,6 +3,8 @@ draft: true
 final: false
 anonymous: false
 arxiv: false
+bibliography:
+  - papers.bib
 libraries:
   - lib/aliaume.tex
   - lib/maths.tex
@@ -10,7 +12,6 @@ libraries:
 ---
 
 
-% main content
 \input{src/introduction}
 \input{src/prelims}
 \input{src/badpaths}

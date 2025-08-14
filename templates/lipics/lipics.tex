@@ -106,8 +106,8 @@ $endfor$
 
 \Copyright{$for(author)$$author.name$$sep$ and $endfor$} 
 
-$for(classification.ccdesc)$
-\ccsdesc[100]{$it$}
+$for(classification.acm_12)$
+\ccsdesc[100]{$it.desc$}
 $endfor$
 
 \keywords{$for(keywords)$$it$$sep$, $endfor$} %TODO mandatory; please add comma-separated list of keywords
@@ -164,6 +164,7 @@ $endif$
 \end{abstract}
 
 % Include the content of the paper
+
 $body$
 
 % Include the bibliography
