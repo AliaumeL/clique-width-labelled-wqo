@@ -122,12 +122,14 @@
 \title{Well-quasi-ordered classes of bounded clique-width}
 
 \author{
-Aliaume Lopez\thanks{}
+Aliaume Lopez\thanks{INP Bordeaux, LaBRI, CNRS}
+ \and
+Maël Dumas\thanks{University of Warsaw}
 }
 
 % For the date, we first check if the user has provided a date,
 % and otherwise use the git meta inforamtion (if available).
-\date{2025-04-22 10:41:30 +0200\footnote{c9130a596aefa5c256de1775c2cf7727b09d6f14 -- branch main at git@github.com:AliaumeL/clique-width-labelled-wqo.git}}
+\date{2025-08-14 12:17:13 +0200\footnote{f126cb22616e5dcab175ec10c6464a93a08aa910 -- branch main at git@github.com:AliaumeL/clique-width-labelled-wqo.git}}
 
 \newcommand{\repositoryUrl}{\url{}}
 
@@ -140,7 +142,9 @@ Aliaume Lopez\thanks{}
 \maketitle
 % Print the abstract
 \begin{abstract}
-    From words to trees.
+    We study classes of graphs with bounded clique-width that are well-quasi-ordered by the induced subgraph relation, in the presence of labels on the vertices. We prove that, given a finite presentation of a class of graphs, one can decide whether the class is labelled-well-quasi-ordered. This solves an open problem raised by Daligault, Rao and Thomassé in 2010. From our proof techniques, we also derive (restricted versions of) conjectures of Pouzet regarding well-quasi-ordering of graphs under the induces subgraph relation. Finally, we provide a structural characterization of those classes as those that are of bounded clique-width and do not existentially transduce the class of all finite paths.
+    \paragraph{Keywords:}
+    well-quasi-ordering, clique-width, automata theory, monoids, factorization forests, gap embedding
 \paragraph{Repository:} \repositoryUrl
 \end{abstract}
 
@@ -149,9 +153,7 @@ Aliaume Lopez\thanks{}
 
 
 % Include the content of the paper
-% main content 
-
-\input{src/introduction} 
+\input{src/introduction}
 \input{src/prelims}
 \input{src/badpaths}
 \input{src/interpreting}
@@ -159,6 +161,8 @@ Aliaume Lopez\thanks{}
 \input{src/conclusion}
 
 % Include the bibliography
+\bibliographystyle{plainurl}
+\bibliography{papers.bib}
 
 % If there are any appendices, we include them here.
 

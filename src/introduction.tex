@@ -22,6 +22,158 @@ the sum and the product of WQOs. As an example, the closure of WQOs under the
 finite words, also known as Higman's lemma \cite{HIG52}, has been used in the
 verification of so-called \emph{lossy channel systems}~\cite{ABDU93}. 
 
+
+% Well-quasi-ordered classes of graphs
+\AP Undirected finite graphs are naturally equipped with the \reintro{induced
+subgraph relation}, where $G$ is an induced subgraph of $H$ if $G$ can be
+obtained from $H$ by deleting vertices (and the edges adjacent to them). Unlike
+the graph minor relation, the induced subgraph relation is not a
+well-quasi-ordering on the class of all finite graphs, as witnessed by the
+infinite family of cycles of increasing size, which form an infinite antichain.
+However, some classes of finite graphs are well-quasi-ordered under the induced
+subgraph relation: for instance, the class of all finite paths, or the class of
+all finite cliques. Distinguishing which classes of finite graphs are
+well-quasi-ordered under the induced subgraph relation is a long-standing open
+problem in graph theory, dating back to Pouzet's seminal work \cite{POUZ72}.
+
+\AP In general, there is little hope to characterise all such classes, since
+any countable order with finite infixes can be embedded into the induced
+subgraph relation on finite graphs.\footnote{This is a folklore result.}
+However, there are high hopes that a better notion of well-quasi-ordering on
+classes of finite graphs is more amenable to structural characterisations. This
+is why one usually considers \emph{labelled} well-quasi-orderings on classes of
+finite graphs. Given a class $\Cls$ of finite graphs, and a well-quasi-ordering
+$(X, \leq)$, one can consider the class $\Label{X}{\Cls}$ of graphs in $\Cls$
+whose vertices are labelled by elements of $X$. The induced subgraph relation
+is then extended to labelled graphs by requiring that the labels are preserved
+by the embedding, i.e. that the label of a vertex in the smaller graph is less
+than or equal to the label of its image in the larger graph. 
+
+\begin{example}
+  \label{ex:labelled-graphs}
+  The class of all finite paths is not $2$-well-quasi-ordered,
+  since the infinite sequence of paths with colored endpoints 
+  forms an infinite antichain.
+  The class of cliques is labelled-well-quasi-ordered,
+  since any labelled clique can be identified with a multiset of labels,
+  and the set of finite multisets over a WQO is itself WQO.
+\end{example}
+
+
+\AP
+Bounded clique-width is a well-studied graph complexity measure
+that generalises other well-known graph complexity measures such as
+todo.
+
+
+% ici mettre la figure de mon projet CNRS ?
+% 
+% -> exemples de classes + conjectures
+
+\paragraph*{Contributions}
+\AP
+We prove that one can decide whether a class of graphs of bounded clique-width
+is labelled-well-quasi-ordered, when the class is given by
+an $\MSO$ interpretation from finite trees to undirected graphs.
+Our proof scheme 
+
+
+
+
+\paragraph*{Related works}
+
+There are three natural conjectures that have been formulated 
+regarding the relationship between various notions of well-quasi-ordering on
+classes of finite graphs.
+
+\begin{conjecture}[Pouzet \cite{POUZ72}]
+    \label{pouzet1:conj}
+    Let $\Cls$ be a class of finite graphs.
+    Then, the following are equivalent:
+    \begin{enumerate}
+      \item $\Cls$ is pointed-well-quasi-ordered,
+      \item $\Cls$ is 2-well-quasi-ordered,
+      \item $\Cls$ is labelled-well-quasi-ordered,
+      \item $\Cls$ is wqo-well-quasi-ordered.
+      \item $\Cls$ one can add a total order on the vertices of 
+        its graphs, and remain wqo-well-quasi-ordered.
+    \end{enumerate}
+\end{conjecture}
+
+\begin{conjecture}[\cite{DRT10}]
+  \label{thomasse:conj}
+  Let $\Cls$ be a class of finite graphs of bounded clique-width.
+  Then, $\Cls$ is $2$-well-quasi-ordered if and only if
+  there exists $\Cls \subseteq \Cls[D]$ 
+  ``structurally simpler'' such that $\Cls[D]$ is $2$-well-quasi-ordered.
+\end{conjecture}
+
+
+\begin{conjecture}[\cite{ALM17}]
+  \label{lozin:conj}
+  Let $\Cls$ be a hereditary class of finite graphs that is not labelled-well-quasi-ordered.
+  Then, there exists 
+  an infinite bad sequence of graphs in $\Cls$
+  that is \emph{regular}.
+\end{conjecture}
+
+\begin{conjecture}[Schmitz's Transduction Conjecture]
+    \label{transduction:conj}
+    Let $\Cls$ be a class of finite graphs.
+    Then, $\Cls$ is labelled-well-quasi-ordered
+    if and only if
+    $\Cls$
+    does not existentially transduce all finite paths.
+\end{conjecture}
+
+
+\begin{conjecture}[Szymon's Collapsing Conjecture]
+    \label{nip-cw:conj}
+    Let $\Cls$ be a class of graphs.
+    If $\Cls$ is labelled-wqo,
+    then $\Cls$ is of bounded clique-width.
+\end{conjecture}
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[
+        conj/.style={rounded corners, thick, dashed, 
+            A4
+        },
+        impl/.style={->, double},
+        constr/.style={rounded corners,minimum width=1.7cm,minimum height=1cm,draw,rectangle,align=center}]
+        \node[constr] (1w) at (0,0) {One \\ label};
+        \node[constr] (2w) at (2,0) {Two \\ labels};
+        \node[constr] (kw) at (4,0) {$k < \infty$ \\ labels};
+        \node[constr] (lw) at (6,0) {Finite set \\ of labels};
+        \node[constr] (ww) at (8,0) {WQO set    \\ of labels};
+
+        \draw[conj]
+        ($(lw.south west) + (-0.1, -1.1)$) rectangle ($(ww.north east) + (0.1, 0.1)$);
+
+        \draw[conj]
+        ($(2w.north west) + (-0.1, 1.1)$) rectangle ($(lw.south east) + (0.1, -0.1)$);
+        \coordinate (P1m) at ($(2w.north)!0.5!(lw.north)$);
+        \coordinate (P2m) at ($(lw.south)!0.5!(ww.south)$);
+        \node (P1) at ($(P1m) + (0, 0.7)$) {\cref{pouzet1:conj}};
+        \node (P2) at ($(P2m) + (0, -0.7)$) {\cref{pouzet2:conj}};
+
+    \end{tikzpicture}
+    \caption{The four well-quasi-ordering properties one can consider
+             on classes of finite graphs.}
+    \label{graph-properties:fig}
+\end{figure}
+
+
+
+\paragraph*{Proof Techniques and Overview.}
+
+
+
+\paragraph*{Outline}
+
+
+
 This explains the \emph{bottom-up} research direction in the field of WQOs,
 which is to understand which \emph{constructors} preserve the WQO property:
 finite sums, finite products, finite words, finite trees, finite graphs
@@ -34,6 +186,8 @@ it is WQO or not, and whether classical decision algorithm on well-structured
 transition systems can be applied to the concrete model one has. This dual
 \emph{top-down} approach also had its recent share of successes
 \cite{ALM17,FINGU19,LOPEZ24}.
+
+
 
 
 \subparagraph{A Model-Theoretic Approach to WQOs.}
@@ -77,54 +231,6 @@ these various properties, and the two conjectures of Pouzet claiming that these
 potentially distinct notions all collapse to either being \kl{WQO} or
 \kl{wqo-WQO}. We state the two conjectures separately because only the first
 one is explicitly found in \cite{POUZ72}.
-
-\begin{conjecture}[Pouzet \cite{POUZ72}]
-    \label{pouzet1:conj}
-    Let $\Cls$ be a class of finite graphs.
-    Then, $\Cls$ is 2-well-quasi-ordered
-    if and only if
-    $\Cls$ is labelled-well-quasi-ordered.
-\end{conjecture}
-
-\begin{conjecture}
-    \label{pouzet2:conj}
-    Let $\Cls$ be a class of finite graphs.
-    Then, $\Cls$ is labelled-well-quasi-ordered
-    if and only if
-    $\Cls$ is wqo-well-quasi-ordered.
-\end{conjecture}
-
-
-
-\begin{figure}
-    \centering
-    \begin{tikzpicture}[
-        conj/.style={rounded corners, thick, dashed, 
-            A4
-        },
-        impl/.style={->, double},
-        constr/.style={rounded corners,minimum width=1.7cm,minimum height=1cm,draw,rectangle,align=center}]
-        \node[constr] (1w) at (0,0) {One \\ label};
-        \node[constr] (2w) at (2,0) {Two \\ labels};
-        \node[constr] (kw) at (4,0) {$k < \infty$ \\ labels};
-        \node[constr] (lw) at (6,0) {Finite set \\ of labels};
-        \node[constr] (ww) at (8,0) {WQO set    \\ of labels};
-
-        \draw[conj]
-        ($(lw.south west) + (-0.1, -1.1)$) rectangle ($(ww.north east) + (0.1, 0.1)$);
-
-        \draw[conj]
-        ($(2w.north west) + (-0.1, 1.1)$) rectangle ($(lw.south east) + (0.1, -0.1)$);
-        \coordinate (P1m) at ($(2w.north)!0.5!(lw.north)$);
-        \coordinate (P2m) at ($(lw.south)!0.5!(ww.south)$);
-        \node (P1) at ($(P1m) + (0, 0.7)$) {\cref{pouzet1:conj}};
-        \node (P2) at ($(P2m) + (0, -0.7)$) {\cref{pouzet2:conj}};
-
-    \end{tikzpicture}
-    \caption{The four well-quasi-ordering properties one can consider
-             on classes of finite graphs.}
-    \label{graph-properties:fig}
-\end{figure}
 
 In general, the class of all finite graphs (even undirected and unlabelled) is
 not well-quasi-ordered under the induced subgraph relation (for instance, the
@@ -180,22 +286,7 @@ well-behaved'' and the field of ``structural graph theory'' that focuses on
 class that are ``first-order well-behaved''.
 
 
-\begin{conjecture}[Schmitz's Transduction Conjecture]
-    \label{transduction:conj}
-    Let $\Cls$ be a class of finite graphs.
-    Then, $\Cls$ is labelled-well-quasi-ordered
-    if and only if
-    $\Cls$
-    does not existentially transduce all finite paths.
-\end{conjecture}
 
-
-\begin{conjecture}[Szymon's Collapsing Conjecture]
-    \label{nip-cw:conj}
-    Let $\Cls$ be a class of graphs.
-    If $\Cls$ is labelled-wqo,
-    then $\Cls$ is of bounded clique-width.
-\end{conjecture}
 
 The motto would then be ``the only well-quasi-orderings on graphs are the gap
 embeddings'' and would provide a fundamental barrier to the complexity of

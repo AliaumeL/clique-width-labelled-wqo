@@ -1,14 +1,30 @@
 title: "Well-quasi-ordered classes of bounded clique-width"
 license: "CC-BY-SA 4.0"
 abstract: |
-  From words to trees.
+  We study classes of graphs with bounded clique-width that 
+  are well-quasi-ordered by the induced subgraph relation, 
+  in the presence of labels on the vertices. We prove that,
+  given a finite presentation of a class of graphs,
+  one can decide whether the class is labelled-well-quasi-ordered.
+  This solves an open problem raised by Daligault, Rao and Thomassé
+  in 2010. From our proof techniques, we also derive
+  (restricted versions of) conjectures
+  of Pouzet regarding well-quasi-ordering of graphs under 
+  the induces subgraph relation. 
+  Finally, we provide a structural characterization of those 
+  classes as those that are of bounded clique-width and 
+  do not existentially transduce the class of all finite paths.
 author:
   - name: "Aliaume Lopez"
     initials: "A. Lopez"
     orcid: "0000-0002-4205-327X"
-    affiliation: 
-      - name: "University of Warsaw"
-    email: ad.lopez@uw.edu.pl
+    affiliation:
+      - name: "INP Bordeaux, LaBRI, CNRS"
+        country: "France"
+        city: "Bordeaux"
+    arxiv: alopez_3
+    github: AliaumeL
+    email: aliaume.lopez@bordeaux-inp.fr
   - name: "Maël Dumas"
     initials: "M. Dumas"
     affiliation: 
