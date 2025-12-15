@@ -12,7 +12,7 @@
 
 % we setup a custom geometry because the default one is too narrow
 \usepackage{geometry}
-\geometry{margin=3.5cm}
+\geometry{margin=2.5cm}
 
 % utf-8 for old systems
 \usepackage[utf8]{inputenc}
@@ -27,7 +27,6 @@
 $if(draft)$
 \usepackage{todonotes}
 \usepackage{lineno}
-\linenumbers
 $endif$
 
 
@@ -52,7 +51,6 @@ $endif$
 \usepackage{graphicx}
 \usepackage[obeyclassoptions,mode=tex]{standalone}
 \usepackage{tikz}
-\usetikzlibrary{calc}
 \usetikzlibrary{backgrounds}
 \usetikzlibrary{shapes.geometric}
 \usetikzlibrary{positioning}
@@ -84,6 +82,8 @@ $endif$
 \crefname{algocfline}{Algorithm}{Algorithms}
 \crefname{algocf}{Algorithm}{Algorithms}
 \Crefname{algocf}{Algorithm}{Algorithms}
+\crefname{conjecture}{Conjecture}{Conjectures}
+\Crefname{conjecture}{Conjecture}{Conjectures}
 
 % Packages for macro definitions
 \usepackage{xparse}
@@ -133,6 +133,7 @@ $sep$ \and
 $endfor$
 }
 
+$if(draft)$
 % For the date, we first check if the user has provided a date,
 % and otherwise use the git meta inforamtion (if available).
 $if(date)$
@@ -140,6 +141,7 @@ $if(date)$
 $else$
 $if(git-meta)$
 \date{$git-meta.date$\footnote{$git-meta.commit$ -- branch $git-meta.branch$ at $git-meta.origin$}}
+$endif$
 $endif$
 $endif$
 

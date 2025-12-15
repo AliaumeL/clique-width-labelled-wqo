@@ -15,12 +15,6 @@
     autoref,$if(review)$anonymous,$endif$$if(arxiv)$pdfa,$endif$
     thm-restate]{lipics-v2021}
 
-$if(draft)$
-\usepackage{todonotes}
-\usepackage{lineno}
-\linenumbers
-$endif$
-
 $if(arxiv)$
 \hideLIPIcs
 \pdfoutput=1
@@ -35,16 +29,11 @@ $if(final)$
 \nolinenumbers
 $endif$
 
-% math packages
-\usepackage{stmaryrd,thmtools,upgreek}
-\usepackage{amsmath,amssymb,amsfonts}
-
 % graphics packages
 \usepackage{graphicx}
 \usepackage[obeyclassoptions,mode=tex]{standalone}
 \usepackage{tikz}
 \usetikzlibrary{backgrounds}
-\usetikzlibrary{calc}
 \usetikzlibrary{shapes.geometric}
 \usetikzlibrary{positioning}
 \usetikzlibrary{automata}
@@ -106,8 +95,8 @@ $endfor$
 
 \Copyright{$for(author)$$author.name$$sep$ and $endfor$} 
 
-$for(classification.acm_12)$
-\ccsdesc[100]{$it.desc$}
+$for(classification.ccdesc)$
+\ccsdesc[100]{$it$}
 $endfor$
 
 \keywords{$for(keywords)$$it$$sep$, $endfor$} %TODO mandatory; please add comma-separated list of keywords
@@ -164,7 +153,6 @@ $endif$
 \end{abstract}
 
 % Include the content of the paper
-
 $body$
 
 % Include the bibliography

@@ -1,20 +1,17 @@
 \section{Introduction}
 \label{sec:introduction}
 
-\subparagraph{Context.} 
-\AP
-A quasi-ordered set $(X, \leq)$ is \intro{well-quasi-ordered} (WQO)
-if every non-empty subset of $X$ has a finite non-empty subset $Y \subfin X$ of
-minimal elements, i.e. such that for every $x \in X$, there exists
-$y \in Y$ such that $y \leq x$. When the set $X$ is totally ordered,
-this is equivalent to the usual notion of well-ordering, but in the presence of 
-incomparable elements, it is a stronger condition.
-The theory of well-quasi-orderings (WQOs) is a powerful
-combinatorial setting that has found applications in various areas of
-mathematics and computer science. In graph theory, the celebrated result of
-Robertson and Seymour~\cite{ROBSEY04} states that the class of all finite
-graphs is well-quasi-ordered under the minor relation, a profound result with
-deep algorithmic consequences. WQOs are also at the heart of
+\AP A quasi-ordered set $(X, \leq)$ is \intro{well-quasi-ordered} (WQO) if
+every non-empty subset of $X$ has a finite non-empty subset $Y \subfin X$ of
+minimal elements, i.e. such that for every $x \in X$, there exists $y \in Y$
+such that $y \leq x$. When the set $X$ is totally ordered, this is equivalent
+to the usual notion of well-ordering, but in the presence of incomparable
+elements, it is a stronger condition. The theory of well-quasi-orderings (WQOs)
+is a powerful combinatorial setting that has found applications in various
+areas of mathematics and computer science. In graph theory, the celebrated
+result of Robertson and Seymour~\cite{ROBSEY04} states that the class of all
+finite graphs is well-quasi-ordered under the minor relation, a profound result
+with deep algorithmic consequences. WQOs are also at the heart of
 \emph{well-structured transition systems}, infinite state transitions systems
 over which verification algorithms can be designed~\cite{ABDU96,ABDU98}. One of
 the appeal of WQOs is that they are closed under various operations, such as
@@ -38,16 +35,17 @@ problem in graph theory, dating back to Pouzet's seminal work \cite{POUZ72}.
 
 \AP In general, there is little hope to characterise all such classes, since
 any countable order with finite infixes can be embedded into the induced
-subgraph relation on finite graphs.\footnote{This is a folklore result.}
-However, there are high hopes that a better notion of well-quasi-ordering on
-classes of finite graphs is more amenable to structural characterisations. This
-is why one usually considers \emph{labelled} well-quasi-orderings on classes of
-finite graphs. Given a class $\Cls$ of finite graphs, and a well-quasi-ordering
-$(X, \leq)$, one can consider the class $\Label{X}{\Cls}$ of graphs in $\Cls$
-whose vertices are labelled by elements of $X$. The induced subgraph relation
-is then extended to labelled graphs by requiring that the labels are preserved
-by the embedding, i.e. that the label of a vertex in the smaller graph is less
-than or equal to the label of its image in the larger graph. 
+subgraph relation on finite graphs (this is a consequence of \cite[Lemma
+5.1]{Kuske06}). However, there are high hopes that a better notion of
+well-quasi-ordering on classes of finite graphs is more amenable to structural
+characterisations. This is why one usually considers \emph{labelled}
+well-quasi-orderings on classes of finite graphs. Given a class $\Cls$ of
+finite graphs, and a well-quasi-ordering $(X, \leq)$, one can consider the
+class $\Label{X}{\Cls}$ of graphs in $\Cls$ whose vertices are labelled by
+elements of $X$. The induced subgraph relation is then extended to labelled
+graphs by requiring that the labels are preserved by the embedding, i.e. that
+the label of a vertex in the smaller graph is less than or equal to the label
+of its image in the larger graph. 
 
 \begin{example}
   \label{ex:labelled-graphs}
@@ -189,7 +187,7 @@ classes of finite graphs.
 
 
 
-\subparagraph*{Proof Techniques and Overview.} The overall proof technique can be
+\paragraph*{Proof Techniques and Overview.} The overall proof technique can be
 summarised in \cref{fig:proof-technique}. Given a class $\Cls$ of graphs
 defined as the image of an $\MSO$ interpretation $I$ from finite trees to
 graphs, we want to decide whether $\Cls$ is labelled-well-quasi-ordered. To
@@ -256,188 +254,4 @@ transition systems can be applied to the concrete model one has. This dual
 
 
 
-
-\subparagraph{A Model-Theoretic Approach to WQOs.}
-\AP 
-While finite products and sums are natural algebraic constructions on sets, the
-cornerstone results of Higman and Kruskal showing that well-quasi-ordered sets
-are closed under \emph{finite words} \cite{HIG52} and \emph{finite trees}
-\cite{KRU72} require a careful definition of the ordering on those structures,
-together with a non-trivial and tailored proof that they are
-well-quasi-ordered, often requiring the use of a so-called \emph{minimal bad
-sequence argument} \cite{NASH65}. We argue that the better way to introduce
-these orderings stems from a model-theoretic approach to WQOs, where one
-considers subsets of \emph{finite structures} endowed with the usual notion of
-\emph{embedding} (of models). Considering finite words as labelled total orders
-one immediately sees that the seemingly \emph{ad-hoc} definition of the
-\emph{subword ordering} powering Higman's lemma is in fact an instance of the
-usual embedding relation from logic. A similar observation can be made for
-Kruskal's tree theorem, where structures are labelled trees equipped with the
-least common ancestor relation. These are folklore results, but we believe that
-they are a strong motivation for a more systematic study of the embedding
-relation on classes of finite structures.
-
-\AP In this context, the simplest (non-trivial) structures one can consider are
-\emph{finite undirected graphs}. The corresponding notion of embedding is the
-\emph{induced subgraph relation} that is well-known from graph theory. Given a
-class $\Cls$ of finite undirected graphs, one can as whether $\Cls$ is
-well-quasi-ordered under the induced subgraph relation. One can also consider
-$\Cls$ as a \emph{constructor} for new WQOs, mapping $(X, \leq)$ to
-$\Label{X}{\Cls}$, the class of graphs in $\Cls$ labelled using elements of
-$X$, this is how one obtains $X^*$ from $X$ in Higman's lemma. The natural
-question is then, whether $\Label{X}{\Cls}$ is WQO when $X$ itself is WQO.
-Freely labeling classes of graph is an operation that is prominent in the field
-of \emph{structural graph theory}: this is for instance the difference between
-being NIP and being \emph{monadically} NIP \todo{cite}. However, in this
-context,  the set $X$ of labels is equipped with the equality relation and is
-finite. Of course, one can also consider further restrictions on $X$, such as
-requiring that $X$ is of size at most $k$ for some $k \in \Nat$. We  depicted
-in
-\cref{graph-properties:fig},
-these various properties, and the two conjectures of Pouzet claiming that these
-potentially distinct notions all collapse to either being \kl{WQO} or
-\kl{wqo-WQO}. We state the two conjectures separately because only the first
-one is explicitly found in \cite{POUZ72}.
-
-In general, the class of all finite graphs (even undirected and unlabelled) is
-not well-quasi-ordered under the induced subgraph relation (for instance, the
-class of finite cycles forms an infinite antichain).
-
-There have been many attempts to understand
-which classes of (finite) graphs are WQOs when endowed with the induced
-subgraph relation. One can think of the early work of Ding on classes of
-bounded tree-depth \cite{DING92}, or more recent approaches
-\cite{DRT10,DLP17,POZA22}.
-Typical proofs that a set is well-quasi-ordered can be clustered into two
-categories: \emph{structural proofs} that exhibit an encoding of the set into a
-well-quasi-ordered set built from simpler elements, and \emph{minimal bad
-sequence arguments} \cite{NASH65}. The latter are often tedious and error-prone
-to carry out \cite[Discussion xxx]{LOPEZ23}. 
-
-Attempts to prove these conjectures often relied on assuming some kind of
-structural property of the class of graphs, such as enjoying suitable
-\emph{tree decompositions}.
-
-Now, to work on those trees, one needs to place a well-quasi-ordered relation
-on them. This is usually done using the tree embedding relation, also known as
-Kruskal's embedding relation, which is a well-quasi-ordering on trees
-\cite{KRU72}. This works when the function that maps a tree to a graph is
-simple enough, but more often than not, this is not the case. In \cite{DRT10},
-the authors introduce a \emph{tailored} embedding relation on trees, and prove
-that it is a well-quasi-ordering under certain hypotheses, leveraging a tedious
-and error-prone proof using a \emph{minimal bad sequence argument}
-\cite{NASH65}. \todo{talk about clique width now}
-
-We know since \cite{FREU20} and \cite{LOPEZ23} that one can easily inductively
-define well-quasi-orderings of increasing complexity on a given set. One
-example of such a construction is the \emph{gap embedding relation} of
-Derhowitz and Tzameret \cite{DERSHOWITZ200380}. This relation was already at
-the core of \emph{priority channel systems}, although in a somewhat hidden form
-\cite{HSS13}.  It was also noticed in \cite{LOPEZ24} that the \emph{ad-hoc}
-construction of \cite{DRT10} was in fact a particular instance of the gap
-embedding relation on trees.
-
-A line of research initiated in \cite{LOPEZ24} explores the \emph{automata
-theoretic} approach to the Pouzet conjectures. It was conjectured that the
-notion of gap-embedding could be useful. We prove that this is the case.
-\todo{Relied on monoids and automata theory on words}
-\textbf{The gap embedding is essentially the only well-quasi-ordering on 
-graph that can exist.}
-
-
-Recently, a conjecture was formulated by Sylvain Schmitz in a personal
-communication with the authors, which we will call the \emph{transduction
-conjecture}. It attemps to bridge the gap between the study of
-\kl{well-quasi-ordered} classes of graphs that are ``combinatorially
-well-behaved'' and the field of ``structural graph theory'' that focuses on
-class that are ``first-order well-behaved''.
-
-
-
-
-The motto would then be ``the only well-quasi-orderings on graphs are the gap
-embeddings'' and would provide a fundamental barrier to the complexity of
-induced subgraph well-quasi-orderings.
-
 \clearpage
-
-\paragraph*{Contributions.}
-
-At the core of our analysis is the fundamental connection between a deep
-automata theoretic construction (the existence of \emph{forward ramseyan
-factorisations} on trees \cite{COLC07}) and a deep combinatorial construction
-(\emph{gap embedding} on trees \cite{DERSHOWITZ200380}). These two
-constructions were meant to be used together, as we will try to advocate in
-this paper. This allows us to prove the following result:
-
-\begin{theorem}
-  Let $\Cls$ be a class of graphs having \kl{bounded clique-width}.
-  The following are equivalent:
-  \begin{enumerate}
-    \item $\Cls$ is \kl{wqo-well-quasi-ordered}
-    \item For every class $\Cls[D] \subseteq \Cls$ of graphs of \kl{bounded linear clique-width},
-      $\Cls[D]$ is \kl{wqo-well-quasi-ordered}
-  \end{enumerate}
-  Furthermore, this properties are decidable when $\Cls$ is given 
-  by an $\MSO$ interpretation from finite trees to undirected graphs.
-\end{theorem}
-
-By carefully analysing the proof of \cite{LOPEZ24}, we are able to reformulate
-their main result in terms of \kl{bounded one-dimensional-linear-clique-width},
-a very strong restriction on the class of graphs, which is defined below.
-
-\begin{definition}
-  A class of graphs $\Cls$ has \intro{bounded one-dimensional-linear-clique-width}
-  if there exists a word $w \in \Sigma^*$, where $\Sigma$ is a finite alphabet,
-  and an $\MSO$ interpretation $\phi$ from finite words to undirected graphs
-  such that $\Cls \subseteq \phi(w^*)$.
-\end{definition}
-
-\begin{theorem}
-  Let $\Cls$ be a class of graphs having \kl{bounded linear-clique-width}.
-  The following are equivalent:
-  \begin{enumerate}
-    \item $\Cls$ is \kl{wqo-well-quasi-ordered}
-    \item For every class $\Cls[D] \subseteq \Cls$ of graphs of
-      \kl{bounded one-dimensional-linear-clique-width},
-      $\Cls[D]$ is \kl{wqo-well-quasi-ordered}
-  \end{enumerate}
-  Furthermore, this properties are decidable when $\Cls$ is given 
-  by an $\MSO$ interpretation from finite trees to undirected graphs.
-\end{theorem}
-
-On these very restricted classes, it becomes easy to witness the truth of all
-the Pouzet conjectures, and as well as the Schmitz transduction conjecture in a
-weak from.
-
-\begin{theorem}
-  Let $G$ be an idempotent graph,
-  and $\Cls \defined \setof{ G^n }{n \in \Nat}$.
-  Then, the following are equivalent:
-  \begin{enumerate}
-    \item $\Cls$ is \kl{wqo-well-quasi-ordered}
-    \item $\Cls$ is \kl{labelled-well-quasi-ordered}
-    \item $\Cls$ is \kl{2-well-quasi-ordered}
-    \item $\Cls$ is \kl{pointed-well-quasi-ordered}
-    \item $\Cls$ does not existentially transduce
-      graphs of arbitrarily large diameter.
-  \end{enumerate}
-\end{theorem}
-
-As a consequence of these results,
-we obtain 
-
-\begin{theorem}
-  Let $\Cls$ be a \emph{hereditary} class of \kl{bounded clique-width}.
-  Then, the following are equivalent:
-  \begin{enumerate}
-    \item $\Cls$ is \kl{wqo-well-quasi-ordered}
-    \item $\Cls$ is \kl{pointed-well-quasi-ordered}
-    \item $\Cls$ does not existentially transduce
-      the class of all finite paths.
-  \end{enumerate}
-  Furthermore, this properties are decidable when $\Cls$ is given
-  by an $\MSO$ interpretation from finite trees to undirected graphs.
-\end{theorem}
-
-\paragraph*{Outline.}

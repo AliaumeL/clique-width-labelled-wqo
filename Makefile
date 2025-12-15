@@ -10,6 +10,7 @@ SRC=src/*.tex             \
     $(PAPER).md
 
 TEMPLATES=templates/plain-article.tex \
+		templates/ieee/IEEE-conference-template.tex \
 	  templates/git-meta.lua      \
 	  templates/lipics/lipics.tex 
 
@@ -45,6 +46,17 @@ $(PAPER).lipics.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
 		   -o $(PAPER).lipics.tex \
 		   $(PAPER).md
 	stow --target="." --dir="templates" lipics
+
+
+# Create an ieee document for submission
+$(PAPER).ieee.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
+	pandoc --template=templates/ieee/IEEE-conference-template.tex \
+		   --lua-filter=templates/git-meta.lua \
+		   --metadata-file=./paper-meta.yaml \
+		   --wrap=none \
+		   -o $(PAPER).ieee.tex \
+		   $(PAPER).md
+	stow --target="." --dir="templates" ieee 
 
 # Create a single file tex document for arXiv
 $(PAPER).arxiv.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml

@@ -29,6 +29,8 @@ author:
     initials: "M. Dumas"
     affiliation: 
       - name: "University of Warsaw"
+        country: "Poland"
+        city: "Warsaw"
     email: m.dumas2@uw.edu.pl
 keywords:
   - "well-quasi-ordering"
