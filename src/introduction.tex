@@ -87,10 +87,6 @@ every graph in $\Cls$ can be constructed using the following operations:
 
 
 
-% ici mettre la figure de mon projet CNRS ?
-% 
-% -> exemples de classes + conjectures
-
 \paragraph*{Contributions}
 \AP
 We prove that one can decide whether a class of graphs of bounded clique-width
@@ -155,38 +151,6 @@ classes of finite graphs.
     then $\Cls$ is of bounded clique-width.
 \end{conjecture}
 
-\begin{figure}
-    \centering
-    \begin{tikzpicture}[
-        conj/.style={rounded corners, thick, dashed, 
-            A4
-        },
-        impl/.style={->, double},
-        constr/.style={rounded corners,minimum width=1.7cm,minimum height=1cm,draw,rectangle,align=center}]
-        \node[constr] (1w) at (0,0) {One \\ label};
-        \node[constr] (2w) at (2,0) {Two \\ labels};
-        \node[constr] (kw) at (4,0) {$k < \infty$ \\ labels};
-        \node[constr] (lw) at (6,0) {Finite set \\ of labels};
-        \node[constr] (ww) at (8,0) {WQO set    \\ of labels};
-
-        \draw[conj]
-        ($(lw.south west) + (-0.1, -1.1)$) rectangle ($(ww.north east) + (0.1, 0.1)$);
-
-        \draw[conj]
-        ($(2w.north west) + (-0.1, 1.1)$) rectangle ($(lw.south east) + (0.1, -0.1)$);
-        \coordinate (P1m) at ($(2w.north)!0.5!(lw.north)$);
-        \coordinate (P2m) at ($(lw.south)!0.5!(ww.south)$);
-        \node (P1) at ($(P1m) + (0, 0.7)$) {\cref{pouzet1:conj}};
-        \node (P2) at ($(P2m) + (0, -0.7)$) {\cref{pouzet2:conj}};
-
-    \end{tikzpicture}
-    \caption{The four well-quasi-ordering properties one can consider
-             on classes of finite graphs.}
-    \label{graph-properties:fig}
-\end{figure}
-
-
-
 \paragraph*{Proof Techniques and Overview.} The overall proof technique can be
 summarised in \cref{fig:proof-technique}. Given a class $\Cls$ of graphs
 defined as the image of an $\MSO$ interpretation $I$ from finite trees to
@@ -214,25 +178,6 @@ in nature, yielding a proof of \cref{lozin:conj} for classes of graphs of
 bounded clique-width. Finally, the tree-like structure obtained is a form of
 simple tree decomposition, answering positively to \cref{thomasse:conj} in
 totality.
-
-\begin{figure}
-  \centering
-  \begin{tikzpicture}
-    \node (trees) at (0,0) {Trees};
-    \node (graphs) at (6,0) {$\Cls$};
-    \node (nested) at (3,-2) {Nested Trees};
-
-    \draw[->] (trees) to node[above] {$I$} (graphs);
-    \draw[->] (trees) to node[left] {$F$} (nested);
-    \draw[->] (nested) to node[right] {$J$} (graphs);
-
-    \node[anchor=east] (labelI) at (-1,0) {$I$: $\MSO$ interpretation};
-    \node[anchor=east] (labelF) at (-1,-0.5) {$F$: Ramseyan factorisation};
-    \node[anchor=east] (labelJ) at (-1,-1) {$J$: QF interpretation};
-  \end{tikzpicture}
-  \caption{Overview of the proof technique.}
-  \label{fig:proof-technique}
-\end{figure}
 
 
 \paragraph*{Outline}

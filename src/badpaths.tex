@@ -1,80 +1,26 @@
 \section{Bad Patterns in Images of Interpretations}
 \label{sec:bad-patterns}
 
+In this section, we will isolate combinatorial obstructions to being
+\kl{2-well-quasi-ordered} in classes of graphs that are images of \kl{simple
+MSO interpretations} from trees. We will take the same notations as in
+\cref{sec:ramseyan}. 
+
 \subsection{Obstructions to WQO}
 
-In this section, we will prove the main theorem of this paper, which provides
-an effective algorithm to decide if a class of graphs of bounded clique-width
-is well-quasi-ordered. 
-
-\begin{theorem}[restate=effective-image:thm,label={effective-image:thm}]
-    \label{effective-image:thm}
-    Let $I$ be an $\MSO$ interpretation
-    from finite trees to undirected graphs.
-    There exists a computable $k \in \Nat$
-    such that $\image{I}$
-    is $k$-well-quasi-ordered
-    if and only if 
-    $\image{I}$ is wqo-well-quasi-ordered.
-    These properties are furthermore decidable.
-\end{theorem}
-
-From this theorem, we immediately provide a positive answer to
-\cref{pouzet2:conj} for classes of graphs of \kl{bounded clique-width}.
-
-\begin{corollary}
-    \label{effective-image:cor}
-    A class of graphs $\Cls$ of \kl{bounded clique width} 
-    is \kl{labelled-well-quasi-ordered}
-    if and only if it is \kl{wqo-well-quasi-ordered}.
-\end{corollary}
-\begin{proof}
-    Consider a class $\Cls$ of graphs having bounded clique width.
-    There is an interpretation from trees to a superset of this class $\Cls$.
-    Because $\Cls$ is \kl{labelled-well-quasi-ordered}, the class of images
-    can be described using finitely many forbidden patterns,
-    and we can assume that we do not take subsets.
-    As a consequence, we can assume that there exists a $\varphi$
-    such that $\Cls \subseteq \varphi(\Trees{\Sigma}) \subseteq \dwset{\Cls}$.
-    Now, because $\Cls$ is \kl{labelled-well-quasi-ordered}, we can assume that
-    $\dwset{\Cls}$ is \kl{labelled-well-quasi-ordered} as well.
-    This proves that $\varphi(\Trees{\Sigma})$ is \kl{labelled-well-quasi-ordered},
-    hence \kl{wqo-well-quasi-ordered},
-    and as a consequence so is $\Cls$.
-\end{proof}
-
-Before proving \cref{effective-image:thm}, let us focus our attention on
-\intro{simple interpretations}, i.e., those that are defined solely by a
-formula $\varphi_E(x,y)$.
-This is not a restriction, as the following lemma
-shows.
-
-\begin{lemma}
-    \label{simple-interpretation:lem}
-    Let $I$ be an $\MSO$ interpretation from finite trees to undirected graphs.
-    There exists a (computable) simple interpretation $I'$ such that
-    for all $k \geq 1$,
-    $\image{I}$ is \kl{$k$-well-quasi-ordered} if and only if
-    $\image{I'}$ is \kl{$k$-well-quasi-ordered}.
-\end{lemma}
-\begin{proof}
-\end{proof}
-
-\AP Therefore, the main combinatorial obstacle to understanding whether or not
-a class is \kl{labelled-well-quasi-ordered} is to understand the behaviour of
-pairs of nodes $x$ and $y$ that are \kl{dependent}. This is the motivation
-for the following construction that studies the behaviour of
-consecutive \kl{$k$-neighbourhoods} in a tree.
+As witnessed by \cref{lem:almost-order-preserving}, one obstruction for the
+interpretation $\someInterp$ to be order-preserving is is the behaviour of
+nodes that are ``too close'' to each other. Let us extract a formal obstruction
+for being \kl{$2$-well-quasi-ordered} from this informal idea.
 
 \begin{definition}
     \label{ramseyan-branch:def}
     Let $T$ be a tree and $\spt$ be a \kl{forward Ramseyan split} of height $N$.
-    A \intro{bough of level $k$} in $T$ is an infix of a branch of $T$
-    satisfying:
-    \begin{enumerate}
-        \item Its maximal and minimal elements have level $k$
-        \item All elements of the bough have level greater or equal to $k$
-    \end{enumerate}
+    A \intro{bough of level $k$} in $\aTree$ is an infix of a branch of $\aTree$
+    such that its maximal and minimal elements have level $k$,
+    and such that 
+    all elements of the bough have level greater or equal to $k$.
+
     The \intro{size of a bough} is the number of elements of depth $k$
     in the \kl{bough}.
 \end{definition}
@@ -151,6 +97,7 @@ resulting partition of the tree $T$ with respect to a given \kl{bough} $B$.
 
 \begin{figure}
     \centering
+    \resizebox{0.9\linewidth}{!}{
     \begin{tikzpicture}[
         localType/.style={
             color=C3,
@@ -168,7 +115,7 @@ resulting partition of the tree $T$ with respect to a given \kl{bough} $B$.
         },
         ]
         \draw (0,0) rectangle (8,2);
-        \node (root) at (-2,2) {$\treeRoot$};
+        \node (root) at (-1.2,2) {$\treeRoot$};
         \foreach \x in {0,1,2,3,4} {
             \coordinate (n\x) at ({ 2 * \x},0);
             \coordinate (pb\x) at ({ 2 * \x},2);
@@ -210,23 +157,29 @@ resulting partition of the tree $T$ with respect to a given \kl{bough} $B$.
         \draw[localType, <-] (ty) --
         node[midway, below] {$\BlL(y)$}
         (b3);
-
-
     \end{tikzpicture}
-    \caption{Partitionning a graph using a branch.}
+    }
+    \caption{Partitionning a graph using a \kl{bough}.}
     \label{partitionning-a-graph:fig}
 \end{figure}
 
-\AP
-To compute the presence of an edge between two leaves $x$ and $y$
-in $B(T)$, we only need to know their respective \kl{bough types}
-the order in which they appear in the \kl{bough}, 
-and whether or not there is an idempotent. \cref{partitionning-a-graph:fig}.
+\AP To compute the presence of an edge between two leaves $x$ and $y$ in
+$B(T)$, we only need to know their respective \kl{bough types} the order in
+which they appear in the \kl{bough}, and how they are separated in the tree
+$T$, as illustrated in \cref{partitionning-a-graph:fig}.
+
+\AP Let us define a \intro{context} $C[\square]$ to be a pair of a tree $A$
+with a distinguished hole $\square$ that can be filled by another tree, and a
+tree $B$ that can be plugged into this hole. Given a tree $T$ with a hole, one
+can place it inside a context $C[\square]$ to obtain a new tree $C[T]$ that is
+defined by plugging $T$ into the hole of $A$, and plugging $B$ into the hole of
+$T$.
+
 
 \begin{definition}
     \label{good-bough:def}
     Let $B$ be a \kl{bough} of level $k$ in $T$.
-    We say that $B$ is a \intro{good bough} if, for every element $m \in M$,
+    We say that $B$ is a \intro{good bough} if, for every context 
     there exists a \kl{bough} $H$ of level $k$ in some other tree $T'$,
     and a function $h \colon B(T) \to H(T')$ (from leaves to leaves) such that
     \begin{enumerate}
@@ -495,4 +448,64 @@ copies.
   \cite{ALM17} holds for classes of bounded clique-width!
 \end{corollary}
 
+
+
+\begin{theorem}[restate=effective-image:thm,label={effective-image:thm}]
+    \label{effective-image:thm}
+    Let $I$ be an $\MSO$ interpretation
+    from finite trees to undirected graphs.
+    There exists a computable $k \in \Nat$
+    such that $\image{I}$
+    is $k$-well-quasi-ordered
+    if and only if 
+    $\image{I}$ is wqo-well-quasi-ordered.
+    These properties are furthermore decidable.
+\end{theorem}
+
+From this theorem, we immediately provide a positive answer to
+\cref{pouzet2:conj} for classes of graphs of \kl{bounded clique-width}.
+
+\begin{corollary}
+    \label{effective-image:cor}
+    A class of graphs $\Cls$ of \kl{bounded clique width} 
+    is \kl{labelled-well-quasi-ordered}
+    if and only if it is \kl{wqo-well-quasi-ordered}.
+\end{corollary}
+\begin{proof}
+    Consider a class $\Cls$ of graphs having bounded clique width.
+    There is an interpretation from trees to a superset of this class $\Cls$.
+    Because $\Cls$ is \kl{labelled-well-quasi-ordered}, the class of images
+    can be described using finitely many forbidden patterns,
+    and we can assume that we do not take subsets.
+    As a consequence, we can assume that there exists a $\varphi$
+    such that $\Cls \subseteq \varphi(\Trees{\Sigma}) \subseteq \dwset{\Cls}$.
+    Now, because $\Cls$ is \kl{labelled-well-quasi-ordered}, we can assume that
+    $\dwset{\Cls}$ is \kl{labelled-well-quasi-ordered} as well.
+    This proves that $\varphi(\Trees{\Sigma})$ is \kl{labelled-well-quasi-ordered},
+    hence \kl{wqo-well-quasi-ordered},
+    and as a consequence so is $\Cls$.
+\end{proof}
+
+Before proving \cref{effective-image:thm}, let us focus our attention on
+\intro{simple interpretations}, i.e., those that are defined solely by a
+formula $\varphi_E(x,y)$.
+This is not a restriction, as the following lemma
+shows.
+
+\begin{lemma}
+    \label{simple-interpretation:lem}
+    Let $I$ be an $\MSO$ interpretation from finite trees to undirected graphs.
+    There exists a (computable) simple interpretation $I'$ such that
+    for all $k \geq 1$,
+    $\image{I}$ is \kl{$k$-well-quasi-ordered} if and only if
+    $\image{I'}$ is \kl{$k$-well-quasi-ordered}.
+\end{lemma}
+\begin{proof}
+\end{proof}
+
+\AP Therefore, the main combinatorial obstacle to understanding whether or not
+a class is \kl{labelled-well-quasi-ordered} is to understand the behaviour of
+pairs of nodes $x$ and $y$ that are \kl{dependent}. This is the motivation
+for the following construction that studies the behaviour of
+consecutive \kl{$k$-neighbourhoods} in a tree.
 
