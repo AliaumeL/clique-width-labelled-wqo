@@ -1,20 +1,21 @@
-\section{Existentially Transducing Finite Paths}
+\clearpage
+\section{Structural Characterisations}
 \label{sec:interpreting-paths}
 
 In this section, we will be interested in extracting a very regular structure
 from a graph class $\mathcal{C}$ that is not \kl{$\forall$-well-quasi-ordered}.
 This structure will take two forms, the first one is a combinatorial notion of
-\kl{periodic antichain} that can be traced back to \cite[Section 7]{ALM17}, and
-the second one is a logical property of \kl{existentially transducing} the
-class of all finite paths.
+\kl{periodic antichain} that is similar to the one proposed in \cite[Section
+7]{ALM17}, and the second one is a logical property of \kl{existentially
+transducing} the class of all finite paths.
 
-\begin{definition}[Regular Sequence]
-  A \intro{regular sequence (of graphs)} is given by a finite graph $G$,
+\begin{definition}[Periodic Sequence]
+  A \intro{periodic sequence (of graphs)} is given by a finite graph $G$,
   a labelling function $\lab \colon V(G) \to \Sigma$ for some finite set
   $\Sigma$, and two finite sets $C, F \subseteq \Sigma^2$. It defines
   an infinite set of graphs $\seqof{G^r}[r \geq 1]$ as follows:
   the vertex set of $G^r$ is $V(G) \times \set{1, \ldots, r}$, and there is an edge
-  between $(u,i)$ and $(v,j)$ if and only if one of the following holds:
+  between $(u,i)$ and $(v,j)$ with $i \leq j$ if and only if one of the following holds:
   \begin{itemize}
       \item $(u,v) \in E(G)$ and $i = j$;
       \item $(\lab(u), \lab(v)) \in C$ and $|i - j| = 1$
@@ -24,8 +25,9 @@ class of all finite paths.
 
 It follows from results of the previous section that one can extract
 \kl{periodic antichains} from any hereditary class of graphs that is not
-\kl{$\forall$-well-quasi-ordered}, answering positively to \cite[Conjecture
-2]{ALM17}.
+\kl{$\forall$-well-quasi-ordered}, answering positively to a variant of
+\cite[Conjecture 2]{ALM17} in the case of hereditary classes of bounded
+clique-width.
 
 \begin{lemma}
   \label{lem:regular-antichain}
@@ -36,6 +38,61 @@ It follows from results of the previous section that one can extract
 \begin{proof}
   todo aliaume
 \end{proof}
+
+Let us briefly comment on the fact that the exact statement of \cite[Conjecture
+2]{ALM17} does not hold, on hereditary classes of bounded clique-width. 
+
+\begin{example}
+  \label{example:split-permutations}
+  The class of \intro{split permutation graphs} is the class of graphs 
+  $S_n$ whose vertex set is $\set{a_1, \ldots, a_n, b_1, \ldots, b_n}$,
+  where the set $\set{a_1, \ldots, a_n}$ induces a clique, the set
+  $\set{b_1, \ldots, b_n}$ induces an independent set
+  and there is an edge between $a_i$ and $b_j$ if and only if
+  $i = j$ or $i + 1 \leq j$.
+
+  This class is known to be of bounded clique-width, is not 
+  \kl{$\forall$-well-quasi-ordered}, and yet does not 
+  contain a \emph{periodic antichain} as stated in \cite[Conjecture 2]{ALM17}.
+\end{example}
+\begin{proof}
+  Recall that the definition of a \kl{weak periodic antichain} in \cite[Conjecture
+  2]{ALM17} is obtained as follows: given a finite alphabet $\Sigma$, and 
+  a finite set $S \subseteq \Sigma^2$, one can map a word 
+  $w \in \Sigma^*$ to a graph $G_w$ whose vertex set is
+  the positions of $w$, and where there is an edge between two positions
+  $i + 1 < j$ if and only if $(w[i], w[j]) \in S$,
+  and an edge between two consecutive positions $i$ and $i + 1$
+  if and only if $(w[i], w[i + 1]) \not\in S$.
+
+  In this setting, a \intro{(weak) periodic sequence} is given by a finite word $u
+  \in \Sigma^+$, and a finite set $S \subseteq \Sigma^2$, and defines the
+  infinite set of graphs $\seqof{G_{u^r}}[r \geq 1]$.
+  It is easy to see that every \kl{weak periodic sequence} is also a
+  \kl{periodic sequence} as defined in this paper, by grouping the vertices of
+  $u$ into a single graph $G$ and adapting colors.
+
+  Finally, a \intro{weak periodic antichain} is a \kl{weak periodic sequence}
+  that is an \kl{antichain} for the \kl{labelled induced subgraph} relation
+  when the first and last letters of the words $u^r$ are given distinct colors.
+
+  Let us prove that any antichain contained in the \kl{hereditary closure} of the
+  class of \kl{split permutation graphs} cannot be a \kl{weak periodic antichain}.
+
+  \todo[inline]{\textbf{MAEL ICI}}
+
+  \begin{itemize}
+      \item Observe that to be an antichain, we must contain large 
+        \kl{split permutation graphs} as induced subgraphs, otherwise 
+        this is an independent set or a clique or a half-graph.
+      \item Observe that no \kl{weak periodic sequence} 
+        can define arbitrarily large \kl{split permutation graphs}, 
+        because of the ``skip'' behaviour. \textbf{I do not know how 
+        to formally prove this yet}.
+  \end{itemize}
+
+\end{proof}
+
 
 \AP Let us now leverage this combinatorial structure to extract a logical
 property of the class $\Cls$. Let us recall that an \intro{existential

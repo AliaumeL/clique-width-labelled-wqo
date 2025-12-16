@@ -144,7 +144,7 @@ ordering on trees.
 \AP A \intro{split of height $N$} of a tree $\t$ is a mapping $\spt$ from the
 nodes of $T$ to $\set{1, \dots, N}$. Given a split $\spt$ and two nodes $x
 \treelt[\t] y$, we define $\spt(x \colon y)$ to be the minimal value of
-$\spt(z)$ for $x \treelt[\t] z \treelt[\t] y$, and $\infty$ otherwise. Two
+$\spt(z)$ for $x \treelt[\t] z \treelt[\t] y$, and $N+1$ otherwise. Two
 elements $x \treelt[\t] y$ such that $\spt(x) = \spt(y) = k$ are
 \intro{$k$-neighbours} if $\spt(x \colon y) \geq k$. Note that a \kl{split}
 induces some kind of hierarchical structure on the tree based on the
@@ -248,6 +248,8 @@ given a \kl{forward Ramseyan split} \cite[Lemma 3]{COLC07}.
       \llbracket z_3 : y \rrbracket_{k+1} \\ & \quad 
       \text{if } z_1, z_2, z_3 \text{ witness \kl{independence} at level } k
   \end{align*}
+  Then, for every $x \treelt[\t] y$, we have $\tlbl{\t}{x}{y} =
+  \llbracket x:y \rrbracket_1$.
 \end{lemma}
 
 \begin{figure}
@@ -304,74 +306,4 @@ given a \kl{forward Ramseyan split} \cite[Lemma 3]{COLC07}.
 there exists a finite depth $N$ such that for every tree $T$ labelled using
 $M$, there exists a forward Ramseyan split of height $N$ for $T$. We can
 therefore assume that our trees are always equipped with a forward Ramseyan
-split of height $N$.
-
-
-\AP One can define a notion of embedding between two trees equipped with their
-respective \kl{forward Ramseyan splits}. 
-
-\begin{lemma}
-    \label{gap-embedding-ramseyan:lem}
-    Let $(\t, \spt)$ be a tree with a forward Ramseyan split of height $N$,
-    and $(\t', \spt')$ be another tree with a forward Ramseyan split of height $N$.
-    Let $h \colon \t \to \t'$ be a map such that for every $x,y \in \t$
-    we have 
-    \begin{itemize}
-        \item $h$ maps leaves to leaves. (respects the tree shape)
-        \item $h(\lca(x,y)) = \lca(h(x), h(y))$  (respects the tree shape)
-        \item $h(\spt(x)) = \spt'(h(x))$ (locally respects splits)
-        \item on every branch, for every node $x$ that has a successor 
-            $\tlbl{\t}{x}{x+1} = \tlbl{\t'}{h(x)}{h(x)+1}$ (locally respects edges)
-        \item $\min\setof{ \spt(z) }{x \treeleq[\t] z \treeleq[\t] y} = \min\setof{ \spt'(z) }{h(x) \treeleq[\t'] z \treeleq[\t'] h(y)}$
-            (globally respects nestings)
-    \end{itemize}
-    Then the embedding $h$ satisfies for all $x,y$ such that
-    there exists $x \treeleq[\t] z_1 \treelt[\t] z_2 \treeleq[\t] y$, 
-    with $\spt(z_1) = \spt(z_2) = \min\setof{\spt(z)}{x \treeleq[\t] z \treeleq[\t] y}$, we have
-    \begin{equation*}
-        \tlbl{\t}{x}{y} = \tlbl{\t'}{h(x)}{h(y)} \quad .
-    \end{equation*}
-\end{lemma}
-\begin{proof}
-    We prove this by induction on $k = \min\setof{\spt(z)}{x \treeleq[\t] z \treeleq[\t] y}$.
-    The base case is when $k = N$.
-    In this case, every node on the path from $x$ to $y$ has \kl{split value} $N$.
-    In particular, $\tlbl{\t}{x}{y} = \tlbl{\t}{x}{x+1}$. Now, because $h$ locally 
-    respects the edges, we have $\tlbl{\t'}{h(x)}{h(x)+1} = \tlbl{\t'}{h(x)}{h(y)}$,
-    and we are done.
-
-    Now, assume that the property holds for $k+1$. Let $x,y$ be such that there
-    exists $x \treeleq[\t] z_1 \treelt[\t] z_2 \treeleq[\t] y$ with $\spt(z_1)
-    = \spt(z_2) = k$. Let us write $z_3$ for the last node on the path from
-    $z_2$ to $y$ such that $\spt(z_3) = k$, and assume that between $x$ and
-    $z_1$ there is no node with split value $k$, similarly between $z_1$ and
-    $z_2$ and  $z_3$ and $y$.
-
-    By induction hypothesis, we know that $\tlbl{\t}{x}{z_1} =
-    \tlbl{\t'}{h(z_2)}{h(z_3)}$. Now, we
-
-\end{proof}
-
-\AP The reflexive and transitive closure of the \kl{gap extension} relation is
-the \intro{gap embedding} relation between two trees equipped with their
-respective \kl{forward Ramseyan splits}. Trees equipped with \kl{forward
-Ramseyan splits} form a \kl{well-quasi-ordered} set with respect to the \kl{gap
-embedding} relation as noticed by Dershowitz and Tzameret in 2003
-\cite{DERSHOWITZ200380}. Which can be understood as a ``nested'' version of
-Kruskal's Tree Theorem \cite{FREU20}.
-
-Hence, we are in the opposite situation as with the \kl{composition ordering}:
-we have a \kl{well-quasi-order} on trees, but we do not know whether the
-interpretation $\someInterp$ is order-preserving from trees (with a choice of
-split) to graphs. However, when inserting new nodes, we are often able to state
-that the value of $\tlbl{\t}{x}{y}$ is preserved provided that $x$ and $y$ are
-sufficiently far apart in the \kl{forward Ramseyan split} of the tree, as
-stated in the following lemma.
-
-Problems may arise when $x$ and $y$ are too close in the \kl{forward Ramseyan
-split}, for instance because they are \kl{one-separated at level $k$}, or
-because one inserts new nodes in the first and last part of the path from $x$
-to $y$. A typical example of such a situation is illustrated in the case of a
-monoid $M$ with two elements $\set{a, b}$ such that $a^2 = b$ and $b$ is
-absorbing. Then, replacing an edge $x \treelt y$ labelled with $a$ by two or more
-edges will change the value of $\tlbl{\t}{x}{y}$ from $a$ to $b$.
+split of height $N$. 

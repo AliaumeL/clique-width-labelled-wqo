@@ -6,40 +6,37 @@ In this section, we will isolate combinatorial obstructions to being
 MSO interpretations} from trees. We will take the same notations as in
 \cref{sec:ramseyan}. 
 
-\subsection{Obstructions to WQO}
-
-As witnessed by \cref{lem:almost-order-preserving}, one obstruction for the
-interpretation $\someInterp$ to be order-preserving is is the behaviour of
-nodes that are ``too close'' to each other. Let us extract a formal obstruction
-for being \kl{$2$-well-quasi-ordered} from this informal idea.
-
 \begin{definition}
     \label{ramseyan-branch:def}
-    Let $T$ be a tree and $\spt$ be a \kl{forward Ramseyan split} of height $N$.
+    Let $\aTree$ be a tree and $\spt$ be a \kl{forward Ramseyan split} of height $N$.
     A \intro{bough of level $k$} in $\aTree$ is an infix of a branch of $\aTree$
     such that its maximal and minimal elements have level $k$,
     and such that 
     all elements of the bough have level greater or equal to $k$.
 
-    The \intro{size of a bough} is the number of elements of depth $k$
+    The \intro{dimension of a bough} is the number of elements of level $k$
     in the \kl{bough}.
 \end{definition}
 
-\AP Let $B$ be a \kl{bough of level $k$} in $T$. Given two nodes $b_1$ and
-$b_2$ in $B$ such that $\spt(b_1) = \spt(b_2) = k$, we define the $T_{b_1:b_2}$
-as the set of nodes $x$ in $T$ such that $b_1 \treeleq x$ and $\neg (b_2
-\treeleq x)$. For every leaf $x \in T_{b_0: b_n}$ where $n$ is the size of the
-bough $B$, we define $\Bt(x)$ to be the least ancestor of $x$ that belongs to
-$B$. Similarly, we define $\Bl(x)$ to be the least element of $B$ that is
-greater or equal to $\Bt(x)$, and $\Br(x)$ to be the greatest element of $B$
-that is less or equal to $\Bt(x)$. To every leaf $x$ of $B(T)$, we can
-therefore associate a triple of values: $\BtL(x) \defined
-\tlbl{\t}{\Bt(x)}{x}$, $\BlL(x) \defined \tlbl{\t}{\Bl(x)}{\Bt(x)}$, and
-$\BrL(x) \defined \tlbl{\t}{\Bt(x)}{\Br(x)}$. We refer to
-\cref{type-of-a-leaf-in-branch:fig} for an
-illustration of the type of a leaf with respect to a given \kl{bough} $B$.
-We also refer to \cref{partitionning-a-graph:fig} for an illustration of the
-resulting partition of the tree $T$ with respect to a given \kl{bough} $B$.
+\AP Let $B$ be a \kl{bough of level $k$} in $\aTree$. Given two nodes $b_1$ and
+$b_2$ in $B$ such that $\spt(b_1) = \spt(b_2) = k$, we define the $\aTree_{b_1:b_2}$
+as the set of nodes $x$ in $\aTree$ such that $b_1 \treeleq x$ and $\neg (b_2
+\treeleq x)$. For every leaf $x \in \aTree_{b_0: b_n}$ where $n$ is the
+\kl{dimension of the bough} $B$, we define $\Bt(x)$ to be the least ancestor of
+$x$ that belongs to $B$. Similarly, we define $\Bl(x)$ to be the least element
+of $B$ that is greater or equal to $\Bt(x)$, and $\Br(x)$ to be the greatest
+element of $B$ that is less or equal to $\Bt(x)$. To every leaf $x$ of $B(\aTree)$,
+we can therefore associate the following values in $M$:
+$\BtL(x) \defined
+\tlbl{\t}{\Bt(x)}{x}$, $\BlL(x) \defined \tlbl{\aTree}{\Bl(x)}{\Bt(x)}$,
+$\BrL(x) \defined \tlbl{\t}{\Bt(x)}{\Br(x)}$,
+and $\BrootL(x) \defined \tlbl{\aTree}{\treeRoot}{\Bl(x)}$. We call this tuple 
+the \intro{bough type} of the leaf $x$ with respect to the \kl{bough} $B$.
+We refer to
+\cref{type-of-a-leaf-in-branch:fig} for an illustration of the type of a leaf
+with respect to a given \kl{bough} $B$. We also refer to
+\cref{partitionning-a-graph:fig} for an illustration of the resulting partition
+of the tree $\aTree$ with respect to a given \kl{bough} $B$.
 
 \begin{figure}
     \centering
@@ -124,8 +121,8 @@ resulting partition of the tree $T$ with respect to a given \kl{bough} $B$.
             \draw (n\x) -- (b\x);
         }
         \draw[dashed,<-] (b0) -- (root);
-        \draw[dashed] (b4) -- (9,2);
-        \draw[dashed] (n4) -- (9,0);
+        \draw[dashed] (b4) -- (9,2.5);
+        \draw[dashed] (b4) -- (9,1.5);
 
         \foreach[count=\x] \y in {0,1,2,3} {
             \node (E\x) at ({ 2 * \x - 1},2.6) {$e_{\y}$};
@@ -159,16 +156,51 @@ resulting partition of the tree $T$ with respect to a given \kl{bough} $B$.
         (b3);
     \end{tikzpicture}
     }
-    \caption{Partitionning a graph using a \kl{bough}.}
+    \caption{Partitionning a branch of a tree using a \kl{bough}. To compute
+    the presence of an edge between $x$ and $y$ in the resulting graph, 
+    it is sufficient to know the values of
+    $\tlbl{\t}{b_2}{b_3}$, and the respective \kl{bough types} of $x$ and $y$.}
     \label{partitionning-a-graph:fig}
 \end{figure}
 
-\AP To compute the presence of an edge between two leaves $x$ and $y$ in
-$B(T)$, we only need to know their respective \kl{bough types} the order in
-which they appear in the \kl{bough}, and how they are separated in the tree
-$T$, as illustrated in \cref{partitionning-a-graph:fig}.
+\AP In the rest of the paper, we will ofter rely on some tree surgery operation
+consisting in replacing a \kl{bough} in a tree $\t$ by some other \kl{bough}.
+The \intro{kind of a bough} is given by its level $k$, the value of the first
+idempotent edge $\tlbl{\t}{b_0}{b_1}$, and the value of the last idempotent
+edge $\tlbl{\t}{b_{n-1}}{b_n}$. The following \cref{fact:bough-replacement}
+states that one can safely perform such a replacement without modifying the
+part of the graph represented by the tree $\t$ outside of the \kl{bough}.
 
-\AP Let us define a \intro{context} $C[\square]$ to be a pair of a tree $A$
+\begin{fact}
+  \label{fact:bough-replacement}
+  Let $\t$ be a tree with a \kl{bough} $B$ of level $k$, 
+  and let $H$ be another \kl{bough} of level $k$
+  with the same \kl{kind} as $B$. Then, 
+  one can replace $B$ by $H$ in $\t$ to obtain a new tree $\t'$
+  that is also equipped with a \kl{forward Ramseyan split} $\spt'$
+  obtained by copying $\spt$ outside of $H$, and using the levels of $H$ inside $H$.
+
+  Furthermore, the subraph of $\someInterp(\t)$ induced by the leaves 
+  outside of $B$ is isomorphic (using the identity map) 
+  to the subgraph of $\someInterp(\t')$
+  induced by the leaves outside of $H$.
+\end{fact}
+
+\AP Now that we have an understanding of what happens when replacing a
+\kl{bough} in a fixed tree, let us study what happens when we do the opposite
+operation, i.e., when we chance the ``context'' in which a \kl{bough} is
+placed. 
+
+% TODO:
+% - a context is a tree with a bough removed, given by a triple (Troot, Tleft, Tright) where
+%   where Troot is the tree above the bough with a distinguished leaf where to plug the bough,
+%   and Tleft and Tright are the trees below the bough.
+% 
+% - the context type of a leaf in a context C is given by the values of 
+%   paths from the leaf to the root of Tleft resp Tright
+
+
+Let us define a \intro{context} $C[\square]$ to be a pair of a tree $A$
 with a distinguished hole $\square$ that can be filled by another tree, and a
 tree $B$ that can be plugged into this hole. Given a tree $T$ with a hole, one
 can place it inside a context $C[\square]$ to obtain a new tree $C[T]$ that is
@@ -466,4 +498,45 @@ a class is \kl{labelled-well-quasi-ordered} is to understand the behaviour of
 pairs of nodes $x$ and $y$ that are \kl{dependent}. This is the motivation
 for the following construction that studies the behaviour of
 consecutive \kl{$k$-neighbourhoods} in a tree.
+\subsection{Gap Embedding(s)}
 
+In order to compare two trees equipped with \kl{forward Ramseyan splits}, we
+will design an ordering that respects the tree structure as well as the splits.
+This is usually called the \intro{gap embedding} relation, originally defined
+by Dershowitz and Tzameret \cite{DERSHOWITZ200380}. It was noticed by Freund
+\cite{FREU20} that this ordering can be understood as a nested version of
+Kruskal's Tree Theorem, and this will be our point of view in the following,
+since we will need to slightly adapt the definition to our setting.
+
+\AP Let us consider some $k \in \set{1, \dots, N}$. We will write
+$\Trees{\Sigma,k}{X}(Y)$ for the class of trees with labels in $X \times \set{k,
+\ldots, N}$ on the internal nodes, labels in $\Sigma$ on the edges, with a
+distinguished root, and such that leaves are labelled in $Y$.
+It is immediate that $\Trees{\Sigma,k-1}{X}(Y)$ 
+is the least fixed point of the following operator:
+\begin{equation*}
+  F \colon Z \mapsto Y + \Trees{\Sigma,k}{X}(Z) \quad .
+\end{equation*}
+
+It was shown in \cite{LOPEZ23} that any such inductive definition gives 
+rise to a \kl{well-quasi-order}, obtained by 
+
+
+
+
+
+Hence, we are in the opposite situation as with the \kl{composition ordering}:
+we have a \kl{well-quasi-order} on trees, but we do not know whether the
+interpretation $\someInterp$ is order-preserving from trees (with a choice of
+split) to graphs. However, when inserting new nodes, we are often able to state
+that the value of $\tlbl{\t}{x}{y}$ is preserved provided that $x$ and $y$ are
+sufficiently far apart in the \kl{forward Ramseyan split} of the tree, as
+stated in the following lemma.
+
+Problems may arise when $x$ and $y$ are too close in the \kl{forward Ramseyan
+split}, for instance because they are \kl{one-separated at level $k$}, or
+because one inserts new nodes in the first and last part of the path from $x$
+to $y$. A typical example of such a situation is illustrated in the case of a
+monoid $M$ with two elements $\set{a, b}$ such that $a^2 = b$ and $b$ is
+absorbing. Then, replacing an edge $x \treelt y$ labelled with $a$ by two or more
+edges will change the value of $\tlbl{\t}{x}{y}$ from $a$ to $b$.
