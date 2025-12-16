@@ -210,47 +210,17 @@ $\tlbl{\t}{x}{y}$ and $\tlbl{\t}{x'}{y'}$ may be different \kl{idempotents}.
 
 \AP Let us illustrate how one can use \kl{forward Ramseyan splits} to compute
 efficiently the value of $\tlbl{\t}{x}{y}$ for any pair of nodes $x \treelt[\t]
-y$. There are essentially three cases to consider. We say that two nodes $x$
-and $y$ are \intro{connected at level $k$} if $\spt(x:y) > k$. We say that two
-nodes $x$ and $y$ are \intro{one-separated at level $k$} if $\spt(x:y) = k$ and
-there exists a unique node $z$ such that $x \treelt[\t] z \treelt[\t] y$ and
-$\spt(z) = k$. Finally, we say that $x$ and $y$ are \intro{independent at level
-$k$} if $\spt(x:y) = k$ and there exists three nodes $z_1, z_2, z_3$ such that
-$x \treelt[\t] z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treelt[\t] y$ and
-$\spt(z_1) = \spt(z_2) = \spt(z_3) = k$, and $\spt(x:z_1) > k$, $\spt(z_1:z_2)
-> k$, and $\spt(z_3:y) > k$. In the case of \kl{independence at level $k$}, we
-can use the property of \kl{forward Ramseyan splits} to replace the middle part
-of the path from $x$ to $y$ by a shorter path, as illustrated in
-\cref{fast-computation:fig}. This is the core of the following lemma allowing
-for a fast (first-order computable) computation of the value $\tlbl{\t}{x}{y}$
-given a \kl{forward Ramseyan split} \cite[Lemma 3]{COLC07}.
+y$. We say that $x$ and $y$ are \intro{independent at level $k$} if $\spt(x:y)
+= k$ and there exists three nodes $z_1, z_2, z_3$ such that $x \treelt[\t] z_1
+\treelt[\t] z_2 \treeleq[\t] z_3 \treelt[\t] y$ and $\spt(z_1) = \spt(z_2) =
+\spt(z_3) = k$, and $\spt(x:z_1) > k$, $\spt(z_1:z_2) > k$, and $\spt(z_3:y) >
+k$. In the case of \kl{independence at level $k$}, we can use the property of
+\kl{forward Ramseyan splits} to replace the middle part of the path from $x$ to
+$y$ by a shorter path, as illustrated in \cref{fast-computation:fig}. This can
+be used to provide a fast (and first-order definable) computation of the value
+$\tlbl{\t}{x}{y}$ given a \kl{forward Ramseyan split} as proven in \cite[Lemma
+3]{COLC07}.
 
-\begin{lemma}[{\cite[Lemma 3]{COLC07}}]
-  \label{lem:fast-computation}
-  Let $\aTree$ be a tree equipped with a \kl{forward Ramseyan split} $\spt$ of
-  height $N$. Let $\sigma$ be the map that associates to a node 
-  of the tree the label (in $M$) of its (unique) incoming edge in $\aTree$ if it exists.
-  Let us define 
-  $\llbracket x:y \rrbracket_k$ for $x \treelt[\t] y$ by (reverse) induction on $k \in \{1, \ldots, N+1\}$ as follows:
-  \begin{align*}
-    \llbracket x: y \rrbracket_{N+1} 
-                                 & = \sigma(y) & \\
-    \llbracket x: y \rrbracket_k &= 
-                    \llbracket x : y \rrbracket_{k+1} \quad \text{if \kl{connected}} \\
-    \llbracket x: y \rrbracket_k 
-                      &= \llbracket x : z \rrbracket_{k+1} \cdot
-      \llbracket z : y \rrbracket_{k+1} \quad \text{\kl{one-separated} by } z \\
-    \llbracket x: y \rrbracket_k 
-      &= \llbracket x : z_1 \rrbracket_{k+1}
-      \cdot
-      \llbracket z_1 : z_2 \rrbracket_{k+1}
-      \cdot 
-      \llbracket z_3 : y \rrbracket_{k+1} \\ & \quad 
-      \text{if } z_1, z_2, z_3 \text{ witness \kl{independence} at level } k
-  \end{align*}
-  Then, for every $x \treelt[\t] y$, we have $\tlbl{\t}{x}{y} =
-  \llbracket x:y \rrbracket_1$.
-\end{lemma}
 
 \begin{figure}
     \centering
@@ -307,3 +277,28 @@ there exists a finite depth $N$ such that for every tree $T$ labelled using
 $M$, there exists a forward Ramseyan split of height $N$ for $T$. We can
 therefore assume that our trees are always equipped with a forward Ramseyan
 split of height $N$. 
+
+\AP Let us now state the main remark that will guide the rest of this paper:
+given a branch of a tree equipped with a \kl{forward Ramseyan split} as the one
+illustrated in \cref{fast-computation:fig}, the value of $\tlbl{\t}{x}{y}$ does
+not change when inserting new nodes in the section between $z_1$ and $z_3$ as
+long as these new nodes are assigned a value of the split smaller than or equal
+to $k$, and the resulting tree is still \kl{forward Ramseyan}. A fortiori,
+whether there is an edge between two leaves of $x$ and $y$ in the resulting
+graph is not influenced by such insertions. Hence, the ordering defined by
+``inserting new subtrees compatible with the split'' is \emph{almost}
+\emph{order-preserving} from trees to graphs, as formalised in the following
+\cref{lem:almost-order-preserving}.
+
+\begin{lemma}
+  \label{lem:almost-order-preserving}
+  Let $\t_1$ and $\t_2$ be two trees edge-labelled over a monoid $M$ equipped with
+  \kl{forward Ramseyan splits} $\spt_1$ and $\spt_2$ of height $N$. Assume that
+  $\t_2$ is obtained from $\t_1$ by selecting a \kl{$k$-neighbourhood} in
+  some branch of $\t_1$, and inserting new subtrees in this \kl{$k$-neighbourhood}
+  whose roots are all assigned a value of the split smaller than or equal to $k$.
+  Then, for any two leaves $x,y$ in $\t_1$ (hence, also in $\t_2$),
+  if the two leaves are \emph{far} from the inserted subtrees, then:
+  $(x,y)$ is an edge in $\someInterp(\t_1)$ if and only if
+  $(x,y)$ is an edge in $\someInterp(\t_2)$.
+\end{lemma}

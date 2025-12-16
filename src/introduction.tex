@@ -47,44 +47,12 @@ graphs by requiring that the labels are preserved by the embedding, i.e. that
 the label of a vertex in the smaller graph is less than or equal to the label
 of its image in the larger graph. 
 
-\begin{example}
-  \label{ex:labelled-graphs}
-  The class of all finite paths is not $2$-well-quasi-ordered,
-  since the infinite sequence of paths with colored endpoints 
-  forms an infinite antichain.
-  The class of cliques is labelled-well-quasi-ordered,
-  since any labelled clique can be identified with a multiset of labels,
-  and the set of finite multisets over a WQO is itself WQO.
-\end{example}
-
-
-\AP
-Bounded clique-width is a well-studied graph complexity measure
-that generalises other well-known graph complexity measures such as
-todo. There are several equivalent definitions of 
-having \emph{bounded clique-width}, and we will use two 
-of them in this paper. On the one hand, a class of graphs $\Cls$ has
-\emph{bounded clique-width} if it is MSO-transducable from a class of finite
-trees. On the other hand, a class of graphs $\Cls$ has 
-\emph{bounded clique-width} if there exists a finite set of 
-labels $\Sigma$ such that 
-every graph in $\Cls$ can be constructed using the following operations:
-\begin{itemize}
-  \item creating a new vertex with label $a \in \Sigma$,
-  \item taking the disjoint union of two labelled graphs,
-  \item adding edges between all vertices of label $a$ and all vertices of label $b$,
-  \item renaming all labels $a$ into $b$.
-\end{itemize}
-
-\begin{example}
-  The class of all finite cliques, finite paths, finite cycles, 
-  and finite trees all have bounded clique-width.
-\end{example}
-
-\begin{example}
-  The class of all finite grids does not have bounded clique-width.
-\end{example}
-
+\AP Bounded clique-width is a well-studied graph complexity measure that
+generalises other well-known graph complexity measures such as todo. There are
+several equivalent definitions of having \emph{bounded clique-width}, and we
+will use two of them in this paper. On the one hand, a class of graphs $\Cls$
+has \emph{bounded clique-width} if it is MSO-transducable from a class of
+finite trees. \todo[inline]{And this gives many good properties.}
 
 
 \paragraph*{Contributions}
@@ -93,7 +61,6 @@ We prove that one can decide whether a class of graphs of bounded clique-width
 is labelled-well-quasi-ordered, when the class is given by
 an $\MSO$ interpretation from finite trees to undirected graphs.
 Our proof scheme 
-
 
 
 
@@ -151,39 +118,8 @@ classes of finite graphs.
     then $\Cls$ is of bounded clique-width.
 \end{conjecture}
 
-\paragraph*{Proof Techniques and Overview.} The overall proof technique can be
-summarised in \cref{fig:proof-technique}. Given a class $\Cls$ of graphs
-defined as the image of an $\MSO$ interpretation $I$ from finite trees to
-graphs, we want to decide whether $\Cls$ is labelled-well-quasi-ordered. To
-this end, we will use the following folklore result: if $(X, \leq)$ is a WQO,
-and $f \colon X \to Y$ is a surjective order-preserving map, then $(Y, \leq)$
-is also WQO. Because there exists a good candidate for $X$, namely, the set of
-trees with Kruskal's tree embedding relation, we will try to see whether $I$ is
-order-preserving. It turns out that for general interpretations, this is not
-true (see \cref{example:msotree-not-monotone}). However, leveraging tools from
-automata theory in the name of \emph{ramseyan factorisations} \cite{COLC07}, we
-will be able to ``massage'' the input trees using a function $F$ into
-\emph{nested trees}, with the property that for a good notion of ordering on
-nested trees (nested Kruskal embedding essentially), the function $J$ that
-factors $I$ through $F$ is order-preserving if and only if $\Cls$ is
-labelled-well-quasi-ordered.
-
-This proof technique will actually allow us to derive stronger results since it
-shows that embeddings on graphs in $\Cls$ can be assumed to respect a certain
-tree-like structure, and a fortiori, a linear order on the vertices of the
-graphs. This will allow us to show that \cref{pouzet:conj} holds for classes of
-graphs of bounded clique-width. Furthermore, listing the obstructions for $J$
-to be order-preserving will allow us to show that counter-examples are regular
-in nature, yielding a proof of \cref{lozin:conj} for classes of graphs of
-bounded clique-width. Finally, the tree-like structure obtained is a form of
-simple tree decomposition, answering positively to \cref{thomasse:conj} in
-totality.
-
 
 \paragraph*{Outline}
-
-
-
 This explains the \emph{bottom-up} research direction in the field of WQOs,
 which is to understand which \emph{constructors} preserve the WQO property:
 finite sums, finite products, finite words, finite trees, finite graphs
