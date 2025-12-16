@@ -12,7 +12,7 @@
 
 % we setup a custom geometry because the default one is too narrow
 \usepackage{geometry}
-\geometry{margin=3.5cm}
+\geometry{margin=2.5cm}
 
 % utf-8 for old systems
 \usepackage[utf8]{inputenc}
@@ -26,7 +26,6 @@
 
 \usepackage{todonotes}
 \usepackage{lineno}
-\linenumbers
 
 
 % math packages
@@ -38,6 +37,7 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{fact}[theorem]{Fact}
 \newtheorem{assumption}[theorem]{Assumption}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
@@ -50,8 +50,8 @@
 \usepackage{graphicx}
 \usepackage[obeyclassoptions,mode=tex]{standalone}
 \usepackage{tikz}
-\usetikzlibrary{calc}
 \usetikzlibrary{backgrounds}
+\usetikzlibrary{calc}
 \usetikzlibrary{shapes.geometric}
 \usetikzlibrary{positioning}
 \usetikzlibrary{automata}
@@ -82,6 +82,8 @@
 \crefname{algocfline}{Algorithm}{Algorithms}
 \crefname{algocf}{Algorithm}{Algorithms}
 \Crefname{algocf}{Algorithm}{Algorithms}
+\crefname{conjecture}{Conjecture}{Conjectures}
+\Crefname{conjecture}{Conjecture}{Conjectures}
 
 % Packages for macro definitions
 \usepackage{xparse}
@@ -129,7 +131,7 @@ Maël Dumas\thanks{University of Warsaw}
 
 % For the date, we first check if the user has provided a date,
 % and otherwise use the git meta inforamtion (if available).
-\date{2025-08-14 12:17:13 +0200\footnote{f126cb22616e5dcab175ec10c6464a93a08aa910 -- branch main at git@github.com:AliaumeL/clique-width-labelled-wqo.git}}
+\date{2025-12-16 16:50:11 +0100\footnote{4e82ff10a85d7aa9d7a906f76266317328ce81de -- branch main at git@github.com:AliaumeL/clique-width-labelled-wqo.git}}
 
 \newcommand{\repositoryUrl}{\url{}}
 
@@ -155,9 +157,9 @@ Maël Dumas\thanks{University of Warsaw}
 % Include the content of the paper
 \input{src/introduction}
 \input{src/prelims}
+\input{src/ramseyan}
 \input{src/badpaths}
 \input{src/interpreting}
-\input{src/nip}
 \input{src/conclusion}
 
 % Include the bibliography

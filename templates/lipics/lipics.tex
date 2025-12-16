@@ -15,6 +15,10 @@
     autoref,$if(review)$anonymous,$endif$$if(arxiv)$pdfa,$endif$
     thm-restate]{lipics-v2021}
 
+$if(draft)$
+\usepackage{todonotes}
+$endif$
+
 $if(arxiv)$
 \hideLIPIcs
 \pdfoutput=1
@@ -29,11 +33,15 @@ $if(final)$
 \nolinenumbers
 $endif$
 
+% maths symbols
+\usepackage{stmaryrd}
+
 % graphics packages
 \usepackage{graphicx}
 \usepackage[obeyclassoptions,mode=tex]{standalone}
 \usepackage{tikz}
 \usetikzlibrary{backgrounds}
+\usetikzlibrary{calc}
 \usetikzlibrary{shapes.geometric}
 \usetikzlibrary{positioning}
 \usetikzlibrary{automata}
@@ -63,6 +71,10 @@ $endif$
 
 % Colors 
 \usepackage{ensps-colorscheme}
+
+% create a fact environment
+\theoremstyle{theorem}
+\newtheorem{fact}[theorem]{Fact}
 
 
 % we include whatever the user wants to include in the header

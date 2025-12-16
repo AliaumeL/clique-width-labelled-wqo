@@ -16,15 +16,12 @@
     thm-restate]{lipics-v2021}
 
 \usepackage{todonotes}
-\usepackage{lineno}
-\linenumbers
 
 
 
 
-% math packages
-\usepackage{stmaryrd,thmtools,upgreek}
-\usepackage{amsmath,amssymb,amsfonts}
+% maths symbols
+\usepackage{stmaryrd}
 
 % graphics packages
 \usepackage{graphicx}
@@ -62,6 +59,10 @@
 % Colors 
 \usepackage{ensps-colorscheme}
 
+% create a fact environment
+\theoremstyle{theorem}
+\newtheorem{fact}[theorem]{Fact}
+
 
 % we include whatever the user wants to include in the header
 
@@ -90,8 +91,6 @@
 
 \Copyright{Aliaume Lopez and Maël Dumas} 
 
-\ccsdesc[100]{Formal languages and automata theory}
-\ccsdesc[100]{Graph theory}
 
 \keywords{well-quasi-ordering, clique-width, automata theory, monoids, factorization forests, gap embedding} %TODO mandatory; please add comma-separated list of keywords
 
@@ -126,12 +125,11 @@
 \end{abstract}
 
 % Include the content of the paper
-
 \input{src/introduction}
 \input{src/prelims}
+\input{src/ramseyan}
 \input{src/badpaths}
 \input{src/interpreting}
-\input{src/nip}
 \input{src/conclusion}
 
 % Include the bibliography
