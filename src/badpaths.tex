@@ -338,48 +338,6 @@ TODOs:
     \item Conclude that the class of images is WQO.
 \end{itemize}
 
-\begin{lemma}
-    \label{gap-embedding-ramseyan:lem}
-    Let $(\t, \spt)$ be a tree with a forward Ramseyan split of height $N$,
-    and $(\t', \spt')$ be another tree with a forward Ramseyan split of height $N$.
-    Let $h \colon \t \to \t'$ be a map such that for every $x,y \in \t$
-    we have 
-    \begin{itemize}
-        \item $h$ maps leaves to leaves. (respects the tree shape)
-        \item $h(\lca(x,y)) = \lca(h(x), h(y))$  (respects the tree shape)
-        \item $h(\spt(x)) = \spt'(h(x))$ (locally respects splits)
-        \item on every branch, for every node $x$ that has a successor 
-            $\tlbl{\t}{x}{x+1} = \tlbl{\t'}{h(x)}{h(x)+1}$ (locally respects edges)
-        \item $\min\setof{ \spt(z) }{x \treeleq[\t] z \treeleq[\t] y} = \min\setof{ \spt'(z) }{h(x) \treeleq[\t'] z \treeleq[\t'] h(y)}$
-            (globally respects nestings)
-    \end{itemize}
-    Then the embedding $h$ satisfies for all $x,y$ such that
-    there exists $x \treeleq[\t] z_1 \treelt[\t] z_2 \treeleq[\t] y$, 
-    with $\spt(z_1) = \spt(z_2) = \min\setof{\spt(z)}{x \treeleq[\t] z \treeleq[\t] y}$, we have
-    \begin{equation*}
-        \tlbl{\t}{x}{y} = \tlbl{\t'}{h(x)}{h(y)} \quad .
-    \end{equation*}
-\end{lemma}
-\begin{proof}
-    We prove this by induction on $k = \min\setof{\spt(z)}{x \treeleq[\t] z \treeleq[\t] y}$.
-    The base case is when $k = N$.
-    In this case, every node on the path from $x$ to $y$ has \kl{split value} $N$.
-    In particular, $\tlbl{\t}{x}{y} = \tlbl{\t}{x}{x+1}$. Now, because $h$ locally 
-    respects the edges, we have $\tlbl{\t'}{h(x)}{h(x)+1} = \tlbl{\t'}{h(x)}{h(y)}$,
-    and we are done.
-
-    Now, assume that the property holds for $k+1$. Let $x,y$ be such that there
-    exists $x \treeleq[\t] z_1 \treelt[\t] z_2 \treeleq[\t] y$ with $\spt(z_1)
-    = \spt(z_2) = k$. Let us write $z_3$ for the last node on the path from
-    $z_2$ to $y$ such that $\spt(z_3) = k$, and assume that between $x$ and
-    $z_1$ there is no node with split value $k$, similarly between $z_1$ and
-    $z_2$ and  $z_3$ and $y$.
-
-    By induction hypothesis, we know that $\tlbl{\t}{x}{z_1} =
-    \tlbl{\t'}{h(z_2)}{h(z_3)}$. Now, we
-
-\end{proof}
-
 \section{From images to general classes}
 
 \subsection{Bounded clique width}

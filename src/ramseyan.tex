@@ -306,52 +306,51 @@ $M$, there exists a forward Ramseyan split of height $N$ for $T$. We can
 therefore assume that our trees are always equipped with a forward Ramseyan
 split of height $N$.
 
+
 \AP One can define a notion of embedding between two trees equipped with their
-respective \kl{forward Ramseyan splits}. Given a tree $\t$ equipped with a
-\kl{forward Ramseyan split} $\spt$, an edge $x:y$ in the tree $\t$ and a list
-of trees $\t_1, \dots, \t_k$ equipped with their respective \kl{forward
-Ramseyan splits} $\spt_1, \dots, \spt_k$ and monoid elements $m_1, \dots,
-m_k$,
-we say that the tree $\t'$ obtained by
-replacing the edge $x:y$ in $\t$ by the sequence (path) of trees $\t_1, \dots, \t_k$ 
-with edges labelled by $m_1, \dots, m_k$ is
-a \intro{gap extension} of $(\t, \spt)$ if the following conditions hold:
-\begin{itemize}
-  \item For every $i \in \set{1, \dots, k}$, the height of the root of 
-    $\t_i$ greater or equal than $\max(\spt(x), \spt(y))$.
-  \item The resulting tree $\t'$ is such that the mapping $\spt'$
-    defined as the union of $\spt$ and $\spt_1, \dots, \spt_k$ is a \kl{forward Ramseyan split}
-    of height $N$ for $\t'$.
-\end{itemize}
+respective \kl{forward Ramseyan splits}. 
 
-\begin{figure}
-  \begin{tikzpicture}
-    % 1 -[a]- 2
-    % 
-    % replaced by 1 -[m1] - s1 -[m2]- s2 - [a] -2
-    %                       |         |
-    %                      t1        t2
-    %                  
+\begin{lemma}
+    \label{gap-embedding-ramseyan:lem}
+    Let $(\t, \spt)$ be a tree with a forward Ramseyan split of height $N$,
+    and $(\t', \spt')$ be another tree with a forward Ramseyan split of height $N$.
+    Let $h \colon \t \to \t'$ be a map such that for every $x,y \in \t$
+    we have 
+    \begin{itemize}
+        \item $h$ maps leaves to leaves. (respects the tree shape)
+        \item $h(\lca(x,y)) = \lca(h(x), h(y))$  (respects the tree shape)
+        \item $h(\spt(x)) = \spt'(h(x))$ (locally respects splits)
+        \item on every branch, for every node $x$ that has a successor 
+            $\tlbl{\t}{x}{x+1} = \tlbl{\t'}{h(x)}{h(x)+1}$ (locally respects edges)
+        \item $\min\setof{ \spt(z) }{x \treeleq[\t] z \treeleq[\t] y} = \min\setof{ \spt'(z) }{h(x) \treeleq[\t'] z \treeleq[\t'] h(y)}$
+            (globally respects nestings)
+    \end{itemize}
+    Then the embedding $h$ satisfies for all $x,y$ such that
+    there exists $x \treeleq[\t] z_1 \treelt[\t] z_2 \treeleq[\t] y$, 
+    with $\spt(z_1) = \spt(z_2) = \min\setof{\spt(z)}{x \treeleq[\t] z \treeleq[\t] y}$, we have
+    \begin{equation*}
+        \tlbl{\t}{x}{y} = \tlbl{\t'}{h(x)}{h(y)} \quad .
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    We prove this by induction on $k = \min\setof{\spt(z)}{x \treeleq[\t] z \treeleq[\t] y}$.
+    The base case is when $k = N$.
+    In this case, every node on the path from $x$ to $y$ has \kl{split value} $N$.
+    In particular, $\tlbl{\t}{x}{y} = \tlbl{\t}{x}{x+1}$. Now, because $h$ locally 
+    respects the edges, we have $\tlbl{\t'}{h(x)}{h(x)+1} = \tlbl{\t'}{h(x)}{h(y)}$,
+    and we are done.
 
-    \node (x) at (0,0) {$x$};
-    \node (y) at (1,0) {$y$};
-    \draw[->] (x) to node[midway, above] {$a$} (y);
-    \node (maps-to) at (1.75,0) {$\mapsto$};
-    \begin{scope}[xshift=2.5cm]
-      \node (x) at (0,0) {$x$};
-      \node (s1) at (2,0) {$s_1$};
-      \node (s2) at (4,0) {$s_2$};
-      \node (y) at (6,0) {$y$};
-      \draw[->] (x) to node[midway, above] {$m_1$} (s1);
-      \draw[->] (s1) to node[midway, above] {$m_2$} (s2);
-      \draw[->] (s2) to node[midway, above] {$a$} (y);
-      \node (t1) at (2,-1) {$\t_1$};
-      \node (t2) at (4,-1) {$\t_2$};
-      \draw[->] (s1) to (t1);
-      \draw[->] (s2) to (t2);
-    \end{scope}
-  \end{tikzpicture}
-\end{figure}
+    Now, assume that the property holds for $k+1$. Let $x,y$ be such that there
+    exists $x \treeleq[\t] z_1 \treelt[\t] z_2 \treeleq[\t] y$ with $\spt(z_1)
+    = \spt(z_2) = k$. Let us write $z_3$ for the last node on the path from
+    $z_2$ to $y$ such that $\spt(z_3) = k$, and assume that between $x$ and
+    $z_1$ there is no node with split value $k$, similarly between $z_1$ and
+    $z_2$ and  $z_3$ and $y$.
+
+    By induction hypothesis, we know that $\tlbl{\t}{x}{z_1} =
+    \tlbl{\t'}{h(z_2)}{h(z_3)}$. Now, we
+
+\end{proof}
 
 \AP The reflexive and transitive closure of the \kl{gap extension} relation is
 the \intro{gap embedding} relation between two trees equipped with their
@@ -368,22 +367,6 @@ split) to graphs. However, when inserting new nodes, we are often able to state
 that the value of $\tlbl{\t}{x}{y}$ is preserved provided that $x$ and $y$ are
 sufficiently far apart in the \kl{forward Ramseyan split} of the tree, as
 stated in the following lemma.
-
-\begin{lemma}
-  \label{lem:almost-order-preserving}
-  Let $(\t_1, \spt_1)$ be a tree equipped with a \kl{forward Ramseyan split} of height
-  $N$, and $x \treelt y$ be two nodes in $\t_1$ that are 
-  \kl{independent at level $k$}, witnessed by 
-  $z_1, z_2, z_3$.
-  Then, for any \kl{gap extension} $(\t_2, \spt_2)$ of $(\t_1, \spt_1)$
-  obtained by replacing an edge between $z_2$ and $z_3$ 
-  the value 
-  $\tlbl{\t_1}{x}{y}$ equals $\tlbl{\t_2}{x}{y}$.
-\end{lemma}
-\begin{proof}
-  This is a direct consequence of \cref{lem:fast-computation}, using the last equation
-  in the case of \kl{independence at level $k$}.
-\end{proof}
 
 Problems may arise when $x$ and $y$ are too close in the \kl{forward Ramseyan
 split}, for instance because they are \kl{one-separated at level $k$}, or

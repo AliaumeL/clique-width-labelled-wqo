@@ -1,39 +1,87 @@
 \section{Existentially Transducing Finite Paths}
 \label{sec:interpreting-paths}
 
-First, because of transduction, we can assume the class is hereditary. Hence,
-if not 2WQO, we can even assume that the class is of bounded linear clique
-width. Therefore, we are in the situation of having a single graph $G$ and
-considering $G^N$ for arbitrarily large $N$. 
+In this section, we will be interested in extracting a very regular structure
+from a graph class $\mathcal{C}$ that is not \kl{$\forall$-well-quasi-ordered}.
+This structure will take two forms, the first one is a combinatorial notion of
+\kl{periodic antichain} that can be traced back to \cite[Section 7]{ALM17}, and
+the second one is a logical property of \kl{existentially transducing} the
+class of all finite paths.
 
-TODO:
-\begin{itemize}
-    \item If not WQO, then arbitrarily large bad branches.
-    \item Color the nodes of this bad branch using their type (relative to the branch)
-    \item Without loss of generality, assume that the branch is super long, and that
-        we do not have a lot of different types of nodes inside each bag.
-        (uniform bound $K$)
-    \item Take a large bad branch, and define 
-        $\psi(x,y) \defined E(x,y) \neq E(l(x), r(y))$ where
-        $l(x)$ and $r(y)$ respectively "putting to the left" or 
-        "putting to the right" of the branch in a (non-existing) "good decomposition".
-    \item Witness that $\psi$ defines \emph{almost} a directed path, except
-        that it may have back edges due to the non-commutativity of the idempotent node.
-    \item If there are no back edges, we just defined a long induced path.
-    \item If there were some back edges, there were \emph{a lot of them}.
-    \item Define $\phi(x,y)$ if there exists a directed edge $x \to y$
-        \textbf{AND} a node $z$ such that $z \to z_1$, $z \to z_2$
-        and a path of length at most $2K$ from $z_1$  to $z_2$
-        that goes through $x$ and $y$ (in this order).
-    \item Prove that $\phi$ defines a directed path.
-    \item Take the symmetric version of $\phi$ and conclude.
-\end{itemize}
- Theory
+\begin{definition}[Regular Sequence]
+  A \intro{regular sequence (of graphs)} is given by a finite graph $G$,
+  a labelling function $\lab \colon V(G) \to \Sigma$ for some finite set
+  $\Sigma$, and two finite sets $C, F \subseteq \Sigma^2$. It defines
+  an infinite set of graphs $\seqof{G^r}[r \geq 1]$ as follows:
+  the vertex set of $G^r$ is $V(G) \times \set{1, \ldots, r}$, and there is an edge
+  between $(u,i)$ and $(v,j)$ if and only if one of the following holds:
+  \begin{itemize}
+      \item $(u,v) \in E(G)$ and $i = j$;
+      \item $(\lab(u), \lab(v)) \in C$ and $|i - j| = 1$
+      \item $(\lab(u), \lab(v)) \in F$ and $|i - j| > 1$.
+  \end{itemize}
+\end{definition}
 
-Consider a bad branch $B$. We define the following interpretation:
-\begin{equation*}
-    \varphi(x,y) \defined 
-    E(x,y) \neq E(l(x), r(y))
-\end{equation*}
+It follows from results of the previous section that one can extract
+\kl{periodic antichains} from any hereditary class of graphs that is not
+\kl{$\forall$-well-quasi-ordered}, answering positively to \cite[Conjecture
+2]{ALM17}.
 
-\restate{transductions-paths:thm}
+\begin{lemma}
+  \label{lem:regular-antichain}
+  If a hereditary class of graphs $\Cls$ is not \kl{$\forall$-well-quasi-ordered},
+  then it contains a \kl{periodic sequence} $\seqof{G^r}[r \geq 1]$ that is an
+  \kl{antichain} for the \kl{labelled induced subgraph} relation.
+\end{lemma}
+\begin{proof}
+  todo aliaume
+\end{proof}
+
+\AP Let us now leverage this combinatorial structure to extract a logical
+property of the class $\Cls$. Let us recall that an \intro{existential
+interpretation} from (labelled) graphs to graphs is given by an existential
+first order formula $\phi_{\text{univ}}(x)$ that selects the vertices of the
+interpreted graph, an existential first order formula $\phi_{\text{edge}}(x,y)$
+that selects the edges of the interpreted graph, and an existential first order
+formula $\phi_{\text{dom}}$ that selects the graphs of $\Cls$ on which the
+interpretation is defined. The semantics is that for every graph $G \in \Cls$
+satisfying $\phi_{\text{dom}}$, the interpreted graph $\mathcal{I}(G)$ has for
+vertex set the vertices of $G$ satisfying $\phi_{\text{univ}}$, and has an edge
+between two vertices $u,v$ if and only if $G$ satisfies
+$\phi_{\text{edge}}(u,v)$ (which is assumed to be symmetric and irreflexive on
+the selected vertices). A class $\Cls$ \intro{existentially interprets} a class
+$\mathcal{D}$ if there exists an existential interpretation $\someInterp$ from
+$\Cls$ to graphs such that $\mathcal{D} \subseteq \someInterp(\Cls)$. We say
+that $\Cls$ \intro{existentially transduces} $\mathcal{D}$ if there exists a
+finite labelling set $\Sigma$ such that $\Label{\Sigma}{\Cls}$ \kl{existentially
+interprets} $\mathcal{D}$.
+
+
+\begin{lemma}
+  \label{lem:paths-transduction}
+  Let $\Cls$ be a \kl{periodic antichain} (having the coloring defined) as in 
+  \cref{lem:regular-antichain}. Then $\Cls$ \kl{existentially interprets}
+  the class of all finite paths.
+\end{lemma}
+\begin{proof}
+  \todo[inline]{\textbf{MAEL ICI}}
+\end{proof}
+
+\begin{corollary}
+  \label{cor:not-wqo-implies-transducing-paths}
+  If a hereditary class of graphs $\Cls$ is not \kl{$\forall$-well-quasi-ordered},
+  then it \kl{existentially transduces} the class of all finite paths.
+\end{corollary}
+\begin{proof}
+  \todo[inline]{\textbf{MAEL ICI}}
+  It follows from \cref{lem:regular-antichain} and
+  \cref{lem:paths-transduction}.
+\end{proof}
+
+\begin{conjecture}
+  \label{conj:paths-transduction}
+  A hereditary class of graphs $\Cls$ is \kl{$\forall$-well-quasi-ordered} if and
+  only if it does not \kl{existentially interprets} the class of all finite paths.
+\end{conjecture}
+
+This could be 
