@@ -89,7 +89,9 @@ of the tree $\aTree$ with respect to a given \kl{bough} $B$.
 
         \draw[staredge] (t)  -- node[monoid, midway, below left] {$\BtL(x)$} (x);
     \end{tikzpicture}
-    \caption{The type of a leaf with respect to a given \kl{bough} $B$.}
+    \caption{The type of a leaf with respect to a given \kl{bough} $B$,
+    here $\Bl(x)$ and $\Br(x)$ are elements of level $k$ in the \kl{bough},
+    and $\Bt(x)$ is the least ancestor of $x$ in the \kl{bough}.}
     \label{type-of-a-leaf-in-branch:fig}
 \end{figure}
 
@@ -128,7 +130,7 @@ of the tree $\aTree$ with respect to a given \kl{bough} $B$.
         \foreach[count=\x] \y in {0,1,2,3} {
             \node (E\x) at ({ 2 * \x - 1},2.6) {$e_{\y}$};
             \draw[->,thick] (b\y) to[bend left=40] (b\x);
-            \node (T\x) at ({ 2 * \x - 1},-0.6) {$T_{b_{\y}:b_{\x}}$};
+            \node (T\x) at ({ 2 * \x - 1},-0.6) {$\t_{b_{\y}:b_{\x}}$};
         }
         
         \node (x) at (3,0.2)  {$x$};
@@ -165,46 +167,32 @@ of the tree $\aTree$ with respect to a given \kl{bough} $B$.
 \end{figure}
 
 \AP In the rest of the paper, we will ofter rely on some tree surgery operation
-consisting in replacing a \kl{bough} in a tree $\t$ by some other \kl{bough}.
-Two boughs $B$ and $B'$ are \intro{compatible} if they start with the same
-idempotent value, and if for every tree $\aTree$ that contains $B$, one can
-replace $B$ by $B'$ to obtain a new tree $\aTree'$ that remains \kl{forward
-Ramseyan}, and conversely for every tree $\aTree'$ that contains $B'$. The
-following \cref{fact:bough-replacement} states that one can safely perform such
-a replacement without modifying the part of the graph represented by the tree
+consisting in replacing a \kl{bough} in a tree by some other \kl{bough}. Given
+a \kl{bough} $B$ in a tree $\t$, we write $\t = C[B]$ to denote that $\t$ can
+be obtained by plugging the \kl{bough} $B$ into a \intro{context} $C[\square]$.
+Formally, a \kl{context} $C[\square]$ is given by a tree $\t_{\mathsf{root}}$
+with a distinguished leaf $\square$, together with two trees
+$\t_{\mathsf{left}}$ and $\t_{\mathsf{right}}$. These three elements are
+reprenented as dashed lines in \cref{partitionning-a-graph:fig}.
+
+\AP Two boughs $B$ and $B'$ are \intro{compatible} if they start with the same
+idempotent value, and if for every tree $\aTree = C[B]$, the tree $C[B']$ is
+also well-defined (i.e., it remains \kl{forward Ramseyan}). The following
+\cref{fact:bough-replacement} states that one can safely perform such a
+replacement without modifying the part of the graph represented by the tree
 $\t$ outside of the \kl{bough}.
 
 \begin{fact}
   \label{fact:bough-replacement}
-  Let $\t$ be a tree with a \kl{bough} $B$ of level $k$, 
+  Let $\t = C[B]$ be a tree with a \kl{bough} $B$ of level $k$, 
   and let $H$ be a \kl{bough} that is \kl{compatible}
-  with $B$. Let $\t'$ be the tree obtained by replacing $B$ by $H$ in $\t$.
+  with $B$. Let $\t' = C[H]$ be the tree obtained by replacing $B$ by $H$ in $\t$.
   Then, the subraph of $\someInterp(\t)$ induced by the leaves 
   outside of $B$ is isomorphic (using the identity map) 
   to the subgraph of $\someInterp(\t')$
   induced by the leaves outside of $H$.
 \end{fact}
 
-\AP Now that we have an understanding of what happens when replacing a
-\kl{bough} in a fixed tree, let us study what happens when we do the opposite
-operation, i.e., when we chance the ``context'' in which a \kl{bough} is
-placed. 
-
-% TODO:
-% - a context is a tree with a bough removed, given by a triple (Troot, Tleft, Tright) where
-%   where Troot is the tree above the bough with a distinguished leaf where to plug the bough,
-%   and Tleft and Tright are the trees below the bough.
-% 
-% - the context type of a leaf in a context C is given by the values of 
-%   paths from the leaf to the root of Tleft resp Tright
-
-
-Let us define a \intro{context} $C[\square]$ to be a pair of a tree $A$
-with a distinguished hole $\square$ that can be filled by another tree, and a
-tree $B$ that can be plugged into this hole. Given a tree $T$ with a hole, one
-can place it inside a context $C[\square]$ to obtain a new tree $C[T]$ that is
-defined by plugging $T$ into the hole of $A$, and plugging $B$ into the hole of
-$T$.
 
 
 \begin{definition}
@@ -212,63 +200,91 @@ $T$.
     Let $B$ be a \kl{bough} of level $k$ in a tree $\t$.
     We say that $B$ is a \intro{good bough} if, 
     there exists a \kl{compatible} \kl{bough} $H$ of level $k$,
-    and a map $h \colon \someInterp(\t{[B]}) \to \someInterp(\t{[H]})$
+    and a map $h \colon \someInterp(C[B]) \to \someInterp(C[H])$
     such that:
     \begin{enumerate}
         \item $h$ is an embedding of graphs,
-        \item $h$ is the identity map on leaves outside of $B$,
-        \item there exists a block in $H$ that is left untouched 
+        \item $h$ is the identity map on leaves belonging $C[\square]$,
+        \item there exists a \kl{block} in $H$ that is left untouched 
           by $h$.
     \end{enumerate}
+    A \intro{bad bough} is a \kl{bough} that is not a \kl{good bough}.
 \end{definition}
 
-\AP Therefore, the main combinatorial obstacle to understanding whether or not
-a class is \kl{labelled-well-quasi-ordered} is to understand the behaviour of
-pairs of nodes $x$ and $y$ that are \kl{dependent}. This is the motivation
-for the following construction that studies the behaviour of
-consecutive \kl{$k$-neighbourhoods} in a tree.
-\subsection{Gap Embedding(s)}
+We claim that the existence of \kl{bad boughs} of arbitrarily large
+\kl{dimension} is the only obstruction to being \kl{2-well-quasi-ordered}.
 
-In order to compare two trees equipped with \kl{forward Ramseyan splits}, we
-will design an ordering that respects the tree structure as well as the splits.
-This is usually called the \intro{gap embedding} relation, originally defined
-by Dershowitz and Tzameret \cite{DERSHOWITZ200380}. It was noticed by Freund
-\cite{FREU20} that this ordering can be understood as a nested version of
-Kruskal's Tree Theorem, and this will be our point of view in the following,
-since we will need to slightly adapt the definition to our setting.
+\begin{lemma}
+  \label{lem:good-boughs-wqo}
+  The image of $\someInterp$ is \kl{$2$-well-quasi-ordered} 
+  if and only if
+  the image of $\someInterp$ is \kl{$\forall$-well-quasi-ordered} 
+  if and only if 
+  there exists a bound on the \kl{dimension} of \kl{bad boughs}.
+\end{lemma}
 
-\AP Let us consider some $k \in \set{1, \dots, N}$. We will write
-$\Trees{\Sigma,k}{X}(Y)$ for the class of trees with labels in $X \times \set{k,
-\ldots, N}$ on the internal nodes, labels in $\Sigma$ on the edges, with a
-distinguished root, and such that leaves are labelled in $Y$.
-It is immediate that $\Trees{\Sigma,k-1}{X}(Y)$ 
-is the least fixed point of the following operator:
-\begin{equation*}
-  F \colon Z \mapsto Y + \Trees{\Sigma,k}{X}(Z) \quad .
-\end{equation*}
-
-It was shown in \cite{LOPEZ23} that any such inductive definition gives 
-rise to a \kl{well-quasi-order}, obtained by 
+The proof of \cref{lem:good-boughs-wqo} is split into two parts, one will
+leverage the bound on the \kl{dimension} of \kl{bad boughs} to construct a
+suitable tree representation of the graphs proving that they are
+\kl{$\forall$-well-quasi-ordering} (\cref{sec:gap-embedding}). On the other
+hand, we will show that the existence of \kl{bad boughs} of arbitrarily large
+\kl{dimension} allows to construct an infinite two-labelled antichain in the
+image of $\someInterp$ (\cref{sec:obstructions}).
 
 
+\subsection{Gap Embedding}
+\label{sec:gap-embedding}
 
+\AP If there is a bound $N_0$ on the \kl{dimension} of \kl{bad boughs}, we can
+use \cref{fact:bough-replacement} to upgrade our trees in the following way:
+given a tree $\t$, we will insert dummy nodes in every \kl{bough} of level $k$
+that has dimension greater than $N_0$. The resulting tree $\t'$ will have two
+kind of nodes: \kl{important nodes}, that correspond to nodes of $\t$, and
+\kl{dummy nodes} that were inserted during this procedure. The following 
+\cref{lem:important-nodes} precises the properties of this construction.
 
+\begin{lemma}
+    \label{lem:important-nodes}
+    Assume that there exists a bound $N_0$ on the \kl{dimension} of \kl{bad
+    boughs}. Then, for every tree $\t$, one can effectively
+    construct a tree $\t'$ equipped with a set of \kl{important nodes} such that:
+    \begin{itemize}
+      \item the restriction of $\t'$ to its \kl{important nodes} is $\t$,
+      \item the restriction of $\someInterp(\t')$ to \kl{important leaves}
+        is exactly $\someInterp(\t)$,
+      \item every \kl{bough} containing only \kl{important nodes}
+        has dimension less than $N_0$.
+    \end{itemize}
+\end{lemma}
+\begin{proof}
+  We proceed top-down in the tree $\t$. At the beginning, we mark 
+  every node of $\t$ as \kl{important}.
 
-Hence, we are in the opposite situation as with the \kl{composition ordering}:
-we have a \kl{well-quasi-order} on trees, but we do not know whether the
-interpretation $\someInterp$ is order-preserving from trees (with a choice of
-split) to graphs. However, when inserting new nodes, we are often able to state
-that the value of $\tlbl{\t}{x}{y}$ is preserved provided that $x$ and $y$ are
-sufficiently far apart in the \kl{forward Ramseyan split} of the tree, as
-stated in the following lemma.
+  Whenever we encounter a \kl{bough} $B$ of level $k$ with dimension greater
+  than $N_0$, we replace it by a \kl{good bough} $H$ of level $k$ with
+  dimension exactly $N_0$, which exists by assumption. This operation does not
+  modify the graph outside of the \kl{bough} by \cref{fact:bough-replacement}.
+  We then mark the leaves of $H$ that correspond to leaves of $B$ as
+  \kl{important}, and the other ones of $H$ as \kl{dummy}. Then, we complete
+  the marking of \kl{important} nodes by asking that the least common ancestor
+  of two \kl{important} nodes is also \kl{important}. By definition, the graph
+  induced by the \kl{important leaves} remains unchanged by this operation.
+\end{proof}
 
-Problems may arise when $x$ and $y$ are too close in the \kl{forward Ramseyan
-split}, for instance because they are \kl{one-separated at level $k$}, or
-because one inserts new nodes in the first and last part of the path from $x$
-to $y$. A typical example of such a situation is illustrated in the case of a
-monoid $M$ with two elements $\set{a, b}$ such that $a^2 = b$ and $b$ is
-absorbing. Then, replacing an edge $x \treelt y$ labelled with $a$ by two or more
-edges will change the value of $\tlbl{\t}{x}{y}$ from $a$ to $b$.
+Leveraging \cref{lem:important-nodes}, we can now assume that every nodes of
+interest in our trees are somehow \emph{well-separated} from each other,
+allowing us to leverage the remarks of \cref{sec:ramseyan} and
+\cref{fast-computation:fig}.
+
+\AP We will now define a \kl{well-quasi-ordering} on the trees equipped with
+\kl{forward Ramseyan splits} and \kl{important nodes}. The natural candidate is
+called the \intro{gap embedding} relation, originally defined by Dershowitz and
+Tzameret \cite{DERSHOWITZ200380}. It was noticed by Freund \cite{FREU20} that
+this ordering can be understood as a nested version of Kruskal's Tree Theorem,
+and this will be our point of view in the following, since we will need to
+slightly adapt the classical definition to our setting.
+
+\todo[inline]{waaaaaaa}
 
 % TODO start with the positive part !
 %
@@ -291,3 +307,163 @@ edges will change the value of $\tlbl{\t}{x}{y}$ from $a$ to $b$.
 % one color. By 2-WQO, we would obtain a pair of graphs where one embeds
 % into the other, but this gives an embedding of bad boughs, which is a contradiction.
 %
+
+\subsection{Obstructions}
+\label{sec:obstructions}
+
+\AP In this section, we will assume that there 
+exist \kl{bad boughs} of arbitrarily large \kl{dimension}, and we will
+leverage this to construct an infinite \kl{antichain} in the image of
+$\someInterp$.
+
+Our first remark is that there are only finitely many equivalence 
+classes for \kl{boughs} of a given level $k$ with respect to \kl{compatibility}.
+This is the content of the following \cref{lem:finitely-many-boughs}.
+
+
+\begin{lemma}
+  \label{lem:finitely-many-boughs}
+  Let $k$ be a level. There exists a finite set of \kl{boughs} of level $k$
+  such that every \kl{bough} of level $k$ is \kl{compatible} with one of them.
+\end{lemma}
+\begin{proof}
+  Sketch: Compatibility between two \kl{boughs} $B$ and $B'$ of level $k$ 
+  is determined by the shape of the beginning and ends of the splits of $B$ and $B'$,
+  and there are finitely many such shapes.
+\end{proof}
+
+\begin{lemma}
+  \label{lem:finitely-many-contexts}
+  There exists a finite set $\mathcal{F}$ of contexts $C[\square]$ such that
+  for every bad bough $B$ of level $k$, there exists a context
+  $C[\square] \in \mathcal{F}$ such that $B$ is a \kl{bad bough} in $C[B]$.
+\end{lemma}
+\begin{proof}
+  Sketch: the context is not very important in good boughs
+  because outside it is the identity map. Furthermore, the behaviour
+  of nodes in the context with respect to those of the bough 
+  is determined by a finite number of monoid elements.
+  Hence, if a bough is good in some context, it is good in any context with 
+  the same behaviour and there are finitely many such contexts.
+\end{proof}
+
+
+\begin{lemma}
+  \label{lem:bad-bough-antichain}
+  If there exist \kl{bad boughs} of arbitrarily large \kl{dimension},
+  then there exists an infinite two-colored \kl{antichain} in the image of $\someInterp$.
+\end{lemma}
+\begin{proof}
+  Assume towards a contradiction that the class of graphs 
+  obtained as images of $\someInterp$ is \kl{$2$-well-quasi-ordered}.
+  Let $\seqof{B_i}[i \geq 1]$ be an infinite sequence of \kl{bad boughs}. Without loss 
+  of generality, one can assume that all \kl{boughs} $B_i$ have the same level $k$,
+  and are pairwise \kl{compatible}, by \cref{lem:finitely-many-boughs}.
+
+  Now, using \cref{lem:finitely-many-contexts}, one can extract one context 
+  $C[\square]$ such that infinitely many \kl{boughs} $B_i$ are \kl{bad boughs}
+  in $C[B_i]$. Finally, one can extract further to assume that 
+  the \kl{dimension} of the \kl{boughs} $B_{i+1}$ 
+  is greater than twice the number of leaves in $B_i$.
+
+  Let us now color every graph $\someInterp(C[B_i])$ with two labels: $\top$
+  to leaves belonging to $B_i$, and color $\bot$ to leaves belonging to
+  $C[\square]$. Because we assume that the image of $\someInterp$ is
+  \kl{$2$-well-quasi-ordered}, we can extract an infinite increasing
+  subsequence, and assume that for all $i < j$, there exists an embedding $f_{i,j}
+  \colon \someInterp(C[B_i]) \to \someInterp(C[B_j])$ that preserves labels.
+  Let us remark that for all $i < j$, the map 
+  $f_{i,j}$ acts as a permutation when restricted to nodes labelled $\bot$,
+  that is of size the number of leaves in $C[\square]$.
+  By a Ramsey argument, we can therefore assume that this permutation is the identity
+  for all $i < j$.
+  Finally, consider any two indices $i < j$. 
+
+  Because the \kl{dimension} of $B_j$ is greater than twice the number of leaves
+  in $B_i$, there must be some \kl{block} in $B_j$ that is left untouched by $f_{i,j}$.
+  Furthermore, we know that $f_{i,j}$ is the identity on leaves
+  belonging to $C[\square]$. Hence, the map $f_{i,j}$
+  witnesses that $B_i$ is a \kl{good bough} in $C[B_i]$, which is a contradiction.
+\end{proof}
+
+
+\section{Hereditary Classes}
+\label{sec:hereditary-classes}
+
+We use a notion of \kl{perfect boughs}
+
+\begin{definition}[Perfect Bough]
+  \label{def:perfect-bough}
+  Let $\aTree = C[B]$ be a tree with a \kl{bough} $B$ of level $k$.
+  We say that $B$ is a \intro{perfect bough} there exists a compatible
+  \kl{bough} $H$ of level $k$ and 
+  a map $h \colon \someInterp(C[B]) \to \someInterp(C[H])$
+  \begin{itemize}
+      \item $h$ is an embedding of graphs,
+      \item $h$ is the identity map on leaves belonging $C[\square]$
+      \item the \kl{bough type} of every leaf $x$ in $H$ is the same as 
+        the \kl{bough type} of $h(x)$ in $B$.
+      \item there exists a \kl{block} in $H$ that is left untouched 
+          by $h$.
+  \end{itemize}
+  An \intro{imperfect bough} is a \kl{bough} that is not a \kl{perfect bough}.
+\end{definition}
+
+\begin{lemma}
+  \label{lem:perfect-boughs-wqo}
+  The image of $\someInterp$ is \kl{$2$-well-quasi-ordered} 
+  if and only if
+  the image of $\someInterp$ is \kl{$\forall$-well-quasi-ordered} 
+  if and only if 
+  there exists a bound on the \kl{dimension} of \kl{imperfect boughs}.
+\end{lemma}
+\begin{proof}
+  First, if we have a bound on the \kl{dimension} of \kl{imperfect boughs},
+  then we also have a bound on the \kl{dimension} of \kl{bad boughs},
+  hence by \cref{lem:good-boughs-wqo}, the image of $\someInterp$ is
+  \kl{$\forall$-well-quasi-ordered}.
+
+  Conversely, assume that there exist \kl{imperfect boughs} of arbitrarily
+  large \kl{dimension}. Then, by an argument similar to the one of 
+  \cref{lem:bad-bough-antichain}, we can construct an infinite
+  labelled \kl{antichain} in the image of $\someInterp$. The only change is that 
+  one also adds the \kl{bough type} of the leaves as additional labels.
+\end{proof}
+
+The important advantage of \cref{lem:perfect-boughs-wqo} over
+\cref{lem:good-boughs-wqo} is that \kl{imperfect boughs} are easily
+recognizable.
+
+\begin{lemma}
+  \label{lem:recognizing-perfect-boughs}
+  There exists an $\MSO$ formula that recognizes \kl{imperfect boughs}.
+\end{lemma}
+
+\begin{corollary}
+  One can decide whether there are \kl{imperfect boughs} of arbitrarily large
+  \kl{dimension}.
+\end{corollary}
+
+One other advantage of \cref{lem:perfect-boughs-wqo} is that
+in the case of hereditary classes, we can further simplify 
+the statement. 
+
+\begin{lemma}
+  \label{lem:hereditary-perfect-boughs}
+  Assume that there are \kl{imperfect boughs} of arbitrarily large \kl{dimension}.
+  Then, there exists a finite set of blocks $\mathbb{F}$ such that 
+  one can build an \kl{imperfect bough} of arbitrarily large \kl{dimension}
+  using only \kl{blocks} from $\mathbb{F}$.
+\end{lemma}
+
+As an immediate consequence of \cref{lem:perfect-boughs-wqo} and
+\cref{lem:hereditary-perfect-boughs}, we see that 
+
+\begin{corollary}
+  \label{cor:hereditary-perfect-boughs-wqo}
+  Assume that the class $\someInterp$ is hereditary.
+  Then, the image of $\someInterp$ is \kl{$2$-well-quasi-ordered}
+  if and only if 
+  every class of \kl{bounded linear clique-width} in $\someInterp$
+  is \kl{$2$-well-quasi-ordered}.
+\end{corollary}

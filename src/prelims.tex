@@ -103,7 +103,7 @@ $\phi_{\mathsf{dom}}$ are tautologies.
 \begin{example}
   \label{ex:mso-interp-cycles}
   An \kl{$\MSO$-interpretation} $\someInterp$ from $\Trees{}{}$ to finite undirected graphs
-  that procudes all odd-lenghts cliques can be defined as follows: 
+that procudes all odd-lenghts cliques can be defined as follows: 
     $\phi_{\mathsf{dom}}$ is the formula that is true on trees with an odd number of leaves,
     $\phi_{\mathsf{univ}}(x)$ is the formula that is true if and only if $x$ is a leaf,
     $\phi_{\mathsf{edge}}(x,y)$ is the formula that is true if and only if $x \neq y$.
@@ -125,3 +125,31 @@ We will use the following fact that is well-known in the literature.
   has bounded clique-width. However, any subset of this class 
   having bounded linear clique-width must be finite.
 \end{fact}
+
+\paragraph{Transductions from graphs to graphs} \AP Another notion of
+transduction that will be relevant in this paper is that of \kl{existential
+transduction} and \kl{existential interpretation} that were mentionned in
+\cref{thm:characterisations,conj:path-transduction}, and are defined in a
+similar way as \kl{$\MSO$-interpretations}.
+
+
+\AP An \intro{existential interpretation} from (labelled) graphs to graphs is
+given by an existential first order formula $\phi_{\text{univ}}(x)$ that
+selects the vertices of the interpreted graph, an existential first order
+formula $\phi_{\text{edge}}(x,y)$ that selects the edges of the interpreted
+graph, and an existential first order formula $\phi_{\text{dom}}$ that selects
+the graphs of $\Cls$ on which the interpretation is defined. The semantics is
+that for every graph $G \in \Cls$ satisfying $\phi_{\text{dom}}$, the
+interpreted graph $\mathcal{I}(G)$ has for vertex set the vertices of $G$
+satisfying $\phi_{\text{univ}}$, and has an edge between two vertices $u,v$ if
+and only if $G$ satisfies $\phi_{\text{edge}}(u,v)$ (which is assumed to be
+symmetric and irreflexive on the selected vertices). A class $\Cls$
+\intro{existentially interprets} a class $\mathcal{D}$ if there exists an
+existential interpretation $\someInterp$ from $\Cls$ to graphs such that
+$\mathcal{D} \subseteq \someInterp(\Cls)$. We say that $\Cls$
+\intro{existentially transduces} $\mathcal{D}$ if there exists a finite
+labelling set $\Sigma$ such that $\Label{\Sigma}{\Cls}$ \kl{existentially
+interprets} $\mathcal{D}$.
+
+
+

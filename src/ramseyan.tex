@@ -286,20 +286,7 @@ not change when inserting new nodes in the section between $z_1$ and $z_3$ as
 long as these new nodes are assigned a value of the split smaller than or equal
 to $k$, and the resulting tree is still \kl{forward Ramseyan}. A fortiori,
 whether there is an edge between two leaves of $x$ and $y$ in the resulting
-graph is not influenced by such insertions. Hence, the ordering defined by
-``inserting new subtrees compatible with the split'' is \emph{almost}
-\emph{order-preserving} from trees to graphs, as formalised in the following
-\cref{lem:almost-order-preserving}.
-
-\begin{lemma}
-  \label{lem:almost-order-preserving}
-  Let $\t_1$ and $\t_2$ be two trees edge-labelled over a monoid $M$ equipped with
-  \kl{forward Ramseyan splits} $\spt_1$ and $\spt_2$ of height $N$. Assume that
-  $\t_2$ is obtained from $\t_1$ by selecting a \kl{$k$-neighbourhood} in
-  some branch of $\t_1$, and inserting new subtrees in this \kl{$k$-neighbourhood}
-  whose roots are all assigned a value of the split smaller than or equal to $k$.
-  Then, for any two leaves $x,y$ in $\t_1$ (hence, also in $\t_2$),
-  if the two leaves are \emph{far} from the inserted subtrees, then:
-  $(x,y)$ is an edge in $\someInterp(\t_1)$ if and only if
-  $(x,y)$ is an edge in $\someInterp(\t_2)$.
-\end{lemma}
+graph is not influenced by such insertions. This will guide our definition of a
+suitable ordering on trees, where we allow many insertions (being coarser than
+the \kl{composition ordering}) while still preserving the edges between
+``most'' leaves in the interpreted graphs.
