@@ -1,14 +1,16 @@
 ---
 draft: true
-final: false
+camera-ready: false
 anonymous: false
-arxiv: false
+acmart:
+  format: sigconf
 bibliography:
   - papers.bib
 libraries:
   - lib/aliaume.tex
   - lib/maths.tex
   - lib/knowledges.kl
+header-includes: "\\usepackage{ensps-colorscheme}"
 ---
 
 

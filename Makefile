@@ -6,81 +6,38 @@ SRC=src/*.tex             \
     papers.bib            \
     lib/knowledges.kl     \
     ensps-colorscheme.sty \
-    plainurl.bst	  \
     $(PAPER).md
-
-TEMPLATES=templates/plain-article.tex \
-		templates/ieee/IEEE-conference-template.tex \
-	  templates/git-meta.lua      \
-	  templates/lipics/lipics.tex 
-
-FIGURES=
 
 all: $(PAPER).pdf
 
 # Default target: create the pdf file
-%.pdf: %.tex $(FIGURES)
+%.pdf: %.tex 
 	latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" $<
 
-# How to create standalone versions of the pictures
-fig/%.pdf: fig/%.tex
-	@cp $^ $(notdir $^)
-	pdflatex $(notdir $^)
-	@mv $(notdir $@) $@
-	@rm $(notdir $^)
-
-$(PAPER).tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
-	pandoc --template=templates/plain-article.tex \
-		   --lua-filter=templates/git-meta.lua \
-		   --metadata-file=./paper-meta.yaml \
-		   --wrap=none \
-		   -o $(PAPER).tex \
-		   $(PAPER).md
-
-# Create a lipics document for submission
-$(PAPER).lipics.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
-	pandoc --template=templates/lipics/lipics.tex \
-		   --lua-filter=templates/git-meta.lua \
-		   --metadata-file=./paper-meta.yaml \
-		   --wrap=none \
-		   -o $(PAPER).lipics.tex \
-		   $(PAPER).md
-	stow --target="." --dir="templates" lipics
-
-
-# Create an ieee document for submission
-$(PAPER).ieee.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
-	pandoc --template=templates/ieee/IEEE-conference-template.tex \
-		   --lua-filter=templates/git-meta.lua \
-		   --metadata-file=./paper-meta.yaml \
-		   --wrap=none \
-		   -o $(PAPER).ieee.tex \
-		   $(PAPER).md
-	stow --target="." --dir="templates" ieee 
+$(PAPER).sigconf.tex: $(SRC) ./paper-meta.yaml
+	pandoc -t latex \
+		     --output $(PAPER).sigconf.tex \
+				 --defaults acmart \
+				 --metadata-file=./paper-meta.yaml \
+				 --wrap=none \
+		     $(PAPER).md
 
 # Create a single file tex document for arXiv
-$(PAPER).arxiv.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
-	pandoc --template=templates/plain-article.tex \
-		   --lua-filter=templates/git-meta.lua \
-		   --metadata-file=./paper-meta.yaml \
-		   --metadata=arxiv:true \
-		   --wrap=none \
-		   -o $(PAPER)-arxiv-tmp.tex \
-		   $(PAPER).md
-	latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" $(PAPER)-arxiv-tmp.tex
+$(PAPER).arxiv.tex: $(PAPER).plain.tex ./paper-meta.yaml
+	latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" $(PAPER).plain.tex
 	latexpand -o $(PAPER).arxiv.tex         \
-		      --empty-comments          \
-		      --expand-bbl $(PAPER)-arxiv-tmp.bbl \
-              $(PAPER)-arxiv-tmp.tex
-	@rm $(PAPER)-arxiv-tmp.*
+		        --empty-comments          \
+		        --expand-bbl $(PAPER).plain.tex \
+						$(PAPER).plain.tex
+	@rm $(PAPER).plain.*
 
 # Create an archive with the single file tex document and the license
 $(PAPER).arxiv.tar.gz: $(PAPER).arxiv.tex
 	tar -czf $(PAPER).arxiv.tar.gz \
-             $(PAPER).arxiv.tex    \
-			 plainurl.bst          \
-			 ensps-colorscheme.sty \
-             ./LICENSE
+           $(PAPER).arxiv.tex    \
+			 plainurl.bst              \
+			 ensps-colorscheme.sty     \
+       ./LICENSE
 
 $(PAPER).arxiv.pdf: $(PAPER).arxiv.tar.gz
 	# create temporary directory

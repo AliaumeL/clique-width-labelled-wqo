@@ -1,5 +1,5 @@
 \section{Preliminaries}
-\label{sec:preliminaries}
+\label{sec:prelims}
 
 We assume the reader to be familiar with basic notions of logic on finite
 relational strucutres, such as monadic second-order logic ($\MSO$), first-order
@@ -29,6 +29,8 @@ quasi-ordered by equality.
 \AP A class of graphs $\Cls$ is a \intro{hereditary class} if it is closed under
 taking induced subgraphs, i.e., if for all $G, H$ such that $
 G \isubleq H$ and $H \in \Cls$, we have $G \in \Cls$.
+The \intro{hereditary closure} of a class of graphs $\Cls$ is the smallest
+hereditary class containing $\Cls$.
 
 \AP
 An \intro{ordered graph} is a finite undirected graph $G = (V, E)$ equipped
@@ -64,35 +66,7 @@ $\Cls$ with a linear order $\leq_G$ on its vertices such that the resulting
 class of ordered graphs is \kl{well-quasi-ordered} (resp.
 \kl{$k$-well-quasi-ordered}, resp. \kl{$\forall$-well-quasi-ordered}).
 
-\begin{example}
-  \label{ex:wqo-classes}
-  The class $\intro*\Cycles$ of all finite cycles is not \kl{well-quasi-ordered},
-  since the infinite sequence of cycles forms an infinite \kl{antichain}.
-  The class $\intro*\Paths$ of all finite paths is \kl{well-quasi-ordered}
-  since $(\Paths, \isubleq)$ is isomorphic to $(\mathbb{N}, \leq)$.
-  However, it is not \kl{$2$-well-quasi-ordered}, since the infinite
-  sequence of paths with colored endpoints forms an infinite \kl{antichain}.
-  The class $\intro*\Cliques$ of all finite cliques is \kl{$\forall$-well-quasi-ordered},
-  since any \kl{$X$-labelled clique} can be identified with a finite multiset of labels from $X$,
-  and the set of finite multisets over a \kl{well-quasi-order} is itself \kl{well-quasi-ordered}
-  by standard results on \kl{well-quasi-orders} \cite{SCSC12}.
-\end{example}
 
-\begin{figure}
-  \centering
-  \begin{tabular}{c|c|c|c}
-    \toprule
-    \textbf{Class} & \kl{WQO} & \kl{2-WQO} & \kl{$\forall$-WQO} \\
-    \midrule
-    $\Cycles$ & \no & \no & \no \\
-    $\Paths$ & \yes & \no & \no \\
-    $\Cliques$  & \yes & \yes & \yes \\
-    \bottomrule
-  \end{tabular}
-  \caption{Well-quasi-ordering properties of some classes of graphs, 
-  see Example~\ref{ex:wqo-classes} for details.}
-  \label{fig:wqo-classes}
-\end{figure}
 
 
 
@@ -142,3 +116,12 @@ graphs \cite{COUR91}. It has \intro{bounded linear clique-width} if it is
 included in the image of some \kl{$\MSO$-interpretation} from \intro{linear
 trees} (i.e., trees where every node has at most one non-leaf child) to finite
 undirected graphs. 
+
+We will use the following fact that is well-known in the literature.
+
+\begin{fact}
+  \label{fact:trees-bdcw-not-bdlcw}
+  The class of complete binary trees seen as graphs using the parent relation
+  has bounded clique-width. However, any subset of this class 
+  having bounded linear clique-width must be finite.
+\end{fact}

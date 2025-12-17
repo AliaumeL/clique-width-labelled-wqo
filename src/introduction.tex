@@ -1,23 +1,18 @@
 \section{Introduction}
 \label{sec:introduction}
 
-\AP A quasi-ordered set $(X, \leq)$ is \intro{well-quasi-ordered} (WQO) if
-every non-empty subset of $X$ has a finite non-empty subset $Y \subfin X$ of
-minimal elements, i.e. such that for every $x \in X$, there exists $y \in Y$
-such that $y \leq x$. When the set $X$ is totally ordered, this is equivalent
-to the usual notion of well-ordering, but in the presence of incomparable
-elements, it is a stronger condition. The theory of well-quasi-orderings (WQOs)
-is a powerful combinatorial setting that has found applications in various
-areas of mathematics and computer science. In graph theory, the celebrated
-result of Robertson and Seymour~\cite{ROBSEY04} states that the class of all
-finite graphs is well-quasi-ordered under the minor relation, a profound result
-with deep algorithmic consequences. WQOs are also at the heart of
-\emph{well-structured transition systems}, infinite state transitions systems
-over which verification algorithms can be designed~\cite{ABDU96,ABDU98}. One of
-the appeal of WQOs is that they are closed under various operations, such as
-the sum and the product of WQOs. As an example, the closure of WQOs under the
-finite words, also known as Higman's lemma \cite{HIG52}, has been used in the
-verification of so-called \emph{lossy channel systems}~\cite{ABDU93}. 
+\AP The theory of well-quasi-orderings (WQOs) provides a powerful combinatorial
+setting that has found applications in various areas of mathematics and
+computer science. In graph theory, the celebrated result of Robertson and
+Seymour~\cite{ROBSEY04} states that the class of all finite graphs is
+well-quasi-ordered under the minor relation, a profound result with deep
+algorithmic consequences. WQOs are also at the heart of \emph{well-structured
+transition systems}, infinite state transitions systems over which verification
+algorithms can be designed~\cite{ABDU96,ABDU98}. One of the appeal of WQOs is
+that they are closed under various operations, such as the sum and the product
+of WQOs. As an example, the closure of WQOs under the finite words, also known
+as Higman's lemma \cite{HIG52}, has been used in the verification of so-called
+\emph{lossy channel systems}~\cite{ABDU93}. 
 
 
 % Well-quasi-ordered classes of graphs
@@ -36,7 +31,7 @@ problem in graph theory, dating back to Pouzet's seminal work \cite{POUZ72}.
 \AP In general, there is little hope to characterise all such classes, since
 any countable order with finite infixes can be embedded into the induced
 subgraph relation on finite graphs (this is a consequence of \cite[Lemma
-5.1]{Kuske06}). However, there are high hopes that a better notion of
+5.1]{Kuske06}). However, there are high hopes that a finer notion of
 well-quasi-ordering on classes of finite graphs is more amenable to structural
 characterisations. This is why one usually considers \emph{labelled}
 well-quasi-orderings on classes of finite graphs. Given a class $\Cls$ of
@@ -45,19 +40,137 @@ class $\Label{X}{\Cls}$ of graphs in $\Cls$ whose vertices are labelled by
 elements of $X$. The induced subgraph relation is then extended to labelled
 graphs by requiring that the labels are preserved by the embedding, i.e. that
 the label of a vertex in the smaller graph is less than or equal to the label
-of its image in the larger graph. 
+of its image in the larger graph. A class $\Cls$ of finite graphs is said to be
+\reintro{$(X,\leq)$-well-quasi-ordered} if the class $\Label{X}{\Cls}$ is
+well-quasi-ordered under the labelled induced subgraph relation. We will say
+that it is \reintro{$k$-well-quasi-ordered} if it is
+$(X,\leq)$-well-quasi-ordered where $X$ is a $k$-element antichain, and that it
+is \reintro{$\forall$-well-quasi-ordered} if it is
+$(X,\leq)$-well-quasi-ordered for every well-quasi-ordering $(X, \leq)$.
 
-\AP Bounded clique-width is a well-studied graph complexity measure that
-generalises other well-known graph complexity measures such as todo. There are
-several equivalent definitions of having \emph{bounded clique-width}, and we
-will use two of them in this paper. On the one hand, a class of graphs $\Cls$
-has \emph{bounded clique-width} if it is MSO-transducable from a class of
-finite trees. \todo[inline]{And this gives many good properties.}
+\begin{example}
+  \label{ex:wqo-classes}
+  The class $\intro*\Cycles$ of all finite cycles is not \kl{well-quasi-ordered},
+  since the infinite sequence of cycles forms an infinite \kl{antichain}.
+  The class $\intro*\Paths$ of all finite paths is \kl{well-quasi-ordered}
+  since $(\Paths, \isubleq)$ is isomorphic to $(\mathbb{N}, \leq)$.
+  However, it is not \kl{$2$-well-quasi-ordered}, since the infinite
+  sequence of paths with colored endpoints forms an infinite \kl{antichain}.
+  The class $\intro*\Cliques$ of all finite cliques is \kl{$\forall$-well-quasi-ordered},
+  since any \kl{$X$-labelled clique} can be identified with a finite multiset of labels from $X$,
+  and the set of finite multisets over a \kl{well-quasi-order} is itself \kl{well-quasi-ordered}
+  by standard results on \kl{well-quasi-orders} \cite{SCSC12}.
+\end{example}
+
+\begin{figure}
+  \centering
+  \begin{tabular}{c|c|c|c}
+    \toprule
+    \textbf{Class} & \kl{WQO} & \kl{2-WQO} & \kl{$\forall$-WQO} \\
+    \midrule
+    $\Cycles$ & \no & \no & \no \\
+    $\Paths$ & \yes & \no & \no \\
+    $\Cliques$  & \yes & \yes & \yes \\
+    \bottomrule
+  \end{tabular}
+  \caption{Well-quasi-ordering properties of classes in \cref{ex:wqo-classes}.}
+  \label{fig:wqo-classes}
+\end{figure}
 
 
-\paragraph*{Contributions}
-\AP
-We prove the following theorem.
+\AP The study of labelled structures is a recurring theme in the theory of
+well-quasi-orderings: clasical results such as Higman's lemma \cite{HIG52} or
+Kruskal's tree theorem \cite{KRUSK60} are actually stating that some classes of
+finite relational structures (respectively finite linear orders and finite meet
+trees) are well-quasi-ordered under the labelled embedding relation, for every
+well-quasi-ordering of labels. It was conjectured by Pouzet \cite{POUZ72} that
+being \kl{$\forall$-well-quasi-ordered} reduces to being
+\kl{$2$-well-quasi-ordered} for hereditary classes of structures (see
+\cite[Problems 9, (1)]{Pouzet24} for a modern formulation). Another interesting
+conjecture of Pouzet \cite[Problems 12]{Pouzet24} states that when a class
+$\Cls$ is \kl{$\forall$-well-quasi-ordered}, one can add a total order on the
+vertices of its structures such that the new class is still
+\kl{$\forall$-well-quasi-ordered}. This conjecture gained interest in the
+recent development of algebraic methods for polynomials over relational
+structures \cite[Section 3, Theorem 11 and 12]{GHOLAS24}, where ``monomials''
+are defined as structures labelled by $(\mathbb{N}, \leq)$.
+
+
+\AP Even for classes of finite undirected graphs, these conjectures remain
+open. Several works that date back to the 90s have idendified structural
+properties of hereditary classes of finite graphs that guarantee that they are
+\kl{$\forall$-well-quasi-ordered}, such as being of bounded tree-depth
+\cite{DING92}. In 2010, Daligault, Rao and Thomassé \cite{DRT10} initiated the
+study in the reverse direction, by considering a syntax for graph classes
+(using NLC graph expressions), and identifying which ones are
+\kl{$2$-well-quasi-ordered}. In this context, they verified Pouzet's
+conjectures, but were unable to generalise their results \cite[Conjecture
+4]{DRT10}. All the classes considered in \cite{DRT10} have so-called
+\emph{bounded clique-width},\footnote{This will be defined formally in 
+\cref{sec:prelims}} and it is believed that it is enough to understand
+hereditary classes of bounded clique-width to solve these conjectures in full
+generality, as stated in the following conjecture.
+
+\begin{conjecture}[{\cite[Conjecture 5]{DRT10}}]
+    \label{cwqo:conj}
+    Let $\Cls$ be a hereditary class of finite graphs of 
+    that is \kl{$2$-well-quasi-ordered}.
+    Then, $\Cls$ is of bounded clique-width.
+\end{conjecture}
+
+
+On parallel with the conjectures of Pouzet, another line of research has
+focused on finding structural obstructions to being
+\kl{$\forall$-well-quasi-ordered}. The natural candidate for such an
+obstruction is the class of all finite paths \cref{fig:wqo-classes}. For the
+particular classes studied in \cite{DRT10}, it was shown that every class that
+is not \kl{$2$-well-quasi-ordered} contains all finite paths \cite[Corollary
+2]{DRT10}. There are examples of hereditary classes that are not
+\kl{$2$-well-quasi-ordered} and do not contain all finite paths, but on every
+known such example, one can ``extract'' finite paths using very simple logical
+formulas. This lead to the following conjecture.
+
+\begin{conjecture}[{\cite[Conjecture 26]{LOPEZ24}}]
+    \label{conj:path-transduction}
+    Let $\Cls$ be a hereditary class of finite graphs.
+    If $\Cls$ is not \kl{$2$-well-quasi-ordered},
+    then it \kl{existentially transduces} the class of all finite paths.
+\end{conjecture}
+
+\AP Another kind of obstruction to being \kl{$\forall$-well-quasi-ordered}
+comes from the existence of infite antichains with a periodic structure that
+were called \kl(weak){periodic antichains} in \cite[Section 7]{ALM17}.
+
+\begin{conjecture}[{\cite[Conjecture 2]{ALM17}}]
+  \label{lozin:conj}
+  Let $\Cls$ be a hereditary class of finite graphs that is not
+  \kl{$2$-well-quasi-ordered}.
+  Then, there exists 
+  an infinite \kl{(weak) periodic antichain} in $\Cls$.
+\end{conjecture}
+
+
+\AP In 2024, Lopez \cite{LOPEZ24} introduced a new technique to study
+well-quasi-orderings on classes of graphs of bounded \emph{linear}
+clique-width, that leveraged combinatorial tools from automata theory (Simon's
+factorisation forests \cite{SIMO90}). This allowed to prove a weakening of
+Pouzet's conjectures \cite[Corollary 2]{LOPEZ24}, namely, that a hereditary
+class of bounded linear clique-width is \kl{$\forall$-well-quasi-ordered} if
+and only if it is \kl{$k$-well-quasi-ordered} for every $k \in \mathbb{N}$. It
+is apparent from the proof that the techniques also yield a natural ordering on
+the vertices whenever the class is \kl{$\forall$-well-quasi-ordered}, although
+this is not formally stated in the paper. It was conjectured \cite[Section
+5]{LOPEZ24} that these techniques could be refined to work on classes of
+bounded clique-width (not necessarily linear), and actually obtain the
+correspondence between \kl{$2$-well-quasi-ordering} and
+\kl{$\forall$-well-quasi-ordering}.
+
+
+\paragraph{Contributions} \AP Our main contribution is \cref{main:theorem},
+that answers positively to the conjectures of \cite{LOPEZ24}, and completely
+solves both Pouzet's conjectures for hereditary classes of bounded clique-width
+(see \cref{main:corollary}).
+
 
 \begin{theorem}
   \label{main:theorem}
@@ -82,94 +195,57 @@ We prove the following theorem.
   The same holds when $\Cls$ is a hereditary class of bounded clique-width graphs.
 \end{corollary}
 
-From our proof techniques, we also derive nice consequences regarding 
-hereditary classes of bounded clique-width graphs. Namely:
+
+
+
+From our proof techniques, we also derive nice obstructions to being
+\kl{$2$-well-quasi-ordered}, that yield the equivalences stated in
+\cref{thm:characterisations}. These answer positively to the conjectures of
+\cite{ALM17,LOPEZ24}. In particular, for a hereditary class $\Cls$ to be
+\kl{$2$-well-quasi-ordered}, it suffices that it avoids very simple
+\kl{(strong) periodic antichains}.
+
+
 
 \begin{theorem}
   \label{thm:characterisations}
   Let $\Cls$ be a hereditary class of finite graphs of bounded clique-width.
   Then, the following are equivalent:
   \begin{itemize}
-    \item $\Cls$ is not $2$-well-quasi-ordered,
+    \item $\Cls$ is not \kl{$2$-well-quasi-ordered},
     \item There exists a class $\Cls[D] \subseteq \Cls$
-      and $\Cls[D]$ is of bounded linear clique-width is not $2$-well-quasi-ordered,
-    \item There exists a \kl{periodic antichain} in $\Cls$,
-    \item $\Cls$ existentially transduces the class of all finite paths.
+      and $\Cls[D]$ is of \kl{bounded linear clique-width} is not 
+      \kl{$2$-well-quasi-ordered},
+    \item There exists a \kl{strong periodic antichain} in $\Cls$,
+    \item $\Cls$ \kl{existentially transduces} the class of all finite paths.
   \end{itemize}
 \end{theorem}
 
-Note that some of our results naturally extend  to non-hereditary classes, but
-for the sake of clarity we chose to state them in the hereditary case only.
+The results of \cref{main:corollary} extends to non-hereditary classes of
+bounded clique-width graphs, but for the sake of clarity and space, we only
+state them on hereditary ones.
+On the other hand, \cref{thm:characterisations} does not immediately 
+extend to non-hereditary classes, as witnessed by the following example.
+
+\begin{example}
+  \label{ex:non-hereditary}
+  Let $\Cls$ be the class of graphs that are complete binary trees,
+  i.e., acyclic graphs where every vertex has degree at most $3$, and a single vertex has degree $2$.
+  Then, $\Cls$ is of bounded clique-width and is not $2$-well-quasi-ordered, 
+  but: every class $\Cls[D] \subseteq \Cls$ of bounded linear clique-width
+  is finite hence $2$-well-quasi-ordered. Since \kl{periodic antichains}
+  have bounded linear clique-width, there is no \kl{periodic antichain} in $\Cls$.
+  Note that $\Cls$ existentially transduces the class of all finite paths
+  by selecting one leaf and following the path to the root, but 
+  one can show that $\Cls$ does not existentially \emph{interpret}
+  the class of all finite paths.
+\end{example}
 
 
-\paragraph*{Related works}
-
-There are three natural conjectures that have been formulated 
-regarding the relationship between various notions of well-quasi-ordering on
-classes of finite graphs.
-
-\begin{conjecture}[Pouzet \cite{POUZ72}]
-    \label{pouzet:conj}
-    Let $\Cls$ be a class of finite graphs.
-    Then, the following are equivalent:
-    \begin{enumerate}
-      \item $\Cls$ is pointed-well-quasi-ordered,
-      \item $\Cls$ is 2-well-quasi-ordered,
-      \item $\Cls$ is labelled-well-quasi-ordered,
-      \item $\Cls$ is wqo-well-quasi-ordered.
-      \item $\Cls$ one can add a total order on the vertices of 
-        its graphs, and remain wqo-well-quasi-ordered.
-    \end{enumerate}
-\end{conjecture}
-
-\begin{conjecture}[{\cite[Conjecture 4]{DRT10}}]
-  \label{thomasse:conj}
-  Let $\Cls$ be a hereditary class of finite graphs of bounded clique-width.
-  Then, $\Cls$ is $2$-well-quasi-ordered if and only if
-  there exists $\Cls \subseteq \Cls[D]$ 
-  ``structurally simpler'' such that $\Cls[D]$ is $2$-well-quasi-ordered.
-\end{conjecture}
-
-
-\begin{conjecture}[\cite{ALM17}]
-  \label{lozin:conj}
-  Let $\Cls$ be a hereditary class of finite graphs that is not labelled-well-quasi-ordered.
-  Then, there exists 
-  an infinite bad sequence of graphs in $\Cls$
-  that is \emph{regular}.
-\end{conjecture}
-
-\begin{conjecture}[Schmitz's Transduction Conjecture]
-    \label{transduction:conj}
-    Let $\Cls$ be a class of finite graphs.
-    Then, $\Cls$ is labelled-well-quasi-ordered
-    if and only if
-    $\Cls$
-    does not existentially transduce all finite paths.
-\end{conjecture}
-
-
-\begin{conjecture}[Szymon's Collapsing Conjecture]
-    \label{nip-cw:conj}
-    Let $\Cls$ be a class of graphs.
-    If $\Cls$ is labelled-wqo,
-    then $\Cls$ is of bounded clique-width.
-\end{conjecture}
 
 
 \paragraph*{Outline}
-This explains the \emph{bottom-up} research direction in the field of WQOs,
-which is to understand which \emph{constructors} preserve the WQO property:
-finite sums, finite products, finite words, finite trees, finite graphs
-\emph{with the minor relation} etc. It is motivated by the idea that one can
-build complex orderings to model a concrete system by combining simpler ones,
-and has empirically shown to be a fruitful approach (see \cite{HSS13} for an
-example of nesting Higman's orderings). One other research direction is to
-devise \emph{decision procedures} that take as input a set and decide whether
-it is WQO or not, and whether classical decision algorithm on well-structured
-transition systems can be applied to the concrete model one has. This dual
-\emph{top-down} approach also had its recent share of successes
-\cite{ALM17,FINGU19,LOPEZ24}.
+
 
 
 
