@@ -18,7 +18,7 @@ as Higman's lemma \cite{HIG52}, has been used in the verification of so-called
 % Well-quasi-ordered classes of graphs
 \AP Undirected finite graphs are naturally equipped with the \reintro{induced
 subgraph relation}, where $G$ is an induced subgraph of $H$ if $G$ can be
-obtained from $H$ by deleting vertices (and the edges adjacent to them). Unlike
+obtained from $H$ by deleting vertices (and the edges adjacent to them)\mael{unecessary comment}. Unlike
 the graph minor relation, the induced subgraph relation is not a
 well-quasi-ordering on the class of all finite graphs, as witnessed by the
 infinite family of cycles of increasing size, which form an infinite antichain.
@@ -27,6 +27,7 @@ subgraph relation: for instance, the class of all finite paths, or the class of
 all finite cliques. Distinguishing which classes of finite graphs are
 well-quasi-ordered under the induced subgraph relation is a long-standing open
 problem in graph theory, dating back to Pouzet's seminal work \cite{POUZ72}.
+\maelin{We may avoid mentionning everytime finite graphs, as we only consider finite ones}
 
 \AP In general, there is little hope to characterise all such classes, since
 any countable order with finite infixes can be embedded into the induced
@@ -104,7 +105,7 @@ properties of hereditary classes of finite graphs that guarantee that they are
 study in the reverse direction, by considering a syntax for graph classes
 (using NLC graph expressions), and identifying which ones are
 \kl{$2$-well-quasi-ordered}. In this context, they verified Pouzet's
-conjectures, but were unable to generalise their results \cite[Conjecture
+conjectures, but were unable to generalise their results\mael{to what?} \cite[Conjecture
 4]{DRT10}. All the classes considered in \cite{DRT10} have so-called
 \emph{bounded clique-width},\footnote{This will be defined formally in 
 \cref{sec:prelims}} and it is believed that it is enough to understand
@@ -181,7 +182,7 @@ solves both Pouzet's conjectures for hereditary classes of bounded clique-width
     \item The class $\Label{X}{\Cls}$ is well-quasi-ordered under the labelled induced subgraph relation,
       where $X$ is a two-element antichain,
     \item 
-      The class $\Label{X}{\Cls}$ is well-quasi-ordered under the labelled induced subgraph relation,
+      The class $\Label{X}{\Cls}$ is well-quasi-ordered under the labelled induced subgraph relation, \mael{missing text}
     \item 
       There exists a way to endow every graph of $\Cls$ with a total order on its vertices,
       such that 
@@ -214,7 +215,7 @@ From our proof techniques, we also derive nice obstructions to being
   \begin{itemize}
     \item $\Cls$ is not \kl{$2$-well-quasi-ordered},
     \item There exists a class $\Cls[D] \subseteq \Cls$
-      and $\Cls[D]$ is of \kl{bounded linear clique-width} is not 
+      of \kl{bounded linear clique-width} which is not 
       \kl{$2$-well-quasi-ordered},
     \item There exists a \kl{strong periodic antichain} in $\Cls$,
     \item $\Cls$ \kl{existentially transduces} the class of all finite paths.
@@ -230,7 +231,7 @@ extend to non-hereditary classes, as witnessed by the following example.
 \begin{example}
   \label{ex:non-hereditary}
   Let $\Cls$ be the class of graphs that are complete binary trees,
-  i.e., acyclic graphs where every vertex has degree at most $3$, and a single vertex has degree $2$.
+  i.e., acyclic graphs where every vertex has degree at most $3$, and a single vertex has degree $2$.\mael{the i.e. is not necessary}
   Then, $\Cls$ is of bounded clique-width and is not $2$-well-quasi-ordered, 
   but: every class $\Cls[D] \subseteq \Cls$ of bounded linear clique-width
   is finite hence $2$-well-quasi-ordered. Since \kl{periodic antichains}

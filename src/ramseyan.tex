@@ -2,7 +2,7 @@
 \section{From Interpretations to Nested Trees}
 \label{sec:ramseyan}
 
-As a first step towards proving \cref{main-theorem:thm}, we are going to
+As a first step towards proving \cref{main:theorem}, we are going to
 transform a \kl{simple $\MSO$-interpretation} from trees to graphs into a more
 combinatorial object that will make the interpretation \emph{quantifier-free}.
 To that end, we will chain two standard transformations from automata theory:
@@ -32,6 +32,7 @@ ancestor} of $x$ and $y$. We refer to the book on Tree Automata Techniques and
 Applications for a comprehensive overview of the connection between MSO on
 trees, and tree automata \cite{TATA08}.
 
+\maelin{Are $\mu(T[x \colon y])$ and $\tlbl{T}{x}{y}$ equal? Maybe say that in the section $\mu$ is fixed and define $\tlbl{T}{x}{y}$ in consequence. }
 
 \AP As a consequence, one can collect in a subset $P \subseteq M^3$ all the
 triples $(a,b,c)$ such that this triple corresponds to a satisfying assignment
@@ -110,7 +111,7 @@ as follows. Given two trees $\aTree_1$ and $\aTree_2$ labelled over a monoid
 $M$, we say that $\aTree_1$ is less than $\aTree_2$ in the \kl{composition
 ordering}, written $\aTree_1 \cmpleq \aTree_2$, if there exists a map $h \colon
 \aTree_1 \to \aTree_2$ that maps leaves to leaves, respects the relation
-$\lca$, $\treesibleq$, and the function $\tlbl{\cdot}{\cdot}{\cdot}$. This
+$\lca$, $\treesibleq$, and the function $\tlbl{}{\cdot}{\cdot}$. This
 ordering is naturally extended to node-labelled trees by asking that for every
 node $x$ in $\aTree_1$, the label of $x$ is less or equal than the label of
 $h(x)$ in $\aTree_2$. It is straightforward to check that the interpretation
@@ -284,7 +285,7 @@ given a branch of a tree equipped with a \kl{forward Ramseyan split} as the one
 illustrated in \cref{fast-computation:fig}, the value of $\tlbl{\t}{x}{y}$ does
 not change when inserting new nodes in the section between $z_1$ and $z_3$ as
 long as these new nodes are assigned a value of the split smaller than or equal
-to $k$, and the resulting tree is still \kl{forward Ramseyan}. A fortiori,
+to $k$, and the resulting tree is still \kl{forward Ramseyan}. \maelin{bigger ? je trouve ce passage un peu dur à suivre, peut-être motiver mieux la raison de pourquoi ne change pas $\tlbl{\t}{x}{y}$} A fortiori,
 whether there is an edge between two leaves of $x$ and $y$ in the resulting
 graph is not influenced by such insertions. This will guide our definition of a
 suitable ordering on trees, where we allow many insertions (being coarser than

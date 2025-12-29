@@ -2,6 +2,8 @@
 \section{Bad Patterns in Images of Interpretations}
 \label{sec:bad-patterns}
 
+\maelin{Commentaire général sur la section, j'ai vraiment du mal à bien saisir ce qu'est la notion de bough. J'ai laissé des commentaires là où ça me posait des problème, mais de manière générale il faudrait réussir à mieux introduire l'objet, à expliquer ce qu'il est.}
+
 In this section, we will isolate combinatorial obstructions to being
 \kl{2-well-quasi-ordered} in classes of graphs that are images of \kl{simple
 MSO interpretations} from trees. We will take the same notations as in
@@ -19,8 +21,7 @@ MSO interpretations} from trees. We will take the same notations as in
     in the \kl{bough}.
 \end{definition}
 
-\AP Let $B$ be a \kl{bough of level $k$} in $\aTree$. Given two nodes $b_1$ and
-$b_2$ in $B$ such that $\spt(b_1) = \spt(b_2) = k$, we define the $\aTree_{b_1:b_2}$
+\AP Let $B$ be a \kl{bough of level $k$} in $\aTree$. Given two nodes $b_1 \treelt b_2$ in $B$ such that $\spt(b_1) = \spt(b_2) = k$, we define the $\aTree_{b_1:b_2}$
 as the set of nodes $x$ in $\aTree$ such that $b_1 \treeleq x$ and $\neg (b_2
 \treeleq x)$. For every leaf $x \in \aTree_{b_0: b_n}$ where $n$ is the
 \kl{dimension of the bough} $B$, we define $\Bt(x)$ to be the least ancestor of
@@ -174,6 +175,7 @@ Formally, a \kl{context} $C[\square]$ is given by a tree $\t_{\mathsf{root}}$
 with a distinguished leaf $\square$, together with two trees
 $\t_{\mathsf{left}}$ and $\t_{\mathsf{right}}$. These three elements are
 reprenented as dashed lines in \cref{partitionning-a-graph:fig}.
+\maelin{It is unclear what this leaf $\square$. Maybe you should detail morehow you attach $B$ to the context.}
 
 \AP Two boughs $B$ and $B'$ are \intro{compatible} if they start with the same
 idempotent value, and if for every tree $\aTree = C[B]$, the tree $C[B']$ is
@@ -181,6 +183,8 @@ also well-defined (i.e., it remains \kl{forward Ramseyan}). The following
 \cref{fact:bough-replacement} states that one can safely perform such a
 replacement without modifying the part of the graph represented by the tree
 $\t$ outside of the \kl{bough}.
+
+\maelin{Je suis confus sur ce qu'est un bough, c'est une chemin ? un sous-arbre ? la façon dont tu le défini pour moi c'est simplement un chemin, sauf que j'ai l'impression que ça devrait être un arbre (genre un chemin avec des sous-arbre pendant).}
 
 \begin{fact}
   \label{fact:bough-replacement}
@@ -235,7 +239,7 @@ image of $\someInterp$ (\cref{sec:obstructions}).
 \subsection{Gap Embedding}
 \label{sec:gap-embedding}
 
-\AP If there is a bound $N_0$ on the \kl{dimension} of \kl{bad boughs}, we can
+\AP If there is a bound\mael{upper/lower ?} $N_0$ on the \kl{dimension} of \kl{bad boughs}, we can
 use \cref{fact:bough-replacement} to upgrade our trees in the following way:
 given a tree $\t$, we will insert dummy nodes in every \kl{bough} of level $k$
 that has dimension greater than $N_0$. The resulting tree $\t'$ will have two
@@ -250,8 +254,9 @@ kind of nodes: \kl{important nodes}, that correspond to nodes of $\t$, and
     construct a tree $\t'$ equipped with a set of \kl{important nodes} such that:
     \begin{itemize}
       \item the restriction of $\t'$ to its \kl{important nodes} is $\t$,
+      \maelin{Maybe def restriction of a tree (it is intuitive but may be unclear)}
       \item the restriction of $\someInterp(\t')$ to \kl{important leaves}
-        is exactly $\someInterp(\t)$,
+        is exactly $\someInterp(\t)$, \maelin{Here restriction is induced subgraph}
       \item every \kl{bough} containing only \kl{important nodes}
         has dimension less than $N_0$.
     \end{itemize}
@@ -261,8 +266,10 @@ kind of nodes: \kl{important nodes}, that correspond to nodes of $\t$, and
   every node of $\t$ as \kl{important}.
 
   Whenever we encounter a \kl{bough} $B$ of level $k$ with dimension greater
-  than $N_0$, we replace it by a \kl{good bough} $H$ of level $k$ with
-  dimension exactly $N_0$, which exists by assumption. This operation does not
+  than $N_0$, we replace it by a \kl{good bough}\mael{equivalent ?} $H$ of level $k$ with
+  dimension exactly $N_0$, which exists by assumption.
+  \maelin{Je pense que ce n'est pas clair les arguments ici, pourquoi il en existe un plus petit qui est compatible ?}
+   This operation does not
   modify the graph outside of the \kl{bough} by \cref{fact:bough-replacement}.
   We then mark the leaves of $H$ that correspond to leaves of $B$ as
   \kl{important}, and the other ones of $H$ as \kl{dummy}. Then, we complete
@@ -422,6 +429,7 @@ We use a notion of \kl{perfect boughs}
   then we also have a bound on the \kl{dimension} of \kl{bad boughs},
   hence by \cref{lem:good-boughs-wqo}, the image of $\someInterp$ is
   \kl{$\forall$-well-quasi-ordered}.
+  \maelin{I don't see the implication, can't you have unbounded dimension on bad bough why having bound for the imperfects}
 
   Conversely, assume that there exist \kl{imperfect boughs} of arbitrarily
   large \kl{dimension}. Then, by an argument similar to the one of 
