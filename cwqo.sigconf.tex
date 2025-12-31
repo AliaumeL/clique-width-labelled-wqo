@@ -47,7 +47,19 @@
 \theoremstyle{acmplain}
 \newtheorem{assumption}[theorem]{Assumption}
 \newtheorem{fact}[theorem]{Fact}
+\newtheorem{claim}[theorem]{Claim}
 }
+
+% for the qed's of claims
+\def\cqedsymbol{\ifmmode$\lrcorner$\else{\unskip\nobreak\hfil
+		\penalty50\hskip1em\null\nobreak\hfil$\lrcorner$
+		\parfillskip=0pt\finalhyphendemerits=0\endgraf}\fi} 
+\newcommand{\cqed}{\renewcommand{\qed}{\cqedsymbol}}
+
+
+\newenvironment{claimproof}[1][Proof.]{\begin{proof}[#1]}{\renewcommand{\qed}{\hfill$\blacksquare$}\end{proof}}
+\newcommand{\claimqedhere}{\renewcommand{\qedsymbol}{\hfill$\blacksquare$}\qedhere}
+
 
 
 % graphics packages
@@ -70,6 +82,7 @@
 \usepackage{hyperref}
 \usepackage[capitalise,noabbrev,nameinlink]{cleveref}
 \Crefname{assumption}{Assumption}{Assumptions}
+\crefname{claim}{Claim}{Claims}
 \usepackage[composition,hyperref,xcolor,cleveref]{knowledge}
 \knowledgeconfigure{notion}
 
@@ -93,6 +106,7 @@
 \crefname{algocfline}{Algorithm}{Algorithms}
 \crefname{algocf}{Algorithm}{Algorithms}
 \Crefname{algocf}{Algorithm}{Algorithms}
+
 
 % Colors 
 \definecolor{KLA4}{RGB}{0,78,125}

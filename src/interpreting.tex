@@ -12,7 +12,7 @@ transducing} the class of all finite paths.
 \begin{definition}[Periodic Sequence]
   A \intro{periodic sequence (of graphs)} is given by a finite graph $G$,
   a labelling function $\lab \colon V(G) \to \Sigma$ for some finite set
-  $\Sigma$, and two finite sets $C, F \subseteq \Sigma^2$. It defines
+  $\Sigma$, and two sets $C, F \subseteq \Sigma^2$. It defines
   an infinite set of graphs $\seqof{G^r}[r \geq 1]$ as follows:
   the vertex set of $G^r$ is $V(G) \times \set{1, \ldots, r}$, and there is an edge
   between $(u,i)$ and $(v,j)$ with $i \leq j$ if and only if one of the following holds:
@@ -121,8 +121,51 @@ interprets} $\mathcal{D}$.
   the class of all finite paths.
 \end{lemma}
 \begin{proof}
-  \todo[inline]{\textbf{MAEL ICI}}
+	\maelin{Draft, most arguments are here, let me know if there is something that sounds fishy, i'm not used to write such things. I will rewrite it nicer later}
+Let $\Cls = \seqof{G^r}[r \geq 1]$ be a periodic antichain with labelling function  $\lab \colon V(G) \to \Sigma$ and sets  $C, F \subseteq \Sigma^2$ . Moreover assume that $\lab$ is injective up to duplicating labels from $\Sigma$, in particular $|\Sigma| = |V(G)|$. For $i\leq r$, we denote the $i$-th copy of $G$ in $G^r$ by $G_i$, and by $u_i \in G^r$ the $i$-th copy of $u\in V(G)$. We will proceed in two steps, we first define a formula producing a directed graph where there is a directed shortest path from $G_1$ to $G_r$ going through every $G_i$, but where there is may be arcs going from $G_i$ to $G_j$ for $j\leq i$. We will then show how to get rid of theses back arcs, and produce the path $P_r$.
+
+We now define formula:
+$$\phi_{\rightarrow}(u,v) = \lnot (uv \in E(G^r) \Leftrightarrow l(u)l(v) \in F ) $$
+Informally, $\phi_{\rightarrow}(u,v)$ creates an arc $(u,v)$ if the edge relation between $u,v \in G^r$ differs if $u$ and $v$ are put far away form each other in this order (note that $u$ can be in a copy of $G$ that comes after the one of $v$ in $G^r$).
+Let $H^r = \someInterp(G^r)$ for $\someInterp = (\top, \phi_{\rightarrow}, \top)$, note that $H$ is a directed graph as $\phi_{\rightarrow}$ is not symmetric.
+  
+
+\begin{claim}\label{clm:nolongforwardarc}
+	For $u_iv_j \in E(H^r)$ only if $j\leq i+1$.
+\end{claim}
+\begin{claimproof}
+	If $j \geq i+1$, then $uv \in E(G^r)$ if and only if $l(u)l(v) \in F$ by definition of $G^r$.
+\end{claimproof}
+
+\begin{claim}\label{clm:regularbackward}
+	If $u_iv_j \in E(H^r)$ for $j<i$ then for every $j'\leq i$, $u_iv_{j'} \in E(H^r)$.
+\end{claim}
+\begin{claimproof}
+	Follow from the definiton.
+\end{claimproof}
+
+A spanning path of $H^r$ is a directed shortest path from $V(H_1)$ to $V(H_r)$ going through at least one vertex from each $V(H_i)$.
+
+\begin{claim} \label{clm:spanningpath}
+	There is a spanning path in $H^r$.
+\end{claim}
+\begin{claimproof}
+	Let $V_i^+$ be the vertices of $H_i$ such that there is an arc from $H_{i-1}$ to them,  $V_i^-$ be the vertices of $H_i$ such that there is an arc from them to $H_{i+1}$, and $V_i^o$ be the remaining vertices of $V_i$. Suppose there is no spanning path in $H^r$, \cref{clm:nolongforwardarc}, it have to be because either there is no path in $H_i$ from $V_i^+$ to $V_i^-$, or that they are empty (i.e. there is no arc from $H_i$ to $H_{i+1}$). 
+	\maelin{Argue that in this case we can embed $G^r$ into $G^{r+1}$, contradicting the antichain.} 
+\end{claimproof}
+  Let $P$ a spanning path of $H^r$, furthermore assume that it is periodic, i.e. that $P$ go through the same sequence of vertices in each $H_i$, say $P_i =  u_i^1 \dots u_i^p$, and $P=P_1P_2\dots P_r $. If there is a backward arc $uv \in E(H^r)$ in $P$ with  $u \in P_i$ and $v\in P_j$ with $i>j$, then by \cref{clm:regularbackward} this arc exists between every copy of $u$ and $v$ where $v$ is an earlier copy than the one of $u$. 
+  Define now the formula $$\phi_P(u,v) = \dist_P(u,v)\leq p \land \dist_P(v,u)\leq p \land l(u) = l(v) = c,$$ where $c = \lab(u_1^p)$.
+  This formula create a path from $u_1^p$ to $u_{r-1}^p$, moreover this path is undirected as $\phi_P(u,v)$ is symmetric. Consider the interpretation $\someInterp = (\top, \phi_P, \phi_{univ})$, where $$\phi_{univ}(u) = l(u) = c \land \exists v, \phi_P(u,v)$$ (the exist is to remove the vertex $u_ r^p$).
+  It follows that $\someInterp(\seqof{G^r}[r \geq 2])$ is the class of all path. It is easy to see that these formula are existential first order.
+  
+  
+  
+  
 \end{proof}
+	
+	
+
+
 
 \begin{corollary}
   \label{cor:not-wqo-implies-transducing-paths}
