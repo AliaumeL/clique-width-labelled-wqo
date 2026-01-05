@@ -38,7 +38,8 @@ characterisations. This is why one usually considers \emph{labelled}
 well-quasi-orderings on classes of finite graphs. Given a class $\Cls$ of
 finite graphs, and a well-quasi-ordering $(X, \leq)$, one can consider the
 class $\Label{X}{\Cls}$ of graphs in $\Cls$ whose vertices are labelled by
-elements of $X$. The induced subgraph relation is then extended to labelled
+elements of $X$, that is, equipped with a function 
+$\ell \ V(G) \to X$. The induced subgraph relation is then extended to labelled
 graphs by requiring that the labels are preserved by the embedding, i.e. that
 the label of a vertex in the smaller graph is less than or equal to the label
 of its image in the larger graph. A class $\Cls$ of finite graphs is said to be
@@ -105,12 +106,12 @@ properties of hereditary classes of finite graphs that guarantee that they are
 study in the reverse direction, by considering a syntax for graph classes
 (using NLC graph expressions), and identifying which ones are
 \kl{$2$-well-quasi-ordered}. In this context, they verified Pouzet's
-conjectures, but were unable to generalise their results\mael{to what?} \cite[Conjecture
-4]{DRT10}. All the classes considered in \cite{DRT10} have so-called
-\emph{bounded clique-width},\footnote{This will be defined formally in 
-\cref{sec:prelims}} and it is believed that it is enough to understand
-hereditary classes of bounded clique-width to solve these conjectures in full
-generality, as stated in the following conjecture.
+conjectures, but were unable to generalise their results to arbitrary graph
+classes \cite[Conjecture 4]{DRT10}. All the classes considered in \cite{DRT10}
+have so-called \emph{bounded clique-width},\footnote{This will be defined
+formally in \cref{sec:prelims}} and it is believed that it is enough to
+understand hereditary classes of bounded clique-width to solve these
+conjectures in full generality, as stated in the following conjecture.
 
 \begin{conjecture}[{\cite[Conjecture 5]{DRT10}}]
     \label{cwqo:conj}
@@ -182,7 +183,8 @@ solves both Pouzet's conjectures for hereditary classes of bounded clique-width
     \item The class $\Label{X}{\Cls}$ is well-quasi-ordered under the labelled induced subgraph relation,
       where $X$ is a two-element antichain,
     \item 
-      The class $\Label{X}{\Cls}$ is well-quasi-ordered under the labelled induced subgraph relation, \mael{missing text}
+      The class $\Label{X}{\Cls}$ is well-quasi-ordered under the labelled induced subgraph relation,
+      for every well-quasi-ordering $(X, \leq)$,
     \item 
       There exists a way to endow every graph of $\Cls$ with a total order on its vertices,
       such that 
