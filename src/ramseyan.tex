@@ -31,15 +31,26 @@ $\mu(T[\treeRoot \colon z])$ where $z = \lca(x,y)$ is the \kl{least common
 ancestor} of $x$ and $y$. We refer to the book on Tree Automata Techniques and
 Applications for a comprehensive overview of the connection between MSO on
 trees, and tree automata \cite{TATA08}.
-
-\maelin{Are $\mu(T[x \colon y])$ and $\tlbl{T}{x}{y}$ equal? Maybe say that in the section $\mu$ is fixed and define $\tlbl{T}{x}{y}$ in consequence. }
+In the rest of the section, we will fix such a monoid $M$ and morphism $\mu$. 
+To simplify notations, we will 
+write $\tlbl{T}{x}{y}$ for $\mu(T[x \colon y])$, that is, the 
+product of the labels of the edges on the path from $x$ to $y$ in $T$.
 
 \AP As a consequence, one can collect in a subset $P \subseteq M^3$ all the
 triples $(a,b,c)$ such that this triple corresponds to a satisfying assignment
 of the formula $\varphi(x,y)$. This is illustrated in
-\cref{interpretation-to-monoid:fig}. Given two nodes $x \treelt[T] y$ in a tree
-$T$, we will write $\tlbl{T}{x}{y}$ for the product of the edge labels on the
-path from $x$ to $y$ in $T$.
+\cref{interpretation-to-monoid:fig}.
+We define a \intro{monoid interpretation} from trees
+labelled over $M$ to finite undirected graphs to be a tuple 
+$(\Sigma, \mu, M, P)$ where $\Sigma$ is a finite alphabet,
+$\mu \colon \Sigma^* \to M$ is a morphism to a finite monoid $M$,
+and $P \subseteq M^3$ is a subset of triples of elements of $M$.
+The interpretation works as follows: given a tree $T$ whose edges are labelled
+by elements of $\Sigma$, the vertices of the interpreted graph are the leaves of
+$T$, and there is an edge between two leaves $x \treesibleq y$ if and only if
+the triple $(\tlbl{T}{\treeRoot}{\lca(x,y)},
+\tlbl{T}{\lca(x,y)}{x}, \tlbl{T}{\lca(x,y)}{y})$ is in $P$.
+
 Adding the function $\tlbl{T}{x}{y}$ to the signature of trees, and assuming 
 that $\lca$ is also part of the signature, we can rewrite the formula
 $\varphi(x,y)$ as a quantifier-free formula as follows:
@@ -124,7 +135,7 @@ $(X, \leq_X)$.
 
 
 \AP  Historically, this  was (although not explicitly) the approach taken by
-\cite{DRT10}. Unfortunately, the composition ordering on trees is more often
+\cite{DING92,DRT10}. Unfortunately, the composition ordering on trees is more often
 than not way more strict than the \kl{induced subgraph} ordering. It was
 already observed that the composition ordering on trees is
 \kl{well-quasi-ordered} if and only if \emph{for every} $P \subseteq M^3$, the
@@ -284,10 +295,309 @@ split of height $N$.
 given a branch of a tree equipped with a \kl{forward Ramseyan split} as the one
 illustrated in \cref{fast-computation:fig}, the value of $\tlbl{\t}{x}{y}$ does
 not change when inserting new nodes in the section between $z_1$ and $z_3$ as
-long as these new nodes are assigned a value of the split smaller than or equal
-to $k$, and the resulting tree is still \kl{forward Ramseyan}. \maelin{bigger ? je trouve ce passage un peu dur à suivre, peut-être motiver mieux la raison de pourquoi ne change pas $\tlbl{\t}{x}{y}$} A fortiori,
+long as these new nodes are assigned a value of the split bigger than or equal
+to $k$, and the resulting tree is still \kl{forward Ramseyan}. A fortiori,
 whether there is an edge between two leaves of $x$ and $y$ in the resulting
 graph is not influenced by such insertions. This will guide our definition of a
 suitable ordering on trees, where we allow many insertions (being coarser than
 the \kl{composition ordering}) while still preserving the edges between
 ``most'' leaves in the interpreted graphs.
+
+\subsection{Marked Nested Trees}
+\label{sec:marked-nested-trees}
+
+\newcommand{\marked}{M}
+\newcommand{\separating}{S}
+\newcommand{\dummy}{D}
+\newcommand{\marking}{\rho}
+
+\begin{definition}
+  A \intro{marked nested tree} is a tuple $(\t, \spt, \marking)$ where
+  $\t$ is a tree whose edges are labelled over a finite monoid $M$,
+  $\spt$ is a forward Ramseyan split of height $N$ of $\t$,
+  and $\marking$ is a function from the nodes of $\t$ to $\set{\marked, \separating, \dummy}$, 
+  respectively called \intro(nodes){marked}, \intro(nodes){separating}, and \intro(nodes){dummy} nodes.
+
+  A \kl{marked nested tree} $(\t, \spt, \marking)$ is \intro{well-marked} if
+  the \kl{marked nodes} contain the root of $\t$, are closed under 
+  the \kl{least common ancestor} operation, and furthermore satisfy that
+  for every $x \treelt[\t] z_1 \treelt[\t] y$ such that 
+  $\spt(x:z_1) > k$, $\spt(z_1) = k$, and  $\spt(z_1:y) \geq k$ for some $k \in \set{1, \dots, N}$,
+  if $x$ and $y$ are \kl{marked nodes} and $z$ is not a \kl{marked node}, then there exists $z_2, z_3$
+  such that 
+  $x \treelt[\t] z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$,
+  $\spt(z_1) = \spt(z_2) = \spt(z_3) = k$, and 
+  $\spt(x:z_1) > k$, $\spt(z_1:z_2) > k$, and $\spt(z_3:y) \geq k$, 
+  with $\marking(z_1) = \marked$, and $\marking(z_2) \in \set{\marked, \separating}$.
+\end{definition}
+
+\NewDocumentCommand{\gemb}{}{\leq_{\mathrm{gap}}}
+
+\begin{definition}
+  \label{def:gap-embedding}
+  Given two \kl{marked nested trees}
+  $(\t_1, \spt_1, \marking_1)$ and
+  $(\t_2, \spt_2, \marking_2)$,
+  we say that $(\t_1, \spt_1, \marking_1)$ \intro{gap-embeds} into
+  $(\t_2, \spt_2, \marking_2)$, written
+  $(\t_1, \spt_1, \marking_1) \gemb (\t_2, \spt_2, \marking_2)$,
+  if there exists a mapping $h \colon \t_1 \to \t_2$ that
+  \begin{enumerate}
+    \item is a tree embedding: respects the ancestor relation $\treeleq$, least
+      common ancestors $\lca$, and maps leaves to leaves,
+    \item respects the marking: for every node $x$ in $\t_1$,
+      $\marking_1(x) = \marking_2(h(x))$,
+    \item respects the split: for every node $x$ in $\t_1$,
+      $\spt_1(x) = \spt_2(h(x))$,
+      and $\spt_1(x:y) > k$ implies $\spt_2(h(x):h(y)) \geq k$,
+    \item is strict on marked nodes: for every pair of nodes
+      $x \treelt[\t_1] y$ in $\t_1$ such that $\marking_1(x) = \marked$
+      and $\marking_1(y) \in \set{\marked, \separating}$,
+      $\spt_1(x:y) = \spt_2(h(x):h(y))$.
+    \item respects local products: if $y$ is the immediate left (resp. right)
+      child of $x$ in $\t_1$, and $y'$ is the immediate left (resp. right) child of
+      $h(x)$ in $\t_2$, then
+      $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{y'}$.
+    \item respects neighbourhood products: for every $k \in \set{1, \dots, N}$,
+      and every node $x \in \t_1$, if $z$ is the least ancestor of $x$ such that
+      $\spt_1(z) = k$ and $z'$ is the least ancestor of $h(x)$ such that
+      $\spt_2(z') = k$, then 
+      $\tlbl{\t_1}{z}{x} = \tlbl{\t_2}{z'}{h(x)}$. 
+  \end{enumerate}
+\end{definition}
+
+\begin{lemma}
+  \label{lem:gap-embedding-respects-products}
+  Let $(\t_1, \spt_1, \marking_1)$ and
+  $(\t_2, \spt_2, \marking_2)$ be two \kl{marked nested trees}
+  such that
+  $(\t_1, \spt_1, \marking_1) \gemb (\t_2, \spt_2, \marking_2)$ 
+  via some mapping $h$.
+  For every pair of \kl{marked nodes} $x \treelt[\t_1] y$ in $\t_1$,
+  we have $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{h(y)}$.
+\end{lemma}
+\begin{proof}
+  We proceed by induction on the value of $\spt_1(x:y)$.
+  If $\spt(x:y) = N+1$, then $y$ is an immediate child of $x$,
+  and $\spt(h(x):h(y)) = N+1$ by definition of \kl{gap-embedding}.
+  Therefore, by point (5) of \cref{def:gap-embedding},
+  we have $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{h(y)}$.
+
+  Otherwise, let $k = \spt_1(x:y) \leq N$. We distinguish two cases.
+  Either, there exists a unique child $z$ of $x$ such that
+  $\spt_1(x:z) = k$ and $z$ is a \kl{marked node}.
+  By induction hypothesis, we have
+  $\tlbl{\t_1}{z}{y} = \tlbl{\t_2}{h(z)}{h(y)}$,
+  and $\tlbl{\t_1}{x}{z} = \tlbl{\t_2}{h(x)}{h(z)}$. Hence, 
+  $\tlbl{\t_1}{x}{y} = \tlbl{\t_1}{x}{z} \cdot \tlbl{\t_1}{z}{y}
+  = \tlbl{\t_2}{h(x)}{h(z)} \cdot \tlbl{\t_2}{h(z)}{h(y)}
+  = \tlbl{\t_2}{h(x)}{h(y)}$.
+
+  Otherwise, since $(\t_1, \spt_1, \marking_1)$ is \kl{well-marked},
+  there exists $z_1, z_2, z_3$ such that
+  $x \treelt[\t_1] z_1 \treelt[\t_1] z_2 \treeleq[\t_1] z_3 \treelt[\t_1] y$,
+  $\spt_1(z_1) = \spt_1(z_2) = \spt_1(z_3) = k$, and 
+  $\spt_1(x:z_1) > k$, $\spt_1(z_1:z_2) > k$, and $\spt_1(z_3:y) > k$, 
+  with $\marking_1(z_1) = \marked$, and $\marking_1(z_2) \in \set{\marked, \separating}$.
+
+  \begin{center}
+    \begin{tikzpicture}
+        \node (x) at (0,0) {$x$};
+        \node (z1) at (2,0) {$z_1$};
+        \node (z2) at (4,0) {$z_2$};
+        \node (z3) at (6,0) {$z_3$};
+        \node (y) at (8,0) {$y$};
+
+        \node at (1,-0.2) {$> k$};
+        \node at (3,-0.2) {$> k$};
+        \node at (5,-0.2) {$\geq k$};
+        \node at (7,-0.2) {$> k$};
+
+        \node[below=0.02cm of z1] {$k$};
+        \node[below=0.02cm of z2] {$k$};
+        \node[below=0.02cm of z3] {$k$};
+
+        \draw[->] (x) --
+        node[midway, above] {$\tlbl{\t_1}{x}{z_1}$}
+        (z1);
+        \draw[->] (z1) --
+        node[midway, above] {$\tlbl{\t_1}{z_1}{z_2}$}
+        (z2);
+        \draw[->] (z2) --
+        node[midway, above] {$\tlbl{\t_1}{z_2}{z_3}$}
+        (z3);
+        \draw[->] (z3) --
+        node[midway, above] {$\tlbl{\t_1}{z_3}{y}$}
+        (y);
+    \end{tikzpicture}
+  \end{center}
+
+  Let us now consider $z_3'$ the least ancestor of $h(y)$ such that
+  $\spt_2(z_3') = k$. This node exists because $h$ respects the split
+  (point (3) of \cref{def:gap-embedding}).
+  This yields the following configuration:
+
+  \begin{center}
+    \begin{tikzpicture}
+        \node (hx) at (0,0) {$h(x)$};
+        \node (hz1) at (2,0) {$h(z_1)$};
+        \node (hz2) at (4,0) {$h(z_2)$};
+        \node (hz3) at (6,0) {$z_3'$};
+        \node (hy) at (8,0) {$h(y)$};
+
+        \node at (1,-0.2) {$> k$};
+        \node at (3,-0.2) {$> k$};
+        \node at (5,-0.2) {$\geq k$};
+        \node at (7,-0.2) {$> k$}; 
+        \node[below=0.02cm of hz1] {$k$};
+        \node[below=0.02cm of hz2] {$k$};
+        \node[below=0.02cm of hz3] {$k$};
+
+        \draw[->] (hx) --
+        node[midway, above] {$\tlbl{\t_2}{h(x)}{h(z_1)}$}
+        (hz1);
+        \draw[->] (hz1) --
+        node[midway, above] {$\tlbl{\t_2}{h(z_1)}{h(z_2)}$}
+        (hz2);
+        \draw[->] (hz2) --
+        node[midway, above] {$\tlbl{\t_2}{h(z_2)}{z_3'}$}
+        (hz3);
+        \draw[->] (hz3) --
+        node[midway, above] {$\tlbl{\t_2}{z_3'}{h(y)}$}
+        (hy);
+    \end{tikzpicture}
+  \end{center}  
+
+  Indeed, by point (3) of \cref{def:gap-embedding},
+  we have $\spt_2(h(x):h(y)) \geq k$, and 
+  $\spt_2(h(z_1)) = \spt_2(h(z_2)) = \spt_2(h(z_3)) = k$. Furthermore,
+  since $x$, $y$, and $z_1$ are \kl{marked nodes}, and because
+  $\marking(z_2) \in \set{\marked, \separating}$, we conclude from 
+  point (4) of \cref{def:gap-embedding} that
+  $\spt_1(x:z_1) = \spt_2(h(x):h(z_1)) > k$,
+  $\spt_1(z_1:z_2) = \spt_2(h(z_1):h(z_2)) > k$.
+
+  Now, by induction hypothesis, we have
+  $\tlbl{\t_1}{z_1}{z_2} = \tlbl{\t_2}{h(z_1)}{h(z_2)}$.
+  Furthermore, by point (6) of \cref{def:gap-embedding},
+  we have $\tlbl{\t_1}{z_3}{y} = \tlbl{\t_2}{z_3'}{h(y)}$
+  and $\tlbl{\t_1}{z_1}{z_2} = \tlbl{\t_2}{h(z_1)}{h(z_2)}$.
+  Finally, because $x$ and $y$ are \kl{independent at level $k$},
+  we have by \cref{fake-idempotent:eq} that
+  \begin{align*}
+    \tlbl{\t_1}{x}{y}
+    & = \tlbl{\t_1}{x}{z_1} \cdot \tlbl{\t_1}{z_1}{z_2} \cdot \tlbl{\t_1}{z_3}{y} \\
+    & = \tlbl{\t_2}{h(x)}{h(z_1)} \cdot \tlbl{\t_2}{h(z_1)}{h(z_2)} \cdot \tlbl{\t_2}{z_3'}{h(y)} \\
+    & = \tlbl{\t_2}{h(x)}{h(y)} \quad . 
+  \end{align*}
+  We conclude the proof.
+\end{proof}
+
+
+\begin{corollary}
+  \label{cor:gap-embedding-monotone}
+  Let $(\t_1, \spt_1, \marking_1)$ and
+  $(\t_2, \spt_2, \marking_2)$ be two \kl{well-marked nested trees}
+  such that
+  $(\t_1, \spt_1, \marking_1) \gemb (\t_2, \spt_2, \marking_2)$.
+  Then, the graph interpreted from
+  $(\t_1, \spt_1, \marking_1)$
+  is an induced subgraph of the graph interpreted from
+  $(\t_2, \spt_2, \marking_2)$
+  when considering only \kl{marked leaves} as vertices.
+\end{corollary}
+\begin{proof}
+  Follows directly from \cref{lem:gap-embedding-respects-products}
+  and the definition of the interpretation using the set $P \subseteq M^3$,
+  because the edges between two \kl{marked leaves} $x$ and $y$
+  only depend on the values of
+  $\tlbl{\t}{\treeRoot}{\lca(x,y)}$,
+  $\tlbl{\t}{\lca(x,y)}{x}$, and
+  $\tlbl{\t}{\lca(x,y)}{y}$, all of which are \kl{marked nodes}.
+\end{proof}
+
+\AP
+A \kl{$L$-bounded marked nested tree} is a \kl{marked nested tree}
+such that for every $k$, for every 
+sequence $x_1 \treelt[\t] x_2 \treelt[\t] \dots \treelt[\t] x_n$ of \kl{marked nodes} with
+$\spt(x_i : x_{i+1}) > k$ for every $i$, and $\spt(x_i) = k$ for every $i$,
+we have $n \leq L$.
+
+\begin{theorem}
+  \label{thm:marked-nested-trees-wqo}
+  For every finite $L$,
+  the class of \kl(tree){$L$-bounded} \kl{well-marked nested trees} labelled over a
+  \kl{well-quasi-ordered} set $(X, \leq_X)$
+  is \kl{well-quasi-ordered} under the \kl{gap-embedding} ordering.
+\end{theorem}
+
+The proof of \cref{thm:marked-nested-trees-wqo}
+follows directly from an earlier result of Dershowitz and Tzameret
+\cite[Section 3.3 Path Comparable Trees]{DERSHOWITZ200380}, stating that the class of \kl{marked trees}
+is \kl{well-quasi-ordered} under a weaker variant of the \kl{gap-embedding} ordering 
+obtained by removing points (2) and (4) to (6) of \cref{def:gap-embedding}.
+
+
+\begin{proof}
+  The idea is to encode conditions (2) and  (4) to (6) of \cref{def:gap-embedding}
+  by adding new labels on the nodes of the trees.
+  Let us consider a \kl{$L$-bounded marked nested tree}
+  $(\t, \spt, \marking)$
+  labelled over a \kl{well-quasi-ordered} set $(X, \leq_X)$.
+
+  We define a new labelling of the nodes of $\t$ as follows: we add to each node $x$ of $\t$
+  the label $\tlbl{\t}{z}{x}$ for every $k \in \set{1, \dots, N}$,
+  where $z$ is the least ancestor of $x$ such that $\spt(z) = k$,
+  or a special symbol $\bot$ if no such ancestor exists.
+  Furthermore, if $y$ is the immediate left (resp. right) child of $x$ in $\t$,
+  we also add the label $\tlbl{\t}{x}{y}$ to $x$,
+  or the special symbol $\bot$ if no such child exists.
+  Finally, we also add the label $\marking(x)$ to $x$.
+  Since $M$ is finite, the new labelling is still over a \kl{well-quasi-ordered} set.
+
+
+
+  To encode condition (4) of \cref{def:gap-embedding}, we will
+  crucially use the fact that the trees are \kl{$L$-bounded}.
+  To that end, we change the split $\spt$ into a new split $\spt'$ defined as follows:
+  for every \kl{marked node} $x$ in $\t$, if $\spt(x) = k$, we set $\spt'(x) = k \times (L+3) + i$,
+  where $i$ is the index of $x$ in the sequence of \kl{marked nodes}
+  with split value $k$ ordered by the ancestor relation $\treelt[\t]$.
+  For every \kl{separating node} $x$ in $\t$, if $\spt(x) = k$, we set $\spt'(x) = k \times (L+3) + L + 1$.
+  Finally, for every \kl{dummy node} $x$ in $\t$, if $\spt(x) = k$, we set $\spt'(x) = k \times (L+3)$.
+  Since the tree is \kl{$L$-bounded}, the new split $\spt'$ has height at most $N \times (L+3)$.
+
+
+  Now, assume that $(\t_1, \spt_1, \marking_1)$ and
+  $(\t_2, \spt_2, \marking_2)$ are two \kl{$L$-bounded marked nested trees}
+  such that
+   $(\t_1', \spt_1')$ embeds into $(\t_2', \spt_2')$ by some mapping $h$,
+   that respects conditions (1) and (3) of \cref{def:gap-embedding},
+   and preserves the new labels.
+   We claim that $h$ is a \kl{gap-embedding} from
+   $(\t_1, \spt_1, \marking_1)$ to
+   $(\t_2, \spt_2, \marking_2)$.
+
+  It is clear that $h$ respects point (2) of \cref{def:gap-embedding}
+  because the marking is part of the new labels. Furthermore, $h$ respects 
+  points (5) and (6) of \cref{def:gap-embedding} because the relevant products
+  are also part of the new labels.
+
+  Finally, let us show that $h$ respects point (4) of \cref{def:gap-embedding}.
+  To that end, let us consider two \kl{marked nodes} $x$ and $y$ in $\t_1$
+  such that $x \treelt[\t_1] y$, $\spt(x) = \spt(y) = k$, and 
+  $\spt(x:y) > k$. By definition of the new split $\spt_1'$,
+  we have $\spt_1'(x) = k \times (L+3) + i$ and $\spt_1'(y) = k \times (L+3) + i+1$,
+  for some $i < L$. Now, since $h$ respects the split,
+  we have $\spt_2'(h(x)) = k \times (L+3) + i$ and $\spt_2'(h(y)) = k \times (L+3) + i+1$.
+  Also, since $\spt_1(x:y) > k$, we have that $\spt_1'(x:y) > k \times (L+3)$,
+  and therefore $\spt_2'(h(x):h(y)) \geq k \times (L+3)$.
+  But this means that there are no nodes $z$ between $h(x)$ and $h(y)$
+  such that $\spt_2(z) = k$, and therefore $\spt_2(h(x):h(y)) > k$.
+  We conclude that $h$ respects point (4) of \cref{def:gap-embedding}.
+  A similar reasoning applies when $\marking_1(y) = \separating$.
+
+  In particular, 
+
+
+\end{proof}

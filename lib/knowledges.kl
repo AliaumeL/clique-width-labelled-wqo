@@ -11,12 +11,6 @@
 \knowledge{notion}
  | monadic second-order logic
  | monadic second-order@logic
-\knowledge{notion}
- | transduction@logic
-\knowledge{notion}
- | interpretation@logic
-\knowledge{notion}
- | existential transduction 
 
 
 % 
@@ -40,6 +34,9 @@
  | $X$-induced quasi-order
  | $X$-induced subgraph
  | $X$-induced@subgraph
+ | induced subgraph
+ | induced subgraph relation
+ | labelled induced subgraph
 \knowledge{notion}
  | labelled-well-quasi-ordered
  | labelled-wqo
@@ -80,6 +77,28 @@
  | well-quasi-orderings
  | wqo
  | wqos
+ | WQO
+
+\knowledge{notion}
+ | $(X,\leq )$-well-quasi-ordered
+
+\knowledge{notion}
+ | $k$-well-quasi-ordered
+ | $2$-well-quasi-ordered
+ | $2$-well-quasi-ordering
+
+\knowledge{notion}
+ | $\forall $-well-quasi-ordered
+ | $\forall $-WQO
+ | $\forall $-well-quasi-ordering
+
+
+\knowledge{notion}
+  | orderably well-quasi-ordered
+  | orderably $k$-well-quasi-ordered
+  | orderably $\forall $-well-quasi-ordered
+
+
 \knowledge{notion}
  | bad sequence
  | bad sequences
@@ -98,8 +117,25 @@
 \knowledge{notion}
  | forward Ramseyan split
  | forward Ramseyan@split
+ | forward Ramseyan splits
+ | forward Ramseyan
+ | nested trees
 \knowledge{notion}
  | split of height $N$
+ | split
+\knowledge{notion}
+ | $k$-neighbourhoods
+ | $k$-neighbourhood
+ | $k$-neighbours
+
+\knowledge{notion}
+  | independent at level $k$
+  | independence at level $k$
+
+
+\knowledge{notion}
+ | composition ordering
+
 
 % 
 % Automata theory
@@ -125,3 +161,171 @@
  | bad@branch
 
 
+
+
+
+\knowledge{notion}
+ | periodic sequence (of graphs)
+ | periodic sequence
+\knowledge{notion}
+ | periodic antichains
+ | periodic antichain
+ | (strong) periodic antichains
+ | strong periodic antichain
+
+\knowledge{notion}
+  | (weak) periodic sequence
+  | weak periodic sequence
+\knowledge{notion}
+  | periodic antichains@weak
+  | (weak) periodic antichain
+  | weak periodic antichain
+
+
+
+\knowledge{notion}
+  | existentially transduces
+  | existentially transducing
+
+
+\knowledge{notion}
+  | $\MSO $-interpretation
+  | $\MSO $-interpretations
+
+\knowledge{notion}
+  | simple@interpretation
+  | simple $\MSO $-interpretation
+
+
+\knowledge{notion}
+  | existential interpretation
+  | existentially interprets
+
+
+
+
+
+%%%%% NEW KNOWLEDGES 
+%
+%\knowledge{notion}
+%  | antichain
+%
+%\knowledge{notion}
+%  | $X$-labelled clique
+%
+%\knowledge{notion}
+%  | 2-WQO
+%
+%\knowledge{notion}
+%  | bounded linear clique-width
+%
+%\knowledge{notion}
+%  | undirected
+%
+%\knowledge{notion}
+%  | embeds
+%
+%\knowledge{notion}
+%  | monomorphism
+%
+%\knowledge{notion}
+%  | hereditary class
+%
+%\knowledge{notion}
+%  | hereditary closure
+%
+%\knowledge{notion}
+%  | ordered graph
+%
+%\knowledge{notion}
+%  | ancestor relation
+%
+%\knowledge{notion}
+%  | topological order
+%
+%\knowledge{notion}
+%  | linear trees
+%
+%\knowledge{notion}
+%  | existential transduction
+%
+%\knowledge{notion}
+%  | monoid interpretation
+%
+%\knowledge{notion}
+%  | gap embedding
+%
+%\knowledge{notion}
+%  | least common ancestor
+%
+%\knowledge{notion}
+%  | idempotent
+%  | idempotents
+%
+
+%
+%\knowledge{notion}
+%  | 2-well-quasi-ordered
+%
+%\knowledge{notion}
+%  | simple MSO interpretations
+%
+%\knowledge{notion}
+%  | bough of level $k$
+%
+%\knowledge{notion}
+%  | dimension of a bough
+%  | dimension of the bough
+%
+%\knowledge{notion}
+%  | bough
+%  | boughs
+%
+%\knowledge{notion}
+%  | bough type
+%  | bough types
+%
+%\knowledge{notion}
+%  | context
+%
+%\knowledge{notion}
+%  | compatible
+%  | compatibility
+%
+%\knowledge{notion}
+%  | good bough
+%
+%\knowledge{notion}
+%  | block
+%  | blocks
+%
+%\knowledge{notion}
+%  | bad bough
+%  | bad boughs
+%
+%\knowledge{notion}
+%  | dimension
+%
+%\knowledge{notion}
+%  | important nodes
+%
+%\knowledge{notion}
+%  | dummy nodes
+%
+%\knowledge{notion}
+%  | important leaves
+%
+%\knowledge{notion}
+%  | important
+%
+%\knowledge{notion}
+%  | dummy
+%
+%\knowledge{notion}
+%  | perfect boughs
+%  | perfect bough
+%  | imperfect bough
+%  | imperfect boughs
+%
+%\knowledge{notion}
+%  | split permutation graphs
