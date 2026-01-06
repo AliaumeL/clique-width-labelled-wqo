@@ -553,18 +553,28 @@ assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
     \end{tikzpicture}
   \end{center}
 
-  Let us now consider $z_3'$ the least ancestor of $h(y)$ such that
-  $\spt_2(z_3') = k$. This node exists because $h$ respects the split
-  (\cref{item:gap-embedding:gap}).
-  This yields the following configuration:
+  By applying the \kl{gap-embedding} $h$,
+  we the following configuration inside $\t_2$, where
+  we used the notations
+  $a = \tlbl{\t_2}{h(x)}{h(z_1)}$,
+  $b = \tlbl{\t_2}{h(z_1)}{h(z_2)}$,
+  $c = \tlbl{\t_2}{h(z_2)}{h(z_3)}$,
+  and $d = \tlbl{\t_2}{h(z_3)}{h(y)}$.
 
   \begin{center}
-    \begin{tikzpicture}
-        \node (hx) at (0,0) {$h(x)$};
-        \node (hz1) at (2,0) {$h(z_1)$};
+    \begin{tikzpicture}[
+      xscale=0.9,
+      % style for `dummy` nodes
+      dummy/.style={B1},
+      marked/.style={A1},
+      separating/.style={A2},
+      value/.style={A1},
+    ]
+        \node[marked] (hx) at (0,0) {$h(x)$};
+        \node[marked] (hz1) at (2,0) {$h(z_1)$};
         \node (hz2) at (4,0) {$h(z_2)$};
-        \node (hz3) at (6,0) {$z_3'$};
-        \node (hy) at (8,0) {$h(y)$};
+        \node (hz3) at (6,0) {$h(z_3)$};
+        \node[marked] (hy) at (8,0) {$h(y)$};
 
         \node at (1,-0.2) {$> k$};
         \node at (3,-0.2) {$> k$};
@@ -575,46 +585,76 @@ assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
         \node[below=0.02cm of hz3] {$k$};
 
         \draw[->] (hx) --
-        node[midway, above] {$\tlbl{\t_2}{h(x)}{h(z_1)}$}
+        node[midway, above, value] {$a$}
         (hz1);
         \draw[->] (hz1) --
-        node[midway, above] {$\tlbl{\t_2}{h(z_1)}{h(z_2)}$}
+        node[midway, above, value] {$b$}
         (hz2);
         \draw[->] (hz2) --
-        node[midway, above] {$\tlbl{\t_2}{h(z_2)}{z_3'}$}
+        node[midway, above, value] {$c$}
         (hz3);
         \draw[->] (hz3) --
-        node[midway, above] {$\tlbl{\t_2}{z_3'}{h(y)}$}
+        node[midway, above, value] {$d$}
         (hy);
     \end{tikzpicture}
   \end{center}
 
-  Indeed, by \cref{item:gap-embedding:gap},
-  we have $\spt_2(h(x):h(y)) \geq k$, and 
-  $\spt_2(h(z_1)) = \spt_2(h(z_2)) = \spt_2(h(z_3)) = k$. Furthermore,
-  since $x$, $y$, and $z_1$ are \kl{marked nodes}, and because
-  $\marking(z_2) \in \set{\marked, \separating}$, we conclude from 
-  \cref{item:gap-embedding:marking} that
-  $\spt_1(x:z_1) = \spt_2(h(x):h(z_1)) > k$,
-  $\spt_1(z_1:z_2) = \spt_2(h(z_1):h(z_2)) > k$.
+  Let us briefly argue the inequalities on the splits 
+  on the above paths.
+  To do that, we will use the fact that \cref{item:gap-embedding:gap}
+  implies that if $\spt(u:v) > k$ and $\spt(v) = k$,
+  then $\spt(h(u):h(v)) \geq k$.
+  This is proven by immediate induction on the length
+  of the path from $u$ to $v$, the base case being given by 
+  the definition of \kl{gap-embedding}.
+  Furthermore, if $v$ is a \kl{marked node} or a \kl{separating node},
+  then we can strengthen the inequality to a strict one,
+  i.e., $\spt(h(u):h(v)) > k$ even when $\spt(v) \neq k$.
+  This is because of \cref{item:gap-embedding:gluing},
+  which ensures that the immediate parent of $h(v)$
+  is the image of the immediate parent of $v$, which has a split value
+  strictly greater than $k$, and we conclude by the previous argument.\footnote{The case where there are no intermediate nodes between $u$ and $v$ is given directly by the definition of \kl{gap-embedding}.
+  node between $u$ and $v$ happens if $v$ is the immediate child of $u$, 
+  in which case the property is given directly by the 
+  gluing property.}
 
-  \textbf{Todo: use the fact that gap is gluing to 
-  conclude about the strict things.}
+  Using these facts we conclude that:
+  \begin{align*}
+    \spt_2(h(x):h(z_1))   &> k 
+                          & \text{because $z_1$ is a \kl(nodes){marked},}
+                          \\
+    \spt_2(h(z_1):h(z_2)) &> k
+                          & \text{because $z_2$ is a \kl(nodes){marked}
+                                   or \kl(nodes){separating},}
+                          \\
+    \spt_2(h(z_2):h(z_3)) &\geq k
+                          & \text{by the gap property,}
+                          \\
+    \spt_2(h(z_3):h(y))   &> k
+                          & \text{because $y$ is a \kl(nodes){marked},}                               
+  \end{align*}
 
-  Now, by induction hypothesis, we have
-  $\tlbl{\t_1}{z_1}{z_2} = \tlbl{\t_2}{h(z_1)}{h(z_2)}$.
-  Furthermore, by \cref{item:gap-embedding:neighbourhood},
-  we have $\tlbl{\t_1}{z_3}{y} = \tlbl{\t_2}{z_3'}{h(y)}$
-  and $\tlbl{\t_1}{z_1}{z_2} = \tlbl{\t_2}{h(z_1)}{h(z_2)}$.
-  Finally, because $x$ and $y$ are \kl{independent at level $k$},
+  Now, we can compute the values of $a$, $b$, and $d$:
+  \begin{align*}
+    \tlbl{\t_1}{x}{z_1} & = a
+    &\text{by induction hypothesis,} \\
+    \tlbl{\t_1}{z_2}{z_3} & = b
+    &\text{by \cref{item:gap-embedding:neighbourhood},} \\
+    \tlbl{\t_1}{z_3}{y} & = d 
+    &\text{by \cref{item:gap-embedding:neighbourhood}.}
+  \end{align*}
+
+  Finally, because $h(x)$ and $h(y)$ are \kl{independent at level $k$},
+  and so are $x$ and $y$,
   we have by \cref{fake-idempotent:eq} that
   \begin{align*}
     \tlbl{\t_1}{x}{y}
-    & = \tlbl{\t_1}{x}{z_1} \cdot \tlbl{\t_1}{z_1}{z_2} \cdot \tlbl{\t_1}{z_3}{y} \\
-    & = \tlbl{\t_2}{h(x)}{h(z_1)} \cdot \tlbl{\t_2}{h(z_1)}{h(z_2)} \cdot \tlbl{\t_2}{z_3'}{h(y)} \\
-    & = \tlbl{\t_2}{h(x)}{h(y)} \quad . 
+          & = \tlbl{\t_1}{x}{z_1} \cdot
+              \tlbl{\t_1}{z_1}{z_2} \cdot
+              \tlbl{\t_1}{z_3}{y} \\
+          & = a \cdot b \cdot d \\
+    & = \tlbl{\t_2}{h(x)}{h(y)} \quad . \qedhere
   \end{align*}
-  We conclude the proof.
 \end{proof}
 
 
