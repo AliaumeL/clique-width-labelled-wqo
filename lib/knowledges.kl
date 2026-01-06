@@ -80,6 +80,8 @@
  | branches@tree
  | branch of a tree
  | branches of a tree
+\knowledge{notion}
+  | least common ancestor
 
 %
 % Orders and WQOs
@@ -154,6 +156,12 @@
 \knowledge{notion}
  | composition ordering
 
+\knowledge{notion}
+  | gap embedding
+  | gap-embeddings
+  | gap-embedding
+  | gap-embed
+
 
 \knowledge{notion}
   | dummy nodes
@@ -169,19 +177,22 @@
 
 \knowledge{notion}
   | gap-embeds@marked
+  | marked gap-embedding
 
 \knowledge{notion}
   | $L$-bounded marked nested tree
   | $L$-bounded marked nested trees
   | $L$-bounded@tree
-
-%\knowledge{notion}
+  | $L$-bounded well-marked nested trees
+  | $L$-bounded
+  | $L$-boundedness
 
 
 \knowledge{notion}
   | marked@nodes
   | marked nodes
   | marked node
+  | marked leaves
 
 \knowledge{notion}
   | separating@nodes
@@ -266,27 +277,12 @@
 %\knowledge{notion}
 %  | monoid interpretation
 %
-%\knowledge{notion}
-%  | gap embedding
-%
-%\knowledge{notion}
-%  | least common ancestor
-%
-%\knowledge{notion}
-%  | gap-embeddings
-%  | gap-embedding
-%  | gap-embed
-%
 
 %
 
 %
 %\knowledge{notion}
-%  | $L$-bounded
-%  | $L$-boundedness
-%
-%\knowledge{notion}
-%  | marked leaves
+%  | split depth
 %
 %\knowledge{notion}
 %  | 2-well-quasi-ordered
@@ -329,6 +325,15 @@
 %
 %\knowledge{notion}
 %  | dimension
+%
+%\knowledge{notion}
+%  | important nodes
+%
+%\knowledge{notion}
+%  | important leaves
+%
+%\knowledge{notion}
+%  | important
 %
 %\knowledge{notion}
 %  | perfect boughs
