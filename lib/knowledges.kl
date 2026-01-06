@@ -11,7 +11,18 @@
 \knowledge{notion}
  | monadic second-order logic
  | monadic second-order@logic
-
+\knowledge{notion}
+  | existentially transduces
+  | existentially transducing
+\knowledge{notion}
+  | $\MSO $-interpretation
+  | $\MSO $-interpretations
+\knowledge{notion}
+  | simple@interpretation
+  | simple $\MSO $-interpretation
+\knowledge{notion}
+  | existential interpretation
+  | existentially interprets
 
 % 
 % Graphs 
@@ -51,6 +62,10 @@
  | clique-width
  | clique-width@graph
  | bounded clique-width
+
+
+\knowledge{notion}
+ | bounded linear clique-width
 
 % 
 % Trees
@@ -107,6 +122,9 @@
  | good sequence
  | good sequences
  | good@sequence
+\knowledge{notion}
+ | antichain
+ | antichains
 
 % 
 % Ramsey Theory
@@ -137,6 +155,39 @@
  | composition ordering
 
 
+\knowledge{notion}
+  | dummy nodes
+  | dummy@nodes
+  | dummy
+  | dummy node
+\knowledge{notion}
+  | marked nested tree
+  | marked nested trees
+\knowledge{notion}
+  | well-marked
+  | well-marked nested trees
+
+\knowledge{notion}
+  | gap-embeds@marked
+
+\knowledge{notion}
+  | $L$-bounded marked nested tree
+  | $L$-bounded marked nested trees
+  | $L$-bounded@tree
+
+%\knowledge{notion}
+
+
+\knowledge{notion}
+  | marked@nodes
+  | marked nodes
+  | marked node
+
+\knowledge{notion}
+  | separating@nodes
+  | separating node
+
+
 % 
 % Automata theory
 %
@@ -149,21 +200,14 @@
 \knowledge{notion}
  | morphism@monoid
  | monoid morphism
+\knowledge{notion}
+ | idempotent
+ | idempotents
+
 
 % 
 % Local to the Paper
 %
-\knowledge{notion}
- | good branch
- | good@branch
-\knowledge{notion}
- | bad branch
- | bad@branch
-
-
-
-
-
 \knowledge{notion}
  | periodic sequence (of graphs)
  | periodic sequence
@@ -181,43 +225,13 @@
   | (weak) periodic antichain
   | weak periodic antichain
 
-
-
-\knowledge{notion}
-  | existentially transduces
-  | existentially transducing
-
-
-\knowledge{notion}
-  | $\MSO $-interpretation
-  | $\MSO $-interpretations
-
-\knowledge{notion}
-  | simple@interpretation
-  | simple $\MSO $-interpretation
-
-
-\knowledge{notion}
-  | existential interpretation
-  | existentially interprets
-
-
-
-
-
 %%%%% NEW KNOWLEDGES 
-%
-%\knowledge{notion}
-%  | antichain
 %
 %\knowledge{notion}
 %  | $X$-labelled clique
 %
 %\knowledge{notion}
 %  | 2-WQO
-%
-%\knowledge{notion}
-%  | bounded linear clique-width
 %
 %\knowledge{notion}
 %  | undirected
@@ -259,10 +273,20 @@
 %  | least common ancestor
 %
 %\knowledge{notion}
-%  | idempotent
-%  | idempotents
+%  | gap-embeddings
+%  | gap-embedding
+%  | gap-embed
 %
 
+%
+
+%
+%\knowledge{notion}
+%  | $L$-bounded
+%  | $L$-boundedness
+%
+%\knowledge{notion}
+%  | marked leaves
 %
 %\knowledge{notion}
 %  | 2-well-quasi-ordered
@@ -305,21 +329,6 @@
 %
 %\knowledge{notion}
 %  | dimension
-%
-%\knowledge{notion}
-%  | important nodes
-%
-%\knowledge{notion}
-%  | dummy nodes
-%
-%\knowledge{notion}
-%  | important leaves
-%
-%\knowledge{notion}
-%  | important
-%
-%\knowledge{notion}
-%  | dummy
 %
 %\knowledge{notion}
 %  | perfect boughs

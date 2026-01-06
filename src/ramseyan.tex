@@ -306,9 +306,44 @@ the \kl{composition ordering}) while still preserving the edges between
 \subsection{Marked Nested Trees}
 \label{sec:marked-nested-trees}
 
-\newcommand{\marked}{M}
-\newcommand{\separating}{S}
-\newcommand{\dummy}{D}
+In this section, we will show how the notion of \kl{forward Ramseyan split} gets 
+us closer to defining a \kl{well-quasi-order} on trees that is suitable for our purpose.
+A first step is to notice that there already exists a notion of embedding 
+that somehow respects \kl{forward Ramseyan splits}, called \kl{gap-embeddings}
+and that endows trees with a \kl{well-quasi-order} \cite{DERSHOWITZ200380}.
+
+\begin{definition}[{\cite[Definition 3.3]{DERSHOWITZ200380}}]
+  A \intro{gap-embedding} between trees $\t_1, \t_2$
+  endowed with \kl{forward Ramseyan splits} $\spt_1, \spt_2$
+  is a mapping $h \colon \t_1 \to \t_2$ that
+  \begin{enumerate}
+    \item is a tree embedding: respects the ancestor relation $\treeleq$, least
+      common ancestors $\lca$, and sibling ordering $\treesibleq$,
+    \item satifies the root gap property:
+      $\spt_2(r_2 : h(r_1)) \geq \spt_1(r_1)$ where $r_1, r_2$ are the roots of $\t_1, \t_2$,
+    \item satisfies the edge gap property:
+      for every edge $x \treelt[\t] y$ in $\t_1$,
+      $\spt_2(h(x) : h(y)) \geq \spt_1(x)$.
+  \end{enumerate}
+  If the trees are node-labelled by a set $(X, \leq_X)$,
+  we further require that for every node $x$ in $\t_1$,
+  the label of $x$ is less or equal than the label of $h(x)$ in $\t_2$.
+\end{definition}
+
+\AP 
+It follows from \cite[Theorem 3.1, Main Theorem]{DERSHOWITZ200380}
+that the class of trees
+equipped with \kl{forward Ramseyan splits} is \kl{well-quasi-ordered}
+under the \kl{gap-embedding} ordering, even under the assumption
+that nodes are labelled with a \kl{well-quasi-ordered} set $(X, \leq_X)$.
+We will now devise a suitable modification of the \kl{gap-embedding} ordering
+that will ensure that the interpretation $\someInterp$ is order-preserving
+from trees to graphs.
+
+
+\newcommand{\marked}{\mathbf{M}}
+\newcommand{\separating}{\mathbf{S}}
+\newcommand{\dummy}{\mathbf{D}}
 \newcommand{\marking}{\rho}
 
 \begin{definition}
@@ -338,33 +373,119 @@ the \kl{composition ordering}) while still preserving the edges between
   Given two \kl{marked nested trees}
   $(\t_1, \spt_1, \marking_1)$ and
   $(\t_2, \spt_2, \marking_2)$,
-  we say that $(\t_1, \spt_1, \marking_1)$ \intro{gap-embeds} into
+  we say that $(\t_1, \spt_1, \marking_1)$ \intro(marked){gap-embeds} into
   $(\t_2, \spt_2, \marking_2)$, written
   $(\t_1, \spt_1, \marking_1) \gemb (\t_2, \spt_2, \marking_2)$,
   if there exists a mapping $h \colon \t_1 \to \t_2$ that
   \begin{enumerate}
-    \item is a tree embedding: respects the ancestor relation $\treeleq$, least
-      common ancestors $\lca$, and maps leaves to leaves,
-    \item respects the marking: for every node $x$ in $\t_1$,
-      $\marking_1(x) = \marking_2(h(x))$,
-    \item respects the split: for every node $x$ in $\t_1$,
-      $\spt_1(x) = \spt_2(h(x))$,
-      and $\spt_1(x:y) > k$ implies $\spt_2(h(x):h(y)) \geq k$,
-    \item is strict on marked nodes: for every pair of nodes
-      $x \treelt[\t_1] y$ in $\t_1$ such that $\marking_1(x) = \marked$
-      and $\marking_1(y) \in \set{\marked, \separating}$,
-      $\spt_1(x:y) = \spt_2(h(x):h(y))$.
-    \item respects local products: if $y$ is the immediate left (resp. right)
+    \item \label{item:gap-embedding:gap} is a \kl{gap embedding} from $(\t_1, \spt_1)$ to $(\t_2, \spt_2)$,
+
+    \item \label{item:gap-embedding:root} sends the root of $\t_1$ to the root of $\t_2$,
+  
+    \item \label{item:gap-embedding:leaves} maps leaves to leaves,
+
+    \item \label{item:gap-embedding:marking} respects the marking:
+      $\marking_1 = \marking_2  \circ h$,
+
+    \item \label{item:gap-embedding:local} respects local products: if $y$ is the immediate left (resp. right)
       child of $x$ in $\t_1$, and $y'$ is the immediate left (resp. right) child of
       $h(x)$ in $\t_2$, then
       $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{y'}$.
-    \item respects neighbourhood products: for every $k \in \set{1, \dots, N}$,
+
+    \item \label{item:gap-embedding:neighbourhood} respects neighbourhood products: for every $k \in \set{1, \dots, N}$,
       and every node $x \in \t_1$, if $z$ is the least ancestor of $x$ such that
       $\spt_1(z) = k$ and $z'$ is the least ancestor of $h(x)$ such that
       $\spt_2(z') = k$, then 
-      $\tlbl{\t_1}{z}{x} = \tlbl{\t_2}{z'}{h(x)}$. 
+      $\tlbl{\t_1}{z}{x} = \tlbl{\t_2}{z'}{h(x)}$.
+    
+    \item \label{item:gap-embedding:gluing} is gluing on non-\kl{dummy} nodes: 
+    if $\marking_1(x) \in \set{\marked, \separating}$,
+    and $y$ is the parent of $x$ in $\t_1$,
+    then $h(y)$ is the parent of $h(x)$ in $\t_2$.
+
   \end{enumerate}
 \end{definition}
+
+
+
+\AP
+A \kl{$L$-bounded marked nested tree} is a \kl{marked nested tree}
+such that any path of non \kl{dummy} nodes has length at most $L$.
+As we will see in the following \cref{thm:marked-nested-trees-wqo},
+the class of \kl{$L$-bounded well-marked nested trees}
+is \kl{well-quasi-ordered} under the \kl{marked gap-embedding} ordering
+when labelled over a \kl{well-quasi-ordered} set. Note that the boundedness
+assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
+
+\begin{theorem}
+  \label{thm:marked-nested-trees-wqo}
+  For every finite $L$,
+  the class of \kl(tree){$L$-bounded} \kl{well-marked nested trees} labelled over a
+  \kl{well-quasi-ordered} set $(X, \leq_X)$
+  is \kl{well-quasi-ordered} under the \kl{gap-embedding} ordering.
+\end{theorem}
+\begin{proof}
+  One can clearly encode conditions (1) to (6) of \cref{def:gap-embedding}
+  by adding suitable labels to the nodes of the trees. Formally,
+  we define a new labelling of the nodes of a tree $\t$ as follows: we add to each node $x$ of $\t$
+  the label $\tlbl{\t}{z}{x}$ for every $k \in \set{1, \dots, N}$,
+  where $z$ is the least ancestor of $x$ such that $\spt(z) = k$,
+  or a special symbol $\bot$ if no such ancestor exists.
+  Furthermore, if $y$ is the immediate left (resp. right) child of $x$ in $\t$,
+  we also add the label $\tlbl{\t}{x}{y}$ to $x$,
+  or the special symbol $\bot$ if no such child exists.
+  We also distinguish the root by adding a special label $\mathsf{root}$,
+  and we add a special label $\mathsf{leaf}$ to every leaf.
+  Finally, we also add the label $\marking(x)$ to $x$.
+  Since $M$ is finite, the new labelling is still over a \kl{well-quasi-ordered} set.
+
+  The only non-trivial part is to ensure that the mapping $h$ is gluing on non-\kl{dummy} nodes.
+  To that end, we will modify the \kl{split} $\spt$ into a new split $\spt'$ as follows:
+  for every non-\kl{dummy} node $x$, we have that $x$ is the $i$th element 
+  in a maximal path of non-\kl{dummy} nodes $x_1 \treelt[\t] x_2 \treelt[\t] \cdots \treelt[\t] x_n$
+  that contains $x$. Because the tree is \kl{$L$-bounded}, we have $n \leq L$.
+  We set $\spt'(x) = N + 1 + i$. For a \kl{dummy} node $y$, we set $\spt'(y) = \spt(y)$.
+
+  Note that any \kl{gap-embedding} $h$ from
+  $(\t_1, \spt'_1)$ to $(\t_2, \spt'_2)$
+  is necessarily gluing on non-\kl{dummy} nodes: 
+  assume that $\marking_1(y) \in \set{\marked, \separating}$,
+  and let $x$ be the parent of $y$ in $\t_1$.
+  Since $\spt'_1(y) = N + 1 + i$, we know that 
+  $\spt'_2(h(x):h(y)) \geq \spt'_1(y) = N + 1 + i$.
+  But this means that between $h(x)$ and $h(y)$
+  there are only nodes with \kl{split depth} greater or equal than $N + 1 + i$.
+  If $i = 0$ (i.e., $y$ is the first node of a maximal path of non-\kl{dummy} nodes),
+  then there is no such node, and $h(x)$ is the parent of $h(y)$.
+  Otherwise, $\spt'_1(x) = N + i > N$, and therefore 
+  the path from $h(x)$ to $h(y)$ contains only non \kl{dummy} nodes.
+  Since the split values have been chosen to be strictly increasing inside
+  maximal paths of non-\kl{dummy} nodes,
+  there is no such node, and $h(x)$ is the parent of $h(y)$.
+\end{proof}
+
+\begin{lemma}
+  \label{rem:unbounded-mark-not-wqo}
+  The \kl{well-quasi-order} of \cref{thm:marked-nested-trees-wqo}
+  does not hold if we remove the \kl{$L$-boundedness} assumption.
+  Indeed, consider the infinite sequence of trees
+  $(\t_n, \spt_n, \marking_n)$ where $\t_n$ is a branch of length $n+1$,
+  $\spt_n$ assigns the value $1$ to every node of $\t_n$,
+  and $\marking_n$ marks all the nodes of $\t_n$.
+  It is straightforward to check that for every $n < m$,
+  $(\t_n, \spt_n, \marking_n)$ does not \kl{gap-embed} into
+  $(\t_m, \spt_m, \marking_m)$.
+\end{lemma}
+\begin{proof}
+  We create an infinite antichain by 
+  considering the infinite sequence of trees
+  $(\t_n, \spt_n, \marking_n)$ where $\t_n$ is a branch of length $n+1$,
+  $\spt_n$ assigns the value $1$ to every node of $\t_n$,
+  and $\marking_n$ marks all the nodes of $\t_n$.
+  It is straightforward to check that for every $n < m$,
+  $(\t_n, \spt_n, \marking_n)$ does not \kl{gap-embed} into
+  $(\t_m, \spt_m, \marking_m)$.
+\end{proof}
 
 \begin{lemma}
   \label{lem:gap-embedding-respects-products}
@@ -380,7 +501,7 @@ the \kl{composition ordering}) while still preserving the edges between
   We proceed by induction on the value of $\spt_1(x:y)$.
   If $\spt(x:y) = N+1$, then $y$ is an immediate child of $x$,
   and $\spt(h(x):h(y)) = N+1$ by definition of \kl{gap-embedding}.
-  Therefore, by point (5) of \cref{def:gap-embedding},
+  Therefore, by \cref{item:gap-embedding:local},
   we have $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{h(y)}$.
 
   Otherwise, let $k = \spt_1(x:y) \leq N$. We distinguish two cases.
@@ -434,7 +555,7 @@ the \kl{composition ordering}) while still preserving the edges between
 
   Let us now consider $z_3'$ the least ancestor of $h(y)$ such that
   $\spt_2(z_3') = k$. This node exists because $h$ respects the split
-  (point (3) of \cref{def:gap-embedding}).
+  (\cref{item:gap-embedding:gap}).
   This yields the following configuration:
 
   \begin{center}
@@ -466,20 +587,23 @@ the \kl{composition ordering}) while still preserving the edges between
         node[midway, above] {$\tlbl{\t_2}{z_3'}{h(y)}$}
         (hy);
     \end{tikzpicture}
-  \end{center}  
+  \end{center}
 
-  Indeed, by point (3) of \cref{def:gap-embedding},
+  Indeed, by \cref{item:gap-embedding:gap},
   we have $\spt_2(h(x):h(y)) \geq k$, and 
   $\spt_2(h(z_1)) = \spt_2(h(z_2)) = \spt_2(h(z_3)) = k$. Furthermore,
   since $x$, $y$, and $z_1$ are \kl{marked nodes}, and because
   $\marking(z_2) \in \set{\marked, \separating}$, we conclude from 
-  point (4) of \cref{def:gap-embedding} that
+  \cref{item:gap-embedding:marking} that
   $\spt_1(x:z_1) = \spt_2(h(x):h(z_1)) > k$,
   $\spt_1(z_1:z_2) = \spt_2(h(z_1):h(z_2)) > k$.
 
+  \textbf{Todo: use the fact that gap is gluing to 
+  conclude about the strict things.}
+
   Now, by induction hypothesis, we have
   $\tlbl{\t_1}{z_1}{z_2} = \tlbl{\t_2}{h(z_1)}{h(z_2)}$.
-  Furthermore, by point (6) of \cref{def:gap-embedding},
+  Furthermore, by \cref{item:gap-embedding:neighbourhood},
   we have $\tlbl{\t_1}{z_3}{y} = \tlbl{\t_2}{z_3'}{h(y)}$
   and $\tlbl{\t_1}{z_1}{z_2} = \tlbl{\t_2}{h(z_1)}{h(z_2)}$.
   Finally, because $x$ and $y$ are \kl{independent at level $k$},
@@ -514,90 +638,4 @@ the \kl{composition ordering}) while still preserving the edges between
   $\tlbl{\t}{\treeRoot}{\lca(x,y)}$,
   $\tlbl{\t}{\lca(x,y)}{x}$, and
   $\tlbl{\t}{\lca(x,y)}{y}$, all of which are \kl{marked nodes}.
-\end{proof}
-
-\AP
-A \kl{$L$-bounded marked nested tree} is a \kl{marked nested tree}
-such that for every $k$, for every 
-sequence $x_1 \treelt[\t] x_2 \treelt[\t] \dots \treelt[\t] x_n$ of \kl{marked nodes} with
-$\spt(x_i : x_{i+1}) > k$ for every $i$, and $\spt(x_i) = k$ for every $i$,
-we have $n \leq L$.
-
-\begin{theorem}
-  \label{thm:marked-nested-trees-wqo}
-  For every finite $L$,
-  the class of \kl(tree){$L$-bounded} \kl{well-marked nested trees} labelled over a
-  \kl{well-quasi-ordered} set $(X, \leq_X)$
-  is \kl{well-quasi-ordered} under the \kl{gap-embedding} ordering.
-\end{theorem}
-
-The proof of \cref{thm:marked-nested-trees-wqo}
-follows directly from an earlier result of Dershowitz and Tzameret
-\cite[Section 3.3 Path Comparable Trees]{DERSHOWITZ200380}, stating that the class of \kl{marked trees}
-is \kl{well-quasi-ordered} under a weaker variant of the \kl{gap-embedding} ordering 
-obtained by removing points (2) and (4) to (6) of \cref{def:gap-embedding}.
-
-
-\begin{proof}
-  The idea is to encode conditions (2) and  (4) to (6) of \cref{def:gap-embedding}
-  by adding new labels on the nodes of the trees.
-  Let us consider a \kl{$L$-bounded marked nested tree}
-  $(\t, \spt, \marking)$
-  labelled over a \kl{well-quasi-ordered} set $(X, \leq_X)$.
-
-  We define a new labelling of the nodes of $\t$ as follows: we add to each node $x$ of $\t$
-  the label $\tlbl{\t}{z}{x}$ for every $k \in \set{1, \dots, N}$,
-  where $z$ is the least ancestor of $x$ such that $\spt(z) = k$,
-  or a special symbol $\bot$ if no such ancestor exists.
-  Furthermore, if $y$ is the immediate left (resp. right) child of $x$ in $\t$,
-  we also add the label $\tlbl{\t}{x}{y}$ to $x$,
-  or the special symbol $\bot$ if no such child exists.
-  Finally, we also add the label $\marking(x)$ to $x$.
-  Since $M$ is finite, the new labelling is still over a \kl{well-quasi-ordered} set.
-
-
-
-  To encode condition (4) of \cref{def:gap-embedding}, we will
-  crucially use the fact that the trees are \kl{$L$-bounded}.
-  To that end, we change the split $\spt$ into a new split $\spt'$ defined as follows:
-  for every \kl{marked node} $x$ in $\t$, if $\spt(x) = k$, we set $\spt'(x) = k \times (L+3) + i$,
-  where $i$ is the index of $x$ in the sequence of \kl{marked nodes}
-  with split value $k$ ordered by the ancestor relation $\treelt[\t]$.
-  For every \kl{separating node} $x$ in $\t$, if $\spt(x) = k$, we set $\spt'(x) = k \times (L+3) + L + 1$.
-  Finally, for every \kl{dummy node} $x$ in $\t$, if $\spt(x) = k$, we set $\spt'(x) = k \times (L+3)$.
-  Since the tree is \kl{$L$-bounded}, the new split $\spt'$ has height at most $N \times (L+3)$.
-
-
-  Now, assume that $(\t_1, \spt_1, \marking_1)$ and
-  $(\t_2, \spt_2, \marking_2)$ are two \kl{$L$-bounded marked nested trees}
-  such that
-   $(\t_1', \spt_1')$ embeds into $(\t_2', \spt_2')$ by some mapping $h$,
-   that respects conditions (1) and (3) of \cref{def:gap-embedding},
-   and preserves the new labels.
-   We claim that $h$ is a \kl{gap-embedding} from
-   $(\t_1, \spt_1, \marking_1)$ to
-   $(\t_2, \spt_2, \marking_2)$.
-
-  It is clear that $h$ respects point (2) of \cref{def:gap-embedding}
-  because the marking is part of the new labels. Furthermore, $h$ respects 
-  points (5) and (6) of \cref{def:gap-embedding} because the relevant products
-  are also part of the new labels.
-
-  Finally, let us show that $h$ respects point (4) of \cref{def:gap-embedding}.
-  To that end, let us consider two \kl{marked nodes} $x$ and $y$ in $\t_1$
-  such that $x \treelt[\t_1] y$, $\spt(x) = \spt(y) = k$, and 
-  $\spt(x:y) > k$. By definition of the new split $\spt_1'$,
-  we have $\spt_1'(x) = k \times (L+3) + i$ and $\spt_1'(y) = k \times (L+3) + i+1$,
-  for some $i < L$. Now, since $h$ respects the split,
-  we have $\spt_2'(h(x)) = k \times (L+3) + i$ and $\spt_2'(h(y)) = k \times (L+3) + i+1$.
-  Also, since $\spt_1(x:y) > k$, we have that $\spt_1'(x:y) > k \times (L+3)$,
-  and therefore $\spt_2'(h(x):h(y)) \geq k \times (L+3)$.
-  But this means that there are no nodes $z$ between $h(x)$ and $h(y)$
-  such that $\spt_2(z) = k$, and therefore $\spt_2(h(x):h(y)) > k$.
-  We conclude that $h$ respects point (4) of \cref{def:gap-embedding}.
-  A similar reasoning applies when $\marking_1(y) = \separating$.
-
-  In particular, 
-
-
 \end{proof}
