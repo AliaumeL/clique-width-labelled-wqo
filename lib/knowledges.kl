@@ -94,6 +94,7 @@
 
 \knowledge{notion}
  | parent@node
+ | parent@tree
  | parent node
  | parent relation
 
@@ -196,6 +197,9 @@
 \knowledge{notion}
  | split of height $N$
  | split
+ | split depth
+ | split@depth
+ | depth@split
 \knowledge{notion}
  | $k$-neighbourhoods
  | $k$-neighbourhood

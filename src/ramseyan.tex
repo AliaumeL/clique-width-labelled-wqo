@@ -164,12 +164,15 @@ ordering on trees.
 \AP A \intro{split of height $N$} of a tree $\t$ is a mapping $\spt$ from the
 nodes of $T$ to $\set{1, \dots, N}$. Given a split $\spt$ and two nodes $x
 \treelt[\t] y$, we define $\spt(x \colon y)$ to be the minimal value of
-$\spt(z)$ for $x \treelt[\t] z \treelt[\t] y$, and $N+1$ otherwise. Two
-elements $x \treelt[\t] y$ such that $\spt(x) = \spt(y) = k$ are
+$\spt(z)$ for $x \treelt[\t] z \treelt[\t] y$, and $N+1$ otherwise. In
+particular, this does not count the nodes $x$ and $y$ themselves.
+
+\AP Two elements $x \treelt[\t] y$ such that $\spt(x) = \spt(y) = k$ are
 \intro{$k$-neighbours} if $\spt(x \colon y) \geq k$. Note that a \kl{split}
 induces some kind of hierarchical structure on the tree based on the
 \kl{$k$-neighbourhoods}. We illustrate the situation on a branch of a tree in
-\cref{split-on-branch:fig}.
+\cref{split-on-branch:fig}. We will refer to the value of $\spt(x)$ as the
+\reintro{split depth} of the node $x$.
 
 \begin{figure}
   \centering 
@@ -210,13 +213,13 @@ induces some kind of hierarchical structure on the tree based on the
   in \textcolor{A4}{dark blue} connect $1$-neighbours, 
   the arcs in \textcolor{A5}{light blue} connect $2$-neighbours,
   and the arcs in \textcolor{A3}{light purple} connect $3$-neighbours. Full neighbourhoods
-  are obtained by considering the connected components induced by the (reflxive closure) of
+  are obtained by considering the connected components induced by the (reflexive closure) of
   arcs of each color.}
   \label{split-on-branch:fig}
 \end{figure}
 
 
-\AP A split $\spt$ is \intro{forward Ramseyan} if for every $k \in \set{1,
+\AP A \kl{split} $\spt$ is \intro{forward Ramseyan} if for every $k \in \set{1,
 \dots, N}$ and every $x, y, x', y'$ in the same class of \kl{$k$-neighbourhood}
 with $x \treelt[\t] y$ and $x' \treelt[\t] y'$, we have: 
 \begin{equation}
@@ -293,10 +296,10 @@ $\tlbl{\t}{x}{y}$ given a \kl{forward Ramseyan split} as proven in \cite[Lemma
 \end{figure}
 
 \AP The main theorem of \cite{COLC07} is that for every finite monoid $M$,
-there exists a finite depth $N$ such that for every tree $T$ labelled using
-$M$, there exists a forward Ramseyan split of height $N$ for $T$. We can
-therefore assume that our trees are always equipped with a forward Ramseyan
-split of height $N$. 
+there exists a finite depth $N$ such that for every tree $\aTree$ edge-labelled
+using $M$, there exists a forward Ramseyan split of height $N$ for $T$. We can
+therefore assume that our trees are always equipped with a \kl{forward Ramseyan
+split} of height $N$. 
 
 \AP Let us now state the main remark that will guide the rest of this paper:
 given a branch of a tree equipped with a \kl{forward Ramseyan split} as the one
@@ -306,9 +309,10 @@ long as these new nodes are assigned a value of the split bigger than or equal
 to $k$, and the resulting tree is still \kl{forward Ramseyan}. A fortiori,
 whether there is an edge between two leaves of $x$ and $y$ in the resulting
 graph is not influenced by such insertions. This will guide our definition of a
-suitable ordering on trees, where we allow many insertions (being coarser than
-the \kl{composition ordering}) while still preserving the edges between
-``most'' leaves in the interpreted graphs.
+suitable ordering on trees in the upcoming \cref{sec:marked-nested-trees},
+where we allow many insertions (being coarser than the \kl{composition
+ordering}) while still preserving the edges between ``most'' leaves in the
+interpreted graphs.
 
 \subsection{Marked Nested Trees}
 \label{sec:marked-nested-trees}
@@ -406,9 +410,9 @@ from trees to graphs.
       $\tlbl{\t_1}{z}{x} = \tlbl{\t_2}{z'}{h(x)}$.
     
     \item \label{item:gap-embedding:gluing} is gluing on non-\kl{dummy} nodes: 
-    if $\marking_1(x) \in \set{\marked, \separating}$,
-    and $y$ is the parent of $x$ in $\t_1$,
-    then $h(y)$ is the parent of $h(x)$ in $\t_2$.
+    if $\marking_1(y) \in \set{\marked, \separating}$,
+    and $x$ is the \kl(tree){parent} of $y$ in $\t_1$,
+    then $h(x)$ is the \kl(tree){parent} of $h(y)$ in $\t_2$.
 
   \end{enumerate}
 \end{definition}
@@ -517,9 +521,11 @@ assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
   By induction hypothesis, we have
   $\tlbl{\t_1}{z}{y} = \tlbl{\t_2}{h(z)}{h(y)}$,
   and $\tlbl{\t_1}{x}{z} = \tlbl{\t_2}{h(x)}{h(z)}$. Hence, 
-  $\tlbl{\t_1}{x}{y} = \tlbl{\t_1}{x}{z} \cdot \tlbl{\t_1}{z}{y}
-  = \tlbl{\t_2}{h(x)}{h(z)} \cdot \tlbl{\t_2}{h(z)}{h(y)}
-  = \tlbl{\t_2}{h(x)}{h(y)}$.
+  \begin{align*}
+    \tlbl{\t_1}{x}{y} &= \tlbl{\t_1}{x}{z} \cdot \tlbl{\t_1}{z}{y} \\
+                      &= \tlbl{\t_2}{h(x)}{h(z)} \cdot \tlbl{\t_2}{h(z)}{h(y)} \\
+                      &= \tlbl{\t_2}{h(x)}{h(y)} \quad .
+  \end{align*}
 
   Otherwise, since $(\t_1, \spt_1, \marking_1)$ is \kl{well-marked},
   there exists $z_1, z_2, z_3$ such that
