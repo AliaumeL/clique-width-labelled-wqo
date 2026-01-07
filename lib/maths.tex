@@ -9,9 +9,8 @@
 \NewDocumentCommand{\Label}{ m m }{\withkl{\kl[\Label]}{\cmdkl{\mathsf{Label}}_{#1}\mathopen{\cmdkl{(}}#2\mathclose{\cmdkl{)}}}}
 \knowledge{\Label}{notion}
 
-\NewDocumentCommand{\treeRoot}{}{\mathsf{root}}
-% \NewDocumentCommand{\lca}{}{\mathop{\mathsf{lca}}}
-% with knowledge
+\NewDocumentCommand{\treeRoot}{}{\mathop{\kl[\treeRoot]{\mathsf{root}}}}
+\knowledge{\treeRoot}{notion}
 \NewDocumentCommand{\lca}{}{\mathop{\kl[\lca]{\mathsf{lca}}}}
 \knowledge{\lca}{notion}
 
@@ -26,14 +25,20 @@
 \NewDocumentCommand{\Leaves}{ m }{\mathsf{Leaves}(#1)}
 \NewDocumentCommand{\Graphs}{ O{} }{\mathsf{Graphs}_{#1}}
 
-%\NewDocumentCommand{\tlbl}{ m m m }{ [{#2}{\colon}\!{#3}]_{#1}}
+\NewDocumentCommand{\tword}{ O{\aTree} m m}{%
+    \withkl{\kl[\tword]}{%
+      \mathopen{\cmdkl{[}} #2 \mathbin{\cmdkl{\colon}} #3 \mathclose{\cmdkl{]_{#1}}}%
+    }%
+}
+\knowledge{\tword}{notion}
+
 \NewDocumentCommand{\tlbl}{ m m m }{
     \withkl{\kl[\tlbl]}{
-        \cmdkl{[}
+      \mathopen{\cmdkl{\llbracket}}
         #2
-        \cmdkl{\colon}\!
+        \mathbin{\cmdkl{\colon}}
         #3
-        \cmdkl{]}
+        \mathclose{\cmdkl{\rrbracket}}
         _{#1}
     }
 }
@@ -44,8 +49,9 @@
 \NewDocumentCommand{\cmpleq}{}{\preceq}
 \NewDocumentCommand{\cmplt}{}{\prec}
 
-\NewDocumentCommand{\isubleq}{}{\subseteq_i}
-\NewDocumentCommand{\isublt}{}{\subset_i}
+\NewDocumentCommand{\isubleq}{}{\mathrel{\kl[\isubleq]{\subseteq_i}}}
+\NewDocumentCommand{\isublt}{}{\mathrel{\kl[\isubleq]{\subset_i}}}
+\knowledge{\isubleq}{notion}
 
 % Projections on a branch
 \NewDocumentCommand{\Br}{}{\mathop{\mathsf{B}_r}}

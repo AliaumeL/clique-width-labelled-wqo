@@ -26,18 +26,17 @@ edges of the graphs.
 $\Trees{\Sigma}{}$ one can associate a finite monoid $M$ and a morphism $\mu
 \colon \Sigma^* \to M$ such that for any tree $T$ and any pair of leaves $x
 \treesibleq y$ in $T$, whether $T \models \varphi(x,y)$ is entirely determined
-by the values of $\mu(T[z \colon x])$, $\mu(T[z \colon y])$ and
-$\mu(T[\treeRoot \colon z])$ where $z = \lca(x,y)$ is the \kl{least common
+by the values of $\mu(\tword{z}{x})$, $\mu(\tword{z}{y})$ and
+$\mu(\tword{\treeRoot}{z})$ where $z = \lca(x,y)$ is the \kl{least common
 ancestor} of $x$ and $y$. We refer to the book on Tree Automata Techniques and
-Applications for a comprehensive overview of the connection between MSO on
-trees, and tree automata \cite{TATA08}.
-In the rest of the section, we will fix such a monoid $M$ and morphism $\mu$. 
-To simplify notations, we will 
-write $\tlbl{T}{x}{y}$ for $\mu(T[x \colon y])$, that is, the 
-product of the labels of the edges on the path from $x$ to $y$ in $T$.
+Applications for a comprehensive overview of the connection between Monadic
+Second Order Logic on trees, and tree automata \cite{TATA08}. In the rest of
+the section, we will fix such a monoid $M$ and morphism $\mu$. To simplify
+notations, we will write $\intro*\tlbl{\aTree}{x}{y}$ for $\mu(\tword{x}{y})$, that
+is, the product of the labels of the edges on the path from $x$ to $y$ in $\aTree$.
 
 \AP As a consequence, one can collect in a subset $P \subseteq M^3$ all the
-triples $(a,b,c)$ such that this triple corresponds to a satisfying assignment
+triples $(a,b,c)$ corresponding to a satisfying assignments
 of the formula $\varphi(x,y)$. This is illustrated in
 \cref{interpretation-to-monoid:fig}.
 We define a \intro{monoid interpretation} from trees
@@ -116,16 +115,24 @@ is \kl{$\forall$-well-quasi-ordered} can be reduced to finding a suitable
   If $(X, \leq_X)$ is \kl{well-quasi-ordered},
   then $(Y, \leq_Y)$ is \kl{well-quasi-ordered}.
 \end{fact}
+\begin{proof}
+  Let $(y_i)_{i \in \mathbb{N}}$ be an infinite sequence of elements of $Y$.
+  Since $f$ is surjective, there exists an infinite sequence $(x_i)_{i \in \mathbb{N}}$
+  of elements of $X$ such that for every $i$, $f(x_i) = y_i$.
+  Since $(X, \leq_X)$ is \kl{well-quasi-ordered},
+  there exists two indices $i < j$ such that $x_i \leq_X x_j$.
+  Since $f$ is order-preserving, we have $y_i = f(x_i) \leq_Y f(x_j) = y_j$.
+\end{proof}
 
 \AP One candidate ordering on trees is the \intro{composition ordering} defined
 as follows. Given two trees $\aTree_1$ and $\aTree_2$ labelled over a monoid
 $M$, we say that $\aTree_1$ is less than $\aTree_2$ in the \kl{composition
 ordering}, written $\aTree_1 \cmpleq \aTree_2$, if there exists a map $h \colon
 \aTree_1 \to \aTree_2$ that maps leaves to leaves, respects the relation
-$\lca$, $\treesibleq$, and the function $\tlbl{}{\cdot}{\cdot}$. This
-ordering is naturally extended to node-labelled trees by asking that for every
-node $x$ in $\aTree_1$, the label of $x$ is less or equal than the label of
-$h(x)$ in $\aTree_2$. It is straightforward to check that the interpretation
+$\lca$, $\treesibleq$, and the function $\tlbl{}{\cdot}{\cdot}$. This ordering
+is naturally extended to node-labelled trees by asking that for every node $x$
+in $\aTree_1$, the label of $x$ is less or equal than the label of $h(x)$ in
+$\aTree_2$. It is straightforward to check that the interpretation
 $\someInterp$ is order-preserving from trees equipped with the \kl{composition
 ordering} to graphs equipped with the \kl{induced subgraph} ordering. Hence, to
 prove that the image of $\someInterp$ is \kl{$\forall$-well-quasi-ordered}, it
@@ -135,14 +142,14 @@ $(X, \leq_X)$.
 
 
 \AP  Historically, this  was (although not explicitly) the approach taken by
-\cite{DING92,DRT10}. Unfortunately, the composition ordering on trees is more often
-than not way more strict than the \kl{induced subgraph} ordering. It was
-already observed that the composition ordering on trees is
-\kl{well-quasi-ordered} if and only if \emph{for every} $P \subseteq M^3$, the
-class of graphs obtained from trees by considering only the triples in $P$ is
-\kl{labelled-well-quasi-ordered} \cite[Theorem 24]{LOPEZ24}. To understand what happens for
-a precise choice of $P$, we need to have a finer understanding of the way trees
-can be decomposed.
+\cite{DING92,DRT10}. Unfortunately, the \kl{composition ordering} on trees is
+often way stricter than the \kl{induced subgraph} ordering. It was already
+observed that the \kl{composition ordering} on trees is \kl{well-quasi-ordered}
+if and only if \emph{for every} $P \subseteq M^3$, the class of graphs obtained
+from trees by considering only the triples in $P$ is
+\kl{labelled-well-quasi-ordered} \cite[Theorem 24]{LOPEZ24}. To understand what
+happens for a precise choice of $P$, we need to have a finer understanding of
+the way trees can be decomposed.
 
 
 \subsection{Forward Ramseyan Splits}

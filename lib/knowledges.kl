@@ -46,14 +46,62 @@
  | $X$-induced subgraph
  | $X$-induced@subgraph
  | induced subgraph
+ | induced subgraphs
  | induced subgraph relation
  | labelled induced subgraph
+ | embeds@graph
 \knowledge{notion}
  | labelled-well-quasi-ordered
  | labelled-wqo
 \knowledge{notion}
  | wqo-well-quasi-ordered
  | wqo-wqo
+
+\knowledge{notion}
+ | monomorphism
+ | graph embedding
+ | embedding@graph
+
+
+\knowledge{notion}
+ | hereditary class of graphs
+ | hereditary class
+\knowledge{notion}
+ | hereditary closure
+
+\knowledge{notion}
+ | ordered graph
+ | ordered@graph
+ | ordered graphs
+
+
+%
+% Trees
+%
+\knowledge{notion}
+ | tree
+ | trees
+
+\knowledge{notion}
+ | sibling order
+
+\knowledge{notion}
+ | left child
+ | right child
+ | right children
+ | left@child
+ | right@child
+
+\knowledge{notion}
+ | parent@node
+ | parent node
+ | parent relation
+
+\knowledge{notion}
+ | ancestor@node
+ | ancestor@tree
+ | ancestor node
+ | ancestor relation
 
 %
 % Clique width
@@ -131,6 +179,11 @@
 % 
 % Ramsey Theory
 %
+
+\knowledge{notion}
+ | monoid interpretation
+ | monoid interpretations
+
 \knowledge{notion}
  | Ramsey's theorem
  | Ramsey@theorem

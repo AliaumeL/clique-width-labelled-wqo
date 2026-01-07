@@ -2,13 +2,13 @@
 \label{sec:prelims}
 
 We assume the reader to be familiar with basic notions of logic on finite
-relational strucutres, such as monadic second-order logic ($\MSO$), first-order
+relational structures, such as monadic second-order logic ($\MSO$), first-order
 logic and quantifier-free formulas.
 
 \paragraph*{Graphs} \AP
 A \intro{graph} is a pair $G = (V, E)$ where $V$ is a set
 of \intro{vertices} and $E \subseteq V \times V$ is a set of \intro{edges}. A
-graph is \intro{undirected} if $(u, v) \in E$ implies $(v, u) \in E$ for all
+graph is \intro(graph){undirected} if $(u, v) \in E$ implies $(v, u) \in E$ for all
 $u, v \in V$. In this paper we will focus on finite undirected graphs. Given a
 set $X$, an \intro{$X$-labelled graph} is a graph equipped with a function
 $\ell \colon V \to X$ that assigns a label to each vertex. Given a class $\Cls$
@@ -17,20 +17,20 @@ $X$-labelled graphs in $\Cls$, i.e., the class of all \kl{$X$-labelled graphs}
 $G = (V, E, \ell)$ such that $G \in \Cls$.
 
 \AP
-Whenever $(X, \leq)$ is a quasi-order, we say that a graph $G$ \intro{embeds}
+Whenever $(X, \leq)$ is a quasi-order, we say that a graph $G$ \intro(graph){embeds}
 into a graph $H$ if there exists a \intro{monomorphism} from $G$ to $H$, i.e.,
 an injective function $f \colon V_G \to V_H$ such that for all $u, v \in V_G$,
 $(u, v) \in E_G$ if and only if $(f(u), f(v)) \in E_H$, and such that for all
-$v \in V_G$, we have $\ell_G(v) \leq \ell_H(f(v))$. We write $G \isubleq H$ to
-denote that $G$ embeds into $H$, which we also call the \reintro{induced
+$v \in V_G$, we have $\ell_G(v) \leq \ell_H(f(v))$. We write $G \intro*\isubleq H$ to
+denote that $G$ \kl(graph){embeds} into $H$, which we also call the \reintro{induced
 subgraph relation}. When not specified, we consider that labels are
 quasi-ordered by equality.
 
 \AP A class of graphs $\Cls$ is a \intro{hereditary class} if it is closed under
-taking induced subgraphs, i.e., if for all $G, H$ such that $
-G \isubleq H$ and $H \in \Cls$, we have $G \in \Cls$.
+taking \kl{induced subgraphs}, i.e., if for all $G, H$ such that 
+$G \isubleq H$ and $H \in \Cls$, we have $G \in \Cls$.
 The \intro{hereditary closure} of a class of graphs $\Cls$ is the smallest
-hereditary class containing $\Cls$.
+\kl{hereditary class} containing $\Cls$.
 
 \AP
 An \intro{ordered graph} is a finite undirected graph $G = (V, E)$ equipped
@@ -40,57 +40,67 @@ subgraph relation} extends to ordered graphs by requiring that the embedding $f
 \leq_G v$ if and only if $f(u) \leq_H f(v)$.
 
 \paragraph*{Well-quasi-orderings} A quasi-ordered set $(X, \leq)$ is a set $X$
-equipped with a reflexive and transitive relation $\leq$. A sequence
+with a reflexive and transitive relation $\leq$. A sequence
 $\seqof{x_i}$ of elements in $X$ is \intro(sequence){good} if there exist $i <
 j$ such that $x_i \leq x_j$. A quasi-ordered set is \intro{well-quasi-ordered}
 (\reintro{wqo}) if every infinite sequence is \kl(sequence){good}.
+A \intro{bad sequence} is an infinite sequence that is not \kl(sequence){good},
+and a sequence of pairwise incomparable elements is called an
+\intro{antichain}.
 
 \AP As mentioned in the introduction, several notions of well-quasi-ordering
 can be defined for a given class of finite undirected graphs $\Cls$. Let us 
 briefly state them:
-\begin{itemize}
-  \item $\Cls$ is \reintro{well-quasi-ordered}
+$\Cls$ is \reintro{well-quasi-ordered}
     if the class $(\Cls, \isubleq)$ is \kl{well-quasi-ordered},
-  \item $\Cls$ is \intro{$k$-well-quasi-ordered} for some $k \in \mathbb{N}$,
+$\Cls$ is \intro{$k$-well-quasi-ordered} for some $k \in \mathbb{N}$,
     if for every set $(X,=)$ of size $k$, the class
     $(\Label{X}{\Cls}, \isubleq)$ is \kl{well-quasi-ordered},
-  \item $\Cls$ is \intro{$\forall$-well-quasi-ordered} if for every 
+and $\Cls$ is \intro{$\forall$-well-quasi-ordered} if for every 
     \kl{well-quasi-order} $(X, \leq)$, the class
     $(\Label{X}{\Cls}, \isubleq)$ is \kl{well-quasi-ordered}.
-\end{itemize}
 
 Finally, a class of graph is \intro{orderably well-quasi-ordered} (resp.
 \reintro{orderably $k$-well-quasi-ordered}, resp. \reintro{orderably
 $\forall$-well-quasi-ordered}) if there is a way to equip each graph $G$ in
 $\Cls$ with a linear order $\leq_G$ on its vertices such that the resulting
-class of ordered graphs is \kl{well-quasi-ordered} (resp.
+class of \kl{ordered graphs} is \kl{well-quasi-ordered} (resp.
 \kl{$k$-well-quasi-ordered}, resp. \kl{$\forall$-well-quasi-ordered}).
 
 
 
 
 
-\paragraph*{Bounded clique-width} \AP In this paper, trees are finite, binary,
-and ordered (have left and right children). They are understood as finite
-relational structures over the signature $\sigma = (\treeleq, \treesibleq)$
-where $\treeleq$ is the \kl{ancestor relation}, and $\treesibleq$ is the
-\kl{topological order} on the nodes of the tree. As in the case of graphs, we
-will be interested in vertex-labelled trees where labels are taken from a
-\kl{well-quasi-order} $(X, \leq)$. We will also be interested in edge-labelled
-trees, typically using a finite set of labels $\Sigma$. These trees are denoted
-using $\Trees{\Sigma}{X}$ to denote the class of trees whose edges are labelled
-by elements of $\Sigma$ and whose nodes are labelled by elements of $X$. These
-are omitted when unused (i.e., $\Trees{}{}$ denotes the class of unlabelled
-trees, and $\Trees{\Sigma}{}$ denotes the class of trees whose edges are
-labelled by elements of $\Sigma$).
+\paragraph*{Trees} \AP In this paper, \intro{trees} are finite, binary, and
+ordered (have \intro(child){left} and \reintro{right children}). They are
+understood as finite relational structures over the signature $\sigma =
+(\treeleq, \treesibleq)$ where $\treeleq$ is the \intro{ancestor relation}, and
+$\treesibleq$ is the \intro{sibling order} on the nodes of the tree, extended
+to all pairs of nodes as a topological order. In a tree $\aTree$, the
+\intro(tree){root} is denoted by $\intro*\treeRoot(\aTree)$, with $\aTree$
+being left implicit when clear from context. The set of \intro(tree){leaves} is
+denoted by $\Leaves{\aTree}$. Given two nodes $x$ and $y$ in a tree $T$, their
+\intro{least common ancestor} is denoted by $\intro*\lca(x,y)$. We will often
+use the \intro{parent relation}, which state that $y$ is the unique immediate
+\kl(tree){ancestor} of $x$.
 
-\AP In a tree, the root is denoted by $\treeRoot$, and the set of leaves is
-denoted by $\Leaves{T}$. Given two nodes $x$ and $y$ in a tree $T$, their least
-common ancestor is denoted by $\lca(x,y)$. Given two nodes $x,y$ such that $y$
-is an ancestor of $x$, the notation $T[x:y]$ denotes the \emph{word} in
-$\Sigma^*$ obtained by reading the labels of the edges on the path from $x$ to
-$y$ in $T$. 
+\AP
+As in the case of graphs, we will be interested in
+vertex-labelled trees where labels are taken from a \kl{well-quasi-order} $(X,
+\leq)$. We will also be interested in edge-labelled trees, typically using a
+finite set of labels $\Sigma$. These trees are denoted using
+$\intro*\Trees{\Sigma}{X}$ to denote the class of trees whose edges are labelled by
+elements of $\Sigma$ and whose nodes are labelled by elements of $X$. These are
+omitted when unused (i.e., $\Trees{}{}$ denotes the class of unlabelled trees,
+and $\Trees{\Sigma}{}$ denotes the class of trees whose edges are labelled by
+elements of $\Sigma$).
+Given two nodes $x,y$ such
+that $y$ is an \kl(tree){ancestor} of $x$, 
+the notation $\intro*\tword{x}{y}$ denotes the \emph{word}
+in $\Sigma^*$ obtained by reading the labels of the edges on the path from $x$
+to $y$ in $\aTree$, we can leave $\aTree$ implicit if clear from context.
 
+\paragraph*{Bounded Clique-Width}
 \AP An \intro{$\MSO$-interpretation} $\someInterp$ from $\Trees{\Sigma}{}$ to
 finite undirected graphs is given by a tuple of $\MSO$ formulas that specify
 how to respectively: select a subset of nodes of the leaves of tree to be the
@@ -115,24 +125,21 @@ image of some \kl{$\MSO$-interpretation} from finite trees to finite undirected
 graphs \cite{COUR91}. It has \intro{bounded linear clique-width} if it is
 included in the image of some \kl{$\MSO$-interpretation} from \intro{linear
 trees} (i.e., trees where every node has at most one non-leaf child) to finite
-undirected graphs. 
-
-We will use the following fact that is well-known in the literature.
+undirected graphs. In this paper,  will use the following well-known fact.
 
 \begin{fact}
   \label{fact:trees-bdcw-not-bdlcw}
-  The class of complete binary trees seen as graphs using the parent relation
-  has bounded clique-width. However, any subset of this class 
-  having bounded linear clique-width must be finite.
+  The class of complete binary \kl{trees} seen as graphs using the \kl{parent relation}
+  is infinite and has \kl{bounded clique-width}. 
+  However, any subset of this class 
+  having \kl{bounded linear clique-width} must be finite.
 \end{fact}
 
-\maelin{"Another notion": it is the first occurence of transduction in this section, maybe you meant interpretation, and then talk about more general transduction ? }
-\paragraph{Transductions from graphs to graphs} \AP Another notion of
-transduction that will be relevant in this paper is that of \kl{existential
-transduction} and \kl{existential interpretation} that were mentionned in
+\paragraph{Transductions from graphs to graphs} \AP Another notion of logical
+transformation that will be relevant in this paper is that of \kl{existential
+transduction} and \kl{existential interpretation} that were mentioned in
 \cref{thm:characterisations,conj:path-transduction}, and are defined in a
 similar way as \kl{$\MSO$-interpretations}.
-
 
 \AP An \intro{existential interpretation} from (labelled) graphs to graphs is
 given by an existential first order formula $\phi_{\text{univ}}(x)$ that
