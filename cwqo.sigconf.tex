@@ -8,7 +8,7 @@
 %   in the `src` directory.
 % - If you want to update the template itself (e.g., change the layout), please
 %   edit the `defaults/asmart/asmart-small.tex` file instead.
-\documentclass[sigconf,review,screen]{acmart}
+\documentclass[sigconf,review,,screen]{acmart}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -28,9 +28,6 @@
 
 \usepackage{todonotes}
 
-\newcommand{\mael}[1]{\todo[color=violet!40]{#1}}
-\newcommand{\maelin}[1]{\todo[inline,size=\normalsize,color=violet!40,caption={}]{Mael: #1}}
-
 % babel for language settings
 \usepackage[english]{babel}
 
@@ -44,18 +41,23 @@
 % adding new theorems, taken from  
 % https://github.com/borisveytsman/acmart/issues/399
 \AtEndPreamble{%
-\theoremstyle{acmplain}
+\theoremstyle{acmdefinition}
 \newtheorem{assumption}[theorem]{Assumption}
 \newtheorem{fact}[theorem]{Fact}
 \newtheorem{claim}[theorem]{Claim}
+\Crefname{assumption}{Assumption}{Assumptions}
+\crefname{assumption}{Assumption}{Assumptions}
+\Crefname{fact}{Fact}{Facts}
+\crefname{fact}{Fact}{Facts}
+\Crefname{claim}{Claim}{Claims}
+\crefname{claim}{Claim}{Claims}
 }
 
-% for the qed's of claims
+% claim and claim proof environment
 \def\cqedsymbol{\ifmmode$\lrcorner$\else{\unskip\nobreak\hfil
 		\penalty50\hskip1em\null\nobreak\hfil$\lrcorner$
 		\parfillskip=0pt\finalhyphendemerits=0\endgraf}\fi} 
 \newcommand{\cqed}{\renewcommand{\qed}{\cqedsymbol}}
-
 
 \newenvironment{claimproof}[1][Proof.]{\begin{proof}[#1]}{\renewcommand{\qed}{\hfill$\blacksquare$}\end{proof}}
 \newcommand{\claimqedhere}{\renewcommand{\qedsymbol}{\hfill$\blacksquare$}\qedhere}
@@ -79,9 +81,9 @@
 
 
 % links inside the document
+\usepackage{hyperref}
 \usepackage[capitalise,noabbrev,nameinlink]{cleveref}
 \Crefname{assumption}{Assumption}{Assumptions}
-\crefname{claim}{Claim}{Claims}
 \usepackage[composition,hyperref,xcolor,cleveref]{knowledge}
 \knowledgeconfigure{notion}
 
@@ -106,7 +108,6 @@
 \crefname{algocf}{Algorithm}{Algorithms}
 \Crefname{algocf}{Algorithm}{Algorithms}
 
-
 % Colors 
 \definecolor{KLA4}{RGB}{0,78,125}
 \definecolor{KLB1}{RGB}{49,62,72}
@@ -115,6 +116,9 @@
 
 % we include whatever the user wants to include in the header
 \usepackage{ensps-colorscheme}
+\usepackage{todonotes}
+\newcommand{\mael}[1]{\todo[color=violet!40]{#1}}
+\newcommand{\maelin}[1]{\todo[inline,size=\normalsize,color=violet!40,caption={}]{Mael: #1}}
 
 % we include libraries (tex files) usually written in the `lib` directory
 \input{lib/aliaume.tex}
@@ -160,8 +164,8 @@
 \begin{document}
 
 \title{Well-quasi-ordered classes of bounded clique-width \\
-       main d8dc3e64fee9afd8cad4f8a67dcee59997d0f504 \\
-       2025-12-16 19:51:13 +0100
+       main 63025d0c2bb13d7ba1f53e4ace38ba72f7888dc2 \\
+       2026-01-08 10:38:40 +0100
 }
 
 
@@ -174,7 +178,7 @@
       \country{France}
     }
       \author{Maël Dumas}
-  \email{mdumas@mimuw.edu.pl}
+  \email{m.dumas2@uw.edu.pl}
   \orcid{}
       \affiliation{
       \institution{University of Warsaw}
@@ -232,6 +236,7 @@ a \kl[kl-usage]{notion} points to its \intro[kl-usage]{definition}.
 \input{src/prelims}
 \input{src/ramseyan}
 \input{src/badpaths}
+\input{src/maintheorems}
 \input{src/interpreting}
 \input{src/conclusion}
 

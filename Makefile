@@ -17,9 +17,9 @@ all: $(PAPER).pdf
 $(PAPER).sigconf.tex: $(SRC) ./paper-meta.yaml
 	pandoc -t latex \
 		     --output $(PAPER).sigconf.tex \
-				 --defaults acmart \
-				 --metadata-file=./paper-meta.yaml \
-				 --wrap=none \
+			 --defaults acmart \
+			 --metadata-file=./paper-meta.yaml \
+			 --wrap=none \
 		     $(PAPER).md
 
 # Create a single file tex document for arXiv
