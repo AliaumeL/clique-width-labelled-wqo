@@ -21,7 +21,8 @@ subgraph relation}, where $G$ is an induced subgraph of $H$ if $G$ can be
 obtained from $H$ by deleting vertices. Unlike
 the graph minor relation, the induced subgraph relation is not a
 well-quasi-ordering on the class of all finite graphs, as witnessed by the
-infinite family of cycles of increasing size, which form an infinite antichain.
+infinite family of cycles of increasing size, which form an infinite sequence of 
+pairwise incomparable graphs.
 However, some classes of finite graphs are well-quasi-ordered under the induced
 subgraph relation: for instance, the class of all finite paths, or the class of
 all finite cliques. Distinguishing which classes of (finite) graphs are
@@ -31,9 +32,7 @@ problem in graph theory, dating back to Pouzet's seminal work \cite{POUZ72}.
 \AP In general, there is little hope to characterise all such classes, since
 any countable order with finite infixes can be embedded into the induced
 subgraph relation on finite graphs (this is a consequence of \cite[Lemma
-5.1]{Kuske06}). However, there are high hopes that a finer notion of
-well-quasi-ordering on classes of finite graphs is more amenable to structural
-characterisations. This is why one usually considers \emph{labelled}
+5.1]{Kuske06}). Fortunatelly, one usually considers \emph{labelled}
 well-quasi-orderings on classes of finite graphs. Given a class $\Cls$ of
 finite graphs, and a well-quasi-ordering $(X, \leq)$, one can consider the
 class $\Label{X}{\Cls}$ of graphs in $\Cls$ whose vertices are labelled by
@@ -95,16 +94,16 @@ vertices of its structures such that the new class is still
 recent development of algebraic methods for polynomials over relational
 structures \cite[Section 3, Theorem 11 and 12]{GHOLAS24}, where ``monomials''
 are defined as structures labelled by $(\mathbb{N}, \leq)$. We refer 
-to this property as being \reintro(wqo){orderably} well-quasi-ordered.
+to this property as being \reintro{orderably $\forall$-well-quasi-ordered}.
 
 
 \AP Even for classes of finite undirected graphs, these conjectures remain
-open. Several works that date back to the 90s have idendified structural
+open. Several works dating back to the 90s have idendified structural
 properties of hereditary classes of finite graphs that guarantee that they are
 \kl{$\forall$-well-quasi-ordered}, such as being of bounded tree-depth
 \cite{DING92}. In 2010, Daligault, Rao and Thomassé \cite{DRT10} initiated the
 study in the reverse direction, by considering a syntax for graph classes
-(using NLC graph expressions), and identifying which ones are
+(using NLC graph expressions), and identifying which ones among them are
 \kl{$2$-well-quasi-ordered}. In this context, they verified Pouzet's
 conjectures, but were unable to generalise their results to arbitrary graph
 classes \cite[Conjecture 4]{DRT10}. All the classes considered in \cite{DRT10}
@@ -130,7 +129,9 @@ is not \kl{$2$-well-quasi-ordered} contains all finite paths \cite[Corollary
 2]{DRT10}. There are examples of hereditary classes that are not
 \kl{$2$-well-quasi-ordered} and do not contain all finite paths, but on every
 known such example, one can ``extract'' finite paths using very simple logical
-formulas. This lead to the following conjecture.
+formulas. This lead to the following conjecture, where 
+\kl{existentially transduces} is a notion from model theory
+(see \cref{sec:prelims} for a formal definition).
 
 \begin{conjecture}[{\cite[Conjecture 26]{LOPEZ24}}]
     \label{conj:path-transduction}
@@ -141,7 +142,7 @@ formulas. This lead to the following conjecture.
 
 \AP Another kind of obstruction to being \kl{$\forall$-well-quasi-ordered}
 comes from the existence of infite antichains with a periodic structure that
-were called \kl(weak){periodic antichains} in \cite[Section 7]{ALM17}.
+were called \reintro(weak){periodic antichains} in \cite[Section 7]{ALM17}.
 
 \begin{conjecture}[{\cite[Conjecture 2]{ALM17}}]
   \label{lozin:conj}
@@ -169,10 +170,13 @@ correspondence between \kl{$2$-well-quasi-ordering} and
 
 
 \paragraph{Contributions} \AP Our main contribution is \cref{main:theorem},
-that answers positively to the conjectures of \cite{LOPEZ24}, and completely
-solves both Pouzet's conjectures for hereditary classes of bounded clique-width
-(see \cref{main:corollary}).
-
+that answers positively to the conjectures of \cite{LOPEZ24}.
+To that end, we first consider generalisation of the framework 
+of \cite{DRT10} from NLC graph expressions to
+\kl{MSO interpretations} from trees (these will be formally defined 
+in \cref{sec:prelims}). This also generalises 
+the setting of \cite{LOPEZ24} that stutied \kl{MSO interpretations} from
+\emph{words} (i.e., paths). Our main combinatorial result is the following.
 
 \begin{theorem}
   \label{main:theorem}
@@ -182,26 +186,27 @@ solves both Pouzet's conjectures for hereditary classes of bounded clique-width
   \begin{enumerate}
     \item $\Cls$ is \kl{$2$-well-quasi-ordered},
     \item $\Cls$ is \kl{$\forall$-well-quasi-ordered},
-    \item $\Cls$ is \kl{orderably well-quasi-ordered},
+    \item $\Cls$ is \kl{orderably $\forall$-well-quasi-ordered},
   \end{enumerate}
 \end{theorem}
+
+From \cref{main:theorem},
+we derive the following corollary that solves
+Pouzet's conjectures for hereditary classes of bounded clique-width.
 
 \begin{corollary}
   \label{main:corollary}
   The same holds when $\Cls$ is a hereditary class of bounded clique-width graphs.
 \end{corollary}
 
-
-
-
-From our proof techniques, we also derive nice obstructions to being
-\kl{$2$-well-quasi-ordered}, that yield the equivalences stated in
-\cref{thm:characterisations}. These answer positively to the conjectures of
+Because our proof techniques exhibit structural 
+obstructions to being \kl{$2$-well-quasi-ordered}, we also 
+obtain the following characterisations in
+\cref{thm:characterisations}.
+These answer positively to the conjectures of
 \cite{ALM17,LOPEZ24}. In particular, for a hereditary class $\Cls$ to be
 \kl{$2$-well-quasi-ordered}, it suffices that it avoids very simple
 \kl{(strong) periodic antichains}.
-
-
 
 \begin{theorem}
   \label{thm:characterisations}
@@ -218,7 +223,8 @@ From our proof techniques, we also derive nice obstructions to being
   \end{enumerate}
 \end{theorem}
 
-The results of \cref{main:corollary} extends to non-hereditary classes of
+The results of \cref{main:corollary}
+extend to non-hereditary classes of
 bounded clique-width graphs, but for the sake of clarity and space, we only
 state them on hereditary ones.
 On the other hand, \cref{thm:characterisations} does not immediately 
@@ -226,38 +232,48 @@ extend to non-hereditary classes, as witnessed by the following example.
 
 \begin{example}
   \label{ex:non-hereditary}
-  Let $\Cls$ be the class of graphs that are complete binary trees,
-  i.e., acyclic graphs where every vertex has degree at most $3$, and a single vertex has degree $2$.\mael{the i.e. is not necessary}
-  Then, $\Cls$ is of bounded clique-width and is not $2$-well-quasi-ordered, 
-  but: every class $\Cls[D] \subseteq \Cls$ of bounded linear clique-width
-  is finite hence $2$-well-quasi-ordered. Since \kl{periodic antichains}
-  have bounded linear clique-width, there is no \kl{periodic antichain} in $\Cls$.
-  Note that $\Cls$ existentially transduces the class of all finite paths
-  by selecting one leaf and following the path to the root, but 
-  one can show that $\Cls$ does not existentially \emph{interpret}
-  the class of all finite paths.
+  Let $\Cls$ be the class of graphs that are complete binary trees
+  has bounded clique-width, is not \kl{$2$-well-quasi-ordered},
+  but contains no \kl{periodic antichain}, 
+  and every subclass $\Cls[D] \subseteq \Cls$ of bounded linear clique-width
+  is \kl{$2$-well-quasi-ordered}.
+  It happens that $\Cls$ \kl{existentially transduces} the class of all finite paths,
+  but it does not \kl{existentially interprets} them.
 \end{example}
+\begin{proof}
+  It is well-known that the class of complete binary trees has
+  bounded clique-width. Furthermore, it is not \kl{$2$-well-quasi-ordered},
+  since one can color the leaves and the root of the complete binary trees
+  to form an infinite \kl{antichain}.
+  On the other hand, any subclass $\Cls[D] \subseteq \Cls$ of bounded linear
+  clique-width must be finite: indeed, complete binary trees have unbounded
+  linear clique-width. Finally, because \kl{periodic antichains} have 
+  bounded linear clique-width (see \cref{sec:interpreting-paths})
+  there cannot be any \kl{periodic antichain} in $\Cls$.
+
+  The \kl{existential transduction} of all finite paths from $\Cls$ is obtained
+  by transducing all finite substructures, that in particular contains all finite
+  paths. There cannot be an \kl{existential interpretation} of all finite paths from $\Cls$,
+  because paths have only two automorphisms (reversing and identity), while
+  complete binary trees have many more, and interpretations must preserve automorphisms.
+\end{proof}
 
 
 
 
 \paragraph*{Outline}
 \cref{sec:prelims} introduces the necessary background on well-quasi-orders,
-graphs, and MSO interpretations.
+graphs, MSO interpretations and first-order transductions.
 \cref{sec:ramseyan} shows how to reduce the study of graph classes obtained by
-MSO interpretations from trees to the study of trees labelled over finite monoids.
-We introduce forward Ramseyan splits and define marked nested trees, establishing
-\cref{thm:marked-nested-trees-wqo} which proves that
-bounded well-marked nested trees are well-quasi-ordered.
+MSO interpretations from trees to the study of trees labelled over finite monoids. This section also shows how to leverage 
+\kl{forward Ramseyan splits} to obtain well-behaved tree representations of graphs,
+that are well-quasi-ordered (as trees) with respect to the so-called \emph{gap embedding} relation.
 \cref{sec:bad-patterns} identifies combinatorial obstructions to being 
-2-well-quasi-ordered in images of interpretations from trees. 
-We develop the theory of boughs and their types, establishing key lemmas
-about perfect and imperfect boughs.
+2-well-quasi-ordered in images of interpretations from trees, and is the core combinatorial part of the paper.
 \cref{sec:hereditary-classes} brings together the previous results to prove
-our main theorems. We establish \cref{main:theorem} showing the equivalence
-between 2-WQO, $\forall$-WQO, and orderably WQO for images of MSO interpretations
-from trees, and \cref{main:corollary} extending this to hereditary classes of
-bounded clique-width. We also prove \cref{thm:characterisations} which provides
-multiple equivalent characterizations of when such classes are 2-well-quasi-ordered,
-including via periodic antichains and existential transductions.
-\cref{sec:conclusion} discusses open problems and future directions.
+our \cref{main:theorem} and \cref{main:corollary}. We also 
+discuss the equivalence between the first two items of \cref{thm:characterisations}.
+The remaining items of \cref{thm:characterisations} 
+are proven equivalent in \cref{sec:interpreting-paths}.
+Finally, in 
+\cref{sec:conclusion} we discuss some perspectives and open problems.

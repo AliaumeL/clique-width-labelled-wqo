@@ -161,6 +161,7 @@
 
 
 \knowledge{notion}
+  | orderably@wqo
   | orderably well-quasi-ordered
   | orderably $k$-well-quasi-ordered
   | orderably $\forall $-well-quasi-ordered
@@ -316,6 +317,29 @@
 \knowledge{notion}
   | context@bough
 
+\knowledge{notion}
+  | block@bough
+  | blocks@bough 
+  | bough block
+  | bough blocks
+
+\knowledge{notion}
+  | backbone@bough
+  | bough backbone
+
+\knowledge{notion}
+  | compatible@bough
+  | compatible bough
+
+\knowledge{notion}
+  | good bough
+  | good boughs
+  | good@bough
+
+\knowledge{notion}
+  | bad bough
+  | bad boughs
+  | bad@bough
 
 %%%%% NEW KNOWLEDGES 
 %

@@ -140,9 +140,10 @@ suffices to prove that the class of trees is \kl{well-quasi-ordered} under the
 $(X, \leq_X)$.
 
 
-\AP  Historically, this  was (although not explicitly) the approach taken by
+\AP Historically, this approach was used to prove that some classes of graphs are
+\kl{labelled-well-quasi-ordered}, see for instance the results of
 \cite{DING92,DRT10}. Unfortunately, the \kl{composition ordering} on trees is
-often way stricter than the \kl{induced subgraph} ordering. It was already
+often way stricter than the \kl{induced subgraph} ordering. It was
 observed that the \kl{composition ordering} on trees is \kl{well-quasi-ordered}
 if and only if \emph{for every} $P \subseteq M^3$, the class of graphs obtained
 from trees by considering only the triples in $P$ is
@@ -296,7 +297,7 @@ $\tlbl{\t}{x}{y}$ given a \kl{forward Ramseyan split} as proven in \cite[Lemma
 
 \AP The main theorem of \cite{COLC07} is that for every finite monoid $M$,
 there exists a finite depth $N$ such that for every tree $\aTree$ edge-labelled
-using $M$, there exists a forward Ramseyan split of height $N$ for $T$. We can
+using $M$, there exists a forward Ramseyan split of height $N$ for $\aTree$. We can
 therefore assume that our trees are always equipped with a \kl{forward Ramseyan
 split} of height $N$. 
 
@@ -478,13 +479,6 @@ assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
   \label{rem:unbounded-mark-not-wqo}
   The \kl{well-quasi-order} of \cref{thm:marked-nested-trees-wqo}
   does not hold if we remove the \kl{$L$-boundedness} assumption.
-  Indeed, consider the infinite sequence of trees
-  $(\t_n, \spt_n, \marking_n)$ where $\t_n$ is a branch of length $n+1$,
-  $\spt_n$ assigns the value $1$ to every node of $\t_n$,
-  and $\marking_n$ marks all the nodes of $\t_n$.
-  It is straightforward to check that for every $n < m$,
-  $(\t_n, \spt_n, \marking_n)$ does not \kl{gap-embed} into
-  $(\t_m, \spt_m, \marking_m)$.
 \end{lemma}
 \begin{proof}
   We create an infinite antichain by 
