@@ -152,6 +152,7 @@
  | $k$-well-quasi-ordered
  | $2$-well-quasi-ordered
  | $2$-well-quasi-ordering
+ | $2$-WQO
 
 \knowledge{notion}
  | $\forall $-well-quasi-ordered
