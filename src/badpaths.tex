@@ -9,96 +9,12 @@ In this section, we will isolate combinatorial obstructions to being
 MSO interpretations} from trees. We will take the same notations as in
 \cref{sec:ramseyan}. 
 
-\begin{definition}
-    \label{ramseyan-branch:def}
-    Let $\aTree$ be a tree and $\spt$ be a \kl{forward Ramseyan split} of height $N$.
-    A \intro{bough of level $k$} in $\aTree$ is an infix of a branch of $\aTree$
-    such that its maximal and minimal elements have level $k$,
-    and such that 
-    all elements of the bough have level greater or equal to $k$.
 
-    The \intro{dimension of a bough} is the number of elements of level $k$
-    in the \kl{bough}.
-\end{definition}
-
-\AP Let $B$ be a \kl{bough of level $k$} in $\aTree$. Given two nodes $b_1 \treelt b_2$ in $B$ such that $\spt(b_1) = \spt(b_2) = k$, we define the $\aTree_{b_1:b_2}$
-as the set of nodes $x$ in $\aTree$ such that $b_1 \treeleq x$ and $\neg (b_2
-\treeleq x)$. For every leaf $x \in \aTree_{b_0: b_n}$ where $n$ is the
-\kl{dimension of the bough} $B$, we define $\Bt(x)$ to be the least ancestor of
-$x$ that belongs to $B$. Similarly, we define $\Bl(x)$ to be the least element
-of $B$ that is greater or equal to $\Bt(x)$, and $\Br(x)$ to be the greatest
-element of $B$ that is less or equal to $\Bt(x)$. To every leaf $x$ of $B(\aTree)$,
-we can therefore associate the following values in $M$:
-$\BtL(x) \defined
-\tlbl{\t}{\Bt(x)}{x}$, $\BlL(x) \defined \tlbl{\aTree}{\Bl(x)}{\Bt(x)}$,
-$\BrL(x) \defined \tlbl{\t}{\Bt(x)}{\Br(x)}$,
-and $\BrootL(x) \defined \tlbl{\aTree}{\treeRoot}{\Bl(x)}$. We call this tuple 
-the \intro{bough type} of the leaf $x$ with respect to the \kl{bough} $B$.
-We refer to
-\cref{type-of-a-leaf-in-branch:fig} for an illustration of the type of a leaf
-with respect to a given \kl{bough} $B$. We also refer to
-\cref{partitionning-a-graph:fig} for an illustration of the resulting partition
-of the tree $\aTree$ with respect to a given \kl{bough} $B$.
-
-\begin{figure}
+% use a large two column figure here to illustrate the various notions
+% we are using sigcomp latex class in two columns where the command
+% \begin{figure*} ... \end{figure*} creates a figure spanning both columns
+\begin{figure*}[htbp]
     \centering
-    \begin{tikzpicture}[
-        branch/.style={
-            color=Prune,
-            inner sep=0pt,
-            minimum size=4pt,
-            fill,
-            circle
-        },
-        inner/.style={
-            color=A1,
-            inner sep=0pt,
-            minimum size=4pt,
-            draw,
-            circle
-        },
-        staredge/.style={
-            color=A1,
-            ->,
-            dashed
-        },
-        root/.style={
-            color=Prune,
-        },
-        leaf/.style={
-            color=Prune,
-        },
-        monoid/.style={
-            color=A2
-        },
-        ]
-        % first draw the branch 
-        \node[root]   (root) at (-2,0) {$\treeRoot$};
-        \node[branch] (b0) at (0,0) {};
-        \node[branch] (b1) at (4,0) {};
-        \node[inner]  (t)  at (2,0) {};
-        \node[leaf]   (x)  at (3.5,-2) {$x$};
-
-        \node[above=0.1cm of b0] {$\Bl(x)$};
-        \node[above=0.1cm of t]  {$\Bt(x)$};
-        \node[above=0.1cm of b1] {$\Br(x)$};
-
-        \draw[staredge] (root) -- (b0);
-        \draw[staredge] (b0) -- node[monoid, midway, below] {$\BlL(x)$} (t);
-        \draw[staredge] (t)  -- node[monoid, midway, below] {$\BrL(x)$} (b1);
-        \draw[staredge] (b1) -- (5,0);
-
-        \draw[staredge] (t)  -- node[monoid, midway, below left] {$\BtL(x)$} (x);
-    \end{tikzpicture}
-    \caption{The type of a leaf with respect to a given \kl{bough} $B$,
-    here $\Bl(x)$ and $\Br(x)$ are elements of level $k$ in the \kl{bough},
-    and $\Bt(x)$ is the least ancestor of $x$ in the \kl{bough}.}
-    \label{type-of-a-leaf-in-branch:fig}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \resizebox{0.9\linewidth}{!}{
     \begin{tikzpicture}[
         localType/.style={
             color=C3,
@@ -131,7 +47,7 @@ of the tree $\aTree$ with respect to a given \kl{bough} $B$.
         \foreach[count=\x] \y in {0,1,2,3} {
             \node (E\x) at ({ 2 * \x - 1},2.6) {$e_{\y}$};
             \draw[->,thick] (b\y) to[bend left=40] (b\x);
-            \node (T\x) at ({ 2 * \x - 1},-0.6) {$\t_{b_{\y}:b_{\x}}$};
+            \node (T\x) at ({ 2 * \x - 1},-0.6) {$\BBlock[\t]{b_{\y}}{b_{\x}}$};
         }
         
         \node (x) at (3,0.2)  {$x$};
@@ -159,23 +75,69 @@ of the tree $\aTree$ with respect to a given \kl{bough} $B$.
         node[midway, below] {$\BlL(y)$}
         (b3);
     \end{tikzpicture}
-    }
     \caption{Partitionning a branch of a tree using a \kl{bough}. To compute
     the presence of an edge between $x$ and $y$ in the resulting graph, 
     it is sufficient to know the values of
     $\tlbl{\t}{b_2}{b_3}$, and the respective \kl{bough types} of $x$ and $y$.}
     \label{partitionning-a-graph:fig}
-\end{figure}
+\end{figure*}
+
+\begin{definition}
+    \label{ramseyan-branch:def}
+    Let $\aTree$ be a tree and $\spt$ be a \kl{forward Ramseyan split} of height $N$.
+    A \intro{bough of level $k$} in $\aTree$ is defined from a part of a $k$-neighbourhood as follows:
+    Consider a sequence $b_0, b_1, \ldots, b_n$ of nodes of level $k$ on a branch of $\aTree$
+    forming a \kl{$k$-neighbourhood}.
+    Elements of the \reintro{bough} $B$ are all nodes $x$ in $\aTree$ such that 
+    $b_0 \treeleq x$, and $\neg (b_n \treeleq x)$, plus $b_n$ itself.
+    
+    We say that the \intro(bough){dimension} of the \kl{bough} $B$ is $n+1$.
+\end{definition}
+
+\AP Let $B$ be a \kl{bough of level $k$} in $\aTree$.
+Given two nodes $b_1 \treelt b_2$ in $B$ such that $\spt(b_1) = \spt(b_2) = k$, we define the $\BBlock[\aTree]{b_1}{b_2}$
+as the set of nodes $x$ in $\aTree$ such that $b_1 \treeleq x$ and $\neg (b_2
+\treeleq x)$. We also refer to
+\cref{partitionning-a-graph:fig} for an illustration of the resulting partition
+of the tree $\aTree$ with respect to a given \kl{bough} $B$.
+
+\AP
+For every leaf $x \in \BBlock[\aTree]{b_0}{b_n}$ where $n$ is the
+\kl{dimension of the bough} $B$, we define $\intro*\Bt(x)$ to be the least ancestor of
+$x$ that belongs to $B$. Similarly, we define $\intro*\Bl(x)$ to be the least element
+of $B$ that is greater or equal to $\intro*\Bt(x)$, and $\intro*\Br(x)$ to be the greatest
+element of $B$ that is less or equal to $\intro*\Bt(x)$. To every leaf $x$ of $B(\aTree)$,
+we can therefore associate the following values in $M$:
+\begin{align*}
+  \intro*\BtL(x) &\defined \tlbl{\t}{\Bt(x)}{x}, \\
+  \intro*\BlL(x) &\defined \tlbl{\aTree}{\Bl(x)}{\Bt(x)}, \\
+  \intro*\BrL(x) &\defined \tlbl{\t}{\Bt(x)}{\Br(x)}, \\
+  \intro*\BrootL(x) &\defined \tlbl{\aTree}{\treeRoot}{\Bl(x)}.
+\end{align*}
+We call this tuple 
+the \intro{bough type} of the leaf $x$ with respect to the \kl{bough} $B$.
+We again refer to 
+\cref{partitionning-a-graph:fig}
+for an illustration of the type of a leaf
+with respect to a given \kl{bough} $B$. 
+
 
 \AP In the rest of the paper, we will ofter rely on some tree surgery operation
 consisting in replacing a \kl{bough} in a tree by some other \kl{bough}. Given
-a \kl{bough} $B$ in a tree $\t$, we write $\t = C[B]$ to denote that $\t$ can
-be obtained by plugging the \kl{bough} $B$ into a \intro{context} $C[\square]$.
-Formally, a \kl{context} $C[\square]$ is given by a tree $\t_{\mathsf{root}}$
+a \kl{bough} $B$ in a tree $\t$ defined using a \kl{$k$-neighbourhood}
+$b_0$, $b_1$, \ldots, $b_n$,
+we write $\t = C[B]$ to denote that $\t$ can
+be obtained by plugging the \kl{bough} $B$ into a \intro(bough){context} $C[\square]$.
+Formally, a \reintro(bough){context} $C[\square]$ is given by a tree $\t_{\mathsf{root}}$
 with a distinguished leaf $\square$, together with two trees
 $\t_{\mathsf{left}}$ and $\t_{\mathsf{right}}$. These three elements are
 reprenented as dashed lines in \cref{partitionning-a-graph:fig}.
-\maelin{It is unclear what this leaf $\square$. Maybe you should detail morehow you attach $B$ to the context.}
+The tree $C[B]$ is then obtained as follows: one first attaches 
+$\t_{\mathsf{left}}$ as the left subtree of $b_n$,
+where $b_n$ is the last element of the \kl{$k$-neighbourhood} defining $B$,
+then one attaches $\t_{\mathsf{right}}$ as the right subtree of $b_n$, and finally,
+one replaces the distinguished leaf $\square$ in $\t_{\mathsf{root}}$ by the
+node $b_0$, the first element of the \kl{$k$-neighbourhood} defining $B$.
 
 \AP Two boughs $B$ and $B'$ are \intro{compatible} if they start with the same
 idempotent value, and if for every tree $\aTree = C[B]$, the tree $C[B']$ is
@@ -236,84 +198,72 @@ hand, we will show that the existence of \kl{bad boughs} of arbitrarily large
 image of $\someInterp$ (\cref{sec:obstructions}).
 
 
-\subsection{Gap Embedding}
+\subsection{Using the Gap Embedding}
 \label{sec:gap-embedding}
 
-\AP If there is a bound\mael{upper/lower ?} $N_0$ on the \kl{dimension} of \kl{bad boughs}, we can
+\AP If there is an upper bound $N_0$ on the \kl{dimension} of \kl{bad boughs}, we can
 use \cref{fact:bough-replacement} to upgrade our trees in the following way:
 given a tree $\t$, we will insert dummy nodes in every \kl{bough} of level $k$
-that has dimension greater than $N_0$. The resulting tree $\t'$ will have two
-kind of nodes: \kl{important nodes}, that correspond to nodes of $\t$, and
-\kl{dummy nodes} that were inserted during this procedure. The following 
-\cref{lem:important-nodes} precises the properties of this construction.
+that has \kl{dimension} greater than $N_0$. The resulting tree $\t'$ will be a
+\kl{marked nested tree} as defined in \cref{sec:ramseyan}, with three
+kinds of nodes: \kl{marked nodes}, that correspond to nodes of $\t$,
+\kl{dummy nodes} that were inserted during this procedure,
+and \kl{separating nodes}, that are the last nodes of the \kl{$k$-neighbourhoods}
+defining the \kl{boughs} we manipulated.
+The following 
+\cref{lem:important-nodes} shows that this construction produces
+\kl{well-marked nested trees} that are \kl{$N_0$-bounded}, allowing us to apply
+\cref{thm:marked-nested-trees-wqo}.
 
 \begin{lemma}
     \label{lem:important-nodes}
     Assume that there exists a bound $N_0$ on the \kl{dimension} of \kl{bad
-    boughs}. Then, for every tree $\t$, one can effectively
-    construct a tree $\t'$ equipped with a set of \kl{important nodes} such that:
-    \begin{itemize}
-      \item the restriction of $\t'$ to its \kl{important nodes} is $\t$,
-      \maelin{Maybe def restriction of a tree (it is intuitive but may be unclear)}
-      \item the restriction of $\someInterp(\t')$ to \kl{important leaves}
-        is exactly $\someInterp(\t)$, \maelin{Here restriction is induced subgraph}
-      \item every \kl{bough} containing only \kl{important nodes}
-        has dimension less than $N_0$.
-    \end{itemize}
+    boughs}. Then, for every tree $\t$ equipped with a \kl{forward Ramseyan split} $\spt$, 
+    one can effectively construct a \kl{well-marked nested tree} $(\t', \spt', \marking)$ 
+    that is \kl{$N_0$-bounded} and such that
+    the restriction of $\someInterp(\t')$ to \kl{marked leaves}
+    is isomorphic to $\someInterp(\t)$.
 \end{lemma}
 \begin{proof}
-  We proceed top-down in the tree $\t$. At the beginning, we mark 
-  every node of $\t$ as \kl{important}.
+  We proceed top-down in the tree $\t$. At the beginning, we define 
+  every node of $\t$ as \kl(nodes){marked}.
 
   Whenever we encounter a \kl{bough} $B$ of level $k$ with dimension greater
-  than $N_0$, we replace it by a \kl{good bough}\mael{equivalent ?} $H$ of level $k$ with
-  dimension exactly $N_0$, which exists by assumption.
-  \maelin{Je pense que ce n'est pas clair les arguments ici, pourquoi il en existe un plus petit qui est compatible ?}
-   This operation does not
+  than $N_0$, we first consider its prefix of \kl{dimension} $N_0 + 1$. 
+  This prefix is a \kl{good bough} by assumption on the bound $N_0$,
+  hence there exists a \kl{compatible} \kl{bough} $H$ of level $k$
+  and one can replace $B$ by $H$ in $\t$. This operation does not 
   modify the graph outside of the \kl{bough} by \cref{fact:bough-replacement}.
-  We then mark the leaves of $H$ that correspond to leaves of $B$ as
-  \kl{important}, and the other ones of $H$ as \kl{dummy}. Then, we complete
-  the marking of \kl{important} nodes by asking that the least common ancestor
-  of two \kl{important} nodes is also \kl{important}. By definition, the graph
-  induced by the \kl{important leaves} remains unchanged by this operation.
+  Furthermore, by definition of \kl{good boughs}, the graph induced 
+  by $B$ is an induced subgraph of the graph induced by $H$.
+  We update the marking accordingly so that leaves of $B$ that were marked 
+  remain marked in $H$, untouched leaves of $H$ become \kl{dummy},
+  and we mark the last element of the $k$-neighbourhood defining $H$
+  as a \kl{separating node}.
+  Then, we complete
+  the marking by ensuring that the least common ancestor
+  of two \kl{marked nodes} is also \kl{marked}. By definition, the graph
+  induced by the \kl{marked leaves} remains unchanged by this operation.
+  
+  To verify that $(\t', \spt', \marking)$ is \kl{well-marked}, note that by construction,
+  whenever we have \kl{marked nodes} $x$ and $y$ with a non-\kl{marked} node in between
+  at level $k$, this configuration arises from a \kl{bough} replacement where
+  the required witnesses $z_1, z_2, z_3$ exist by the definition of \kl{good boughs}.
+  Moreover, the tree is \kl{$N_0$-bounded} because every maximal path of non-\kl{dummy}
+  nodes has length at most $N_0$ by a simple induction on the length.
 \end{proof}
 
-Leveraging \cref{lem:important-nodes}, we can now assume that every nodes of
-interest in our trees are somehow \emph{well-separated} from each other,
-allowing us to leverage the remarks of \cref{sec:ramseyan} and
-\cref{fast-computation:fig}.
-
-\AP We will now define a \kl{well-quasi-ordering} on the trees equipped with
-\kl{forward Ramseyan splits} and \kl{important nodes}. The natural candidate is
-called the \intro{gap embedding} relation, originally defined by Dershowitz and
-Tzameret \cite{DERSHOWITZ200380}. It was noticed by Freund \cite{FREU20} that
-this ordering can be understood as a nested version of Kruskal's Tree Theorem,
-and this will be our point of view in the following, since we will need to
-slightly adapt the classical definition to our setting.
-
-\todo[inline]{waaaaaaa}
-
-% TODO start with the positive part !
-%
-% Lemma: one can extend trees with dummy nodes such that all k-neighbourhoods of
-% ``importand nodes'' are of bounded size.
-%
-% Lemma: one can define a quasi-ordering on trees with important nodes that 
-% is wqo, and only touches dummy nodes.
-%
-% Conclude using Lemma 12
-%
-
-% Now: the bad part.
-% Assume that there are arbitrarily long bad boughs.
-% 
-% Lemma 1: we can assume that the context is fixed, because 
-% there are essentially finitely many contexts.
-%
-% Lemma 2: we can then color the graphs obtained by fixing the context in
-% one color. By 2-WQO, we would obtain a pair of graphs where one embeds
-% into the other, but this gives an embedding of bad boughs, which is a contradiction.
-%
+\AP By \cref{lem:important-nodes}, we can transform any tree into a \kl{$N_0$-bounded}
+\kl{well-marked nested tree}. By \cref{thm:marked-nested-trees-wqo}, the class of
+such trees is \kl{well-quasi-ordered} under the \kl{gap-embedding} ordering. Furthermore,
+by \cref{cor:gap-embedding-monotone}, the \kl{gap-embedding} ordering between
+\kl{marked nested trees} preserves the interpretation: if $(\t_1, \spt_1, \marking_1)
+\gemb (\t_2, \spt_2, \marking_2)$, then the graph interpreted from
+$(\t_1, \spt_1, \marking_1)$ (restricted to \kl{marked leaves}) is an induced
+subgraph of the graph interpreted from $(\t_2, \spt_2, \marking_2)$ (restricted to
+\kl{marked leaves}). Since the interpretation restricted to \kl{marked leaves}
+coincides with the original interpretation on $\t_1$ and $\t_2$ by \cref{lem:important-nodes},
+this establishes the desired order-preserving property.
 
 \subsection{Obstructions}
 \label{sec:obstructions}
@@ -393,11 +343,19 @@ This is the content of the following \cref{lem:finitely-many-boughs}.
   witnesses that $B_i$ is a \kl{good bough} in $C[B_i]$, which is a contradiction.
 \end{proof}
 
-
-\section{Hereditary Classes}
+\clearpage
+\section{Bounded Clique Width}
 \label{sec:hereditary-classes}
 
-We use a notion of \kl{perfect boughs}
+
+In this section, we will aim at leveraging the previous results 
+to tackle classes of \kl{bounded clique-width}. Our first goal is to 
+prove our \cref{main:theorem} regarding the 
+images of finite trees under \kl{MSO interpretations}. There are two difficulties here:
+first, we only dealt with \kl{simple MSO interpretations} so far, and second,
+we have not yet given any decision procedure to check whether the image of
+a given \kl{simple MSO interpretation} is \kl{2-well-quasi-ordered}. Let us first
+tackle the second difficulty.
 
 \begin{definition}[Perfect Bough]
   \label{def:perfect-bough}
@@ -427,9 +385,9 @@ We use a notion of \kl{perfect boughs}
 \begin{proof}
   First, if we have a bound on the \kl{dimension} of \kl{imperfect boughs},
   then we also have a bound on the \kl{dimension} of \kl{bad boughs},
-  hence by \cref{lem:good-boughs-wqo}, the image of $\someInterp$ is
+  because every \kl{bad bough} is an \kl{imperfect bough}.
+  Hence, by \cref{lem:good-boughs-wqo}, the image of $\someInterp$ is
   \kl{$\forall$-well-quasi-ordered}.
-  \maelin{I don't see the implication, can't you have unbounded dimension on bad bough why having bound for the imperfects}
 
   Conversely, assume that there exist \kl{imperfect boughs} of arbitrarily
   large \kl{dimension}. Then, by an argument similar to the one of 
@@ -446,15 +404,76 @@ recognizable.
   \label{lem:recognizing-perfect-boughs}
   There exists an $\MSO$ formula that recognizes \kl{imperfect boughs}.
 \end{lemma}
+\begin{proof}[Proof Sketch]
+  The proof follows the same pattern as 
+  \cite[Lemma 19]{LOPEZ24}. The main idea is that if a \kl{bough} $B$ is
+  \kl{perfect}, then the only thing that matters for a given leaf $x$ in $B$
+  is its \kl{bough type} and whether it is mapped on the left or right of the
+  ``untouched block'' in the \kl{bough} $H$. Hence, one can guess for every leaf 
+  in $B$ where it is mapped (left or right of the untouched block),
+  and verify that the mapping preserves edges using only \kl{MSO} formulas.
+  If such a mapping exists, then one can reconstruct a bough $H$
+  by triplicating $B$, that is, $H = B B B$, and mapping leaves 
+  to their corresponding copy in $H$. The middle copy will be untouched, 
+  witnessing that $B$ is a \kl{perfect bough}.
+  This reasoning was made formal for \kl{linear clique-width} in
+  \cite[Lemma 16]{LOPEZ24}, and the exact same proof works here.
+\end{proof}
 
 \begin{corollary}
   One can decide whether there are \kl{imperfect boughs} of arbitrarily large
   \kl{dimension}.
 \end{corollary}
+\begin{proof}
+  One can build a cost-mso formula on trees that outputs $0$ if the tree 
+  is not an \kl{imperfect bough}, and outputs its \kl{dimension} otherwise.
+  By \cite{COLOD10}, one can decide whether this cost-mso formula is
+  bounded on the class of finite trees, hence the result.
+\end{proof}
 
-One other advantage of \cref{lem:perfect-boughs-wqo} is that
-in the case of hereditary classes, we can further simplify 
-the statement. 
+
+We are now ready to prove our \cref{main:theorem}.
+\begin{proof}
+  Let $\someInterp$ be an \kl{MSO interpretation}.
+  We can get rid of the domain formula and selection formula 
+  by standard arguments without changing the \kl{2-well-quasi-ordering}
+  status of the image of $\someInterp$ (see \cite{LOPEZ24}).
+  Hence, we can assume that $\someInterp$ is a \kl{simple MSO interpretation}.
+  Furthermore, the transformation from an \kl{simple MSO interpretation}
+  to a \kl{monoid interpretation} from trees
+  described in \cref{sec:ramseyan} is effective.
+  Finally, by \cref{lem:perfect-boughs-wqo}
+  the image of $\someInterp$ is \kl{$2$-well-quasi-ordered}
+  if and only if it is \kl{$\forall$-well-quasi-ordered}, and 
+  by \cref{lem:recognizing-perfect-boughs},
+  one can decide whether the image of $\someInterp$ is \kl{$2$-well-quasi-ordered}. 
+
+  It remains to discuss the fact that one can add a total ordering on the graphs 
+  without changing the \kl{2-well-quasi-ordering} status of the image of $\someInterp$.
+  This is because we prove that the image of $\someInterp$ is \kl{$2$-well-quasi-ordered}
+  using the \kl{marked gap-embedding} ordering on \kl{marked nested trees}
+  representing the graphs, which already includes a total ordering on the leaves
+  (the topological ordering).
+\end{proof}
+
+Let now turn our attention to hereditary classes to obtain our 
+\cref{main:corollary}.
+\begin{proof}
+  By a standard argument, if the class $\someInterp$ is hereditary
+  and \kl{$2$-well-quasi-ordered}, then it is defined by finitely many
+  forbidden induced subgraphs (see \cite{LOPEZ24} for details).
+  Hence, if $\Cls$ has \kl{bounded clique-width} and is hereditary,
+  one can assume that $\Cls$ is the image of an \kl{MSO interpretation}
+  $\someInterp$ from finite trees, and the result follows from 
+  \cref{main:theorem}.
+\end{proof}
+
+
+Let us now turn our attetion to \cref{thm:characterisations},
+and in particular the link between \kl{2-well-quasi-ordering} and
+\kl{bounded linear clique-width}. The following lemma shows that
+the existence of \kl{imperfect boughs} of arbitrarily large \kl{dimension}
+can be witnessed using only \kl{blocks} from a finite set.
 
 \begin{lemma}
   \label{lem:hereditary-perfect-boughs}
@@ -475,3 +494,4 @@ As an immediate consequence of \cref{lem:perfect-boughs-wqo} and
   every class of \kl{bounded linear clique-width} in $\someInterp$
   is \kl{$2$-well-quasi-ordered}.
 \end{corollary}
+

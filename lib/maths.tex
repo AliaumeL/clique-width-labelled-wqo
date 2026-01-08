@@ -54,15 +54,24 @@
 \knowledge{\isubleq}{notion}
 
 % Projections on a branch
-\NewDocumentCommand{\Br}{}{\mathop{\mathsf{B}_r}}
-\NewDocumentCommand{\Bl}{}{\mathop{\mathsf{B}_l}}
-\NewDocumentCommand{\Bt}{}{\mathop{\mathsf{B}_t}}
+\NewDocumentCommand{\Br}{}{\mathop{\kl[\Br]{\mathsf{B}_r}}}
+\NewDocumentCommand{\Bl}{}{\mathop{\kl[\Bl]{\mathsf{B}_l}}}
+\NewDocumentCommand{\Bt}{}{\mathop{\kl[\Bt]{\mathsf{B}_t}}}
+\knowledge{\Br}{notion}
+\knowledge{\Bl}{notion}
+\knowledge{\Bt}{notion}
 
 % Monoid labels based on a branch
-\NewDocumentCommand{\BrL}{}{\mathop{\mathcal{B}}_r}
-\NewDocumentCommand{\BlL}{}{\mathop{\mathcal{B}}_l}
-\NewDocumentCommand{\BtL}{}{\mathop{\mathcal{B}}_t}
-\NewDocumentCommand{\BrootL}{}{\mathop{\mathcal{B}}_{\mathsf{root}}}
+\NewDocumentCommand{\BrL}{}{\mathop{\kl[\BrL]{\mathcal{B}}_r}}
+\NewDocumentCommand{\BlL}{}{\mathop{\kl[\BlL]{\mathcal{B}}_l}}
+\NewDocumentCommand{\BtL}{}{\mathop{\kl[\BtL]{\mathcal{B}}_t}}
+\NewDocumentCommand{\BrootL}{}{\mathop{\kl[\BrootL]{\mathcal{B}}_{\mathsf{root}}}}
+\knowledge{\BrL}{notion}
+\knowledge{\BlL}{notion}
+\knowledge{\BtL}{notion}
+\knowledge{\BrootL}{notion}
+
+\NewDocumentCommand{\BBlock}{O{\aTree} m m}{{#1}_{#2:#3}}
 
 \NewDocumentCommand{\spt}{}{\mathfrak{s}}
 

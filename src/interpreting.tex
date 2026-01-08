@@ -23,9 +23,10 @@ transducing} the class of all finite paths.
   \end{itemize}
 \end{definition}
 
+
 It follows from results of the previous section that one can extract
 \kl{periodic antichains} from any hereditary class of graphs that is not
-\kl{$\forall$-well-quasi-ordered}, answering positively to a variant of
+\kl{$\forall$-well-quasi-ordered}, (almost) answering positively to a variant of
 \cite[Conjecture 2]{ALM17} in the case of hereditary classes of bounded
 clique-width.
 
@@ -36,63 +37,26 @@ clique-width.
   \kl{antichain} for the \kl{labelled induced subgraph} relation.
 \end{lemma}
 \begin{proof}
-  todo aliaume
+  Assume that $\Cls$ is not
+  \kl{$\forall$-well-quasi-ordered}, and in particular, not 
+  \kl{$2$-well-quasi-ordered} by \cref{main:corollary}.
+  By
+  \cref{cor:hereditary-perfect-boughs-wqo}, 
+  it contains a subclass $\Cls'$ of \kl{bounded linear clique-width} that
+  is not \kl{$2$-well-quasi-ordered}.
+  Now, following \cite[3.2 Characterizing Labelled Well-Quasi-Ordered Classes]{LOPEZ24},
+  there is an automaton that witnesses the fact that there are 
+  \kl{imperfect boughs} of arbitrarily large \kl{dimension} in $\Cls'$
+  (they are called \emph{bad forest paths} in \cite{LOPEZ24}). By a pumping argument,
+  one can extract a sequence of the form 
+  $G_l G^n G_r$ of \kl{imperfect boughs} of arbitrarily large \kl{dimension}
+  for some fixed \kl{imperfect boughs} $G_l, G_r$ and $G$. By constructions 
+  $G^n$ must be itself an \kl{imperfect bough} for every $n \geq 1$.
+  Note that we have exactly the structure of a \kl{periodic sequence} here,
+  with $C$ being the set of pairs of labels that create edges between
+  consecutive copies of $G$, and $F$ being the set of pairs of labels that
+  create edges between non-consecutive copies of $G$.
 \end{proof}
-
-Let us briefly comment on the fact that the exact statement of \cite[Conjecture
-2]{ALM17} does not hold, on hereditary classes of bounded clique-width. 
-
-\begin{example}
-  \label{example:split-permutations}
-  The class of \intro{split permutation graphs} is the class of graphs 
-  $S_n$ whose vertex set is $\set{a_1, \ldots, a_n, b_1, \ldots, b_n}$,
-  where the set $\set{a_1, \ldots, a_n}$ induces a clique, the set
-  $\set{b_1, \ldots, b_n}$ induces an independent set
-  and there is an edge between $a_i$ and $b_j$ if and only if
-  $i = j$ or $i + 1 \leq j$.
-
-  This class is known to be of bounded clique-width, is not 
-  \kl{$\forall$-well-quasi-ordered}, and yet does not 
-  contain a \emph{periodic antichain} as stated in \cite[Conjecture 2]{ALM17}.
-\end{example}
-\begin{proof}
-  Recall that the definition of a \kl{weak periodic antichain} in \cite[Conjecture
-  2]{ALM17} is obtained as follows: given a finite alphabet $\Sigma$, and 
-  a finite set $S \subseteq \Sigma^2$, one can map a word 
-  $w \in \Sigma^*$ to a graph $G_w$ whose vertex set is
-  the positions of $w$, and where there is an edge between two positions
-  $i + 1 < j$ if and only if $(w[i], w[j]) \in S$,
-  and an edge between two consecutive positions $i$ and $i + 1$
-  if and only if $(w[i], w[i + 1]) \not\in S$.
-
-  In this setting, a \intro{(weak) periodic sequence} is given by a finite word $u
-  \in \Sigma^+$, and a finite set $S \subseteq \Sigma^2$, and defines the
-  infinite set of graphs $\seqof{G_{u^r}}[r \geq 1]$.
-  It is easy to see that every \kl{weak periodic sequence} is also a
-  \kl{periodic sequence} as defined in this paper, by grouping the vertices of
-  $u$ into a single graph $G$ and adapting colors.
-
-  Finally, a \intro{weak periodic antichain} is a \kl{weak periodic sequence}
-  that is an \kl{antichain} for the \kl{labelled induced subgraph} relation
-  when the first and last letters of the words $u^r$ are given distinct colors.
-
-  Let us prove that any antichain contained in the \kl{hereditary closure} of the
-  class of \kl{split permutation graphs} cannot be a \kl{weak periodic antichain}.
-
-  \todo[inline]{\textbf{MAEL ICI}}
-
-  \begin{itemize}
-      \item Observe that to be an antichain, we must contain large 
-        \kl{split permutation graphs} as induced subgraphs, otherwise 
-        this is an independent set or a clique or a half-graph.
-      \item Observe that no \kl{weak periodic sequence} 
-        can define arbitrarily large \kl{split permutation graphs}, 
-        because of the ``skip'' behaviour. \textbf{I do not know how 
-        to formally prove this yet}.
-  \end{itemize}
-
-\end{proof}
-
 
 \AP Let us now leverage this combinatorial structure to extract a logical
 property of the class $\Cls$. Let us recall that an \intro{existential
@@ -178,10 +142,59 @@ A spanning path of $H^r$ is a directed shortest path from $V(H_1)$ to $V(H_r)$ g
   \cref{lem:paths-transduction}.
 \end{proof}
 
+
+\subsection{From Transductions to Interpretations}
+
+
+\AP
+Let us recall the definition of \kl{weak periodic antichain} 
+from \cite[Conjecture
+2]{ALM17}: given a finite alphabet $\Sigma$, and 
+a finite set $S \subseteq \Sigma^2$, one can map a word 
+$w \in \Sigma^*$ to a graph $G_w$ whose vertex set is
+the positions of $w$, and where there is an edge between two positions
+$i + 1 < j$ if and only if $(w[i], w[j]) \in S$,
+and an edge between two consecutive positions $i$ and $i + 1$
+if and only if $(w[i], w[i + 1]) \not\in S$.  In this setting, a \intro{(weak) periodic sequence} is given by a finite word $u
+\in \Sigma^+$, and a finite set $S \subseteq \Sigma^2$, and defines the
+infinite set of graphs $\seqof{G_{u^r}}[r \geq 1]$.
+It is easy to see that every \kl{weak periodic sequence} is also a
+\kl{periodic sequence} as defined in this paper, by grouping the vertices of
+$u$ into a single graph $G$ and adapting colors.
+Finally, a \intro{weak periodic antichain} is a \kl{weak periodic sequence}
+that is an \kl{antichain} for the \kl{labelled induced subgraph} relation
+when the first and last letters of the words $u^r$ are given distinct colors.
+
+We now prove that \cref[Conjecture 2]{ALM17} holds for hereditary classes of graphs
+having \kl{bounded clique-width}.
+
+\begin{lemma}
+  \label{lem:weak-periodic-antichain}
+  If a hereditary class of graphs $\Cls$ is not \kl{$\forall$-well-quasi-ordered},
+  then it contains a \kl{weak periodic antichain}.
+\end{lemma}
+\begin{proof}
+  It follows from \cref{lem:regular-antichain} and the fact that
+  every \kl{periodic sequence} contains a \kl{weak periodic sequence}
+  by coloring the first and last vertices of $G$ with distinct colors. Indeed, this is what 
+  we did in the proof of \cref{lem:paths-transduction}.
+\end{proof}
+
+From this, we can now try to prove the following conjecture, which would
+complete the structural characterization of hereditary classes of graphs that are
+\kl{$\forall$-well-quasi-ordered}.
+
+
 \begin{conjecture}
   \label{conj:paths-transduction}
   A hereditary class of graphs $\Cls$ is \kl{$\forall$-well-quasi-ordered} if and
   only if it does not \kl{existentially interprets} the class of all finite paths.
 \end{conjecture}
+\begin{proof}[Sketch of proof]
 
-This could be 
+  The only difficult direction is to actually interpret paths, not using colors 
+  to identify the behaviour of the nodes inside the periodic sequence.
+
+  \textbf{TODO: maybe it is possible to adapt the proof!}
+
+\end{proof}

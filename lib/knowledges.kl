@@ -293,6 +293,29 @@
   | (weak) periodic antichain
   | weak periodic antichain
 
+
+
+%
+% Tree surgery, boughs and all 
+% 
+\knowledge{notion}
+  | bough of level $k$
+  | bough
+  | boughs
+
+\knowledge{notion}
+  | dimension of a bough
+  | dimension of the bough
+  | dimension@bough
+
+\knowledge{notion}
+  | bough type
+  | bough types
+
+\knowledge{notion}
+  | context@bough
+
+
 %%%%% NEW KNOWLEDGES 
 %
 %\knowledge{notion}
@@ -347,24 +370,7 @@
 %\knowledge{notion}
 %  | simple MSO interpretations
 %
-%\knowledge{notion}
-%  | bough of level $k$
-%
-%\knowledge{notion}
-%  | dimension of a bough
-%  | dimension of the bough
-%
-%\knowledge{notion}
-%  | bough
-%  | boughs
-%
-%\knowledge{notion}
-%  | bough type
-%  | bough types
-%
-%\knowledge{notion}
-%  | context
-%
+
 %\knowledge{notion}
 %  | compatible
 %  | compatibility
