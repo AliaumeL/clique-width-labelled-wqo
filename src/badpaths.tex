@@ -250,50 +250,81 @@ The following
     Assume that there exists a bound $N_0$ on the \kl{dimension} of \kl{bad
     boughs}. Then, for every tree $\t$ equipped with a \kl{forward Ramseyan split} $\spt$, 
     one can effectively construct a \kl{well-marked nested tree} $(\t', \spt', \marking)$ 
-    that is \kl{$N_0$-bounded} and such that
+  that is \kl{$L$-bounded} for some $L \in \Nat$, and such that
     the restriction of $\someInterp(\t')$ to \kl{marked leaves}
     is isomorphic to $\someInterp(\t)$.
 \end{lemma}
 \begin{proof}
-  We proceed top-down in the tree $\t$. At the beginning, we define 
-  every node of $\t$ as \kl(nodes){marked}.
-
-  Whenever we encounter a \kl{bough} $B$ of level $k$ with dimension greater
-  than $N_0$, we first consider its prefix of \kl{dimension} $N_0 + 1$. 
-  This prefix is a \kl{good bough} by assumption on the bound $N_0$,
-  hence there exists a \kl{compatible} \kl{bough} $H$ of level $k$
-  and one can replace $B$ by $H$ in $\t$. This operation does not 
-  modify the graph outside of the \kl{bough} by \cref{fact:bough-replacement}.
-  Furthermore, by definition of \kl{good boughs}, the graph induced 
-  by $B$ is an induced subgraph of the graph induced by $H$.
-  We update the marking accordingly so that leaves of $B$ that were marked 
+  We proceed iteratively starting from the tree $\t$
+  where every node is set as a \kl{marked node}.
+  A rewrite step is as follows:
+  given a \kl{bough backbone} $b_0, b_1, \ldots, b_n$ defining a \kl{bough} $B$,
+  where all $b_i$ are \kl{marked nodes}, and $n = N_0 + 1$,
+  we know that $B$ is a \kl{good bough} by assumption.
+  As a consequence, there exists a \kl{compatible bough} $H$ of 
+  same level as $B$ that can replace $B$ in $\t$
+  by definition of \kl{good boughs}.
+  The resulting tree $\t'$ is still \kl{forward Ramseyan} by definition of
+  \kl{compatible boughs}, and the graph induced by leaves outside of $B$
+  remains unchanged by \cref{fact:bough-replacement}.
+  Let us now describe the marking on $\t'$:
+  leaves of $B$ that were marked 
   remain marked in $H$, untouched leaves of $H$ become \kl{dummy},
-  and we mark the last element of the $k$-neighbourhood defining $H$
-  as a \kl{separating node}.
+  and if  
+  $\BBlock[H]{h_i}{h_{i+1}}$ and $\BBlock[H]{h_{i+1}}{h_{i+2}}$
+  are the two consecutive \kl{bough blocks} left untouched by the embedding
+  witnessing that $B$ is a \kl{good bough},
+  then we mark $h_{i}$ as a \kl{separating node},
+  and all other nodes of these two \kl{bough blocks} as \kl{dummy nodes}.
   Then, we complete
   the marking by ensuring that the least common ancestor
   of two \kl{marked nodes} is also \kl{marked}. By definition, the graph
   induced by the \kl{marked leaves} remains unchanged by this operation.
+
+  We repeat this procedure until there is no \kl{bough} of \kl{dimension}
+  greater than $N_0$ whose \kl{backbone} is made of \kl{marked nodes}. This
+  process terminates because every rewrite step decreases the multiset of
+  \kl{dimensions} of \kl{boughs} whose \kl{backbone} is made of \kl{marked
+  nodes}.
+
   
-  To verify that $(\t', \spt', \marking)$ is \kl{well-marked}, note that by construction,
+  To verify that $(\t', \spt', \marking)$ is \kl{well-marked},
+  note that by construction,
   whenever we have \kl{marked nodes} $x$ and $y$ with a non-\kl{marked} node in between
   at level $k$, this configuration arises from a \kl{bough} replacement where
   the required witnesses $z_1, z_2, z_3$ exist by the definition of \kl{good boughs}.
-  Moreover, the tree is \kl{$N_0$-bounded} because every maximal path of non-\kl{dummy}
-  nodes has length at most $N_0$ by a simple induction on the length.
+
+  Assume towards a contradiction that there exists arbitrarily long 
+  paths
+  of non-\kl{dummy} nodes in the resulting tree $\t'$.
+  Remark that any path that is too long contains 
+  the \kl{backbone} of a \kl{bough} of \kl{dimension} greater than $N_0$
+  by a Ramsey argument.
+  By construction, every \kl{separating node} in such a
+  \kl{bough backbone} is followed by  a \kl{dummy node}, so without loss of
+  generality, one can assume that the \kl{bough backbone} is made solely
+  of \kl{marked nodes}. But this contradicts the termination
+  of the procedure.
+  We have proven that there exists a bound on the length of paths
+  of non-\kl{dummy} nodes, concluding the proof.
 \end{proof}
 
-\AP By \cref{lem:important-nodes}, we can transform any tree into a \kl{$N_0$-bounded}
-\kl{well-marked nested tree}. By \cref{thm:marked-nested-trees-wqo}, the class of
-such trees is \kl{well-quasi-ordered} under the \kl{gap-embedding} ordering. Furthermore,
-by \cref{cor:gap-embedding-monotone}, the \kl{gap-embedding} ordering between
-\kl{marked nested trees} preserves the interpretation: if $(\t_1, \spt_1, \marking_1)
-\gemb (\t_2, \spt_2, \marking_2)$, then the graph interpreted from
-$(\t_1, \spt_1, \marking_1)$ (restricted to \kl{marked leaves}) is an induced
-subgraph of the graph interpreted from $(\t_2, \spt_2, \marking_2)$ (restricted to
-\kl{marked leaves}). Since the interpretation restricted to \kl{marked leaves}
-coincides with the original interpretation on $\t_1$ and $\t_2$ by \cref{lem:important-nodes},
-this establishes the desired order-preserving property.
+\AP We conclude this section by proving one direction of
+\cref{lem:good-boughs-wqo}. Assume that there exists a bound on the
+\kl{dimension} of \kl{bad boughs}. By \cref{lem:important-nodes}, we can
+transform any tree into a \kl{$L$-bounded} \kl{well-marked nested tree}. By
+\cref{thm:marked-nested-trees-wqo}, the class of such trees is
+\kl{well-quasi-ordered} under the \kl{gap-embedding} ordering. Furthermore, by
+\cref{cor:gap-embedding-monotone}, the \kl{gap-embedding} ordering between
+\kl{marked nested trees} preserves the interpretation: if $(\t_1, \spt_1,
+\marking_1) \gemb (\t_2, \spt_2, \marking_2)$, then the graph interpreted from
+$(\t_1, \spt_1, \marking_1)$ is an induced subgraph of the graph interpreted
+from $(\t_2, \spt_2, \marking_2)$, when both are restricted to \kl{marked
+leaves}. Since the interpretation restricted to \kl{marked leaves} coincides
+with the original interpretation on $\t_1$ and $\t_2$ by
+\cref{lem:important-nodes}, this establishes the desired order-preserving
+property, and we conclude that the image of $\someInterp$ is
+\kl{$\forall$-well-quasi-ordered} using \cref{fact:surjective-wqo}. 
 
 \subsection{Obstructions}
 \label{sec:obstructions}
@@ -314,9 +345,16 @@ This is the content of the following \cref{lem:finitely-many-boughs}.
   such that every \kl{bough} of level $k$ is \kl{compatible} with one of them.
 \end{lemma}
 \begin{proof}
-  Sketch: Compatibility between two \kl{boughs} $B$ and $B'$ of level $k$ 
-  is determined by the shape of the beginning and ends of the splits of $B$ and $B'$,
-  and there are finitely many such shapes.
+  To know if a \kl{bough} $B$ is \kl{compatible} with another \kl{bough} $B'$,
+  it suffices to know the first \kl{idempotent} element labelling $B$ and $B'$,
+  and for every \kl{split depth} $d$, 
+  the possible values of monoid elements such that 
+  when adding them in front it is still \kl{forward Ramseyan}.
+
+  Indeed, when placing a \kl{bough} $B$ in a \kl{context} $C[\square]$,
+  the only way that the tree $C[B]$ can fail to be \kl{forward Ramseyan}
+  is that some ...
+
 \end{proof}
 
 \begin{lemma}
@@ -326,12 +364,9 @@ This is the content of the following \cref{lem:finitely-many-boughs}.
   $C[\square] \in \mathcal{F}$ such that $B$ is a \kl{bad bough} in $C[B]$.
 \end{lemma}
 \begin{proof}
-  Sketch: the context is not very important in good boughs
-  because outside it is the identity map. Furthermore, the behaviour
-  of nodes in the context with respect to those of the bough 
-  is determined by a finite number of monoid elements.
-  Hence, if a bough is good in some context, it is good in any context with 
-  the same behaviour and there are finitely many such contexts.
+  We say that two contexts $C_1[\square]$ and $C_2[\square]$
+  are equivalent if for every \kl{bough} $B$ of level $k$,
+  $C[B]$ is \kl{forward Ramseyan} if and only if
 \end{proof}
 
 
