@@ -32,12 +32,14 @@ problem in graph theory, dating back to Pouzet's seminal work \cite{POUZ72}.
 \AP In general, there is little hope to characterise all such classes, since
 any countable order with finite infixes can be embedded into the induced
 subgraph relation on finite graphs (this is a consequence of \cite[Lemma
-5.1]{Kuske06}). Fortunatelly, one usually considers \emph{labelled}
+5.1]{Kuske06}).
+\maelin{It does not seems that usual? Next sentence sounds weird. Maybe we should say something like "we can enrich the definition to say something" ?}
+Fortunately, one usually considers \emph{labelled}
 well-quasi-orderings on classes of finite graphs. Given a class $\Cls$ of
 finite graphs, and a well-quasi-ordering $(X, \leq)$, one can consider the
 class $\Label{X}{\Cls}$ of graphs in $\Cls$ whose vertices are labelled by
 elements of $X$, that is, equipped with a function 
-$\ell \ V(G) \to X$. The induced subgraph relation is then extended to labelled
+$\ell \colon V(G) \to X$. The induced subgraph relation is then extended to labelled
 graphs by requiring that the labels are preserved by the embedding, i.e. that
 the label of a vertex in the smaller graph is less than or equal to the label
 of its image in the larger graph. A class $\Cls$ of finite graphs is said to be
@@ -106,7 +108,7 @@ study in the reverse direction, by considering a syntax for graph classes
 (using NLC graph expressions), and identifying which ones among them are
 \kl{$2$-well-quasi-ordered}. In this context, they verified Pouzet's
 conjectures, but were unable to generalise their results to arbitrary graph
-classes \cite[Conjecture 4]{DRT10}. All the classes considered in \cite{DRT10}
+classes\mael{arbitrary subclasses ?} \cite[Conjecture 4]{DRT10}. All the classes considered in \cite{DRT10}
 have so-called \emph{bounded clique-width},\footnote{This will be defined
 formally in \cref{sec:prelims}} and it is believed that it is enough to
 understand hereditary classes of bounded clique-width to solve these
@@ -152,7 +154,7 @@ were called \reintro(weak){periodic antichains} in \cite[Section 7]{ALM17}.
   an infinite \kl{(weak) periodic antichain} in $\Cls$.
 \end{conjecture}
 
-
+\maelin{Is it really new or does it build on existing tools ?}
 \AP In 2024, Lopez \cite{LOPEZ24} introduced a new technique to study
 well-quasi-orderings on classes of graphs of bounded \emph{linear}
 clique-width, that leveraged combinatorial tools from automata theory (Simon's
@@ -206,7 +208,7 @@ obtain the following characterisations in
 These answer positively to the conjectures of
 \cite{ALM17,LOPEZ24}. In particular, for a hereditary class $\Cls$ to be
 \kl{$2$-well-quasi-ordered}, it suffices that it avoids very simple
-\kl{(strong) periodic antichains}.
+\kl{(strong)\mael{and weak ?} periodic antichains}.
 
 \begin{theorem}
   \label{thm:characterisations}
@@ -226,14 +228,13 @@ These answer positively to the conjectures of
 The results of \cref{main:corollary}
 extend to non-hereditary classes of
 bounded clique-width graphs, but for the sake of clarity and space, we only
-state them on hereditary ones.
+state them on hereditary ones. \maelin{C'est peut-être un peu trop fort de dire ça, tu prévois d'essayer de le justifier quelque part ?}
 On the other hand, \cref{thm:characterisations} does not immediately 
 extend to non-hereditary classes, as witnessed by the following example.
 
 \begin{example}
   \label{ex:non-hereditary}
-  Let $\Cls$ be the class of graphs that are complete binary trees
-  has bounded clique-width, is not \kl{$2$-well-quasi-ordered},
+  The class $\Cls$ of complete binary trees has bounded clique-width, is not \kl{$2$-well-quasi-ordered},
   but contains no \kl{periodic antichain}, 
   and every subclass $\Cls[D] \subseteq \Cls$ of bounded linear clique-width
   is \kl{$2$-well-quasi-ordered}.
@@ -252,10 +253,10 @@ extend to non-hereditary classes, as witnessed by the following example.
   there cannot be any \kl{periodic antichain} in $\Cls$.
 
   The \kl{existential transduction} of all finite paths from $\Cls$ is obtained
-  by transducing all finite substructures, that in particular contains all finite
+  by transducing all induced subgraphs, that in particular contains all finite
   paths. There cannot be an \kl{existential interpretation} of all finite paths from $\Cls$,
   because paths have only two automorphisms (reversing and identity), while
-  complete binary trees have many more, and interpretations must preserve automorphisms.
+  complete binary trees have many more, and interpretations must preserve automorphisms. \mael{ref ?}
 \end{proof}
 
 

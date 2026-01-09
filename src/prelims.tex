@@ -5,11 +5,13 @@ We assume the reader to be familiar with basic notions of logic on finite
 relational structures, such as monadic second-order logic ($\MSO$), first-order
 logic and quantifier-free formulas.
 
+\maelin{TODO: unify $(u,v)$ and $uv$)}
+\maelin{Remarque globale : si tu dis qu'on ne parle que de graphe/arbre fini, alors pas besoin de repréciser fini à chaque fois.}
 \paragraph*{Graphs} \AP
 A \intro{graph} is a pair $G = (V, E)$ where $V$ is a set
 of \intro{vertices} and $E \subseteq V \times V$ is a set of \intro{edges}. A
 graph is \intro(graph){undirected} if $(u, v) \in E$ implies $(v, u) \in E$ for all
-$u, v \in V$. In this paper we will focus on finite undirected graphs. Given a
+$u, v \in V$ \mael{, directed else ??}. In this paper we will focus on finite undirected graphs\mael{without self-loop ?}. Given a
 set $X$, an \intro{$X$-labelled graph} is a graph equipped with a function
 $\ell \colon V \to X$ that assigns a label to each vertex. Given a class $\Cls$
 of finite undirected graphs, write $\Label{X}{\Cls}$ for the class of freely
@@ -25,10 +27,10 @@ $v \in V_G$, we have $\ell_G(v) \leq \ell_H(f(v))$. We write $G \intro*\isubleq 
 denote that $G$ \kl(graph){embeds} into $H$, which we also call the \reintro{induced
 subgraph relation}. When not specified, we consider that labels are
 quasi-ordered by equality.
+\maelin{Suggestion for previous line : When no order is specified along a set $X$, the order relation is assumed to be equality, i.e. $(X, =)$.}
 
 \AP A class of graphs $\Cls$ is a \intro{hereditary class} if it is closed under
-taking \kl{induced subgraphs}, i.e., if for all $G, H$ such that 
-$G \isubleq H$ and $H \in \Cls$, we have $G \in \Cls$.
+taking \kl{induced subgraphs}, i.e. for $G \in \Cls$, if $H\isubleq G$, then $H \in \Cls$.
 The \intro{hereditary closure} of a class of graphs $\Cls$ is the smallest
 \kl{hereditary class} containing $\Cls$.
 
@@ -46,7 +48,7 @@ j$ such that $x_i \leq x_j$. A quasi-ordered set is \intro{well-quasi-ordered}
 (\reintro{wqo}) if every infinite sequence is \kl(sequence){good}.
 A \intro{bad sequence} is an infinite sequence that is not \kl(sequence){good},
 and a sequence of pairwise incomparable elements is called an
-\intro{antichain}.
+\intro{antichain}. \maelin{an antichain is the same thing as bad sequence? How it is presented may be confusing.}
 
 \AP As mentioned in the introduction, several notions of well-quasi-ordering
 can be defined for a given class of finite undirected graphs $\Cls$. Let us 
@@ -85,10 +87,13 @@ use the \intro{parent relation}, which state that $y$ is the unique immediate
 \kl(tree){ancestor} of $x$.
 
 \AP
-As in the case of graphs, we will be interested in
+As in the case of graphs, we will consider
 vertex-labelled trees where labels are taken from a \kl{well-quasi-order} $(X,
-\leq)$. We will also be interested in edge-labelled trees, typically using a
-finite set of labels $\Sigma$. These trees are denoted using
+\leq)$. 
+We will also consider edge-labelled trees, typically using a
+finite set of labels $\Sigma$.\maelin{Suggestion : The class of vertex-labelled and edge-labelled trees is denoted by	$%\intro*
+	\Trees{\Sigma}{X}$.	The sets $\Sigma$ or $X$ are omitted when unused (i.e., $\Trees{}{}$ denotes the class of unlabelled trees)}
+These trees are denoted using
 $\intro*\Trees{\Sigma}{X}$ to denote the class of trees whose edges are labelled by
 elements of $\Sigma$ and whose nodes are labelled by elements of $X$. These are
 omitted when unused (i.e., $\Trees{}{}$ denotes the class of unlabelled trees,
@@ -103,7 +108,7 @@ to $y$ in $\aTree$, we can leave $\aTree$ implicit if clear from context.
 \paragraph*{Bounded Clique-Width}
 \AP An \intro{$\MSO$-interpretation} $\someInterp$ from $\Trees{\Sigma}{}$ to
 finite undirected graphs is given by a tuple of $\MSO$ formulas that specify
-how to respectively: select a subset of nodes of the leaves of tree to be the
+how to respectively: select a subset of nodes of the leaves\mael{leaves or nodes ?} of tree to be the
 vertices of the graph $\phi_{\mathsf{univ}}(x)$, define the edges of the graph
 $\phi_{\mathsf{edge}}(x,y)$, and define the domain of the interpretation
 $\phi_{\mathsf{dom}}$. An interpretation $\someInterp$ is called
@@ -114,11 +119,19 @@ $\phi_{\mathsf{dom}}$ are tautologies.
   \label{ex:mso-interp-cycles}
   An \kl{$\MSO$-interpretation} $\someInterp$ from $\Trees{}{}$ to finite undirected graphs
 that produces all cliques of odd size can be defined as follows: 
-    $\phi_{\mathsf{dom}}$ is the formula that is true on trees with an odd number of leaves,
+    $\phi_{\mathsf{dom}}$ is the formula that is true on trees with an odd number of leaves,\mael{obviously MSO ?}
     $\phi_{\mathsf{univ}}(x)$ is the formula that is true if and only if $x$ is a leaf,
     $\phi_{\mathsf{edge}}(x,y)$ is the formula that is true if and only if $x \neq y$.
 \end{example}
-
+\maelin{Suggestion of another example}
+\begin{example}
+	%\label{ex:mso-interp-cycles}
+	An \kl{$\MSO$-interpretation} $\someInterp$ from $\Trees{}{}$ to finite undirected graphs
+	that produces all paths can be defined as follows: 
+	$\phi_{\mathsf{dom}}$ is the formula that is true on linear trees (i.e., trees where every node has at most one non-leaf child),
+	$\phi_{\mathsf{univ}}(x)$ is the formula that is true if and only if $x$ is a leaf and its sibling is not a leaf,
+	$\phi_{\mathsf{edge}}(x,y)$ is the formula that is true if and only if are at distance exactly $3$.
+\end{example}
 
 \AP A class of graph has \intro{bounded clique-width} if it is included in the
 image of some \kl{$\MSO$-interpretation} from finite trees to finite undirected
@@ -136,7 +149,7 @@ similar way as \kl{$\MSO$-interpretations}.
 \AP An \intro{existential interpretation} from (labelled) graphs to graphs is
 given by an existential first order formula $\phi_{\text{univ}}(x)$ that
 selects the vertices of the interpreted graph, an existential first order
-formula $\phi_{\text{edge}}(x,y)$ that selects the edges of the interpreted
+formula $\phi_{\text{edge}}(x,y)$ that define the edges of the interpreted
 graph, and an existential first order formula $\phi_{\text{dom}}$ that selects
 the graphs of $\Cls$ on which the interpretation is defined. The semantics is
 that for every graph $G \in \Cls$ satisfying $\phi_{\text{dom}}$, the
@@ -150,6 +163,3 @@ $\mathcal{D} \subseteq \someInterp(\Cls)$. We say that $\Cls$
 \intro{existentially transduces} $\mathcal{D}$ if there exists a finite
 labelling set $\Sigma$ such that $\Label{\Sigma}{\Cls}$ \kl{existentially
 interprets} $\mathcal{D}$.
-
-
-
