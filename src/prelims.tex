@@ -18,16 +18,15 @@ of finite undirected graphs, write $\Label{X}{\Cls}$ for the class of freely
 $X$-labelled graphs in $\Cls$, i.e., the class of all \kl{$X$-labelled graphs}
 $G = (V, E, \ell)$ such that $G \in \Cls$.
 
-\AP
-Whenever $(X, \leq)$ is a quasi-order, we say that a graph $G$ \intro(graph){embeds}
-into a graph $H$ if there exists a \intro{monomorphism} from $G$ to $H$, i.e.,
-an injective function $f \colon V_G \to V_H$ such that for all $u, v \in V_G$,
-$(u, v) \in E_G$ if and only if $(f(u), f(v)) \in E_H$, and such that for all
-$v \in V_G$, we have $\ell_G(v) \leq \ell_H(f(v))$. We write $G \intro*\isubleq H$ to
-denote that $G$ \kl(graph){embeds} into $H$, which we also call the \reintro{induced
-subgraph relation}. When not specified, we consider that labels are
-quasi-ordered by equality.
-\maelin{Suggestion for previous line : When no order is specified along a set $X$, the order relation is assumed to be equality, i.e. $(X, =)$.}
+\AP Whenever $(X, \leq)$ is a quasi-order, we say that a graph $G$
+\intro(graph){embeds} into a graph $H$ if there exists a \intro{monomorphism}
+from $G$ to $H$, i.e., an injective function $f \colon V_G \to V_H$ such that
+for all $u, v \in V_G$, $(u, v) \in E_G$ if and only if $(f(u), f(v)) \in E_H$,
+and such that for all $v \in V_G$, we have $\ell_G(v) \leq \ell_H(f(v))$. We
+write $G \intro*\isubleq H$ to denote that $G$ \kl(graph){embeds} into $H$,
+which we also call the \reintro{induced subgraph relation}.  When no order is
+specified along a set $X$, the order relation is assumed to be equality, i.e.
+$(X, =)$.
 
 \AP A class of graphs $\Cls$ is a \intro{hereditary class} if it is closed under
 taking \kl{induced subgraphs}, i.e. for $G \in \Cls$, if $H\isubleq G$, then $H \in \Cls$.
@@ -86,46 +85,29 @@ denoted by $\Leaves{\aTree}$. Given two nodes $x$ and $y$ in a tree $T$, their
 use the \intro{parent relation}, which state that $y$ is the unique immediate
 \kl(tree){ancestor} of $x$.
 
-\AP
-As in the case of graphs, we will consider
-vertex-labelled trees where labels are taken from a \kl{well-quasi-order} $(X,
-\leq)$. 
-We will also consider edge-labelled trees, typically using a
-finite set of labels $\Sigma$.\maelin{Suggestion : The class of vertex-labelled and edge-labelled trees is denoted by	$%\intro*
-	\Trees{\Sigma}{X}$.	The sets $\Sigma$ or $X$ are omitted when unused (i.e., $\Trees{}{}$ denotes the class of unlabelled trees)}
-These trees are denoted using
-$\intro*\Trees{\Sigma}{X}$ to denote the class of trees whose edges are labelled by
-elements of $\Sigma$ and whose nodes are labelled by elements of $X$. These are
-omitted when unused (i.e., $\Trees{}{}$ denotes the class of unlabelled trees,
-and $\Trees{\Sigma}{}$ denotes the class of trees whose edges are labelled by
-elements of $\Sigma$).
-Given two nodes $x,y$ such
-that $y$ is an \kl(tree){ancestor} of $x$, 
-the notation $\intro*\tword{x}{y}$ denotes the \emph{word}
-in $\Sigma^*$ obtained by reading the labels of the edges on the path from $x$
-to $y$ in $\aTree$, we can leave $\aTree$ implicit if clear from context.
+\AP As in the case of graphs, we will consider vertex-labelled trees where
+labels are taken from a \kl{well-quasi-order} $(X, \leq)$. We will also
+consider edge-labelled trees, typically using a finite set of labels $\Sigma$.
+The class of vertex-labelled and edge-labelled trees is denoted by	$\intro*
+\Trees{\Sigma}{X}$.	The sets $\Sigma$ or $X$ are omitted when unused (i.e.,
+$\Trees{}{}$ denotes the class of unlabelled trees) Given two nodes $x,y$ such
+that $y$ is an \kl(tree){ancestor} of $x$, the notation $\intro*\tword{x}{y}$
+denotes the \emph{word} in $\Sigma^*$ obtained by reading the labels of the
+edges on the path from $x$ to $y$ in $\aTree$, we can leave $\aTree$ implicit
+if clear from context.
 
-\paragraph*{Bounded Clique-Width}
-\AP An \intro{$\MSO$-interpretation} $\someInterp$ from $\Trees{\Sigma}{}$ to
-finite undirected graphs is given by a tuple of $\MSO$ formulas that specify
-how to respectively: select a subset of nodes of the leaves\mael{leaves or nodes ?} of tree to be the
-vertices of the graph $\phi_{\mathsf{univ}}(x)$, define the edges of the graph
-$\phi_{\mathsf{edge}}(x,y)$, and define the domain of the interpretation
-$\phi_{\mathsf{dom}}$. An interpretation $\someInterp$ is called
-\intro(interpretation){simple} if $\phi_{\mathsf{univ}}(x)$ and
-$\phi_{\mathsf{dom}}$ are tautologies.
+\paragraph*{Bounded Clique-Width} \AP An \intro{$\MSO$-interpretation}
+$\someInterp$ from $\Trees{\Sigma}{}$ to finite undirected graphs is given by a
+tuple of $\MSO$ formulas that specify how to respectively: select a subset of
+the leaves of tree to be the vertices of the graph $\phi_{\mathsf{univ}}(x)$,
+define the edges of the graph $\phi_{\mathsf{edge}}(x,y)$, and define the
+domain of the interpretation $\phi_{\mathsf{dom}}$. An interpretation
+$\someInterp$ is called \intro(interpretation){simple} if
+$\phi_{\mathsf{univ}}(x)$ and $\phi_{\mathsf{dom}}$ are tautologies.
+
 
 \begin{example}
-  \label{ex:mso-interp-cycles}
-  An \kl{$\MSO$-interpretation} $\someInterp$ from $\Trees{}{}$ to finite undirected graphs
-that produces all cliques of odd size can be defined as follows: 
-    $\phi_{\mathsf{dom}}$ is the formula that is true on trees with an odd number of leaves,\mael{obviously MSO ?}
-    $\phi_{\mathsf{univ}}(x)$ is the formula that is true if and only if $x$ is a leaf,
-    $\phi_{\mathsf{edge}}(x,y)$ is the formula that is true if and only if $x \neq y$.
-\end{example}
-\maelin{Suggestion of another example}
-\begin{example}
-	%\label{ex:mso-interp-cycles}
+	\label{ex:mso-interp-cycles}
 	An \kl{$\MSO$-interpretation} $\someInterp$ from $\Trees{}{}$ to finite undirected graphs
 	that produces all paths can be defined as follows: 
 	$\phi_{\mathsf{dom}}$ is the formula that is true on linear trees (i.e., trees where every node has at most one non-leaf child),
@@ -136,9 +118,12 @@ that produces all cliques of odd size can be defined as follows:
 \AP A class of graph has \intro{bounded clique-width} if it is included in the
 image of some \kl{$\MSO$-interpretation} from finite trees to finite undirected
 graphs \cite{COUR91}. It has \intro{bounded linear clique-width} if it is
-included in the image of some \kl{$\MSO$-interpretation} from \intro{linear
-trees} (i.e., trees where every node has at most one non-leaf child) to finite
-undirected graphs. 
+included in the image of some \kl{$\MSO$-interpretation} from linear trees
+(i.e., trees where every node has at most one non-leaf child) to finite
+undirected graphs. Equivalently, a class of graphs has \kl{bounded linear
+clique-width} if it is included in the image of some \kl{simple
+$\MSO$-interpretation} from finite words to finite undirected graphs.
+
 
 \paragraph{Transductions from graphs to graphs} \AP Another notion of logical
 transformation that will be relevant in this paper is that of \kl{existential
