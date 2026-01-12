@@ -164,14 +164,14 @@ ordering on trees.
 
 \AP A \intro{split of height $N$} of a tree $\t$ is a mapping $\spt$ from the
 nodes of $T$ to $\set{1, \dots, N}$. Given a split $\spt$ and two nodes $x
-\treelt[\t] y$, we define $\spt(x \colon y)$ to be the minimal value of
+\treelt[\t] y$, we define $\spt(x : y)$ to be the minimal value of
 $\spt(z)$ for $x \treelt[\t] z \treelt[\t] y$, and $N+1$ otherwise. In
 particular, this does not count the nodes $x$ and $y$ themselves.
-\maelin{Replacement suggestion for previous sentence: In particular, if $y$ is a child of $x$, then $\spt(x \colon y) = N+1$.}
+\maelin{Replacement suggestion for previous sentence: In particular, if $y$ is a child of $x$, then $\spt(x : y) = N+1$.}
 
 \maelin{Define more properly $k$-neighbourhoods. I'm not sure how do you define it, is it dependent of one node like the k-neighborhood of $u$? Maybe be more precise about what ou mean by hierarchical. Does these nbd is for branches only or for the whole tree ? }
 \AP Two elements $x \treelt[\t] y$ such that $\spt(x) = \spt(y) = k$ are
-\intro{$k$-neighbours} if $\spt(x \colon y) \geq k$. Note that a \kl{split}
+\intro{$k$-neighbours} if $\spt(x : y) \geq k$. Note that a \kl{split}
 induces some kind of hierarchical structure on the tree based on the
 \kl{$k$-neighbourhoods}. We illustrate the situation on a branch of a tree in
 \cref{split-on-branch:fig}. We will refer to the value of $\spt(x)$ as the
@@ -394,16 +394,19 @@ are not considered in the \kl{gap-embedding} ordering.
   and $\marking$ is a function from the nodes of $\t$ to $\set{\marked, \separating, \dummy}$, 
   respectively called \intro(nodes){marked}, \intro(nodes){separating}, and \intro(nodes){dummy} nodes.
 
+\maelin{I think there is something wrong with this definition. "that
+	for every $x \treelt[\t] z_1 \treelt[\t] y$ such that 
+	$\spt(x:z_1) > k$, $\spt(z_1) = k$" there is only one such $z_1$, Moreover, you assume $\marking(z_1) = \marked$ afterward.}
   A \kl{marked nested tree} $(\t, \spt, \marking)$ is \intro{well-marked} if
   the \kl{marked nodes} contain the root of $\t$, are closed under 
   the \kl{least common ancestor} operation, and furthermore satisfy that
   for every $x \treelt[\t] z_1 \treelt[\t] y$ such that 
   $\spt(x:z_1) > k$, $\spt(z_1) = k$, and  $\spt(z_1:y) \geq k$ for some $k \in \set{1, \dots, N}$,
-  if $x$ and $y$ are \kl{marked nodes} and $z$ is not a \kl{marked node}, then there exists $z_2, z_3$
+  if $x$ and $y$ are \kl{marked nodes} and $z_1$ is not a \kl{marked node}, then there exists $z_2, z_3$
   such that 
   $x \treelt[\t] z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$,
   $\spt(z_1) = \spt(z_2) = \spt(z_3) = k$, 
-  $\spt(x:z_1) > k$, $\spt(z_1:z_2) > k$, $\spt(z_1:z_3) \geq k$, 
+  $\spt(x:z_1) > k$, $\spt(z_1:z_2) > k$, $\spt(z_2:z_3) \geq k$, 
   and $\spt(z_3:y) \geq k$,
   with $\marking(z_1) = \marked$, and $\marking(z_2) \in \set{\marked, \separating}$.
   A graphical illustration of the condition is provided below:
@@ -525,7 +528,7 @@ gap-embedding} ordering when labelled over a \kl{well-quasi-ordered} set.
 
 
   \maelin{Maybe you can present this proof better. Maybe say something along the lines: we will reduce to the case of node-labelled trees equipped with forward Ramseyan splits.}
-  One can encode \cref{item:gap-embedding:gap,item:gap-embedding:root,item:gap-embedding:leaves,item:gap-embedding:marking,item:gap-embedding:local,item:gap-embedding:neighbourhood} of \cref{def:gap-embedding}
+  One can encode \cref{item:gap-embedding:root,item:gap-embedding:leaves,item:gap-embedding:marking,item:gap-embedding:local,item:gap-embedding:neighbourhood} of \cref{def:gap-embedding}
   by adding suitable labels to the nodes of the trees. Formally,
   we define a new labelling of the nodes of a tree $\t$ as follows: we add to each node $x$ of $\t$
   the label $\tlbl{\t}{z}{x}$ for every $k \in \set{1, \dots, N}$,
@@ -721,8 +724,8 @@ gap-embedding} ordering when labelled over a \kl{well-quasi-ordered} set.
           & = \tlbl{\t_1}{x}{z_1} \cdot
               \tlbl{\t_1}{z_1}{z_2} \cdot
               \tlbl{\t_1}{z_3}{y} \\
-          & = a \cdot b \cdot c \cdot d \\
           & = a \cdot b \cdot d \\
+          & = a \cdot b \cdot c \cdot d \\
     & = \tlbl{\t_2}{h(x)}{h(y)} \quad . \qedhere
   \end{align*}
 \end{proof}
