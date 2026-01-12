@@ -166,7 +166,9 @@ nodes of $T$ to $\set{1, \dots, N}$. Given a split $\spt$ and two nodes $x
 \treelt[\t] y$, we define $\spt(x \colon y)$ to be the minimal value of
 $\spt(z)$ for $x \treelt[\t] z \treelt[\t] y$, and $N+1$ otherwise. In
 particular, this does not count the nodes $x$ and $y$ themselves.
+\maelin{Replacement suggestion for previous sentence: In particular, if $y$ is a child of $x$, then $\spt(x \colon y) = N+1$.}
 
+\maelin{Define more properly $k$-neighbourhoods. I'm not sure how do you define it, is it dependent of one node like the k-neighborhood of $u$? Maybe be more precise about what ou mean by hierarchical. Does these nbd is for branches only or for the whole tree ? }
 \AP Two elements $x \treelt[\t] y$ such that $\spt(x) = \spt(y) = k$ are
 \intro{$k$-neighbours} if $\spt(x \colon y) \geq k$. Note that a \kl{split}
 induces some kind of hierarchical structure on the tree based on the
@@ -214,11 +216,13 @@ induces some kind of hierarchical structure on the tree based on the
   the arcs in \textcolor{A5}{light blue} connect $2$-neighbours,
   and the arcs in \textcolor{A3}{light purple} connect $3$-neighbours. Full neighbourhoods
   are obtained by considering the connected components induced by the (reflexive closure) of
-  arcs of each color.}
+  arcs of each color.
+  \maelin{Choose more different colors, + add the arcs between the first and last 1, and same for the 2. }
+  }
   \label{split-on-branch:fig}
 \end{figure}
 
-
+\maelin{It should be for every branch of the tree no ?}
 \AP A \kl{split} $\spt$ is \intro{forward Ramseyan} if for every $k \in \set{1,
 \dots, N}$ and every $x, y, x', y'$ in the same class of \kl{$k$-neighbourhood}
 with $x \treelt[\t] y$ and $x' \treelt[\t] y'$, we have: 
@@ -226,6 +230,8 @@ with $x \treelt[\t] y$ and $x' \treelt[\t] y'$, we have:
   \label{fake-idempotent:eq} 
   \tlbl{\t}{x}{y} = \tlbl{\t}{x}{y} \cdot \tlbl{\t}{x'}{y'} \quad . 
 \end{equation} 
+
+
 
 \AP In particular, $\tlbl{\t}{x}{y}$ is always an \intro{idempotent}:
 $\tlbl{\t}{x}{y} \cdot \tlbl{\t}{x}{y} = \tlbl{\t}{x}{y}$. However, note that
@@ -237,8 +243,10 @@ y$. We say that $x$ and $y$ are \intro{independent at level $k$} if $\spt(x:y)
 = k$ and there exists three nodes $z_1, z_2, z_3$ such that $x \treelt[\t] z_1
 \treelt[\t] z_2 \treeleq[\t] z_3 \treelt[\t] y$ and $\spt(z_1) = \spt(z_2) =
 \spt(z_3) = k$, and $\spt(x:z_1) > k$, $\spt(z_1:z_2) > k$, and $\spt(z_3:y) >
-k$. In the case of \kl{independence at level $k$}, we can use the property of
-\kl{forward Ramseyan splits} to replace the middle part of the path from $x$ to
+k$. 
+\maelin{Maybe explain a bit more why you need three vertices and why only $z_2 \treeleq[\t] z_3 $. This is a bit surprising}
+In the case of \kl{independence at level $k$}, we can use the property of
+\kl{forward Ramseyan splits} to replace the middle part\mael{define middle part} of the path from $x$ to
 $y$ by a shorter path, as illustrated in \cref{fast-computation:fig}. This can
 be used to provide a fast (and first-order definable) computation of the value
 $\tlbl{\t}{x}{y}$ given a \kl{forward Ramseyan split} as proven in \cite[Lemma
@@ -330,17 +338,19 @@ and that endows trees with a \kl{well-quasi-order} \cite{DERSHOWITZ200380}.
   \begin{enumerate}
     \item is a tree embedding: respects the ancestor relation $\treeleq$, least
       common ancestors $\lca$, and sibling ordering $\treesibleq$,
-    \item satifies the root gap property:
+    \item satisfies the root gap property:
       $\spt_2(r_2 : h(r_1)) \geq \spt_1(r_1)$ where $r_1, r_2$ are the roots of $\t_1, \t_2$,
     \item satisfies the edge gap property:
       for every edge $x \treelt[\t] y$ in $\t_1$,
-      $\spt_2(h(x) : h(y)) \geq \spt_1(x)$.
+      $\spt_2(h(x) : h(y)) \geq \spt_1(y)$.
+      
   \end{enumerate}
   If the trees are node-labelled by a set $(X, \leq_X)$,
   we further require that for every node $x$ in $\t_1$,
-  the label of $x$ is less or equal than the label of $h(x)$ in $\t_2$.
+  the label of $x$ is less than or equal to the label of $h(x)$ in $\t_2$.
 \end{definition}
 
+\maelin{Put the following in a lemma/theorem}
 \AP 
 It follows from \cite[Theorem 3.1, Main Theorem]{DERSHOWITZ200380}
 that the class of trees
@@ -350,6 +360,7 @@ that nodes are labelled with a \kl{well-quasi-ordered} set $(X, \leq_X)$.
 We will now devise a suitable modification of the \kl{gap-embedding} ordering
 that will ensure that the interpretation $\someInterp$ is order-preserving
 from trees to graphs.
+
 
 
 \newcommand{\marked}{\mathbf{M}}
@@ -371,9 +382,9 @@ from trees to graphs.
   $\spt(x:z_1) > k$, $\spt(z_1) = k$, and  $\spt(z_1:y) \geq k$ for some $k \in \set{1, \dots, N}$,
   if $x$ and $y$ are \kl{marked nodes} and $z$ is not a \kl{marked node}, then there exists $z_2, z_3$
   such that 
-  $x \treelt[\t] z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$,
+  $x \treelt[\t] z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$, \mael{$z_3 \treeleq[\t] y$ correct ?}
   $\spt(z_1) = \spt(z_2) = \spt(z_3) = k$, and 
-  $\spt(x:z_1) > k$, $\spt(z_1:z_2) > k$, and $\spt(z_3:y) \geq k$, 
+  $\spt(x:z_1) > k$, $\spt(z_1:z_2) > k$, and $\spt(z_3:y) \geq k$, \mael{what about $\spt(z_2:z_3)$ ?} 
   with $\marking(z_1) = \marked$, and $\marking(z_2) \in \set{\marked, \separating}$.
 \end{definition}
 
@@ -436,7 +447,8 @@ assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
   is \kl{well-quasi-ordered} under the \kl{gap-embedding} ordering.
 \end{theorem}
 \begin{proof}
-  One can clearly encode conditions (1) to (6) of \cref{def:gap-embedding}
+  \maelin{Maybe you can present this proof better. Maybe say something along the lines: we will reduce to the case of node-labelled trees equipped with forward Ramseyan splits.}
+  One can encode \cref{item:gap-embedding:gap,item:gap-embedding:root,item:gap-embedding:leaves,item:gap-embedding:marking,item:gap-embedding:local,item:gap-embedding:neighbourhood} of \cref{def:gap-embedding}
   by adding suitable labels to the nodes of the trees. Formally,
   we define a new labelling of the nodes of a tree $\t$ as follows: we add to each node $x$ of $\t$
   the label $\tlbl{\t}{z}{x}$ for every $k \in \set{1, \dots, N}$,
@@ -448,9 +460,9 @@ assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
   We also distinguish the root by adding a special label $\mathsf{root}$,
   and we add a special label $\mathsf{leaf}$ to every leaf.
   Finally, we also add the label $\marking(x)$ to $x$.
-  Since $M$ is finite, the new labelling is still over a \kl{well-quasi-ordered} set.
+  Since $M$ is finite, the new labelling is still over a \kl{well-quasi-ordered} set. \mael{ref}
 
-  The only non-trivial part is to ensure that the mapping $h$ is gluing on non-\kl{dummy} nodes.
+  It remains to ensure that the mapping $h$ is gluing on non-\kl{dummy} nodes.
   To that end, we will modify the \kl{split} $\spt$ into a new split $\spt'$ as follows:
   for every non-\kl{dummy} node $x$, we have that $x$ is the $i$th element 
   in a maximal path of non-\kl{dummy} nodes $x_1 \treelt[\t] x_2 \treelt[\t] \cdots \treelt[\t] x_n$
@@ -466,7 +478,7 @@ assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
   $\spt'_2(h(x):h(y)) \geq \spt'_1(y) = N + 1 + i$.
   But this means that between $h(x)$ and $h(y)$
   there are only nodes with \kl{split depth} greater or equal than $N + 1 + i$.
-  If $i = 0$ (i.e., $y$ is the first node of a maximal path of non-\kl{dummy} nodes),
+  If $i = 0$\mael{should be $i=1$} (i.e., $y$ is the first node of a maximal path of non-\kl{dummy} nodes),
   then there is no such node, and $h(x)$ is the parent of $h(y)$.
   Otherwise, $\spt'_1(x) = N + i > N$, and therefore 
   the path from $h(x)$ to $h(y)$ contains only non \kl{dummy} nodes.
@@ -475,6 +487,9 @@ assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
   there is no such node, and $h(x)$ is the parent of $h(y)$.
 \end{proof}
 
+
+
+\maelin{Je mettrais ça avant le théorème, et pas forcément sous forme d'un lemme, tu peux juste dire que la famille des chemins dont les noeuds sont marqué n'est pas wqo à cause du gluing.}
 \begin{lemma}
   \label{rem:unbounded-mark-not-wqo}
   The \kl{well-quasi-order} of \cref{thm:marked-nested-trees-wqo}
@@ -490,6 +505,7 @@ assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
   $(\t_n, \spt_n, \marking_n)$ does not \kl{gap-embed} into
   $(\t_m, \spt_m, \marking_m)$.
 \end{proof}
+
 
 \begin{lemma}
   \label{lem:gap-embedding-respects-products}
