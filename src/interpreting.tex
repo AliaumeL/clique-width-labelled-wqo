@@ -58,24 +58,7 @@ clique-width.
 \end{proof}
 
 \AP Let us now leverage this combinatorial structure to extract a logical
-property of the class $\Cls$. Let us recall that an \intro{existential
-interpretation} from (labelled) graphs to graphs is given by an existential
-first order formula $\phi_{\text{univ}}(x)$ that selects the vertices of the
-interpreted graph, an existential first order formula $\phi_{\text{edge}}(x,y)$
-that selects the edges of the interpreted graph, and an existential first order
-formula $\phi_{\text{dom}}$ that selects the graphs of $\Cls$ on which the
-interpretation is defined. The semantics is that for every graph $G \in \Cls$
-satisfying $\phi_{\text{dom}}$, the interpreted graph $\mathcal{I}(G)$ has for
-vertex set the vertices of $G$ satisfying $\phi_{\text{univ}}$, and has an edge
-between two vertices $u,v$ if and only if $G$ satisfies
-$\phi_{\text{edge}}(u,v)$ (which is assumed to be symmetric and irreflexive on
-the selected vertices). A class $\Cls$ \intro{existentially interprets} a class
-$\mathcal{D}$ if there exists an existential interpretation $\someInterp$ from
-$\Cls$ to graphs such that $\mathcal{D} \subseteq \someInterp(\Cls)$. We say
-that $\Cls$ \intro{existentially transduces} $\mathcal{D}$ if there exists a
-finite labelling set $\Sigma$ such that $\Label{\Sigma}{\Cls}$ \kl{existentially
-interprets} $\mathcal{D}$.
-
+property of the class $\Cls$. 
 
 \begin{lemma}
   \label{lem:paths-transduction}

@@ -3,14 +3,14 @@
 \label{sec:hereditary-classes}
 
 
-In this section, we will aim at leveraging the previous results 
-to tackle classes of \kl{bounded clique-width}. Our first goal is to 
-prove our \cref{main:theorem} regarding the 
-images of finite trees under \kl{MSO interpretations}. There are two difficulties here:
-first, we only dealt with \kl{simple MSO interpretations} so far, and second,
-we have not yet given any decision procedure to check whether the image of
-a given \kl{simple MSO interpretation} is \kl{2-well-quasi-ordered}. Let us first
-tackle the second difficulty.
+In this section, we will aim at leveraging the previous results to tackle
+classes of \kl{bounded clique-width}. Our first goal is to prove our
+\cref{main:theorem} regarding the images of finite trees under \kl{MSO
+interpretations}. There are two difficulties here: first, we only dealt with
+\kl{simple MSO interpretations} so far, and second, we have not yet given any
+decision procedure to check whether the image of a given \kl{simple MSO
+interpretation} is \kl{2-well-quasi-ordered}. Let us first tackle the second
+difficulty.
 
 \begin{definition}[Perfect Bough]
   \label{def:perfect-bough}
@@ -28,6 +28,9 @@ tackle the second difficulty.
   \end{enumerate}
   An \intro{imperfect bough} is a \kl{bough} that is not a \kl{perfect bough}.
 \end{definition}
+
+Remark that every \kl{perfect bough} is a \kl{good bough}, hence every
+\kl{bad bough} is an \kl{imperfect bough}.
 
 \begin{lemma}
   \label{lem:perfect-boughs-wqo}
@@ -49,11 +52,18 @@ tackle the second difficulty.
   \cref{lem:bad-bough-antichain}, we can construct an infinite
   labelled \kl{antichain} in the image of $\someInterp$. The only change is that 
   one also adds the \kl{bough type} of the leaves as additional labels.
+  This actually follows the original proof technique of 
+  \cite{LOPEZ24} for \kl{linear clique-width}.
 \end{proof}
 
 The important advantage of \cref{lem:perfect-boughs-wqo} over
 \cref{lem:good-boughs-wqo} is that \kl{imperfect boughs} are easily
-recognizable.
+recognizable using Monadic Second-Order logic on trees. Indeed, every
+\kl{bough} $B$ is actually a (binary) tree with some distinguished nodes that
+form its \kl(bough){backbone}. Hence, given a tree $\t$ together with a
+\kl{split} $\spt$ and labels on its edges coming from a finite monoid $M$, one
+can ask whether this tree with distinguished nodes represents an \kl{imperfect
+bough}.
 
 \begin{lemma}
   \label{lem:recognizing-perfect-boughs}
@@ -64,11 +74,13 @@ recognizable.
   \cite[Lemma 19]{LOPEZ24}. The main idea is that if a \kl{bough} $B$ is
   \kl{perfect}, then the only thing that matters for a given leaf $x$ in $B$
   is its \kl{bough type} and whether it is mapped on the left or right of the
-  ``untouched block'' in the \kl{bough} $H$. Hence, one can guess for every leaf 
+  untouched \kl{bough block}
+  in the \kl{bough} $H$. Hence, one can guess for every leaf 
   in $B$ where it is mapped (left or right of the untouched block),
   and verify that the mapping preserves edges using only \kl{MSO} formulas.
+
   If such a mapping exists, then one can reconstruct a bough $H$
-  by triplicating $B$, that is, $H = B B B$, and mapping leaves 
+  by triplicating $B$, that is, letting $H \defined B B B$, and mapping leaves 
   to their corresponding copy in $H$. The middle copy will be untouched, 
   witnessing that $B$ is a \kl{perfect bough}.
   This reasoning was made formal for \kl{linear clique-width} in
@@ -80,10 +92,20 @@ recognizable.
   \kl{dimension}.
 \end{corollary}
 \begin{proof}
-  One can build a cost-mso formula on trees that outputs $0$ if the tree 
-  is not an \kl{imperfect bough}, and outputs its \kl{dimension} otherwise.
-  By \cite{COLOD10}, one can decide whether this cost-mso formula is
-  bounded on the class of finite trees, hence the result.
+  We will use the theory of Cost-MSO formulas \cite[Section 6]{COLOD10}.
+  Let us call $\Phi$ the formula of \cref{lem:recognizing-perfect-boughs}
+  that recognizes \kl{imperfect boughs}.
+  Let us now consider the following Cost MSO formula:
+  \begin{equation*}
+    \Psi(N) \defined 
+    \Phi \land |\{ \text{number of elements in the backbone} \}| \leq N
+  \end{equation*}
+  This formula takes an input parameter $N$ (a natural number),
+  and decides whether the provided tree with \kl{split} and labels
+  represents an \kl{imperfect bough} of \kl{dimension} at most $N$.
+  By \cite[Corollary 16]{COLOD10}, one can decide whether such a 
+  formula can hold for arbitrarily large values of $N$, effectively 
+  answering our question.
 \end{proof}
 
 
@@ -92,7 +114,7 @@ We are now ready to prove our \cref{main:theorem}.
   Let $\someInterp$ be an \kl{MSO interpretation}.
   We can get rid of the domain formula and selection formula 
   by standard arguments without changing the \kl{2-well-quasi-ordering}
-  status of the image of $\someInterp$ (see \cite{LOPEZ24}).
+  status of the image of $\someInterp$ \cite[Lemma 8]{LOPEZ24}.
   Hence, we can assume that $\someInterp$ is a \kl{simple MSO interpretation}.
   Furthermore, the transformation from an \kl{simple MSO interpretation}
   to a \kl{monoid interpretation} from trees
@@ -107,8 +129,7 @@ We are now ready to prove our \cref{main:theorem}.
   without changing the \kl{2-well-quasi-ordering} status of the image of $\someInterp$.
   This is because we prove that the image of $\someInterp$ is \kl{$2$-well-quasi-ordered}
   using the \kl{marked gap-embedding} ordering on \kl{marked nested trees}
-  representing the graphs, which already includes a total ordering on the leaves
-  (the topological ordering).
+  representing the graphs, which already includes a total ordering on the leaves.
 \end{proof}
 
 Let now turn our attention to hereditary classes to obtain our 
@@ -116,9 +137,9 @@ Let now turn our attention to hereditary classes to obtain our
 \begin{proof}
   By a standard argument, if the class $\someInterp$ is hereditary
   and \kl{$2$-well-quasi-ordered}, then it is defined by finitely many
-  forbidden induced subgraphs (see \cite{LOPEZ24} for details).
+  forbidden induced subgraphs \cite[Proposition 3]{DRT10}.
   Hence, if $\Cls$ has \kl{bounded clique-width} and is hereditary,
-  one can assume that $\Cls$ is the image of an \kl{MSO interpretation}
+  one can assume that $\Cls$ is exactly the image of an \kl{MSO interpretation}
   $\someInterp$ from finite trees, and the result follows from 
   \cref{main:theorem}.
 \end{proof}
