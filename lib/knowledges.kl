@@ -14,6 +14,7 @@
 \knowledge{notion}
   | existentially transduces
   | existentially transducing
+  | existential transduction
 \knowledge{notion}
   | $\MSO $-interpretation
   | $\MSO $-interpretations
@@ -24,6 +25,8 @@
 \knowledge{notion}
   | existential interpretation
   | existentially interprets
+
+
 
 % 
 % Graphs 
@@ -67,6 +70,7 @@
 \knowledge{notion}
  | hereditary class of graphs
  | hereditary class
+ | hereditary@class
 \knowledge{notion}
  | hereditary closure
 
@@ -187,6 +191,7 @@
 \knowledge{notion}
  | monoid interpretation
  | monoid interpretations
+ | interpretation@monoid
 
 \knowledge{notion}
  | Ramsey's theorem
@@ -201,6 +206,7 @@
  | split of height $N$
  | split
  | split depth
+ | split level
  | split@depth
  | depth@split
 \knowledge{notion}
@@ -227,6 +233,7 @@
 \knowledge{notion}
   | dummy nodes
   | dummy@nodes
+  | dummy@node
   | dummy
   | dummy node
 \knowledge{notion}
@@ -253,11 +260,13 @@
 
 \knowledge{notion}
   | marked@nodes
+  | marked@node
   | marked nodes
   | marked node
   | marked leaves
 
 \knowledge{notion}
+  | separating@node
   | separating@nodes
   | separating node
   | separating nodes
@@ -314,13 +323,11 @@
   | dimension of a bough
   | dimension of the bough
   | dimension@bough
+  | dimensions@bough
 
 \knowledge{notion}
   | bough type
   | bough types
-
-\knowledge{notion}
-  | context@bough
 
 \knowledge{notion}
   | block@bough
@@ -337,6 +344,7 @@
 
 \knowledge{notion}
   | compatible@bough
+  | compatibility@bough
   | compatible bough
   | compatible boughs
 
@@ -350,114 +358,24 @@
   | bad boughs
   | bad@bough
 
+\knowledge{notion}
+  | contexts@bough
+  | context@bough
+
+\knowledge{notion}
+ | context type
+ | context types
+
 
 %
-
+% Perfect boughs
 %
-%\knowledge{notion}
-%  | split depth
-%
-%\knowledge{notion}
-%  | 2-well-quasi-ordered
-%
-%\knowledge{notion}
-%  | simple MSO interpretations
-%
-
-%\knowledge{notion}
-%  | compatible
-%  | compatibility
-%
-%\knowledge{notion}
-%  | good bough
-%
-%\knowledge{notion}
-%  | block
-%  | blocks
-%
-%\knowledge{notion}
-%  | bad bough
-%  | bad boughs
-%
-%\knowledge{notion}
-%  | dimension
-%
-%\knowledge{notion}
-%  | important nodes
-%
-%\knowledge{notion}
-%  | important leaves
-%
-%\knowledge{notion}
-%  | important
-%
-%\knowledge{notion}
-%  | perfect boughs
-%  | perfect bough
-%  | imperfect bough
-%  | imperfect boughs
-%
-%\knowledge{notion}
-%  | split permutation graphs
-%%%%% NEW KNOWLEDGES 
-%
-%\knowledge{notion}
-%  | MSO interpretations
-%  | MSO interpretation
-%
-%\knowledge{notion}
-%  | (strong)\mael {and weak ?} periodic antichains
-%
-%\knowledge{notion}
-%  | existential transduction
-%
-%\knowledge{notion}
-%  | linear trees
-%
-%\knowledge{notion}
-%  | dimension
-%  | dimensions
-%
-%\knowledge{notion}
-%  | marked
-%
-%\knowledge{notion}
-%  | compatibility
-%  | compatible
-%
-%\knowledge{notion}
-%  | contexts
-%  | context
-%
-%\knowledge{notion}
-%  | bad
-%
-%\knowledge{notion}
-%  | split level
-%
-%\knowledge{notion}
-%  | context type
-%  | context types
-%
-%\knowledge{notion}
-%  | simple MSO interpretations
-%  | simple MSO interpretation
-%
-%\knowledge{notion}
-%  | 2-well-quasi-ordered
-%  | 2-well-quasi-ordering
-%
-%\knowledge{notion}
-%  | perfect bough
-%  | imperfect bough
-%  | imperfect boughs
-%
-%\knowledge{notion}
-%  | linear clique-width
-%
-%\knowledge{notion}
-%  | perfect
-%  | perfectness
-%
-%\knowledge{notion}
-%  | MSO
+\knowledge{notion}
+  | perfect bough
+  | perfect boughs
+  | perfect@bough
+  | perfectness@bough
+\knowledge{notion}
+  | imperfect bough
+  | imperfect boughs
+  | imperfect@bough

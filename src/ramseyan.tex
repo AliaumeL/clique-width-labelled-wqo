@@ -164,18 +164,18 @@ ordering on trees.
 
 \AP A \intro{split of height $N$} of a tree $\t$ is a mapping $\spt$ from the
 nodes of $T$ to $\set{1, \dots, N}$. Given a split $\spt$ and two nodes $x
-\treelt[\t] y$, we define $\spt(x : y)$ to be the minimal value of
-$\spt(z)$ for $x \treelt[\t] z \treelt[\t] y$, and $N+1$ otherwise. In
-particular, this does not count the nodes $x$ and $y$ themselves.
-\maelin{Replacement suggestion for previous sentence: In particular, if $y$ is a child of $x$, then $\spt(x : y) = N+1$.}
+\treelt[\t] y$, we define $\spt(x \colon y)$ to be the minimal value of
+$\spt(z)$ for $x \treelt[\t] z \treelt[\t] y$, and $N+1$ otherwise.
+In particular, if $y$ is a child of $x$, then $\spt(x \colon y) = N+1$.
 
-\maelin{Define more properly $k$-neighbourhoods. I'm not sure how do you define it, is it dependent of one node like the k-neighborhood of $u$? Maybe be more precise about what ou mean by hierarchical. Does these nbd is for branches only or for the whole tree ? }
 \AP Two elements $x \treelt[\t] y$ such that $\spt(x) = \spt(y) = k$ are
-\intro{$k$-neighbours} if $\spt(x : y) \geq k$. Note that a \kl{split}
-induces some kind of hierarchical structure on the tree based on the
-\kl{$k$-neighbourhoods}. We illustrate the situation on a branch of a tree in
-\cref{split-on-branch:fig}. We will refer to the value of $\spt(x)$ as the
-\reintro{split depth} of the node $x$.
+\intro{$k$-neighbours} if $\spt(x \colon y) \geq k$. Being \kl{$k$-neighbours}
+is an equivalence relation on the nodes of the tree having value $k$ in the
+split. A \kl{split} induces a hierarchical structure on the tree based on the
+\kl{$k$-neighbourhoods}. We illustrate the situation on a \emph{branch} of a
+tree in \cref{split-on-branch:fig}, but in general \kl{$k$-neighbourhoods} can
+span several branches of the tree. We will refer to the value of $\spt(x)$ as
+the \reintro{split depth} of the node $x$.
 
 \begin{figure}
   \centering 
@@ -205,25 +205,24 @@ induces some kind of hierarchical structure on the tree based on the
     % 1 / 8 / 11
     \draw[A4] (x1) to[bend left=70] (x8);
     \draw[A4] (x8) to[bend left=70] (x11);
+    \draw[A4] (x1) to[bend left=70] (x11);
     % Draw 2-neighbourhoods
-    \draw[A5] (x2) to[bend left=50] (x4);
-    \draw[A5] (x4) to[bend left=50] (x5);
+    \draw[A2] (x2) to[bend left=50] (x4);
+    \draw[A2] (x4) to[bend left=50] (x5);
+    \draw[A2] (x2) to[bend left=50] (x5);
     % Draw 1-neighbourhoods
-    \draw[A3] (x6) to[bend left=30] (x7);
+    \draw[B5] (x6) to[bend left=40] (x7);
+
   \end{tikzpicture}
 
   \caption{A split $\spt$ on a branch of a tree. The arcs 
   in \textcolor{A4}{dark blue} connect $1$-neighbours, 
-  the arcs in \textcolor{A5}{light blue} connect $2$-neighbours,
-  and the arcs in \textcolor{A3}{light purple} connect $3$-neighbours. Full neighbourhoods
-  are obtained by considering the connected components induced by the (reflexive closure) of
-  arcs of each color.
-  \maelin{Choose more different colors, + add the arcs between the first and last 1, and same for the 2. }
+  the arcs in \textcolor{A2}{light red} connect $2$-neighbours,
+  and the arcs in \textcolor{B5}{light green} connect $3$-neighbours.
   }
   \label{split-on-branch:fig}
 \end{figure}
 
-\maelin{It should be for every branch of the tree no ?}
 \AP A \kl{split} $\spt$ is \intro{forward Ramseyan} if for every $k \in \set{1,
 \dots, N}$ and every $x, y, x', y'$ in the same class of \kl{$k$-neighbourhood}
 with $x \treelt[\t] y$ and $x' \treelt[\t] y'$, we have: 
@@ -241,18 +240,16 @@ $\tlbl{\t}{x}{y}$ and $\tlbl{\t}{x'}{y'}$ may be different \kl{idempotents}.
 \AP Let us illustrate how one can use \kl{forward Ramseyan splits} to compute
 efficiently the value of $\tlbl{\t}{x}{y}$ for any pair of nodes $x \treelt[\t]
 y$. We say that $x$ and $y$ are \intro{independent at level $k$} if $\spt(x:y)
-= k$ and there exists three nodes $z_1, z_2, z_3$ such that $x \treelt[\t] z_1
+= k$ and there exist three nodes $z_1, z_2, z_3$ such that $x \treeleq[\t] z_1
 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$ and $\spt(z_1) = \spt(z_2) =
 \spt(z_3) = k$, and $\spt(x:z_1) > k$, $\spt(z_1:z_2) > k$, and $\spt(z_3:y) >
-k$. 
-\maelin{Maybe explain a bit more why you need three vertices and why only $z_2 \treeleq[\t] z_3 $. This is a bit surprising}
+k$. The idea being that $x$ and $y$ are \emph{separated} by at least
+one \kl{$k$-neighbourhood}.
 In the case of \kl{independence at level $k$}, we can use the property of
-\kl{forward Ramseyan splits} to replace the middle part\mael{define middle part} of the path from $x$ to
-$y$ by a shorter path, as illustrated in \cref{fast-computation:fig}. This can
-be used to provide a fast (and first-order definable) computation of the value
-$\tlbl{\t}{x}{y}$ given a \kl{forward Ramseyan split} as proven in \cite[Lemma
-3]{COLC07}.
-
+\kl{forward Ramseyan splits} to 
+compute $\tlbl{\t}{x}{y}$ without ever looking at the section
+between $z_2$ and $z_3$, leading to a fast (and first-order definable) computation.
+We refer to \cite[Lemma 3]{COLC07} for more details on this computation.
 
 \begin{figure}
     \centering
@@ -519,15 +516,14 @@ gap-embedding} ordering when labelled over a \kl{well-quasi-ordered} set.
 \begin{proof}
   We provide a function $f$ that maps \kl{$L$-bounded well-marked nested trees}
   into \kl{nested trees} labelled over a \kl{well-quasi-ordered} set,
-  such that if $f(\t_1, \spt_1, \marking_1) \gemb f(\t_2, \spt_2, \marking_2)$
-  then there exists a \kl{gap-embedding} from
-  $(\t_1, \spt_1, \marking_1)$ to
-  $(\t_2, \spt_2, \marking_2)$. This is done by encoding markings and 
-  conditions \cref{item:gap-embedding:gluing} of \cref{def:gap-embedding}
-  into node labels and modifying the splits accordingly.
-
-
-  \maelin{Maybe you can present this proof better. Maybe say something along the lines: we will reduce to the case of node-labelled trees equipped with forward Ramseyan splits.}
+  such that if there exists a 
+  \kl{gap-embedding} between $f(\t_1, \spt_1, \marking_1)$ and $f(\t_2, \spt_2, \marking_2)$,
+  then $\t_1 \gemb \t_2$ as \kl{marked nested trees}.
+  Since we know that the class of \kl{nested trees} labelled over a
+  \kl{well-quasi-ordered} set is \kl{well-quasi-ordered} under the \kl{gap-embedding} ordering
+  by \cref{thm:gap-embedding-wqo}, we will immediately conclude that 
+  the class of \kl{$L$-bounded well-marked nested trees} is also \kl{well-quasi-ordered}
+  under the \kl{marked gap-embedding} ordering.
   One can encode \cref{item:gap-embedding:root,item:gap-embedding:leaves,item:gap-embedding:marking,item:gap-embedding:local,item:gap-embedding:neighbourhood} of \cref{def:gap-embedding}
   by adding suitable labels to the nodes of the trees. Formally,
   we define a new labelling of the nodes of a tree $\t$ as follows: we add to each node $x$ of $\t$
@@ -540,7 +536,7 @@ gap-embedding} ordering when labelled over a \kl{well-quasi-ordered} set.
   We also distinguish the root by adding a special label $\mathsf{root}$,
   and we add a special label $\mathsf{leaf}$ to every leaf.
   Finally, we also add the label $\marking(x)$ to $x$.
-  Since $M$ is finite, the new labelling is still over a \kl{well-quasi-ordered} set. \mael{ref}
+  Since $M$ is finite, the new labelling is still over a \kl{well-quasi-ordered} set. 
 
   It remains to ensure that the mapping $h$ is gluing on non-\kl{dummy} nodes.
   To that end, we will modify the \kl{split} $\spt$ into a new split $\spt'$ as follows:
@@ -594,7 +590,7 @@ gap-embedding} ordering when labelled over a \kl{well-quasi-ordered} set.
   $\spt_1(z_1) = \spt_1(z_2) = \spt_1(z_3) = k$, and 
   $\spt_1(x:z_1) > k$, $\spt_1(z_1:z_2) > k$, $\spt_1(z_2:z_3) \geq k$, and $\spt_1(z_3:y) > k$, 
   with $\marking_1(z_1) = \marked$, and $\marking_1(z_2) \in \set{\marked, \separating}$.
-
+  This is depicted in the following figure:
   \begin{center}
     \begin{tikzpicture}
         \node (x) at (0,0) {$x$};
@@ -674,7 +670,7 @@ gap-embedding} ordering when labelled over a \kl{well-quasi-ordered} set.
   \end{center}
 
   Let us briefly argue the inequalities on the splits 
-  on the above paths. Large inequalities 
+  on the above paths. The non-strict inequalities 
   follow from \cref{fact:gap-embedding-gaps}. 
   Furthermore, if $v$ is a \kl{marked node} or a \kl{separating node},
   then we can strengthen the inequality to a strict one,

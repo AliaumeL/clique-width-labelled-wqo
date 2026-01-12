@@ -236,24 +236,22 @@ image of $\someInterp$ (\cref{sec:obstructions}).
 
 
 
-\AP If there is an upper bound $N_0$ on the \kl{dimension} of \kl{bad boughs}, we can
-use \cref{fact:bough-replacement} to upgrade our trees in the following way:
-given a tree $\t$, we will insert dummy nodes in every \kl{bough} of level $k$
-that has \kl{dimension} greater than $N_0$. The resulting tree $\t'$ will be a
-\kl{marked nested tree} as defined in \cref{sec:ramseyan}, with three
-kinds of nodes: \kl{marked nodes}, that correspond to nodes of $\t$,
-\kl{dummy nodes} that were inserted during this procedure,
-and \kl{separating nodes}, that are the last nodes of the \kl{$k$-neighbourhoods}
-defining the \kl{boughs} we manipulated.
-The following 
-\cref{lem:important-nodes} shows that this construction produces
-\kl{well-marked nested trees} that are \kl{$N_0$-bounded}, allowing us to apply
-\cref{thm:marked-nested-trees-wqo}.
+\AP If there is an upper bound $N_0$ on the \kl(bough){dimension} of \kl{bad boughs},
+we can use \cref{fact:bough-replacement} to upgrade our trees in the following
+way: given a tree $\t$, we will insert dummy nodes in every \kl{bough} of level
+$k$ that has \kl(bough){dimension} greater than $N_0$. The resulting tree $\t'$
+will be a \kl{marked nested tree} as defined in \cref{sec:ramseyan}, with three
+kinds of nodes: \kl{marked nodes}, that correspond to nodes of $\t$, \kl{dummy
+nodes} that were inserted during this procedure, and \kl{separating nodes},
+that are the last nodes of the \kl{$k$-neighbourhoods} defining the \kl{boughs}
+we manipulated. The following \cref{lem:important-nodes} shows that this
+construction produces \kl{well-marked nested trees} that are \kl{$L$-bounded},
+allowing us to apply \cref{thm:marked-nested-trees-wqo}.
 
 
 \begin{lemma}
     \label{lem:important-nodes}
-    Assume that there exists a bound $N_0$ on the \kl{dimension} of \kl{bad
+    Assume that there exists a bound $N_0$ on the \kl(bough){dimension} of \kl{bad
     boughs}. Then, for every tree $\t$ equipped with a \kl{forward Ramseyan split} $\spt$, 
     one can effectively construct a \kl{well-marked nested tree} $(\t', \spt', \marking)$ 
   that is \kl{$L$-bounded} for some $L \in \Nat$, and such that
@@ -284,27 +282,27 @@ The following
   and all other nodes of these two \kl{bough blocks} as \kl{dummy nodes}.
   Then, we complete
   the marking by ensuring that the least common ancestor
-  of two \kl{marked nodes} is also \kl{marked}. By definition, the graph
+  of two \kl{marked nodes} is also \kl(node){marked}. By definition, the graph
   induced by the \kl{marked leaves} remains unchanged by this operation.
 
-  We repeat this procedure until there is no \kl{bough} of \kl{dimension}
+  We repeat this procedure until there is no \kl{bough} of \kl(bough){dimension}
   greater than $N_0$ whose \kl{backbone} is made of \kl{marked nodes}. This
   process terminates because every rewrite step decreases the multiset of
-  \kl{dimensions} of \kl{boughs} whose \kl{backbone} is made of \kl{marked
+  \kl(bough){dimensions} of \kl{boughs} whose \kl(bough){backbone} is made of \kl{marked
   nodes}.
 
   
   To verify that $(\t', \spt', \marking)$ is \kl{well-marked},
   note that by construction,
-  whenever we have \kl{marked nodes} $x$ and $y$ with a non-\kl{marked} node in between
+  whenever we have \kl{marked nodes} $x$ and $y$ with a non-\kl(node){marked} node in between
   at level $k$, this configuration arises from a \kl{bough} replacement where
   the required witnesses $z_1, z_2, z_3$ exist by the definition of \kl{good boughs}.
 
   Assume towards a contradiction that there exists arbitrarily long 
   paths
-  of non-\kl{dummy} nodes in the resulting tree $\t'$.
+  of non-\kl(node){dummy} nodes in the resulting tree $\t'$.
   Remark that any path that is too long contains 
-  the \kl{backbone} of a \kl{bough} of \kl{dimension} greater than $N_0$
+  the \kl(bough){backbone} of a \kl{bough} of \kl(bough){dimension} greater than $N_0$
   by a Ramsey argument.
   By construction, every \kl{separating node} in such a
   \kl{bough backbone} is followed by  a \kl{dummy node}, so without loss of
@@ -312,12 +310,12 @@ The following
   of \kl{marked nodes}. But this contradicts the termination
   of the procedure.
   We have proven that there exists a bound on the length of paths
-  of non-\kl{dummy} nodes, concluding the proof.
+  of non-\kl(node){dummy} nodes, concluding the proof.
 \end{proof}
 
 \AP We conclude this section by proving one direction of
 \cref{lem:good-boughs-wqo}. Assume that there exists a bound on the
-\kl{dimension} of \kl{bad boughs}. By \cref{lem:important-nodes}, we can
+\kl(bough){dimension} of \kl{bad boughs}. By \cref{lem:important-nodes}, we can
 transform any tree into a \kl{$L$-bounded} \kl{well-marked nested tree}. By
 \cref{thm:marked-nested-trees-wqo}, the class of such trees is
 \kl{well-quasi-ordered} under the \kl{gap-embedding} ordering. Furthermore, by
@@ -336,16 +334,16 @@ property, and we conclude that the image of $\someInterp$ is
 \label{sec:obstructions}
 
 \AP In this section, we will assume that there exist \kl{bad boughs} of
-arbitrarily large \kl{dimension}, and we will leverage this to construct an
+arbitrarily large \kl(bough){dimension}, and we will leverage this to construct an
 infinite \kl{antichain} in the image of $\someInterp$. Our first remark is that
 there are only finitely many equivalence classes for \kl{boughs} of a given
-level $k$ with respect to \kl{compatibility}. This is the content of the
+level $k$ with respect to \kl(bough){compatibility}. This is the content of the
 following \cref{lem:finitely-many-boughs}. Then, we will show that actually,
-one does not need arbitrarily many \kl{contexts} to witness that a \kl{bough}
-is \kl{bad}. This is the content of \cref{lem:finitely-many-contexts}.
+one does not need arbitrarily many \kl(bough){contexts} to witness that a \kl{bough}
+is \kl(bough){bad}. This is the content of \cref{lem:finitely-many-contexts}.
 Combining these two lemmas, we will extract an infinite sequence of \kl{bad
-boughs} of the same level that are pairwise \kl{compatible}, and that are
-\kl{bad} in the same \kl{context}. Finally, we will leverage this to construct
+boughs} of the same level that are pairwise \kl(bough){compatible}, and that are
+\kl(bough){bad} in the same \kl(bough){context}. Finally, we will leverage this to construct
 an infinite \kl{antichain} in the image of $\someInterp$, as stated in
 \cref{lem:bad-bough-antichain}.
 
@@ -353,16 +351,16 @@ an infinite \kl{antichain} in the image of $\someInterp$, as stated in
 \begin{lemma}
   \label{lem:finitely-many-boughs}
   Let $k$ be a level. There are finitely many \kl{boughs} of level $k$ 
-  up to \kl{compatibility}.
+  up to \kl(bough){compatibility}.
 \end{lemma}
 \begin{proof}
-  Let $B$ be a \kl{bough} of level $k$ and $C[\square]$ be a \kl{context}.
+  Let $B$ be a \kl{bough} of level $k$ and $C[\square]$ be a \kl(bough){context}.
   We want to characterise when $C[B]$ is \kl{forward Ramseyan}, and show 
   that this characterisation only depends on finitely many parameters
   of $B$.
 
   Note that since $B$ itself is \kl{forward Ramseyan},
-  and the \kl{context} $C[\square]$ is also \kl{forward Ramseyan},
+  and the \kl(bough){context} $C[\square]$ is also \kl{forward Ramseyan},
   the only way that $C[B]$ can fail to be \kl{forward Ramseyan}
   is one of the following:
   \begin{enumerate}
@@ -370,7 +368,7 @@ an infinite \kl{antichain} in the image of $\someInterp$, as stated in
       goes across $B$ (i.e., $x$ is in the root subtree, and $y$ is in 
       either the left or right subtree).
     \item \label{item:comp-fr-below} one considers a node $x$ on the branch defined 
-      by the \kl{backbone} of $B$, and $y$ in 
+      by the \kl(bough){backbone} of $B$, and $y$ in 
       the left or right subtree of $C[\square]$.
     \item \label{item:comp-fr-above} one considers a node $x$ in the root subtree of 
       $C[\square]$, and $y$ in the \kl{bough} $B$.
@@ -384,16 +382,16 @@ an infinite \kl{antichain} in the image of $\someInterp$, as stated in
 
   For \cref{item:comp-fr-below}, the \kl{forward Ramseyan} condition
   requires nodes to be in the same \kl{$l$-neighbourhood}. Or,
-  all nodes on the branch defined by the \kl{backbone} of $B$ are of 
+  all nodes on the branch defined by the \kl(bough){backbone} of $B$ are of 
   \kl{split level} at least $k$. Hence, for $x$ and $y$ to be in the same
   \kl{$l$-neighbourhood}, they must be of level exactly $k$. 
   As a consequence, this condition only depends on 
   the (finite set) of idempotent elements labelling the \kl{bough} $B$
-  when the context is fixed.
+  when the \kl(bough){context} is fixed.
 
   Finally, for \cref{item:comp-fr-above}, the \kl{forward Ramseyan} condition
   concerns a node $x$ in the root subtree of $C[\square]$, and a node $y$ in
-  $B$, but not necessarily in the branch defined by the \kl{backbone} of $B$.
+  $B$, but not necessarily in the branch defined by the \kl(bough){backbone} of $B$.
   Here, the \kl{forward Ramseyan} condition boils down to the following
   equations: for each node $z$ in $B$ of level $l$, let $x$ be the closest
   ancestor of of $\square$ of level $l$ (if it exists) in $C[\square]$ and
@@ -413,17 +411,17 @@ an infinite \kl{antichain} in the image of $\someInterp$, as stated in
 
 \begin{lemma}
   \label{lem:finitely-many-contexts}
-  There exists a finite set $\mathcal{F}$ of contexts $C[\square]$ such that
-  for every bad bough $B$ of level $k$, there exists a context
+  There exists a finite set $\mathcal{F}$ of \kl(bough){contexts} $C[\square]$ such that
+  for every bad bough $B$ of level $k$, there exists a \kl(bough){context}
   $C[\square] \in \mathcal{F}$ such that $B$ is a \kl{bad bough} in $C[B]$.
 \end{lemma}
 \begin{proof}
-  The proof relies on the fact that the \kl{context} $C[\square]$ plays 
+  The proof relies on the fact that the \kl(bough){context} $C[\square]$ plays 
   a very little role in witnessing that a \kl{bough} $B$ is
   \kl(bough){bad}. 
 
   Let $B$ and $H$ be two \kl{compatible boughs} of level $k$,
-  and let $C[\square]$ be a \kl{context} such that $\t = C[B]$ 
+  and let $C[\square]$ be a \kl(bough){context} such that $\t = C[B]$ 
   and $\t' = C[H]$ are \kl{forward Ramseyan}.
   We want to characterise when there exists an embedding
   $h \colon \someInterp(\t) \to \someInterp(\t')$
@@ -438,7 +436,7 @@ an infinite \kl{antichain} in the image of $\someInterp$, as stated in
   The fact that there are edges between leaves of $B$ only depends on their
   respective \kl{bough types} and the value of
   $\tlbl{\aTree_{\mathsf{root}}}{\treeRoot}{\square}$. As a consequence, any
-  two contexts sharing the same value for the path from the root to $\square$
+  two \kl(bough){contexts} sharing the same value for the path from the root to $\square$
   do not change the edges between leaves of $B$ (or $H$). Since there
   are finitely many monoid elements, there are finitely many possible values
   for this path.
@@ -458,23 +456,24 @@ an infinite \kl{antichain} in the image of $\someInterp$, as stated in
   \tlbl{\aTree_{\mathsf{right}}}{\treeRoot}{x}$).
   It is immediate that to compute the presence
   of an edge between a leaf $y$ in $B$ and a leaf $x$ in $C[\square]$,
-  it suffices to know the \kl{bough type} of $y$ and the \kl{context type} of $x$.
+  it suffices to know the \kl{bough type} of $y$ and the \kl{context type} of $x$
+  (see \cref{monoid-interpretation:eq}, and \cref{partitionning-a-graph:fig}).
   Since there are finitely many possible \kl{context types}
   and \kl{bough types}, if a \kl{bough} $B$ is a \kl{good bough} in $C[B]$
   using a map $h$ and a \kl{compatible bough} $H$,
-  then for any other \kl{context} $C'[\square]$ sharing the same
+  then for any other \kl(bough){context} $C'[\square]$ sharing the same
   \kl{context types} for its leaves as $C[\square]$,
   the \kl{bough} $B$ is also a \kl{good bough} in $C'[B]$
   using the same map $h$ and the same \kl{compatible bough} $H$.
 
-  Since there are finitely many possible \kl{contexts} up to this 
+  Since there are finitely many possible \kl(bough){contexts} up to this 
   equivalence relation, we conclude the proof.
 \end{proof}
 
 
 \begin{lemma}
   \label{lem:bad-bough-antichain}
-  If there exist \kl{bad boughs} of arbitrarily large \kl{dimension},
+  If there exist \kl{bad boughs} of arbitrarily large \kl(bough){dimension},
   then there exists an infinite two-colored \kl{antichain} in the image of $\someInterp$.
 \end{lemma}
 \begin{proof}
@@ -482,12 +481,12 @@ an infinite \kl{antichain} in the image of $\someInterp$, as stated in
   obtained as images of $\someInterp$ is \kl{$2$-well-quasi-ordered}.
   Let $\seqof{B_i}[i \geq 1]$ be an infinite sequence of \kl{bad boughs}. Without loss 
   of generality, one can assume that all \kl{boughs} $B_i$ have the same level $k$,
-  and are pairwise \kl{compatible}, by \cref{lem:finitely-many-boughs}.
+  and are pairwise \kl(bough){compatible}, by \cref{lem:finitely-many-boughs}.
 
-  Now, using \cref{lem:finitely-many-contexts}, one can extract one context 
+  Now, using \cref{lem:finitely-many-contexts}, one can extract one \kl(bough){context}
   $C[\square]$ such that infinitely many \kl{boughs} $B_i$ are \kl{bad boughs}
   in $C[B_i]$. Finally, one can extract further to assume that 
-  the \kl{dimension} of the \kl{boughs} $B_{i+1}$ 
+  the \kl(bough){dimension} of the \kl{boughs} $B_{i+1}$ 
   is greater than twice the number of leaves in $B_i$.
 
   Let us now color every graph $\someInterp(C[B_i])$ with two labels: $\top$
@@ -503,8 +502,8 @@ an infinite \kl{antichain} in the image of $\someInterp$, as stated in
   for all $i < j$.
   Finally, consider any two indices $i < j$. 
 
-  Because the \kl{dimension} of $B_j$ is greater than twice the number of leaves
-  in $B_i$, there must be some \kl{block} in $B_j$ that is left untouched by $f_{i,j}$.
+  Because the \kl(bough){dimension} of $B_j$ is greater than twice the number of leaves
+  in $B_i$, there must be some \kl{bough block} in $B_j$ that is left untouched by $f_{i,j}$.
   Furthermore, we know that $f_{i,j}$ is the identity on leaves
   belonging to $C[\square]$. Hence, the map $f_{i,j}$
   witnesses that $B_i$ is a \kl{good bough} in $C[B_i]$, which is a contradiction.

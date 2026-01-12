@@ -5,12 +5,12 @@
 
 In this section, we will aim at leveraging the previous results to tackle
 classes of \kl{bounded clique-width}. Our first goal is to prove our
-\cref{main:theorem} regarding the images of finite trees under \kl{MSO
-interpretations}. There are two difficulties here: first, we only dealt with
-\kl{simple MSO interpretations} so far, and second, we have not yet given any
-decision procedure to check whether the image of a given \kl{simple MSO
-interpretation} is \kl{2-well-quasi-ordered}. Let us first tackle the second
-difficulty.
+\cref{main:theorem} regarding the images of finite trees under
+\kl{$\MSO$-interpretations}. There are two difficulties here: first, we only
+dealt with \kl{simple $\MSO$-interpretations} so far, and second, we have not
+yet given any decision procedure to check whether the image of a given
+\kl{simple $\MSO$-interpretation} is \kl{$2$-well-quasi-ordered}. Let us first
+tackle the second difficulty.
 
 \begin{definition}[Perfect Bough]
   \label{def:perfect-bough}
@@ -38,22 +38,22 @@ Remark that every \kl{perfect bough} is a \kl{good bough}, hence every
   if and only if
   the image of $\someInterp$ is \kl{$\forall$-well-quasi-ordered} 
   if and only if 
-  there exists a bound on the \kl{dimension} of \kl{imperfect boughs}.
+  there exists a bound on the \kl(bough){dimension} of \kl{imperfect boughs}.
 \end{lemma}
 \begin{proof}
-  First, if we have a bound on the \kl{dimension} of \kl{imperfect boughs},
-  then we also have a bound on the \kl{dimension} of \kl{bad boughs},
+  First, if we have a bound on the \kl(bough){dimension} of \kl{imperfect boughs},
+  then we also have a bound on the \kl(bough){dimension} of \kl{bad boughs},
   because every \kl{bad bough} is an \kl{imperfect bough}.
   Hence, by \cref{lem:good-boughs-wqo}, the image of $\someInterp$ is
   \kl{$\forall$-well-quasi-ordered}.
 
   Conversely, assume that there exist \kl{imperfect boughs} of arbitrarily
-  large \kl{dimension}. Then, by an argument similar to the one of 
+  large \kl(bough){dimension}. Then, by an argument similar to the one of 
   \cref{lem:bad-bough-antichain}, we can construct an infinite
   labelled \kl{antichain} in the image of $\someInterp$. The only change is that 
   one also adds the \kl{bough type} of the leaves as additional labels.
   This actually follows the original proof technique of 
-  \cite{LOPEZ24} for \kl{linear clique-width}.
+  \cite{LOPEZ24} for \kl{bounded linear clique-width}.
 \end{proof}
 
 The important advantage of \cref{lem:perfect-boughs-wqo} over
@@ -72,24 +72,24 @@ bough}.
 \begin{proof}[Proof Sketch]
   The proof follows the same pattern as 
   \cite[Lemma 19]{LOPEZ24}. The main idea is that if a \kl{bough} $B$ is
-  \kl{perfect}, then the only thing that matters for a given leaf $x$ in $B$
+  \kl(bough){perfect}, then the only thing that matters for a given leaf $x$ in $B$
   is its \kl{bough type} and whether it is mapped on the left or right of the
   untouched \kl{bough block}
   in the \kl{bough} $H$. Hence, one can guess for every leaf 
   in $B$ where it is mapped (left or right of the untouched block),
-  and verify that the mapping preserves edges using only \kl{MSO} formulas.
+  and verify that the mapping preserves edges using only MSO formulas.
 
   If such a mapping exists, then one can reconstruct a bough $H$
   by triplicating $B$, that is, letting $H \defined B B B$, and mapping leaves 
   to their corresponding copy in $H$. The middle copy will be untouched, 
   witnessing that $B$ is a \kl{perfect bough}.
-  This reasoning was made formal for \kl{linear clique-width} in
+  This reasoning was made formal for \kl{bounded linear clique-width} in
   \cite[Lemma 16]{LOPEZ24}, and the exact same proof works here.
 \end{proof}
 
 \begin{corollary}
   One can decide whether there are \kl{imperfect boughs} of arbitrarily large
-  \kl{dimension}.
+  \kl(bough){dimension}.
 \end{corollary}
 \begin{proof}
   We will use the theory of Cost-MSO formulas \cite[Section 6]{COLOD10}.
@@ -102,7 +102,7 @@ bough}.
   \end{equation*}
   This formula takes an input parameter $N$ (a natural number),
   and decides whether the provided tree with \kl{split} and labels
-  represents an \kl{imperfect bough} of \kl{dimension} at most $N$.
+  represents an \kl{imperfect bough} of \kl(bough){dimension} at most $N$.
   By \cite[Corollary 16]{COLOD10}, one can decide whether such a 
   formula can hold for arbitrarily large values of $N$, effectively 
   answering our question.
@@ -111,12 +111,12 @@ bough}.
 
 We are now ready to prove our \cref{main:theorem}.
 \begin{proof}
-  Let $\someInterp$ be an \kl{MSO interpretation}.
+  Let $\someInterp$ be an \kl{$\MSO$-interpretation}.
   We can get rid of the domain formula and selection formula 
-  by standard arguments without changing the \kl{2-well-quasi-ordering}
+  by standard arguments without changing the \kl{$2$-well-quasi-ordering}
   status of the image of $\someInterp$ \cite[Lemma 8]{LOPEZ24}.
-  Hence, we can assume that $\someInterp$ is a \kl{simple MSO interpretation}.
-  Furthermore, the transformation from an \kl{simple MSO interpretation}
+  Hence, we can assume that $\someInterp$ is a \kl{simple $\MSO$-interpretation}.
+  Furthermore, the transformation from an \kl{simple $\MSO$-interpretation}
   to a \kl{monoid interpretation} from trees
   described in \cref{sec:ramseyan} is effective.
   Finally, by \cref{lem:perfect-boughs-wqo}
@@ -126,7 +126,7 @@ We are now ready to prove our \cref{main:theorem}.
   one can decide whether the image of $\someInterp$ is \kl{$2$-well-quasi-ordered}. 
 
   It remains to discuss the fact that one can add a total ordering on the graphs 
-  without changing the \kl{2-well-quasi-ordering} status of the image of $\someInterp$.
+  without changing the \kl{$2$-well-quasi-ordering} status of the image of $\someInterp$.
   This is because we prove that the image of $\someInterp$ is \kl{$2$-well-quasi-ordered}
   using the \kl{marked gap-embedding} ordering on \kl{marked nested trees}
   representing the graphs, which already includes a total ordering on the leaves.
@@ -139,39 +139,39 @@ Let now turn our attention to hereditary classes to obtain our
   and \kl{$2$-well-quasi-ordered}, then it is defined by finitely many
   forbidden induced subgraphs \cite[Proposition 3]{DRT10}.
   Hence, if $\Cls$ has \kl{bounded clique-width} and is hereditary,
-  one can assume that $\Cls$ is exactly the image of an \kl{MSO interpretation}
+  one can assume that $\Cls$ is exactly the image of an \kl{$\MSO$-interpretation}
   $\someInterp$ from finite trees, and the result follows from 
   \cref{main:theorem}.
 \end{proof}
 
 
-Let us now turn our attetion to \cref{thm:characterisations},
-and in particular the link between \kl{2-well-quasi-ordering} and
+Let us now turn our attention to \cref{thm:characterisations},
+and in particular the link between \kl{$2$-well-quasi-ordering} and
 \kl{bounded linear clique-width}. The following lemma shows that
-the existence of \kl{imperfect boughs} of arbitrarily large \kl{dimension}
+the existence of \kl{imperfect boughs} of arbitrarily large \kl(bough){dimension}
 can be witnessed using only \kl{blocks} from a finite set.
 
 \begin{lemma}
   \label{lem:hereditary-perfect-boughs}
-  Assume that there are \kl{imperfect boughs} of arbitrarily large \kl{dimension}.
+  Assume that there are \kl{imperfect boughs} of arbitrarily large \kl(bough){dimension}.
   Then, there exists a finite set of blocks $\mathbb{F}$ such that 
-  one can build an \kl{imperfect bough} of arbitrarily large \kl{dimension}
-  using only \kl{blocks} from $\mathbb{F}$.
+  one can build an \kl{imperfect bough} of arbitrarily large \kl(bough){dimension}
+  using only \kl(bough){blocks} from $\mathbb{F}$.
 \end{lemma}
 \begin{proof}
   The proof follows the same pattern 
   as \cref{lem:finitely-many-boughs,lem:finitely-many-contexts},
   and continues on the ideas of \cref{lem:recognizing-perfect-boughs}.
-  The idea is that if a bough $B$ is \kl{perfect}, then 
+  The idea is that if a bough $B$ is \kl(bough){perfect}, then 
   so is $H \defined BBB$. But this only depends on the \kl{bough types}
   present in $B$. As a consequence, if $B$ and $B'$ exhibit the same 
-  \kl{bough types} for their leaves, then $B$ is \kl{perfect}
+  \kl{bough types} for their leaves, then $B$ is \kl(bough){perfect}
   if and only if $B'$ is  
-  \kl{perfect}. If one defines an equivalence relation between
+  \kl(bough){perfect}. If one defines an equivalence relation between
   \kl{bough blocks} of a given \kl{bough} $B$ based on the set of 
   available \kl{bough types} of its leaves, then 
   one can always replace a \kl{bough block} by another one in the same
-  equivalence class without changing the \kl{perfectness} of $B$.
+  equivalence class without changing the \kl(bough){perfectness} of $B$.
   Since this equivalence relation has finitely many classes, the result follows.
 \end{proof}
 
@@ -180,7 +180,7 @@ As an immediate consequence of \cref{lem:perfect-boughs-wqo} and
 
 \begin{corollary}
   \label{cor:hereditary-perfect-boughs-wqo}
-  Assume that the class $\someInterp$ is hereditary.
+  Assume that the class $\someInterp$ is \kl(class){hereditary}.
   Then, the image of $\someInterp$ is \kl{$2$-well-quasi-ordered}
   if and only if 
   every class of \kl{bounded linear clique-width} in $\someInterp$
