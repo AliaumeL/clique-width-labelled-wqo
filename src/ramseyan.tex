@@ -43,19 +43,19 @@ labelled over $M$ to finite undirected graphs to be a tuple
 $(\Sigma, \mu, M, P)$ where $\Sigma$ is a finite alphabet,
 $\mu \colon \Sigma^* \to M$ is a morphism to a finite monoid $M$,
 and $P \subseteq M^3$ is a subset of triples of elements of $M$.
-The interpretation works as follows: given a tree $T$ whose edges are labelled
+The interpretation works as follows: given a tree $\aTree$ whose edges are labelled
 by elements of $\Sigma$, the vertices of the interpreted graph are the leaves of
 $T$, and there is an edge between two leaves $x \treesibleq y$ if and only if
-the triple $(\tlbl{T}{\treeRoot}{\lca(x,y)},
-\tlbl{T}{\lca(x,y)}{x}, \tlbl{T}{\lca(x,y)}{y})$ is in $P$.
+the triple $(\tlbl{\aTree}{\treeRoot}{\lca(x,y)},
+\tlbl{\aTree}{\lca(x,y)}{x}, \tlbl{\aTree}{\lca(x,y)}{y})$ is in $P$.
 
 Adding the function $\tlbl{T}{x}{y}$ to the signature of trees, and assuming 
 that $\lca$ is also part of the signature, we can rewrite the formula
 $\varphi(x,y)$ as a quantifier-free formula as follows:
 \begin{equation}
     \label{monoid-interpretation:eq}
-    (\tlbl{T}{\treeRoot}{\lca(x,y)},
-     \tlbl{T}{\lca(x,y)}{x}, \tlbl{T}{\lca(x,y)}{y}) \in P
+    (\tlbl{\aTree}{\treeRoot}{\lca(x,y)},
+     \tlbl{\aTree}{\lca(x,y)}{x}, \tlbl{\aTree}{\lca(x,y)}{y}) \in P
 \end{equation}
 
 \begin{figure}
@@ -97,7 +97,8 @@ $\varphi(x,y)$ as a quantifier-free formula as follows:
             \draw[gedge] (nx) to node[midway, above, rotate=90] {$(a,b,c) \in P$?} (ny);
         \end{scope}
     \end{tikzpicture}
-    \caption{The interpretation of a tree using a monoid and an accepting part $P \subseteq M^3$.}
+    \caption{The \kl(monoid){interpretation} of a tree using
+    a monoid $M$ and an accepting part $P \subseteq M^3$.}
     \label{interpretation-to-monoid:fig}
 \end{figure}
 
@@ -241,7 +242,7 @@ $\tlbl{\t}{x}{y}$ and $\tlbl{\t}{x'}{y'}$ may be different \kl{idempotents}.
 efficiently the value of $\tlbl{\t}{x}{y}$ for any pair of nodes $x \treelt[\t]
 y$. We say that $x$ and $y$ are \intro{independent at level $k$} if $\spt(x:y)
 = k$ and there exists three nodes $z_1, z_2, z_3$ such that $x \treelt[\t] z_1
-\treelt[\t] z_2 \treeleq[\t] z_3 \treelt[\t] y$ and $\spt(z_1) = \spt(z_2) =
+\treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$ and $\spt(z_1) = \spt(z_2) =
 \spt(z_3) = k$, and $\spt(x:z_1) > k$, $\spt(z_1:z_2) > k$, and $\spt(z_3:y) >
 k$. 
 \maelin{Maybe explain a bit more why you need three vertices and why only $z_2 \treeleq[\t] z_3 $. This is a bit surprising}
@@ -312,15 +313,12 @@ split} of height $N$.
 \AP Let us now state the main remark that will guide the rest of this paper:
 given a branch of a tree equipped with a \kl{forward Ramseyan split} as the one
 illustrated in \cref{fast-computation:fig}, the value of $\tlbl{\t}{x}{y}$ does
-not change when inserting new nodes in the section between $z_1$ and $z_3$ as
+not change when inserting new nodes in the section between $z_2$ and $z_3$ as
 long as these new nodes are assigned a value of the split bigger than or equal
 to $k$, and the resulting tree is still \kl{forward Ramseyan}. A fortiori,
 whether there is an edge between two leaves of $x$ and $y$ in the resulting
 graph is not influenced by such insertions. This will guide our definition of a
-suitable ordering on trees in the upcoming \cref{sec:marked-nested-trees},
-where we allow many insertions (being coarser than the \kl{composition
-ordering}) while still preserving the edges between ``most'' leaves in the
-interpreted graphs.
+suitable ordering on trees in the upcoming \cref{sec:marked-nested-trees}.
 
 \subsection{Marked Nested Trees}
 \label{sec:marked-nested-trees}
@@ -349,18 +347,40 @@ and that endows trees with a \kl{well-quasi-order} \cite{DERSHOWITZ200380}.
   the label of $x$ is less than or equal to the label of $h(x)$ in $\t_2$.
 \end{definition}
 
-\maelin{Put the following in a lemma/theorem}
-\AP 
-It follows from \cite[Theorem 3.1, Main Theorem]{DERSHOWITZ200380}
-that the class of trees
-equipped with \kl{forward Ramseyan splits} is \kl{well-quasi-ordered}
-under the \kl{gap-embedding} ordering, even under the assumption
-that nodes are labelled with a \kl{well-quasi-ordered} set $(X, \leq_X)$.
-We will now devise a suitable modification of the \kl{gap-embedding} ordering
-that will ensure that the interpretation $\someInterp$ is order-preserving
-from trees to graphs.
+\AP In the following \cref{fact:gap-embedding-gaps} we illustrate why
+\kl{gap-embeddings} are well-suited for our purpose: they respect the gaps
+induced by \kl{forward Ramseyan splits}.
 
+\begin{fact}
+  \label{fact:gap-embedding-gaps}
+  Let $\t_1, \t_2$ be two trees and 
+  $\spt_1, \spt_2$ be two \kl{forward Ramseyan splits} of height $N$ of $\t_1, \t_2$
+  Assume that $h \colon \t_1 \to \t_2$ is a \kl{gap-embedding} from $(\t_1, \spt_1)$ to $(\t_2, \spt_2)$.
+  Then, for every $u, v$ in $\t_1$,
+  if $\spt_1(u:v) > k$ and $\spt_1(v) = k$ for some $k \in \set{1, \dots, N}$,
+  then $\spt_2(h(u):h(v)) \geq k$.
+\end{fact}
+\begin{proof}
+  This is proven by induction on the length of the path 
+  from $u$ to $v$ in $\t_1$. The base case is exactly 
+  \cref{item:gap-embedding:edge} of the definition of \kl{gap-embedding}.
+\end{proof}
 
+One other key property of the \kl{gap-embedding} ordering is that it is
+a \kl{well-quasi-ordering}.
+
+\begin{theorem}[{\cite[Theorem 3.1, Main Theorem]{DERSHOWITZ200380}}]
+  \label{thm:gap-embedding-wqo}
+  The class of trees equipped with \kl{forward Ramseyan splits}
+  is \kl{well-quasi-ordered} under the \kl{gap-embedding} ordering,
+  even under the assumption that nodes are labelled with a \kl{well-quasi-ordered} set $(X, \leq_X)$.
+\end{theorem}
+
+\AP We will now devise a suitable modification of the \kl{gap-embedding}
+ordering that will ensure that the interpretation $\someInterp$ is
+order-preserving from trees to graphs. In particular, this modification will
+take into account the edge-labelling of the trees using the monoid $M$, that 
+are not considered in the \kl{gap-embedding} ordering.
 
 \newcommand{\marked}{\mathbf{M}}
 \newcommand{\separating}{\mathbf{S}}
@@ -381,10 +401,44 @@ from trees to graphs.
   $\spt(x:z_1) > k$, $\spt(z_1) = k$, and  $\spt(z_1:y) \geq k$ for some $k \in \set{1, \dots, N}$,
   if $x$ and $y$ are \kl{marked nodes} and $z$ is not a \kl{marked node}, then there exists $z_2, z_3$
   such that 
-  $x \treelt[\t] z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$, \mael{$z_3 \treeleq[\t] y$ correct ?}
-  $\spt(z_1) = \spt(z_2) = \spt(z_3) = k$, and 
-  $\spt(x:z_1) > k$, $\spt(z_1:z_2) > k$, and $\spt(z_3:y) \geq k$, \mael{what about $\spt(z_2:z_3)$ ?} 
+  $x \treelt[\t] z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$,
+  $\spt(z_1) = \spt(z_2) = \spt(z_3) = k$, 
+  $\spt(x:z_1) > k$, $\spt(z_1:z_2) > k$, $\spt(z_1:z_3) \geq k$, 
+  and $\spt(z_3:y) \geq k$,
   with $\marking(z_1) = \marked$, and $\marking(z_2) \in \set{\marked, \separating}$.
+  A graphical illustration of the condition is provided below:
+  \begin{center}
+    \begin{tikzpicture}[xscale=2,yscale=0.5]
+      % illustrate well-marked condition
+      \node (x) at (0,0) {$x$};
+      \node (z1) at (1,0) {$z_1$};
+      \node (z2) at (2,0) {$z_2$};
+      \node (z3) at (3,0) {$z_3$};
+      \node (y) at (4,0) {$y$};
+
+      \node (sptz1) at (1,-1) {$k$};
+      \node (sptz2) at (2,-1) {$k$};
+      \node (sptz3) at (3,-1) {$k$};
+      \node (sptxz1) at (0.5,-0.7) {$> k$};
+      \node (sptz1z2) at (1.5,-0.7) {$> k$};
+      \node (sptz3y) at (3.5,-0.7) {$\geq k$};
+      \node (sptz1z3) at (2.5,-0.7) {$\geq k$};
+
+      \node (markedx) at (0,1) {$\marked$};
+      \node (markedy) at (4,1) {$\marked$};
+      \node (markedz1) at (1,1) {$\marked$};
+      \node (markedz2) at (2,1) {$\in \{\marked, \separating\}$};
+      \node (notmarkedz3) at (3,1) {$\in \{\marked, \separating, \dummy\}$};
+
+      \draw[->] (x) -- (z1);
+      \draw[->] (z1) -- (z2);
+      \draw[->] (z2) -- (z3);
+      \draw[->] (z3) -- (y);
+
+
+
+    \end{tikzpicture}
+  \end{center}
 \end{definition}
 
 \NewDocumentCommand{\gemb}{}{\leq_{\mathrm{gap}}}
@@ -399,7 +453,11 @@ from trees to graphs.
   $(\t_1, \spt_1, \marking_1) \gemb (\t_2, \spt_2, \marking_2)$,
   if there exists a mapping $h \colon \t_1 \to \t_2$ that
   \begin{enumerate}
-    \item \label{item:gap-embedding:gap} is a \kl{gap embedding} from $(\t_1, \spt_1)$ to $(\t_2, \spt_2)$,
+    % start numbering at 4 
+    % for this specific enumerate 
+    \setcounter{enumi}{3}
+
+    \item[$\star$] \label{item:gap-embedding:gap} is a \kl{gap embedding} from $(\t_1, \spt_1)$ to $(\t_2, \spt_2)$,
 
     \item \label{item:gap-embedding:root} sends the root of $\t_1$ to the root of $\t_2$,
   
@@ -408,14 +466,14 @@ from trees to graphs.
     \item \label{item:gap-embedding:marking} respects the marking:
       $\marking_1 = \marking_2  \circ h$,
 
-    \item \label{item:gap-embedding:local} respects local products: if $y$ is the immediate left (resp. right)
-      child of $x$ in $\t_1$, and $y'$ is the immediate left (resp. right) child of
+    \item \label{item:gap-embedding:local} respects local products: if $y$ is the  left (resp. right)
+      child of $x$ in $\t_1$, and $y'$ is the  left (resp. right) child of
       $h(x)$ in $\t_2$, then
       $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{y'}$.
 
     \item \label{item:gap-embedding:neighbourhood} respects neighbourhood products: for every $k \in \set{1, \dots, N}$,
-      and every node $x \in \t_1$, if $z$ is the least ancestor of $x$ such that
-      $\spt_1(z) = k$ and $z'$ is the least ancestor of $h(x)$ such that
+      and every node $x \in \t_1$, if $z$ is the closest ancestor of $x$ such that
+      $\spt_1(z) = k$ and $z'$ is the closest ancestor of $h(x)$ such that
       $\spt_2(z') = k$, then 
       $\tlbl{\t_1}{z}{x} = \tlbl{\t_2}{z'}{h(x)}$.
     
@@ -427,16 +485,26 @@ from trees to graphs.
   \end{enumerate}
 \end{definition}
 
+\AP Unlike the \kl{gap-embedding} ordering of \cref{thm:gap-embedding-wqo}, the
+\kl{marked gap-embedding} ordering of \cref{def:gap-embedding} is not a
+\kl{well-quasi-order} because of the gluing condition of
+\cref{item:gap-embedding:gluing}.
+We create an infinite \kl{antichain} by 
+considering the infinite sequence of trees
+$(\t_n, \spt_n, \marking_n)$ where $\t_n$ is a branch of length $n+1$,
+$\spt_n$ assigns the value $1$ to every node of $\t_n$,
+and $\marking_n$ marks all the nodes of $\t_n$ with $\marked$.
+It is straightforward to check that for every $n < m$,
+$(\t_n, \spt_n, \marking_n)$ does not \kl{gap-embed} into
+$(\t_m, \spt_m, \marking_m)$.
 
-
-\AP
-A \kl{$L$-bounded marked nested tree} is a \kl{marked nested tree}
-such that any path of non \kl{dummy} nodes has length at most $L$.
-As we will see in the following \cref{thm:marked-nested-trees-wqo},
-the class of \kl{$L$-bounded well-marked nested trees}
-is \kl{well-quasi-ordered} under the \kl{marked gap-embedding} ordering
-when labelled over a \kl{well-quasi-ordered} set. Note that the boundedness
-assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
+\AP To recover the \kl{well-quasi-order} property, we will restrict our
+attention to trees that make a limited use of the gluing property. A
+\kl{$L$-bounded marked nested tree} is a \kl{marked nested tree} such that any
+path of non \kl{dummy} nodes has length at most $L$. As we will see in the
+following \cref{thm:marked-nested-trees-wqo}, the class of \kl{$L$-bounded
+well-marked nested trees} is \kl{well-quasi-ordered} under the \kl{marked
+gap-embedding} ordering when labelled over a \kl{well-quasi-ordered} set.
 
 \begin{theorem}
   \label{thm:marked-nested-trees-wqo}
@@ -446,6 +514,16 @@ assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
   is \kl{well-quasi-ordered} under the \kl{gap-embedding} ordering.
 \end{theorem}
 \begin{proof}
+  We provide a function $f$ that maps \kl{$L$-bounded well-marked nested trees}
+  into \kl{nested trees} labelled over a \kl{well-quasi-ordered} set,
+  such that if $f(\t_1, \spt_1, \marking_1) \gemb f(\t_2, \spt_2, \marking_2)$
+  then there exists a \kl{gap-embedding} from
+  $(\t_1, \spt_1, \marking_1)$ to
+  $(\t_2, \spt_2, \marking_2)$. This is done by encoding markings and 
+  conditions \cref{item:gap-embedding:gluing} of \cref{def:gap-embedding}
+  into node labels and modifying the splits accordingly.
+
+
   \maelin{Maybe you can present this proof better. Maybe say something along the lines: we will reduce to the case of node-labelled trees equipped with forward Ramseyan splits.}
   One can encode \cref{item:gap-embedding:gap,item:gap-embedding:root,item:gap-embedding:leaves,item:gap-embedding:marking,item:gap-embedding:local,item:gap-embedding:neighbourhood} of \cref{def:gap-embedding}
   by adding suitable labels to the nodes of the trees. Formally,
@@ -477,7 +555,7 @@ assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
   $\spt'_2(h(x):h(y)) \geq \spt'_1(y) = N + 1 + i$.
   But this means that between $h(x)$ and $h(y)$
   there are only nodes with \kl{split depth} greater or equal than $N + 1 + i$.
-  If $i = 0$\mael{should be $i=1$} (i.e., $y$ is the first node of a maximal path of non-\kl{dummy} nodes),
+  If $i = 1$ (i.e., $y$ is the first node of a maximal path of non-\kl{dummy} nodes),
   then there is no such node, and $h(x)$ is the parent of $h(y)$.
   Otherwise, $\spt'_1(x) = N + i > N$, and therefore 
   the path from $h(x)$ to $h(y)$ contains only non \kl{dummy} nodes.
@@ -486,24 +564,6 @@ assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
   there is no such node, and $h(x)$ is the parent of $h(y)$.
 \end{proof}
 
-
-
-\maelin{Je mettrais ça avant le théorème, et pas forcément sous forme d'un lemme, tu peux juste dire que la famille des chemins dont les noeuds sont marqué n'est pas wqo à cause du gluing.}
-\begin{lemma}
-  \label{rem:unbounded-mark-not-wqo}
-  The \kl{well-quasi-order} of \cref{thm:marked-nested-trees-wqo}
-  does not hold if we remove the \kl{$L$-boundedness} assumption.
-\end{lemma}
-\begin{proof}
-  We create an infinite antichain by 
-  considering the infinite sequence of trees
-  $(\t_n, \spt_n, \marking_n)$ where $\t_n$ is a branch of length $n+1$,
-  $\spt_n$ assigns the value $1$ to every node of $\t_n$,
-  and $\marking_n$ marks all the nodes of $\t_n$.
-  It is straightforward to check that for every $n < m$,
-  $(\t_n, \spt_n, \marking_n)$ does not \kl{gap-embed} into
-  $(\t_m, \spt_m, \marking_m)$.
-\end{proof}
 
 
 \begin{lemma}
@@ -518,28 +578,18 @@ assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
 \end{lemma}
 \begin{proof}
   We proceed by induction on the value of $\spt_1(x:y)$.
-  If $\spt(x:y) = N+1$, then $y$ is an immediate child of $x$,
-  and $\spt(h(x):h(y)) = N+1$ by definition of \kl{gap-embedding}.
+  If $\spt(x:y) = N+1$, then $y$ is a child of $x$.
+  Because $y$ is a \kl{marked node}, then by 
+  \cref{item:gap-embedding:gluing} we know that 
+  $h(y)$ is a child of $h(x)$.
   Therefore, by \cref{item:gap-embedding:local},
   we have $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{h(y)}$.
 
-  Otherwise, let $k = \spt_1(x:y) \leq N$. We distinguish two cases.
-  Either, there exists a unique child $z$ of $x$ such that
-  $\spt_1(x:z) = k$ and $z$ is a \kl{marked node}.
-  By induction hypothesis, we have
-  $\tlbl{\t_1}{z}{y} = \tlbl{\t_2}{h(z)}{h(y)}$,
-  and $\tlbl{\t_1}{x}{z} = \tlbl{\t_2}{h(x)}{h(z)}$. Hence, 
-  \begin{align*}
-    \tlbl{\t_1}{x}{y} &= \tlbl{\t_1}{x}{z} \cdot \tlbl{\t_1}{z}{y} \\
-                      &= \tlbl{\t_2}{h(x)}{h(z)} \cdot \tlbl{\t_2}{h(z)}{h(y)} \\
-                      &= \tlbl{\t_2}{h(x)}{h(y)} \quad .
-  \end{align*}
-
-  Otherwise, since $(\t_1, \spt_1, \marking_1)$ is \kl{well-marked},
+  Otherwise, let $k = \spt_1(x:y) \leq N$. Since $(\t_1, \spt_1, \marking_1)$ is \kl{well-marked},
   there exists $z_1, z_2, z_3$ such that
-  $x \treelt[\t_1] z_1 \treelt[\t_1] z_2 \treeleq[\t_1] z_3 \treelt[\t_1] y$,
+  $x \treelt[\t_1] z_1 \treelt[\t_1] z_2 \treeleq[\t_1] z_3 \treeleq[\t_1] y$,
   $\spt_1(z_1) = \spt_1(z_2) = \spt_1(z_3) = k$, and 
-  $\spt_1(x:z_1) > k$, $\spt_1(z_1:z_2) > k$, and $\spt_1(z_3:y) > k$, 
+  $\spt_1(x:z_1) > k$, $\spt_1(z_1:z_2) > k$, $\spt_1(z_2:z_3) \geq k$, and $\spt_1(z_3:y) > k$, 
   with $\marking_1(z_1) = \marked$, and $\marking_1(z_2) \in \set{\marked, \separating}$.
 
   \begin{center}
@@ -575,7 +625,7 @@ assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
   \end{center}
 
   By applying the \kl{gap-embedding} $h$,
-  we the following configuration inside $\t_2$, where
+  we have the following configuration inside $\t_2$, where
   we used the notations
   $a = \tlbl{\t_2}{h(x)}{h(z_1)}$,
   $b = \tlbl{\t_2}{h(z_1)}{h(z_2)}$,
@@ -621,13 +671,8 @@ assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
   \end{center}
 
   Let us briefly argue the inequalities on the splits 
-  on the above paths.
-  To do that, we will use the fact that \cref{item:gap-embedding:gap}
-  implies that if $\spt(u:v) > k$ and $\spt(v) = k$,
-  then $\spt(h(u):h(v)) \geq k$.
-  This is proven by immediate induction on the length
-  of the path from $u$ to $v$, the base case being given by 
-  the definition of \kl{gap-embedding}.
+  on the above paths. Large inequalities 
+  follow from \cref{fact:gap-embedding-gaps}. 
   Furthermore, if $v$ is a \kl{marked node} or a \kl{separating node},
   then we can strengthen the inequality to a strict one,
   i.e., $\spt(h(u):h(v)) > k$ even when $\spt(v) \neq k$.
@@ -658,7 +703,7 @@ assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
   \begin{align*}
     \tlbl{\t_1}{x}{z_1} & = a
     &\text{by induction hypothesis,} \\
-    \tlbl{\t_1}{z_2}{z_3} & = b
+    \tlbl{\t_1}{z_1}{z_2} & = b
     &\text{by \cref{item:gap-embedding:neighbourhood},} \\
     \tlbl{\t_1}{z_3}{y} & = d 
     &\text{by \cref{item:gap-embedding:neighbourhood}.}
@@ -671,7 +716,12 @@ assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
     \tlbl{\t_1}{x}{y}
           & = \tlbl{\t_1}{x}{z_1} \cdot
               \tlbl{\t_1}{z_1}{z_2} \cdot
+              \tlbl{\t_1}{z_2}{z_3} \cdot
               \tlbl{\t_1}{z_3}{y} \\
+          & = \tlbl{\t_1}{x}{z_1} \cdot
+              \tlbl{\t_1}{z_1}{z_2} \cdot
+              \tlbl{\t_1}{z_3}{y} \\
+          & = a \cdot b \cdot c \cdot d \\
           & = a \cdot b \cdot d \\
     & = \tlbl{\t_2}{h(x)}{h(y)} \quad . \qedhere
   \end{align*}
@@ -686,14 +736,15 @@ assumption is necessary, as shown in \cref{rem:unbounded-mark-not-wqo}.
   $(\t_1, \spt_1, \marking_1) \gemb (\t_2, \spt_2, \marking_2)$.
   Then, the graph interpreted from
   $(\t_1, \spt_1, \marking_1)$
-  is an induced subgraph of the graph interpreted from
+  is an \kl{induced subgraph} of the graph interpreted from
   $(\t_2, \spt_2, \marking_2)$
   when considering only \kl{marked leaves} as vertices.
 \end{corollary}
 \begin{proof}
   Follows directly from \cref{lem:gap-embedding-respects-products}
-  and the definition of the interpretation using the set $P \subseteq M^3$,
-  because the edges between two \kl{marked leaves} $x$ and $y$
+  and the definition of the \kl{monoid interpretation}
+  using the set $P \subseteq M^3$ (see \cref{monoid-interpretation:eq}):
+  edges between two \kl{marked leaves} $x$ and $y$
   only depend on the values of
   $\tlbl{\t}{\treeRoot}{\lca(x,y)}$,
   $\tlbl{\t}{\lca(x,y)}{x}$, and

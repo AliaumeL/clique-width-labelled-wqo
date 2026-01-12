@@ -20,6 +20,7 @@
 \knowledge{notion}
   | simple@interpretation
   | simple $\MSO $-interpretation
+  | simple $\MSO $-interpretations
 \knowledge{notion}
   | existential interpretation
   | existentially interprets
@@ -206,6 +207,7 @@
  | $k$-neighbourhoods
  | $k$-neighbourhood
  | $k$-neighbours
+ | $l$-neighbourhood
 
 \knowledge{notion}
   | independent at level $k$
@@ -233,6 +235,7 @@
 \knowledge{notion}
   | well-marked
   | well-marked nested trees
+  | well-marked nested tree
 
 \knowledge{notion}
   | gap-embeds@marked
@@ -245,6 +248,7 @@
   | $L$-bounded well-marked nested trees
   | $L$-bounded
   | $L$-boundedness
+  | $N_0$-bounded
 
 
 \knowledge{notion}
@@ -256,6 +260,7 @@
 \knowledge{notion}
   | separating@nodes
   | separating node
+  | separating nodes
 
 
 % 
@@ -322,14 +327,18 @@
   | blocks@bough 
   | bough block
   | bough blocks
+  | block
+  | blocks
 
 \knowledge{notion}
   | backbone@bough
   | bough backbone
+  | backbone
 
 \knowledge{notion}
   | compatible@bough
   | compatible bough
+  | compatible boughs
 
 \knowledge{notion}
   | good bough
@@ -341,47 +350,6 @@
   | bad boughs
   | bad@bough
 
-%%%%% NEW KNOWLEDGES 
-%
-%\knowledge{notion}
-%  | $X$-labelled clique
-%
-%\knowledge{notion}
-%  | 2-WQO
-%
-%\knowledge{notion}
-%  | undirected
-%
-%\knowledge{notion}
-%  | embeds
-%
-%\knowledge{notion}
-%  | monomorphism
-%
-%\knowledge{notion}
-%  | hereditary class
-%
-%\knowledge{notion}
-%  | hereditary closure
-%
-%\knowledge{notion}
-%  | ordered graph
-%
-%\knowledge{notion}
-%  | ancestor relation
-%
-%\knowledge{notion}
-%  | topological order
-%
-%\knowledge{notion}
-%  | linear trees
-%
-%\knowledge{notion}
-%  | existential transduction
-%
-%\knowledge{notion}
-%  | monoid interpretation
-%
 
 %
 
@@ -431,3 +399,65 @@
 %
 %\knowledge{notion}
 %  | split permutation graphs
+%%%%% NEW KNOWLEDGES 
+%
+%\knowledge{notion}
+%  | MSO interpretations
+%  | MSO interpretation
+%
+%\knowledge{notion}
+%  | (strong)\mael {and weak ?} periodic antichains
+%
+%\knowledge{notion}
+%  | existential transduction
+%
+%\knowledge{notion}
+%  | linear trees
+%
+%\knowledge{notion}
+%  | dimension
+%  | dimensions
+%
+%\knowledge{notion}
+%  | marked
+%
+%\knowledge{notion}
+%  | compatibility
+%  | compatible
+%
+%\knowledge{notion}
+%  | contexts
+%  | context
+%
+%\knowledge{notion}
+%  | bad
+%
+%\knowledge{notion}
+%  | split level
+%
+%\knowledge{notion}
+%  | context type
+%  | context types
+%
+%\knowledge{notion}
+%  | simple MSO interpretations
+%  | simple MSO interpretation
+%
+%\knowledge{notion}
+%  | 2-well-quasi-ordered
+%  | 2-well-quasi-ordering
+%
+%\knowledge{notion}
+%  | perfect bough
+%  | imperfect bough
+%  | imperfect boughs
+%
+%\knowledge{notion}
+%  | linear clique-width
+%
+%\knowledge{notion}
+%  | perfect
+%  | perfectness
+%
+%\knowledge{notion}
+%  | MSO
