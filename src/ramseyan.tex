@@ -216,9 +216,9 @@ the \reintro{split depth} of the node $x$.
   \end{tikzpicture}
 
   \caption{A split $\spt$ on a branch of a tree. The arcs 
-  in \textcolor{A4}{dark blue} connect $1$-neighbours, 
-  the arcs in \textcolor{A2}{light red} connect $2$-neighbours,
-  and the arcs in \textcolor{B5}{light green} connect $3$-neighbours.
+  in \textcolor{A4}{blue} connect $1$-neighbours, 
+  the arcs in \textcolor{A2}{red} connect $2$-neighbours,
+  and the arcs in \textcolor{B5}{green} connect $3$-neighbours.
   }
   \label{split-on-branch:fig}
 \end{figure}
@@ -242,7 +242,7 @@ efficiently the value of $\tlbl{\t}{x}{y}$ for any pair of nodes $x \treelt[\t]
 y$. We say that $x$ and $y$ are \intro{independent at level $k$} if $\spt(x:y)
 = k$ and there exist three nodes $z_1, z_2, z_3$ such that $x \treeleq[\t] z_1
 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$ and $\spt(z_1) = \spt(z_2) =
-\spt(z_3) = k$, and $\spt(x:z_1) > k$, $\spt(z_1:z_2) > k$, and $\spt(z_3:y) >
+\spt(z_3) = k$, and $\spt(x\colon z_1) > k$, $\spt(z_1 \colon z_2) > k$, and $\spt(z_3\colon y) >
 k$. The idea being that $x$ and $y$ are \emph{separated} by at least
 one \kl{$k$-neighbourhood}.
 In the case of \kl{independence at level $k$}, we can use the property of
@@ -334,10 +334,10 @@ and that endows trees with a \kl{well-quasi-order} \cite{DERSHOWITZ200380}.
     \item is a tree embedding: respects the ancestor relation $\treeleq$, least
       common ancestors $\lca$, and sibling ordering $\treesibleq$,
     \item satisfies the root gap property:
-      $\spt_2(r_2 : h(r_1)) \geq \spt_1(r_1)$ where $r_1, r_2$ are the roots of $\t_1, \t_2$,
+      $\spt_2(r_2 \colon h(r_1)) \geq \spt_1(r_1)$ where $r_1, r_2$ are the roots of $\t_1, \t_2$,
     \item satisfies the edge gap property:
       for every edge $x \treelt[\t] y$ in $\t_1$,
-      $\spt_2(h(x) : h(y)) \geq \spt_1(y)$.
+      $\spt_2(h(x) \colon h(y)) \geq \spt_1(y)$.
   \end{enumerate}
   If the trees are node-labelled by a set $(X, \leq_X)$,
   we further require that for every node $x$ in $\t_1$,
@@ -393,18 +393,18 @@ are not considered in the \kl{gap-embedding} ordering.
 
 \maelin{I think there is something wrong with this definition. "that
 	for every $x \treelt[\t] z_1 \treelt[\t] y$ such that 
-	$\spt(x:z_1) > k$, $\spt(z_1) = k$" there is only one such $z_1$, Moreover, you assume $\marking(z_1) = \marked$ afterward.}
+	$\spt(x \colon z_1) > k$, $\spt(z_1) = k$" there is only one such $z_1$, Moreover, you assume $\marking(z_1) = \marked$ afterward.}
   A \kl{marked nested tree} $(\t, \spt, \marking)$ is \intro{well-marked} if
   the \kl{marked nodes} contain the root of $\t$, are closed under 
   the \kl{least common ancestor} operation, and furthermore satisfy that
   for every $x \treelt[\t] z_1 \treelt[\t] y$ such that 
-  $\spt(x:z_1) > k$, $\spt(z_1) = k$, and  $\spt(z_1:y) \geq k$ for some $k \in \set{1, \dots, N}$,
+  $\spt(x\colon z_1) > k$, $\spt(z_1) = k$, and  $\spt(z_1\colon y) \geq k$ for some $k \in \set{1, \dots, N}$,
   if $x$ and $y$ are \kl{marked nodes} and $z_1$ is not a \kl{marked node}, then there exists $z_2, z_3$
   such that 
   $x \treelt[\t] z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$,
   $\spt(z_1) = \spt(z_2) = \spt(z_3) = k$, 
-  $\spt(x:z_1) > k$, $\spt(z_1:z_2) > k$, $\spt(z_2:z_3) \geq k$, 
-  and $\spt(z_3:y) \geq k$,
+  $\spt(x\colon z_1) > k$, $\spt(z_1\colon z_2) > k$, $\spt(z_2\colon z_3) \geq k$, 
+  and $\spt(z_3\colon y) \geq k$,
   with $\marking(z_1) = \marked$, and $\marking(z_2) \in \set{\marked, \separating}$.
   A graphical illustration of the condition is provided below:
   \begin{center}
@@ -551,7 +551,7 @@ gap-embedding} ordering when labelled over a \kl{well-quasi-ordered} set.
   assume that $\marking_1(y) \in \set{\marked, \separating}$,
   and let $x$ be the parent of $y$ in $\t_1$.
   Since $\spt'_1(y) = N + 1 + i$, we know that 
-  $\spt'_2(h(x):h(y)) \geq \spt'_1(y) = N + 1 + i$.
+  $\spt'_2(h(x)\colon h(y)) \geq \spt'_1(y) = N + 1 + i$.
   But this means that between $h(x)$ and $h(y)$
   there are only nodes with \kl{split depth} greater or equal than $N + 1 + i$.
   If $i = 1$ (i.e., $y$ is the first node of a maximal path of non-\kl{dummy} nodes),
@@ -576,8 +576,8 @@ gap-embedding} ordering when labelled over a \kl{well-quasi-ordered} set.
   we have $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{h(y)}$.
 \end{lemma}
 \begin{proof}
-  We proceed by induction on the value of $\spt_1(x:y)$.
-  If $\spt(x:y) = N+1$, then $y$ is a child of $x$.
+  We proceed by induction on the value of $\spt_1(x\colon y)$.
+  If $\spt_1(x\colon y) = N+1$, then $y$ is a child of $x$.
   Because $y$ is a \kl{marked node}, then by 
   \cref{item:gap-embedding:gluing} we know that 
   $h(y)$ is a child of $h(x)$.
@@ -588,7 +588,7 @@ gap-embedding} ordering when labelled over a \kl{well-quasi-ordered} set.
   there exists $z_1, z_2, z_3$ such that
   $x \treelt[\t_1] z_1 \treelt[\t_1] z_2 \treeleq[\t_1] z_3 \treeleq[\t_1] y$,
   $\spt_1(z_1) = \spt_1(z_2) = \spt_1(z_3) = k$, and 
-  $\spt_1(x:z_1) > k$, $\spt_1(z_1:z_2) > k$, $\spt_1(z_2:z_3) \geq k$, and $\spt_1(z_3:y) > k$, 
+  $\spt_1(x\colon z_1) > k$, $\spt_1(z_1\colon z_2) > k$, $\spt_1(z_2\colon z_3) \geq k$, and $\spt_1(z_3\colon y) > k$, 
   with $\marking_1(z_1) = \marked$, and $\marking_1(z_2) \in \set{\marked, \separating}$.
   This is depicted in the following figure:
   \begin{center}
@@ -674,7 +674,7 @@ gap-embedding} ordering when labelled over a \kl{well-quasi-ordered} set.
   follow from \cref{fact:gap-embedding-gaps}. 
   Furthermore, if $v$ is a \kl{marked node} or a \kl{separating node},
   then we can strengthen the inequality to a strict one,
-  i.e., $\spt(h(u):h(v)) > k$ even when $\spt(v) \neq k$.
+  i.e., $\spt(h(u)\colon h(v)) > k$ even when $\spt(v) \neq k$.
   This is because of \cref{item:gap-embedding:gluing},
   which ensures that the immediate parent of $h(v)$
   is the image of the immediate parent of $v$, which has a split value
@@ -684,17 +684,17 @@ gap-embedding} ordering when labelled over a \kl{well-quasi-ordered} set.
 
   Using these facts we conclude that:
   \begin{align*}
-    \spt_2(h(x):h(z_1))   &> k 
+    \spt_2(h(x)\colon h(z_1))   &> k 
                           & \text{because $z_1$ is a \kl(nodes){marked},}
                           \\
-    \spt_2(h(z_1):h(z_2)) &> k
+    \spt_2(h(z_1)\colon h(z_2)) &> k
                           & \text{because $z_2$ is a \kl(nodes){marked}
                                    or \kl(nodes){separating},}
                           \\
-    \spt_2(h(z_2):h(z_3)) &\geq k
+    \spt_2(h(z_2)\colon h(z_3)) &\geq k
                           & \text{by the gap property,}
                           \\
-    \spt_2(h(z_3):h(y))   &> k
+    \spt_2(h(z_3)\colon h(y))   &> k
                           & \text{because $y$ is a \kl(nodes){marked},}                               
   \end{align*}
 
