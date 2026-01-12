@@ -158,6 +158,22 @@ can be witnessed using only \kl{blocks} from a finite set.
   one can build an \kl{imperfect bough} of arbitrarily large \kl{dimension}
   using only \kl{blocks} from $\mathbb{F}$.
 \end{lemma}
+\begin{proof}
+  The proof follows the same pattern 
+  as \cref{lem:finitely-many-boughs,lem:finitely-many-contexts},
+  and continues on the ideas of \cref{lem:recognizing-perfect-boughs}.
+  The idea is that if a bough $B$ is \kl{perfect}, then 
+  so is $H \defined BBB$. But this only depends on the \kl{bough types}
+  present in $B$. As a consequence, if $B$ and $B'$ exhibit the same 
+  \kl{bough types} for their leaves, then $B$ is \kl{perfect}
+  if and only if $B'$ is  
+  \kl{perfect}. If one defines an equivalence relation between
+  \kl{bough blocks} of a given \kl{bough} $B$ based on the set of 
+  available \kl{bough types} of its leaves, then 
+  one can always replace a \kl{bough block} by another one in the same
+  equivalence class without changing the \kl{perfectness} of $B$.
+  Since this equivalence relation has finitely many classes, the result follows.
+\end{proof}
 
 As an immediate consequence of \cref{lem:perfect-boughs-wqo} and
 \cref{lem:hereditary-perfect-boughs}, we see that 
