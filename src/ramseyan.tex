@@ -171,7 +171,9 @@ In particular, if $y$ is a child of $x$, then $\spt(x \colon y) = N+1$.
 \AP Two elements $x \treelt[\t] y$ such that $\spt(x) = \spt(y) = k$ are
 \intro{$k$-neighbours} if $\spt(x \colon y) \geq k$. Being \kl{$k$-neighbours}
 is an equivalence relation on the nodes of the tree having value $k$ in the
-split. A \kl{split} induces a hierarchical structure on the tree based on the
+split.
+\maelin{This is false, for example if a,b,c, are such that a is the lca of b and c; we can have a,b and a,c are k-nbr, but not b,c k-nbd. It should be defined branch-wise.}
+ A \kl{split} induces a hierarchical structure on the tree based on the
 \kl{$k$-neighbourhoods}. We illustrate the situation on a \emph{branch} of a
 tree in \cref{split-on-branch:fig}, but in general \kl{$k$-neighbourhoods} can
 span several branches of the tree. We will refer to the value of $\spt(x)$ as
@@ -223,6 +225,7 @@ the \reintro{split depth} of the node $x$.
   \label{split-on-branch:fig}
 \end{figure}
 
+\maelin{What is a class of $k$-neighbourhood ? I think the way you define it is not clear yet. You use it exclusively on branch, I think you should define it only on branch, but observe that on the whole tree, the equivalence classes intersect in a tree-like manner.}
 \AP A \kl{split} $\spt$ is \intro{forward Ramseyan} if for every $k \in \set{1,
 \dots, N}$ and every $x, y, x', y'$ in the same class of \kl{$k$-neighbourhood}
 with $x \treelt[\t] y$ and $x' \treelt[\t] y'$, we have: 

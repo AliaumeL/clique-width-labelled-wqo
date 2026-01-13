@@ -26,11 +26,14 @@ tackle the second difficulty.
       \item there exists a \kl{block} in $H$ that is left untouched 
           by $h$.
   \end{enumerate}
+  \maelin{problem with last condition less restrictive than the one for good bough}
   An \intro{imperfect bough} is a \kl{bough} that is not a \kl{perfect bough}.
 \end{definition}
 
 Remark that every \kl{perfect bough} is a \kl{good bough}, hence every
 \kl{bad bough} is an \kl{imperfect bough}.
+\maelin{Say that you extend \cref{lem:good-boughs-wqo} to perfect bough}
+
 
 \begin{lemma}
   \label{lem:perfect-boughs-wqo}
@@ -79,8 +82,9 @@ bough}.
   in $B$ where it is mapped (left or right of the untouched block),
   and verify that the mapping preserves edges using only MSO formulas.
 
-  If such a mapping exists, then one can reconstruct a bough $H$
-  by triplicating $B$, that is, letting $H \defined B B B$, and mapping leaves 
+  \maelin{Give a bit more intuition, like the idea is to check if B and BBB are compaitble, which is MSO definable ?}
+  If such a mapping exists, then one can reconstruct a compatible bough $H$
+  by triplicating\mael{t'avais juste envie de dire ce mot non?} $B$, that is, letting $H \defined B B B$, and mapping leaves 
   to their corresponding copy in $H$. The middle copy will be untouched, 
   witnessing that $B$ is a \kl{perfect bough}.
   This reasoning was made formal for \kl{bounded linear clique-width} in
@@ -100,16 +104,20 @@ bough}.
     \Psi(N) \defined 
     \Phi \land |\{ \text{number of elements in the backbone} \}| \leq N
   \end{equation*}
+  \maelin{what is number of elements in the backbone, the dimension of bough, the size of the path from $b_0$ to $b_n$ ?}
   This formula takes an input parameter $N$ (a natural number),
   and decides whether the provided tree with \kl{split} and labels
-  represents an \kl{imperfect bough} of \kl(bough){dimension} at most $N$.
+  is an \kl{imperfect bough} of \kl(bough){dimension} at most $N$.
   By \cite[Corollary 16]{COLOD10}, one can decide whether such a 
   formula can hold for arbitrarily large values of $N$, effectively 
   answering our question.
+  \maelin{I am not familiar with this, but this is not obvious for me that \cite[Corollary 16]{COLOD10} actually imply this }
 \end{proof}
 
 
 We are now ready to prove our \cref{main:theorem}.
+\maelin{restate the thm?}
+
 \begin{proof}
   Let $\someInterp$ be an \kl{$\MSO$-interpretation}.
   We can get rid of the domain formula and selection formula 
@@ -136,12 +144,13 @@ Let now turn our attention to hereditary classes to obtain our
 \cref{main:corollary}.
 \begin{proof}
   By a standard argument, if the class $\someInterp$ is hereditary
-  and \kl{$2$-well-quasi-ordered}, then it is defined by finitely many
+  and \kl{$2$-well-quasi-ordered}, then it is characterised by finitely many
   forbidden induced subgraphs \cite[Proposition 3]{DRT10}.
   Hence, if $\Cls$ has \kl{bounded clique-width} and is hereditary,
   one can assume that $\Cls$ is exactly the image of an \kl{$\MSO$-interpretation}
   $\someInterp$ from finite trees, and the result follows from 
   \cref{main:theorem}.
+  \maelin{I don't see why you can assume that "$\Cls$ is exactly the image of an \kl{$\MSO$-interpretation}"}
 \end{proof}
 
 
@@ -163,7 +172,7 @@ can be witnessed using only \kl{blocks} from a finite set.
   as \cref{lem:finitely-many-boughs,lem:finitely-many-contexts},
   and continues on the ideas of \cref{lem:recognizing-perfect-boughs}.
   The idea is that if a bough $B$ is \kl(bough){perfect}, then 
-  so is $H \defined BBB$. But this only depends on the \kl{bough types}
+  so is $H \defined BBB$. But this\mael{what is this ?} only depends on the \kl{bough types}
   present in $B$. As a consequence, if $B$ and $B'$ exhibit the same 
   \kl{bough types} for their leaves, then $B$ is \kl(bough){perfect}
   if and only if $B'$ is  
@@ -177,13 +186,14 @@ can be witnessed using only \kl{blocks} from a finite set.
 
 As an immediate consequence of \cref{lem:perfect-boughs-wqo} and
 \cref{lem:hereditary-perfect-boughs}, we see that 
+\maelin{Explain a bit more how you assemble this two lemma to obtain the corollary. I don't see where the linear clique-width comes from.}
 
 \begin{corollary}
   \label{cor:hereditary-perfect-boughs-wqo}
   Assume that the class $\someInterp$ is \kl(class){hereditary}.
   Then, the image of $\someInterp$ is \kl{$2$-well-quasi-ordered}
   if and only if 
-  every class of \kl{bounded linear clique-width} in $\someInterp$
+  every subclass of \kl{bounded linear clique-width} in $\someInterp$
   is \kl{$2$-well-quasi-ordered}.
 \end{corollary}
 
