@@ -224,7 +224,7 @@ not change when replacing $B$ by a \kl{compatible bough} $H$.
     \begin{enumerate}
         \item $h$ is an embedding of graphs,
         \item $h$ is the identity map on leaves belonging $C[\square]$,
-        \item there exists a pair of consecutive 
+        \item there exist three consecutive
             \kl(bough){blocks} in $H$ such that all their leaves
             are left untouched by $h$.
     \end{enumerate}
@@ -276,50 +276,53 @@ the content of the following \cref{lem:important-nodes}.
   We proceed iteratively starting from the tree $\t$
   where every node is set as a \kl{marked node}.
   A rewrite step is as follows:
-  given a \kl{bough backbone} $b_0, b_1, \ldots, b_n$ defining a \kl{bough} $B$,
+  given a \kl{bough backbone} $b_0, b_1, \ldots, b_n$ defining a \kl{bough} $B$
+  of level $k$,
   where all $b_i$ are \kl{marked nodes}, and $n = N_0 + 1$,
   we know that $B$ is a \kl{good bough} by assumption.
+  Let us write $\t = C[B]$.
 
-  % TODO: fix the explanation here.
-  As a consequence, there exists a \kl{compatible bough} $H$ of 
-  same level as $B$ that can replace $B$ in $\t$
-  by definition of \kl{good boughs}.
-  The resulting tree $\t'$ is still \kl{forward Ramseyan} by definition of
-  \kl{compatible boughs}, and the graph induced by leaves outside of $B$
-  remains unchanged by \cref{fact:bough-replacement}.
-  Let us now describe the marking on $\t'$:
-  leaves of $B$ that were marked 
-  remain marked in $H$, untouched leaves of $H$ become \kl{dummy},
-  and if  
-  $\BBlock[H]{h_i}{h_{i+1}}$ and $\BBlock[H]{h_{i+1}}{h_{i+2}}$
-  are the two consecutive \kl{bough blocks} of $H$ left untouched by the embedding
-  witnessing that $B$ is a \kl{good bough},
-  then we mark $h_{i}$ as a \kl{separating node},
-  and all other nodes of these two \kl{bough blocks} as \kl{dummy nodes}.
-  Then, we complete
-  the marking by ensuring that the least common ancestor
-  of two \kl{marked nodes} is also \kl(node){marked}. 
-  Because of \cref{fact:bough-replacement}, the graph 
-  obtained from $(\t', \spt', \marking)$ is the same as the one 
-  obtained from $(\t, \spt)$ when using the \kl{monoid interpretation} $\someInterp$
-  restricted to \kl(context){leaves} of the context $C[\square]$.
-  Furthermore, by construction, the 
-  By definition\mael{of what?}, the graph
-  induced\mael{defined} by the \kl{marked leaves} remains unchanged by this operation.
+  As a consequence, there exists a \kl{compatible bough} $H$ and an embedding
+  $h \colon \someInterp(C[B]) \to \someInterp(C[H])$ satisfying the three
+  conditions of \cref{good-bough:def}. Let us define $\t' = C[H]$, which is
+  still \kl{forward Ramseyan} by definition of \kl{compatible boughs}. Let us
+  now define the \kl{marking} of $\t'$. For \kl(context){leaves} of
+  $C[\square]$, the \kl{markings} of $\t$ and $\t'$ coincide. For leaves of the
+  \kl{bough} $H$, let us first name the three consecutive \kl(bough){blocks} of
+  $H$ left untouched by $h$ as per \cref{good-bough:def} as
+  $\BBlock[H]{c_i}{c_{i+1}}$, $\BBlock[H]{c_{i+1}}{c_{i+2}}$, and
+  $\BBlock[H]{c_{i+2}}{c_{i+3}}$, where $c_0, c_1, \ldots, c_m$ is the
+  \kl(bough){backbone} of $H$. We set $c_{i}$ as a \kl{marked node}, $c_{i+1}$
+  as a \kl{separating node},  $c_{i+2}$ as a \kl{dummy node}, $c_{i+3}$ as a
+  \kl{marked node}, and all other nodes of the \kl{bough backbone} as
+  \kl{marked nodes}. Now, we also define the \kl{marking} of leaves by stating
+  that they are \kl{dummy leaves} if they do not belong to the image of leaves
+  of $B$ through $h$, and otherwise keep the same \kl{marking} as their
+  preimage through $h$. We close the \kl{marking} by ensuring that the least
+  common ancestor of two \kl{marked nodes} is also \kl(node){marked}. By
+  construction, the two \kl{dummy nodes} $c_{i+1}$ and $c_{i+2}$ remain
+  \kl{dummy nodes} in the completed \kl{marking}, and $c_i$ remains a
+  \kl{separating node}, because all the leaves of the two \kl(bough){blocks}
+  are left untouched by $h$, hence are \kl{dummy leaves}.
 
-  We repeat this procedure until there is no \kl{bough} of \kl(bough){dimension}
-  greater than $N_0$ whose \kl{backbone} is made of \kl{marked nodes}. This
-  process terminates because every rewrite step decreases the multiset of
-  \kl(bough){dimensions} of \kl{boughs} whose \kl(bough){backbone} is made of \kl{marked
-  nodes}.
-  \maelin{Here it may be unclear how you define this multiset, do you consider the dimension of only maximal bough ? or every possible bough ?}
+  Let us prove that the graph interpreted from $(\t', \spt', \marking')$ using
+  $\someInterp$ restricted to \kl{marked leaves} is isomorphic to the graph
+  interpreted from $(\t, \spt, \marking)$ using $\someInterp$, via the map $h$
+  restricted to \kl{marked leaves}. First, $h$ is an embedding by
+  \cref{good-bough:def}, and since marked leaves of $\t$ are mapped to marked
+  leaves of $\t'$, and all marked leaves of $\t'$ in the \kl{bough} $H$ are in
+  the image of $h$, we conclude that $h$ restricted to \kl{marked leaves} is a
+  bijection.
 
-  
-  To verify that $(\t', \spt', \marking)$ is \kl{well-marked},
-  note that by construction,
-  whenever we have \kl{marked nodes} $x$ and $y$ with a non-\kl(node){marked} node in between
-  at level $k$, this configuration arises from a \kl{bough} replacement where
-  the required witnesses $z_1, z_2, z_3$ exist by the definition of \kl{good boughs}.
+  We repeat this procedure until there is no \kl{bough} of
+  \kl(bough){dimension} greater than $N_0$ whose \kl{backbone} is made of
+  \kl{marked nodes}. To verify that the resulting tree $(\t', \spt',
+  \marking')$ is \kl{well-marked}, let us remark that whenever we have
+  \kl{marked nodes} $x$ and $y$ are separated by a node $z$ of level $k$, this
+  configuration arises from a \kl{bough} replacement where the required
+  witnesses $z_1, z_2, z_3$ exist by construction.
+
+  \textbf{TODO: continue here}
 
   Assume towards a contradiction that there exists arbitrarily long 
   paths
