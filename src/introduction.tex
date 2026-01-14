@@ -1,3 +1,4 @@
+% LTeX: language=en-GB
 \section{Introduction}
 \label{sec:introduction}
 
@@ -32,17 +33,16 @@ problem in graph theory, dating back to Pouzet's seminal work \cite{POUZ72}.
 \AP In general, there is little hope to characterise all such classes, since
 any countable order with finite infixes can be embedded into the induced
 subgraph relation on finite graphs (this is a consequence of \cite[Lemma
-5.1]{Kuske06}).
-\maelin{It does not seems that usual? Next sentence sounds weird. Maybe we should say something like "we can enrich the definition to say something" ?}
-Fortunately, one usually considers \emph{labelled}
-well-quasi-orderings on classes of finite graphs. Given a class $\Cls$ of
-finite graphs, and a well-quasi-ordering $(X, \leq)$, one can consider the
-class $\Label{X}{\Cls}$ of graphs in $\Cls$ whose vertices are labelled by
-elements of $X$, that is, equipped with a function 
-$\ell \colon V(G) \to X$. The induced subgraph relation is then extended to labelled
-graphs by requiring that the labels are preserved by the embedding, i.e. that
-the label of a vertex in the smaller graph is less than or equal to the label
-of its image in the larger graph. A class $\Cls$ of finite graphs is said to be
+5.1]{Kuske06}). If one considers \emph{labelled} well-quasi-orderings on
+classes of finite graphs, then there are high hopes of being able to provide a
+full characterisation of (labelled) \kl{well-quasi-ordered} classes. Given a
+class $\Cls$ of finite graphs, and a well-quasi-ordering $(X, \leq)$, one can
+consider the class $\Label{X}{\Cls}$ of graphs in $\Cls$ whose vertices are
+labelled by elements of $X$, that is, equipped with a function $\ell \colon
+V(G) \to X$. The induced subgraph relation is then extended to labelled graphs
+by requiring that the labels are preserved by the embedding, i.e. that the
+label of a vertex in the smaller graph is less than or equal to the label of
+its image in the larger graph. A class $\Cls$ of finite graphs is said to be
 \reintro{$(X,\leq)$-well-quasi-ordered} if the class $\Label{X}{\Cls}$ is
 well-quasi-ordered under the labelled induced subgraph relation. We will say
 that it is \reintro{$k$-well-quasi-ordered} if it is
@@ -75,7 +75,8 @@ $(X,\leq)$-well-quasi-ordered for every well-quasi-ordering $(X, \leq)$.
     $\Cliques$  & \yes & \yes & \yes \\
     \bottomrule
   \end{tabular}
-  \caption{Well-quasi-ordering properties of classes in \cref{ex:wqo-classes}.}
+  \caption{Well-quasi-ordering properties of classes in \cref{ex:wqo-classes}. No example
+  \kl{$2$-WQO} but not \kl{$\forall$-WQO} is known.}
   \label{fig:wqo-classes}
 \end{figure}
 
@@ -108,7 +109,7 @@ study in the reverse direction, by considering a syntax for graph classes
 (using NLC graph expressions), and identifying which ones among them are
 \kl{$2$-well-quasi-ordered}. In this context, they verified Pouzet's
 conjectures, but were unable to generalise their results to arbitrary graph
-classes\mael{arbitrary subclasses ?} \cite[Conjecture 4]{DRT10}. All the classes considered in \cite{DRT10}
+subclasses \cite[Conjecture 4]{DRT10}. All the classes considered in \cite{DRT10}
 have so-called \emph{bounded clique-width},\footnote{This will be defined
 formally in \cref{sec:prelims}} and it is believed that it is enough to
 understand hereditary classes of bounded clique-width to solve these
@@ -143,10 +144,16 @@ formulas. This lead to the following conjecture, where
 \end{conjecture}
 
 \AP Another kind of obstruction to being \kl{$\forall$-well-quasi-ordered}
-comes from the existence of infite antichains with a periodic structure that
+comes from the existence of infinite antichains with a periodic structure that
 were called \reintro(weak){periodic antichains} in \cite[Section 7]{ALM17}.
+These antichains appear in \cite[Conjecture 2]{ALM17}, that considers about
+classes of graphs defined by finitely many excluded induced subgraphs, and
+relates the presence of these antichains to the fact that they are
+\kl{well-quasi-ordered}. Since we are interested in
+\kl{$2$-well-quasi-ordering}, we propose hereafter an adaptation of this
+conjecture to our setting.
 
-\begin{conjecture}[{\cite[Conjecture 2]{ALM17}}]
+\begin{conjecture}[{\cite[Adapted of Conjecture 2]{ALM17}}]
   \label{lozin:conj}
   Let $\Cls$ be a hereditary class of finite graphs that is not
   \kl{$2$-well-quasi-ordered}.
@@ -154,31 +161,28 @@ were called \reintro(weak){periodic antichains} in \cite[Section 7]{ALM17}.
   an infinite \kl{(weak) periodic antichain} in $\Cls$.
 \end{conjecture}
 
-\maelin{Is it really new or does it build on existing tools ?}
-\AP In 2024, Lopez \cite{LOPEZ24} introduced a new technique to study
-well-quasi-orderings on classes of graphs of bounded \emph{linear}
-clique-width, that leveraged combinatorial tools from automata theory (Simon's
-factorisation forests \cite{SIMO90}). This allowed to prove a weakening of
-Pouzet's conjectures \cite[Corollary 2]{LOPEZ24}, namely, that a hereditary
-class of bounded linear clique-width is \kl{$\forall$-well-quasi-ordered} if
-and only if it is \kl{$k$-well-quasi-ordered} for every $k \in \mathbb{N}$. It
-is apparent from the proof that the techniques also yield a natural ordering on
-the vertices whenever the class is \kl{$\forall$-well-quasi-ordered}, although
-this is not formally stated in the paper. 
-It was conjectured \cite[Section 5]{LOPEZ24} that these techniques could be refined to work on classes of
-bounded clique-width (not necessarily linear), and actually obtain the
-correspondence between \kl{$2$-well-quasi-ordering} and
-\kl{$\forall$-well-quasi-ordering}.
+\AP In 2024, Lopez \cite{LOPEZ24} studied labelled well-quasi-orderings on
+classes of graphs of bounded \emph{linear} clique-width, by leveraging
+combinatorial tools from automata theory (Simon's factorisation forests
+\cite{SIMO90}). This allowed to prove a weakening of Pouzet's conjectures
+\cite[Corollary 2]{LOPEZ24}, namely, that a hereditary class of bounded linear
+clique-width is \kl{$\forall$-well-quasi-ordered} if and only if it is
+\kl{$k$-well-quasi-ordered} for every $k \in \mathbb{N}$. It is apparent from
+the proof that the techniques also yield a natural ordering on the vertices
+whenever the class is \kl{$\forall$-well-quasi-ordered}, although this is not
+formally stated in the paper. It was conjectured \cite[Section 5]{LOPEZ24} that
+these techniques could be refined to work on classes of bounded clique-width
+(not necessarily linear), and actually obtain the correspondence between
+\kl{$2$-well-quasi-ordering} and \kl{$\forall$-well-quasi-ordering}.
 
 
 \paragraph{Contributions} \AP Our main contribution is \cref{main:theorem},
-that answers positively to the conjectures of \cite{LOPEZ24}.
-To that end, we first consider generalisation of the framework 
-of \cite{DRT10} from NLC graph expressions to
-\kl{$\MSO$-interpretations} from trees (these will be formally defined 
-in \cref{sec:prelims}). This also generalises 
-the setting of \cite{LOPEZ24} that studied \kl{$\MSO$-interpretations} from
-\emph{words} (i.e., paths). Our main combinatorial result is the following.
+that answers positively to the conjectures of \cite{LOPEZ24}. To that end, we
+first consider generalisation of the framework of \cite{DRT10} from NLC graph
+expressions to \kl{$\MSO$-interpretations} from trees (these will be formally
+defined in \cref{sec:prelims}). This also generalises the setting of
+\cite{LOPEZ24} that studied \kl{$\MSO$-interpretations} from \emph{words}. Our
+main combinatorial result is the following.
 
 \begin{theorem}
   \label{main:theorem}
@@ -208,7 +212,7 @@ obtain the following characterisations in
 These answer positively to the conjectures of
 \cite{ALM17,LOPEZ24}. In particular, for a hereditary class $\Cls$ to be
 \kl{$2$-well-quasi-ordered}, it suffices that it avoids very simple
-\kl{(strong)\mael{and weak ?} periodic antichains}.
+\kl{(weak) periodic antichains}.
 
 \begin{theorem}
   \label{thm:characterisations}
@@ -225,12 +229,12 @@ These answer positively to the conjectures of
   \end{enumerate}
 \end{theorem}
 
-The results of \cref{main:corollary}
-extend to non-hereditary classes of
-bounded clique-width graphs, but for the sake of clarity and space, we only
-state them on hereditary ones. \maelin{C'est peut-être un peu trop fort de dire ça, tu prévois d'essayer de le justifier quelque part ?}
-On the other hand, \cref{thm:characterisations} does not immediately 
-extend to non-hereditary classes, as witnessed by the following example.
+We strongly believe that the results of \cref{main:corollary} extend to
+non-hereditary classes of bounded clique-width graphs, but for the sake of
+clarity and space, we only state and prove them on hereditary ones. On the
+other hand, let us remark that \cref{thm:characterisations} does not
+immediately extend to non-hereditary classes, as witnessed by the following
+example.
 
 \begin{example}
   \label{ex:non-hereditary}
@@ -238,25 +242,22 @@ extend to non-hereditary classes, as witnessed by the following example.
   but contains no \kl{periodic antichain}, 
   and every subclass $\Cls[D] \subseteq \Cls$ of bounded linear clique-width
   is \kl{$2$-well-quasi-ordered}.
-  It happens that $\Cls$ \kl{existentially transduces} the class of all finite paths,
-  but it does not \kl{existentially interprets} them.
+  Furthermore, $\Cls$ \kl{existentially transduces} the class of all finite paths.
 \end{example}
-\begin{proof}
+\begin{proof}[Proof Sketch]
   It is well-known that the class of complete binary trees has
   bounded clique-width. Furthermore, it is not \kl{$2$-well-quasi-ordered},
-  since one can color the leaves and the root of the complete binary trees
+  since one can colour the leaves and the root of the complete binary trees
   to form an infinite \kl{antichain}.
   On the other hand, any subclass $\Cls[D] \subseteq \Cls$ of bounded linear
   clique-width must be finite: indeed, complete binary trees have unbounded
-  linear clique-width. Finally, because \kl{periodic antichains} have 
+  linear clique-width. Finally, because \kl{strong periodic antichains} have 
   bounded linear clique-width (see \cref{sec:interpreting-paths})
-  there cannot be any \kl{periodic antichain} in $\Cls$.
-
+  there cannot be any \kl{strong periodic antichain} in $\Cls$.
   The \kl{existential transduction} of all finite paths from $\Cls$ is obtained
-  by transducing all induced subgraphs, that in particular contains all finite
-  paths. There cannot be an \kl{existential interpretation} of all finite paths from $\Cls$,
-  because paths have only two automorphisms (reversing and identity), while
-  complete binary trees have many more, and interpretations must preserve automorphisms. \mael{ref ?}
+  by transducing all induced subgraphs (see \cref{ex:transducing-all-subgraphs}), 
+  that in particular contains all finite
+  paths. 
 \end{proof}
 
 

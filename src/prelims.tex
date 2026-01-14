@@ -1,3 +1,4 @@
+% LTeX: language=en-GB
 \section{Preliminaries}
 \label{sec:prelims}
 
@@ -5,18 +6,19 @@ We assume the reader to be familiar with basic notions of logic on finite
 relational structures, such as monadic second-order logic ($\MSO$), first-order
 logic and quantifier-free formulas.
 
-\maelin{TODO: unify $(u,v)$ and $uv$)}
-\maelin{Remarque globale : si tu dis qu'on ne parle que de graphe/arbre fini, alors pas besoin de repréciser fini à chaque fois.}
-\paragraph*{Graphs} \AP
-A \intro{graph} is a pair $G = (V, E)$ where $V$ is a set
-of \intro{vertices} and $E \subseteq V \times V$ is a set of \intro{edges}. A
-graph is \intro(graph){undirected} if $(u, v) \in E$ implies $(v, u) \in E$ for all
-$u, v \in V$ \mael{, directed else ??}. In this paper we will focus on finite undirected graphs\mael{without self-loop ?}. Given a
-set $X$, an \intro{$X$-labelled graph} is a graph equipped with a function
-$\ell \colon V \to X$ that assigns a label to each vertex. Given a class $\Cls$
-of finite undirected graphs, write $\Label{X}{\Cls}$ for the class of freely
-$X$-labelled graphs in $\Cls$, i.e., the class of all \kl{$X$-labelled graphs}
-$G = (V, E, \ell)$ such that $G \in \Cls$.
+\maelin{TODO: unify $(u,v)$ and $uv$)} \maelin{Remarque globale : si tu dis
+qu'on ne parle que de graphe/arbre fini, alors pas besoin de repréciser fini à
+chaque fois.}
+\paragraph*{Graphs} \AP A \intro{graph} is a pair $G = (V, E)$
+where $V$ is a set of \intro{vertices} and $E \subseteq V \times V$ is a set of
+\intro{edges}. A graph is \intro(graph){undirected} if $(u, v) \in E$ implies
+$(v, u) \in E$ for all $u, v \in V$, and directed otherwise. In this paper we
+will focus on finite undirected graphs without self-loops. Given a set $X$, an
+\intro{$X$-labelled graph} is a graph equipped with a function $\ell \colon V
+\to X$ that assigns a label to each vertex. Given a class $\Cls$ of finite
+undirected graphs, write $\Label{X}{\Cls}$ for the class of freely $X$-labelled
+graphs in $\Cls$, i.e., the class of all \kl{$X$-labelled graphs} $G = (V, E,
+\ell)$ such that $G \in \Cls$.
 
 \AP Whenever $(X, \leq)$ is a quasi-order, we say that a graph $G$
 \intro(graph){embeds} into a graph $H$ if there exists a \intro{monomorphism}
@@ -41,13 +43,12 @@ subgraph relation} extends to ordered graphs by requiring that the embedding $f
 \leq_G v$ if and only if $f(u) \leq_H f(v)$.
 
 \paragraph*{Well-quasi-orderings} A quasi-ordered set $(X, \leq)$ is a set $X$
-with a reflexive and transitive relation $\leq$. A sequence
-$\seqof{x_i}$ of elements in $X$ is \intro(sequence){good} if there exist $i <
-j$ such that $x_i \leq x_j$. A quasi-ordered set is \intro{well-quasi-ordered}
-(\reintro{wqo}) if every infinite sequence is \kl(sequence){good}.
-A \intro{bad sequence} is an infinite sequence that is not \kl(sequence){good},
-and a sequence of pairwise incomparable elements is called an
-\intro{antichain}. \maelin{an antichain is the same thing as bad sequence? How it is presented may be confusing.}
+with a reflexive and transitive relation $\leq$. A sequence $\seqof{x_i}$ of
+elements in $X$ is \intro(sequence){good} if there exist $i < j$ such that $x_i
+\leq x_j$. A quasi-ordered set is \intro{well-quasi-ordered} (\reintro{wqo}) if
+every infinite sequence is \kl(sequence){good}. A \intro{bad sequence} is an
+infinite sequence that is not \kl(sequence){good}. A sequence of pairwise
+incomparable elements is called an \intro{antichain}.
 
 \AP As mentioned in the introduction, several notions of well-quasi-ordering
 can be defined for a given class of finite undirected graphs $\Cls$. Let us 
@@ -139,7 +140,7 @@ graph, and an existential first order formula $\phi_{\text{dom}}$ that selects
 the graphs of $\Cls$ on which the interpretation is defined. The semantics is
 that for every graph $G \in \Cls$ satisfying $\phi_{\text{dom}}$, the
 interpreted graph $\mathcal{I}(G)$ has for vertex set the vertices of $G$
-satisfying $\phi_{\text{univ}}$, and has an edge between two vertices $u,v$ if
+satisfying $\phi_{\text{univ}}$, and has an edge between two vertices $(u,v)$ if
 and only if $G$ satisfies $\phi_{\text{edge}}(u,v)$ (which is assumed to be
 symmetric and irreflexive on the selected vertices). A class $\Cls$
 \intro{existentially interprets} a class $\mathcal{D}$ if there exists an
@@ -148,3 +149,15 @@ $\mathcal{D} \subseteq \someInterp(\Cls)$. We say that $\Cls$
 \intro{existentially transduces} $\mathcal{D}$ if there exists a finite
 labelling set $\Sigma$ such that $\Label{\Sigma}{\Cls}$ \kl{existentially
 interprets} $\mathcal{D}$.
+
+\begin{example}
+  \label{ex:transducing-all-subgraphs}
+  Let $\Cls$ be a class of graphs.
+  Then, $\Cls$ \kl{existentially transduces} the \kl{hereditary closure} of $\Cls$,
+  using labels $\Sigma = \{\circ, \bullet \}$,
+  and the interpretation defined as follows:
+  $\phi_{\text{dom}}$ is the tautological formula,
+  $\phi_{\text{univ}}(x)$ is the formula that is true if and only if $x$ is labelled with $\bullet$,
+  $\phi_{\text{edge}}(x,y)$ is the formula that is true if and only if there is an edge between $x$ and $y$ in the original graph.
+\end{example}
+

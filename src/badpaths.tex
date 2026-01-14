@@ -1,18 +1,19 @@
+% LTeX: language=en-GB
 \section{Bad Patterns in Images of Interpretations}
 \label{sec:bad-patterns}
 
-\maelin{You need to mention somewhere in this section that you fix an interpretation $\someInterp$ and an alphabet $\Sigma$. (this is important because for exemple in \cref{lem:good-boughs-wqo} it is not clear what is the image of $\someInterp$)}
-
-In this section, we will isolate combinatorial obstructions to being
-\kl{$2$-well-quasi-ordered} in classes of graphs that are images of \kl{monoid interpretations} from trees.
- We will take the same notations as in
-\cref{sec:ramseyan} 
-regarding \kl{forward Ramseyan splits} and \kl{monoid interpretations}.
-The key idea of this section is to start from a tree $\t$ equipped with a
-\kl{forward Ramseyan split} $\spt$, and try to understand under which conditions
-one can turn this tree into a \kl{$L$-bounded marked nested tree} representing the same graph, 
-allowing us to leverage \cref{thm:marked-nested-trees-wqo} 
-to conclude that the class of graphs is \kl{$\forall$-well-quasi-ordered}.
+In this section, we fix a \kl{monoid interpretation} $\someInterp = (\Sigma,
+\mu, M, P)$ from trees edge-labelled over a finite alphabet $\Sigma$ to finite
+undirected graphs. We furthermore assume that all trees we consider are
+equipped with a \kl{forward Ramseyan split} $\spt$ over the monoid $M$. Our
+goal is to isolate some combinatorial obstructions to being
+\kl{$2$-well-quasi-ordered} in classes of graphs that are images of \kl{monoid
+interpretations} from trees. The key idea of this section is to start from a
+tree $\t$ equipped with a \kl{forward Ramseyan split} $\spt$, and try to
+understand under which conditions one can turn this tree into a \kl{$L$-bounded
+marked nested tree} representing the same graph, allowing us to leverage
+\cref{thm:marked-nested-trees-wqo} to conclude that the class of graphs is
+\kl{$\forall$-well-quasi-ordered}.
 
 
 \begin{figure*}[ht]
@@ -103,7 +104,7 @@ to conclude that the class of graphs is \kl{$\forall$-well-quasi-ordered}.
         \draw[dashed] (-1,1.5) -- (-0.7,1) -- (-1.3,1) -- cycle;
 
     \end{tikzpicture}
-    \caption{Partitionning a branch of a tree $\aTree$ using a \kl{bough} $B$.
+    \caption{Partitioning a branch of a tree $\aTree$ using a \kl{bough} $B$.
     Here, the nodes $b_i$ for $0 \leq i \leq 4$ are \kl{$k$-neighbours}
     forming the \kl(bough){backbone} $B$.
     The letter $e_i$ denotes \kl{idempotent} monoid element 
@@ -114,32 +115,21 @@ to conclude that the class of graphs is \kl{$\forall$-well-quasi-ordered}.
     it is sufficient to know the values of
     $\tlbl{\t}{b_2}{b_3}$, and the respective \kl{bough types} of $x$ and $y$
     in their respective \kl{bough blocks} $\BBlock{b_1}{b_2}$ and $\BBlock{b_3}{b_4}$.
-    \maelin{I added some details on the figure 'on the root, and added the trees of the context, maybe you can even add labels mleft and mright on their edges. Moreover I think it would be better if we put $B_t,B_l,B_r$ instead of $\BtL(x)$ and co. }
     }
     \label{partitionning-a-graph:fig}
 \end{figure*}
 
 \begin{definition}
-    \label{ramseyan-branch:def}
-    Let $\aTree$ be a tree and $\spt$ be a \kl{forward Ramseyan split} of height $N$.
-    A \intro{bough of level $k$} in $\aTree$ is defined from a part of a $k$-neighbourhood as follows:
-    Consider a sequence $b_0, b_1, \ldots, b_n$ of nodes of level $k$ on a branch of $\aTree$
-    forming a \kl{$k$-neighbourhood}.
-    Elements of the \reintro{bough} $B$ are all nodes $x$ in $\aTree$ such that 
-    $b_0 \treeleq x$, and $\neg (b_n \treeleq x)$, plus $b_n$ itself.
-    
-    We say that the \intro(bough){dimension} of the \kl{bough} $B$ is $n$,
-    and that $b_0, b_1, \ldots, b_n$ form the \intro(bough){backbone} of $B$.
-\end{definition}
-\maelin{Reformulation suggestion. Question: does $b_0, b_1, \ldots, b_n$ have to be maximal? or maximal between $b_0$ and $b_n$ (i.e. no vertices not in this sequence in the same k-neighborhood)?}
-\begin{definition}
-	%\label{ramseyan-branch:def}
-	Let $\aTree$ be a tree and $\spt$ be a \kl{forward Ramseyan split} of height $N$. Let $b_0, b_1, \ldots, b_n$ be any sequence of nodes of level $k$ on a branch of $\aTree$ forming a \kl{$k$-neighbourhood}. A \intro{bough of level $k$} is the subtree of $\aTree$ induced by all nodes $x$ such that $b_0 \treeleq x$, and $\neg (b_n \treeleq x)$, plus $b_n$ itself.
+	\label{ramseyan-branch:def}
+  Let $\aTree$ be a tree and $\spt$ be a \kl{forward Ramseyan split} of height
+  $N$. Let $n \geq 1$, and let $b_0, b_1, \ldots, b_n$ be any sequence of nodes of level $k$ on a
+  branch of $\aTree$ belonging to the same \kl{$k$-neighbourhood}. A \intro{bough of level
+  $k$} is the subtree of $\aTree$ induced by all nodes $x$ such that $b_0
+  \treeleq x$, and $\neg (b_n \treeleq x)$, plus $b_n$ itself.
 		
 	We say that the \intro(bough){dimension} of the \kl{bough} $B$ is $n$,
 	and that $b_0, b_1, \ldots, b_n$ form the \intro(bough){backbone} of $B$.
 \end{definition}
-
 
 \AP Let $B$ be a \kl{bough of level $k$} in $\aTree$
 and let $b_0, b_1, \ldots, b_n$ be its \kl(bough){backbone}.
@@ -152,17 +142,10 @@ When $j = i + 1$,  this set of nodes is called a \intro(bough){block}. We also r
 illustration of the resulting partition
 of the tree $\aTree$ with respect to a given \kl{bough} $B$.
 
-\maelin{Alternative definition: For every leaf $x \in \BBlock[\aTree]{b_0}{b_n}$, we define $\intro*\Bt(x) \defined \lca(x,b_n)$. Moreover we define $\intro*\Bl(x)$ (resp. $\intro*\Br(x)$) to be the maximal (resp. minimal) element of the backbone $b_0, b_1, \ldots, b_n$ such that $\Bl(x) \treeleq \Bt(x) \treeleq \Br(x)$.
-}
-\AP
-For every leaf $x \in \BBlock[\aTree]{b_0}{b_n}$ where $n$ is the
-\kl{dimension of the bough} $B$, we define $\intro*\Bt(x)$ to be the closest \kl(tree){ancestor} of
-$x$ such that $b_0 \treeleq \reintro*\Bt(x) \treelt b_n$, that is, the closest \kl(tree){ancestor}
-of $x$ on the branch going through the nodes $b_0, b_1, \ldots, b_n$. 
-Similarly, we define $\intro*\Bl(x)$ and $\intro*\Br(x)$
-to be such that $\Bl(x)$ and $\Br(x)$ belong to $\set{b_0, b_1, \ldots, b_n}$,
-and are the closest ones such that $\Bl(x) \treeleq \Bt(x) \treeleq \Br(x)$.
-To every leaf $x$ of $B(\aTree)$,
+\AP For every leaf $x \in \BBlock[\aTree]{b_0}{b_n}$, we define $\intro*\Bt(x)
+\defined \lca(x,b_n)$. Moreover, we define $\intro*\Bl(x)$ (resp.
+$\intro*\Br(x)$) to be the maximal (resp. minimal) element of the backbone
+$b_0, b_1, \ldots, b_n$ such that $\Bl(x) \treeleq \Bt(x) \treeleq \Br(x)$.
 Using these reference points, we define the following monoid elements 
 associated to a leaf $x$ in a \kl(bough){block} of $B$:
 \begin{align*}
@@ -180,9 +163,9 @@ with respect to a given \kl{bough} $B$. There are only finitely
 many possible \kl{bough types} because $M$ is finite.
 
 
-\AP In the rest of the paper, we will ofter rely on some tree surgery operation
+\AP In the rest of the paper, we will often rely on some tree surgery operation
 consisting in replacing a \kl{bough} in a tree by some other \kl{bough}. Given
-a \kl{bough} $B$ in a tree $\t$ defined using a \kl{$k$-neighbourhood} $b_0$,
+a \kl{bough} $B$ in a tree $\t$ defined using a \kl(bough){backbone} $b_0$,
 $b_1$, \ldots, $b_n$, we write $\t = C[B]$ to denote that $\t$ can be obtained
 by plugging the \kl{bough} $B$ into a \intro(bough){context} $C[\square]$.
 Formally, a \reintro(bough){context} $C[\square]$ is given by a tree
@@ -191,27 +174,32 @@ trees $\t_{\mathsf{left}}$ and $\t_{\mathsf{right}}$, and two monoid elements
 $m_{\mathsf{left}}$ and $m_{\mathsf{right}}$. These three elements are
 represented as dashed lines in \cref{partitionning-a-graph:fig}. The tree
 $C[B]$ is then obtained as follows: one first attaches $\t_{\mathsf{left}}$ as
-the left subtree of $b_n$ with an edge labelled $m_{\mathsf{left}}$, where
-$b_n$ is the last element of the \kl{$k$-neighbourhood} defining $B$, then one
+the left subtree of $b_n$ with an edge labelled $m_{\mathsf{left}}$, then one
 attaches $\t_{\mathsf{right}}$ as the right subtree of $b_n$ with an edge
 labelled $m_{\mathsf{right}}$, and finally, one replaces the distinguished leaf
 $\square$ in $\t_{\mathsf{root}}$ by the node $b_0$.
-\maelin{Suggestion: define leaves of $C[\square]$ to be the leaves of the context minus $\square$. This can be helpful when you want to talk about the subgraph defined by the leaves outside of $B$. (some following reformulation suggestion assume this is defined) (you actually use this definition in the following fact)}
 
+\AP In order to simplify statements, we will say that the
+\intro(context){leaves} of a \kl(bough){context} $C[\square]$ are the leaves of
+the tree $\t_{\mathsf{root}}$, $\t_{\mathsf{left}}$, and $\t_{\mathsf{right}}$,
+excluding the distinguished leaf $\square$. As a consequence, the \kl{leaves}
+of $C[B]$ are exactly the \kl{leaves} of $C[\square]$ together with the leaves
+of the \kl(bough){blocks} of $B$. Furthermore, we will often need to talk about
+the \intro(bough){first idempotent value} of a \kl{bough} $B$ defined using the
+\kl(bough){backbone} $b_0, b_1, \ldots, b_n$, which is the idempotent element
+$\tlbl{\t}{b_0}{b_1}$.
 
-\maelin{Define "start with the same idpt value" ($\tlbl{B}{b_0}{b_1}$ ?). Also you sometime say "idempotent labelling the \kl{bough}", this is the same and you should define it}
-\AP Two boughs $B$ and $B'$ are \intro(bough){compatible} if they start with the same
-idempotent value, and if for every tree (with a \kl{split}) 
-$\aTree = C[B]$ that is \kl{forward Ramseyan}, the tree $C[B']$ remains \kl{forward Ramseyan}. \maelin{Ptet tu peux essayer de rappeler ce que ça veut dire de rester forward ramseyan ici.} The following
-\cref{fact:bough-replacement} states that one can safely perform such a
-replacement without modifying the part of the graph represented by the tree
-$\t$ outside of the \kl{bough}.
-This is because to determine the presence of 
-edges between leaves outside of the \kl{bough}, one only needs to know the 
-value of the idempotent element labelling the \kl{bough}, which does not 
-change when replacing $B$ by a \kl{compatible bough} $H$.
-\maelin{reformulation: safely perform such a replacement without modifying the subgraph defined by the leaves of $C[\square]$. 
-This is because to determine the presence of edges between leaves of $C[\square]$, one only needs to know the value of the idempotent element labelling the \kl{bough}, which does not change when replacing $B$ by a \kl{compatible bough} $H$.}
+\AP Two boughs $B$ and $B'$ are \intro(bough){compatible} if they share the
+same \kl(bough){first idempotent value}, and if for every tree (with a
+\kl{split}) $\aTree = C[B]$ that is \kl{forward Ramseyan}, the tree $C[B']$
+is also \kl{forward Ramseyan}.
+
+The following \cref{fact:bough-replacement} states that one can safely perform
+such a replacement without modifying the part of the graph represented by the
+\kl(context){leaves} of $C[\square]$. This is because to determine the presence
+of edges between leaves of $C[\square]$, one only needs to know the value of
+the \kl(bough){first idempotent element} labelling the \kl{bough}, which does
+not change when replacing $B$ by a \kl{compatible bough} $H$.
 	
 	
 \begin{fact}
@@ -219,9 +207,9 @@ This is because to determine the presence of edges between leaves of $C[\square]
   Let $\t = C[B]$ be a tree with a \kl{bough} $B$ of level $k$, 
   and let $H$ be a \kl{bough} that is \kl(bough){compatible}
   with $B$. Let $\t' = C[H]$ be the tree obtained by replacing $B$ by $H$ in $\t$.
-  Then, the subraph of $\someInterp(\t)$ induced by the leaves in 
+  Then, the subraph of $\someInterp(\t)$ induced by the \kl(context){leaves} in 
   the \kl(bough){context} $C[\square]$ equals the 
-  subgraph of $\someInterp(\t')$ induced by the leaves in
+  subgraph of $\someInterp(\t')$ induced by the \kl(context){leaves} in
   the \kl(bough){context} $C[\square]$.
 \end{fact}
 
@@ -240,50 +228,40 @@ This is because to determine the presence of edges between leaves of $C[\square]
             \kl(bough){blocks} in $H$ such that all their leaves
             are left untouched by $h$.
     \end{enumerate}
-    \maelin{Why need two blocks ? this is problematic with the definition of perfect bough (as perfect is not anymore a restriction of good boughs)}
     A \intro{bad bough} is a \kl{bough} that is not a \kl{good bough}.
 \end{definition}
 
 We claim that the existence of \kl{bad boughs} of arbitrarily large
 \kl(bough){dimension} is the only obstruction to being \kl{$2$-well-quasi-ordered}.
 
-\maelin{You should put an enumerate here between the equivalent notions, and then observe that 2->1, and say that in \cref{sec:gap-embedding} you will show 3->2 and in \cref{sec:obstructions} show that 1->3. }
 \begin{lemma}
   \label{lem:good-boughs-wqo}
-  The image of $\someInterp$ is \kl{$2$-well-quasi-ordered} 
-  if and only if
-  the image of $\someInterp$ is \kl{$\forall$-well-quasi-ordered} 
-  if and only if 
-  there exists a bound on the \kl(bough){dimension} of \kl{bad boughs}.
+  The following are equivalent:
+  \begin{enumerate}
+    \item \label{item:2-wqo} The image of $\someInterp$ is \kl{$2$-well-quasi-ordered}.
+    \item \label{item:forall-wqo} The image of $\someInterp$ is \kl{$\forall$-well-quasi-ordered}.
+    \item \label{item:bound-dim} There exists a bound on the \kl(bough){dimension} of \kl{bad boughs}.
+  \end{enumerate}
 \end{lemma}
 
-The proof of \cref{lem:good-boughs-wqo} is split into two parts, one will
-leverage the bound on the \kl(bough){dimension} of \kl{bad boughs} to construct a
-suitable tree representation of the graphs proving that they are
-\kl{$\forall$-well-quasi-ordering} (\cref{sec:gap-embedding}). On the other
-hand, we will show that the existence of \kl{bad boughs} of arbitrarily large
-\kl(bough){dimension} allows to construct an infinite two-labelled antichain in the
-image of $\someInterp$ (\cref{sec:obstructions}).
-
+It is clear that \cref{item:forall-wqo} implies \cref{item:2-wqo}. In 
+\cref{sec:gap-embedding} we will prove that \cref{item:bound-dim} implies
+\cref{item:forall-wqo}, while in \cref{sec:obstructions} we will prove that
+\cref{item:2-wqo} implies \cref{item:bound-dim}, concluding the proof of
+\cref{lem:good-boughs-wqo}.
 
 \subsection{Using the Gap Embedding}
 \label{sec:gap-embedding}
 
-
-
-\maelin{You need to explain why you want to insert dummy nodes}
-\AP If there is an upper bound $N_0$ on the \kl(bough){dimension} of \kl{bad boughs},
-we can use \cref{fact:bough-replacement} to upgrade our trees in the following
-way: given a tree $\t$, we will insert dummy nodes in every \kl{bough} of level
-$k$ that has \kl(bough){dimension} greater than $N_0$. The resulting tree $\t'$
-will be a \kl{marked nested tree} as defined in \cref{sec:ramseyan}, with three
-kinds of nodes: \kl{marked nodes}, that correspond to nodes of $\t$, \kl{dummy
-nodes} that were inserted during this procedure, and \kl{separating nodes},
-that are the last nodes of the \kl{$k$-neighbourhoods} defining the \kl{boughs}
-we manipulated. The following \cref{lem:important-nodes} shows that this
-construction produces \kl{well-marked nested trees} that are \kl{$L$-bounded},
-allowing us to apply \cref{thm:marked-nested-trees-wqo}.
-
+In this section, we will leverage \cref{thm:marked-nested-trees-wqo} to prove
+that \cref{item:bound-dim} implies \cref{item:forall-wqo} of
+\cref{lem:good-boughs-wqo}. The main idea will be to use the bound on the
+\kl(bough){dimension} of \kl{bad boughs} to insert ``dummy nodes'' inside our
+trees, turning them into \kl{marked nested trees}. Because we can insert these
+dummy nodes in a controlled manner, we will be able to ensure that the
+resulting \kl{marked nested trees} are \kl{$L$-bounded} for some $L \in \Nat$,
+allowing us to apply \cref{thm:marked-nested-trees-wqo}. This is exactly 
+the content of the following \cref{lem:important-nodes}.
 
 \begin{lemma}
     \label{lem:important-nodes}
@@ -301,6 +279,8 @@ allowing us to apply \cref{thm:marked-nested-trees-wqo}.
   given a \kl{bough backbone} $b_0, b_1, \ldots, b_n$ defining a \kl{bough} $B$,
   where all $b_i$ are \kl{marked nodes}, and $n = N_0 + 1$,
   we know that $B$ is a \kl{good bough} by assumption.
+
+  % TODO: fix the explanation here.
   As a consequence, there exists a \kl{compatible bough} $H$ of 
   same level as $B$ that can replace $B$ in $\t$
   by definition of \kl{good boughs}.
@@ -318,7 +298,13 @@ allowing us to apply \cref{thm:marked-nested-trees-wqo}.
   and all other nodes of these two \kl{bough blocks} as \kl{dummy nodes}.
   Then, we complete
   the marking by ensuring that the least common ancestor
-  of two \kl{marked nodes} is also \kl(node){marked}. By definition\mael{of what?}, the graph
+  of two \kl{marked nodes} is also \kl(node){marked}. 
+  Because of \cref{fact:bough-replacement}, the graph 
+  obtained from $(\t', \spt', \marking)$ is the same as the one 
+  obtained from $(\t, \spt)$ when using the \kl{monoid interpretation} $\someInterp$
+  restricted to \kl(context){leaves} of the context $C[\square]$.
+  Furthermore, by construction, the 
+  By definition\mael{of what?}, the graph
   induced\mael{defined} by the \kl{marked leaves} remains unchanged by this operation.
 
   We repeat this procedure until there is no \kl{bough} of \kl(bough){dimension}

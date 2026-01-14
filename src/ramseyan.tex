@@ -1,3 +1,4 @@
+% LTeX: language=en-GB
 \section{From Interpretations to Nested Trees}
 \label{sec:ramseyan}
 
@@ -108,21 +109,21 @@ is \kl{$\forall$-well-quasi-ordered} can be reduced to finding a suitable
 \emph{order-preserving} from trees to graphs, leveraging the following standard
 \cref{fact:surjective-wqo}.
 
-\begin{fact}
+\begin{fact}[Folklore]
   \label{fact:surjective-wqo}
   Let $(X, \leq_X)$ and $(Y, \leq_Y)$ be two quasi-orders,
   and $f \colon X \to Y$ be a surjective order-preserving map.
   If $(X, \leq_X)$ is \kl{well-quasi-ordered},
   then $(Y, \leq_Y)$ is \kl{well-quasi-ordered}.
 \end{fact}
-\begin{proof}
-  Let $(y_i)_{i \in \mathbb{N}}$ be an infinite sequence of elements of $Y$.
-  Since $f$ is surjective, there exists an infinite sequence $(x_i)_{i \in \mathbb{N}}$
-  of elements of $X$ such that for every $i$, $f(x_i) = y_i$.
-  Since $(X, \leq_X)$ is \kl{well-quasi-ordered},
-  there exists two indices $i < j$ such that $x_i \leq_X x_j$.
-  Since $f$ is order-preserving, we have $y_i = f(x_i) \leq_Y f(x_j) = y_j$.
-\end{proof}
+%\begin{proof}
+%  Let $(y_i)_{i \in \mathbb{N}}$ be an infinite sequence of elements of $Y$.
+%  Since $f$ is surjective, there exists an infinite sequence $(x_i)_{i \in \mathbb{N}}$
+%  of elements of $X$ such that for every $i$, $f(x_i) = y_i$.
+%  Since $(X, \leq_X)$ is \kl{well-quasi-ordered},
+%  there exists two indices $i < j$ such that $x_i \leq_X x_j$.
+%  Since $f$ is order-preserving, we have $y_i = f(x_i) \leq_Y f(x_j) = y_j$.
+%\end{proof}
 
 \AP One candidate ordering on trees is the \intro{composition ordering} defined
 as follows. Given two trees $\aTree_1$ and $\aTree_2$ labelled over a monoid
@@ -169,15 +170,13 @@ $\spt(z)$ for $x \treelt[\t] z \treelt[\t] y$, and $N+1$ otherwise.
 In particular, if $y$ is a child of $x$, then $\spt(x \colon y) = N+1$.
 
 \AP Two elements $x \treelt[\t] y$ such that $\spt(x) = \spt(y) = k$ are
-\intro{$k$-neighbours} if $\spt(x \colon y) \geq k$. Being \kl{$k$-neighbours}
-is an equivalence relation on the nodes of the tree having value $k$ in the
-split.
-\maelin{This is false, for example if a,b,c, are such that a is the lca of b and c; we can have a,b and a,c are k-nbr, but not b,c k-nbd. It should be defined branch-wise.}
- A \kl{split} induces a hierarchical structure on the tree based on the
-\kl{$k$-neighbourhoods}. We illustrate the situation on a \emph{branch} of a
-tree in \cref{split-on-branch:fig}, but in general \kl{$k$-neighbourhoods} can
-span several branches of the tree. We will refer to the value of $\spt(x)$ as
-the \reintro{split depth} of the node $x$.
+\intro{$k$-neighbours} if $\spt(x \colon y) \geq k$. For every branch of the
+tree, being \kl{$k$-neighbours} is an equivalence relation on the nodes of the
+tree having value $k$ in the split belonging to said branch. A \kl{split}
+induces a hierarchical structure on every branch of the tree, based on the
+\kl{$k$-neighbourhoods}. We illustrate the situation in
+\cref{split-on-branch:fig}. We will refer to the value of $\spt(x)$ as the
+\reintro{split depth} of the node $x$.
 
 \begin{figure}
   \centering 
@@ -225,9 +224,9 @@ the \reintro{split depth} of the node $x$.
   \label{split-on-branch:fig}
 \end{figure}
 
-\maelin{What is a class of $k$-neighbourhood ? I think the way you define it is not clear yet. You use it exclusively on branch, I think you should define it only on branch, but observe that on the whole tree, the equivalence classes intersect in a tree-like manner.}
 \AP A \kl{split} $\spt$ is \intro{forward Ramseyan} if for every $k \in \set{1,
-\dots, N}$ and every $x, y, x', y'$ in the same class of \kl{$k$-neighbourhood}
+\dots, N}$, every branch $b$ of the tree, 
+and every $x, y, x', y'$ in the same class of \kl{$k$-neighbourhood} inside the branch $b$,
 with $x \treelt[\t] y$ and $x' \treelt[\t] y'$, we have: 
 \begin{equation}
   \label{fake-idempotent:eq} 
@@ -334,11 +333,17 @@ and that endows trees with a \kl{well-quasi-order} \cite{DERSHOWITZ200380}.
   endowed with \kl{forward Ramseyan splits} $\spt_1, \spt_2$
   is a mapping $h \colon \t_1 \to \t_2$ that
   \begin{enumerate}
-    \item is a tree embedding: respects the ancestor relation $\treeleq$, least
+    \item 
+      \label{item:gap-embedding:tree-embedding}
+      is a tree embedding: respects the ancestor relation $\treeleq$, least
       common ancestors $\lca$, and sibling ordering $\treesibleq$,
-    \item satisfies the root gap property:
+    \item
+      \label{item:gap-embedding:root}
+      satisfies the root gap property:
       $\spt_2(r_2 \colon h(r_1)) \geq \spt_1(r_1)$ where $r_1, r_2$ are the roots of $\t_1, \t_2$,
-    \item satisfies the edge gap property:
+    \item 
+      \label{item:gap-embedding:edge}
+      satisfies the edge gap property:
       for every edge $x \treelt[\t] y$ in $\t_1$,
       $\spt_2(h(x) \colon h(y)) \geq \spt_1(y)$.
   \end{enumerate}
@@ -394,15 +399,12 @@ are not considered in the \kl{gap-embedding} ordering.
   and $\marking$ is a function from the nodes of $\t$ to $\set{\marked, \separating, \dummy}$, 
   respectively called \intro(nodes){marked}, \intro(nodes){separating}, and \intro(nodes){dummy} nodes.
 
-\maelin{I think there is something wrong with this definition. "that
-	for every $x \treelt[\t] z_1 \treelt[\t] y$ such that 
-	$\spt(x \colon z_1) > k$, $\spt(z_1) = k$" there is only one such $z_1$, Moreover, you assume $\marking(z_1) = \marked$ afterward.}
   A \kl{marked nested tree} $(\t, \spt, \marking)$ is \intro{well-marked} if
   the \kl{marked nodes} contain the root of $\t$, are closed under 
   the \kl{least common ancestor} operation, and furthermore satisfy that
   for every $x \treelt[\t] z_1 \treelt[\t] y$ such that 
   $\spt(x\colon z_1) > k$, $\spt(z_1) = k$, and  $\spt(z_1\colon y) \geq k$ for some $k \in \set{1, \dots, N}$,
-  if $x$ and $y$ are \kl{marked nodes} and $z_1$ is not a \kl{marked node}, then there exists $z_2, z_3$
+  if $x$ and $y$ are \kl{marked nodes}, then there exists $z_2, z_3$
   such that 
   $x \treelt[\t] z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$,
   $\spt(z_1) = \spt(z_2) = \spt(z_3) = k$, 
@@ -492,7 +494,7 @@ are not considered in the \kl{gap-embedding} ordering.
 \kl{marked gap-embedding} ordering of \cref{def:gap-embedding} is not a
 \kl{well-quasi-order} because of the gluing condition of
 \cref{item:gap-embedding:gluing}.
-We create an infinite \kl{antichain} by 
+We can create an infinite \kl{antichain} by 
 considering the infinite sequence of trees
 $(\t_n, \spt_n, \marking_n)$ where $\t_n$ is a branch of length $n+1$,
 $\spt_n$ assigns the value $1$ to every node of $\t_n$,
@@ -522,11 +524,8 @@ gap-embedding} ordering when labelled over a \kl{well-quasi-ordered} set.
   such that if there exists a 
   \kl{gap-embedding} between $f(\t_1, \spt_1, \marking_1)$ and $f(\t_2, \spt_2, \marking_2)$,
   then $\t_1 \gemb \t_2$ as \kl{marked nested trees}.
-  Since we know that the class of \kl{nested trees} labelled over a
-  \kl{well-quasi-ordered} set is \kl{well-quasi-ordered} under the \kl{gap-embedding} ordering
-  by \cref{thm:gap-embedding-wqo}, we will immediately conclude that 
-  the class of \kl{$L$-bounded well-marked nested trees} is also \kl{well-quasi-ordered}
-  under the \kl{marked gap-embedding} ordering.
+  Using \cref{thm:gap-embedding-wqo}, this will conclude the proof. 
+
   One can encode \cref{item:gap-embedding:root,item:gap-embedding:leaves,item:gap-embedding:marking,item:gap-embedding:local,item:gap-embedding:neighbourhood} of \cref{def:gap-embedding}
   by adding suitable labels to the nodes of the trees. Formally,
   we define a new labelling of the nodes of a tree $\t$ as follows: we add to each node $x$ of $\t$
@@ -695,7 +694,7 @@ gap-embedding} ordering when labelled over a \kl{well-quasi-ordered} set.
                                    or \kl(nodes){separating},}
                           \\
     \spt_2(h(z_2)\colon h(z_3)) &\geq k
-                          & \text{by the gap property,}
+                                & \text{by \cref{fact:gap-embedding-gaps},}
                           \\
     \spt_2(h(z_3)\colon h(y))   &> k
                           & \text{because $y$ is a \kl(nodes){marked},}                               
