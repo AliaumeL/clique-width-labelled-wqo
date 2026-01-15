@@ -68,6 +68,28 @@ form its \kl(bough){backbone}. Hence, given a tree $\t$ together with a
 can ask whether this tree with distinguished nodes represents an \kl{imperfect
 bough}.
 
+
+The following \cref{fact:bough-replacement} states that one can safely perform
+such a replacement without modifying the part of the graph represented by the
+\kl(context){leaves} of $C[\square]$. This is because to determine the presence
+of edges between leaves of $C[\square]$, one only needs to know the value of
+the \kl(bough){first idempotent element} labelling the \kl{bough}, which does
+not change when replacing $B$ by a \kl{compatible bough} $H$.
+	
+	
+\begin{fact}
+  \label{fact:bough-replacement}
+  Let $\t = C[B]$ be a tree with a \kl{bough} $B$ of level $k$, 
+  and let $H$ be a \kl{bough} that is \kl(bough){compatible}
+  with $B$. Let $\t' = C[H]$ be the tree obtained by replacing $B$ by $H$ in $\t$.
+  Then, the subraph of $\someInterp(\t)$ induced by the \kl(context){leaves} in 
+  the \kl(bough){context} $C[\square]$ equals the 
+  subgraph of $\someInterp(\t')$ induced by the \kl(context){leaves} in
+  the \kl(bough){context} $C[\square]$.
+\end{fact}
+
+
+
 \begin{lemma}
   \label{lem:recognizing-perfect-boughs}
   There exists an $\MSO$ formula that recognizes \kl{imperfect boughs}.
