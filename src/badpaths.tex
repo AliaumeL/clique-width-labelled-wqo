@@ -211,6 +211,8 @@ the tree $C[B]$ (with split $\spt$) is \kl{forward Ramseyan}, the tree $C[B']$
         \item there exist three consecutive
             \kl(bough){blocks} in $H$ such that all their leaves
             are left untouched by $h$.
+            \maelin{whose leaves
+            	are left untouched by $h$.}
     \end{enumerate}
     A \intro{bad bough} is a \kl{bough} that is not a \kl{good bough}.
 \end{definition}
@@ -291,7 +293,8 @@ the content of the following \cref{lem:important-nodes}.
   \kl{boughs} of lower split level having arbitrarily large
   \kl(bough){dimension} with \kl{marked nodes} in their \kl(bough){backbone}.
 
-  Let us first verify that every rewrite step preserves the fact that $\t$ is a
+
+  Let us first observe that every rewrite step preserves the fact that $\t$ is a
   \kl{well marked nested tree}. This is because non-marked nodes are only
   inserted after a \kl{separating node}. 
 
@@ -306,6 +309,7 @@ the content of the following \cref{lem:important-nodes}.
   From our construction, it is clear that at every level $k$, there are at most
   $N_0 + 1$ consecutive \kl{marked nodes} in the \kl{bough backbone} of any
   \kl{bough} of level $k$.
+  \maelin{I think I have a problem here with bough backbone. Say you have $B$ with $b_0,...,b_n$. After the surgery, $h(b_0),...,h(b_n)$ are still marked and are also all in the same $k$-neighbourhood. I think you must specify that you cannot "expand" by adding another $b$ in th sequence, you need some maximality notion.}
 
   Let us now prove that the resulting tree $\t'$ is \kl{$L$-bounded} for some
   $L \in \Nat$. Assume towards a contradiction that there exists arbitrarily
@@ -317,7 +321,8 @@ the content of the following \cref{lem:important-nodes}.
   $\spt'(x_i) = \spt'(x_j)$ and $\spt'(x_i \colon x_j) = \spt'(x_{i'} \colon
   x_{j'})$ for every $0 \leq i < j \leq N_0 + 1$ and $0 \leq i' < j' \leq N_0 +
   1$. Without loss of generality, we can assume that $\spt'(x_i) < \spt'(x_i
-  \colon x_{i+1})$ for every $0 \leq i \leq N_0$.
+  \colon x_{i+1})$\mael{ $\spt'(x_i) \leq \spt'(x_i
+  	\colon x_{i+1})$?} for every $0 \leq i \leq N_0$.
   Since we only insert \kl{separating node} prior to a \kl{dummy node}, 
   we can also assume that all nodes $x_0, x_1, \ldots, x_{N_0+1}$ are
   \kl{marked nodes}.
@@ -345,7 +350,7 @@ construct \kl{$L$-bounded} \kl{well-marked nested tree} $(\t_i', \spt_i',
 $\someInterp(\t_i')$, when the latter is restricted to vertices corresponding
 to \kl{marked leaves}. By labelling the \kl{marked leaves} of $(\t_i', \spt_i',
 \marking_i)$ with $\circ$ if they are not in $G_i$, and with their original
-label in $Y$ otherwise, we obtain a sequence of $\set{\circ} + Y$ node-labelled
+label in $Y$ otherwise, we obtain a sequence of $Y \cup \set{\circ} $ node-labelled
 \kl{well-marked nested trees}.
 
 By  \cref{thm:marked-nested-trees-wqo}, there exist two trees $(\t_i', \spt_i',
@@ -376,6 +381,7 @@ that all these \kl{bad boughs} are \kl(bough){compatible} (see
 that they are \kl(bough){bad} (see \cref{lem:finitely-many-contexts} below).
 
 \maelin{The proof of this lemma is sometimes unclear, but the next one that prove similar things is much more clear. You can take inspiration of the later to improve.}
+\maelin{Okok, i think my problem is that I don't see why you talk about failing the Ramseyan condition, why you caracterize when it is forward ramseyan. Is it because compatibility depends of every context ? I think I start to get it...}
 \begin{lemma}
   \label{lem:finitely-many-boughs}
   Let $k$ be a level. There are finitely many \kl{boughs} of level $k$ 
@@ -419,11 +425,13 @@ that they are \kl(bough){bad} (see \cref{lem:finitely-many-contexts} below).
   $y$ belongs to $\aTree_{\mathsf{left}}$. For $x$ and $y$ to be in the same
   \kl{$l$-neighbourhood}, they must be of level exactly $k$. As a consequence,
   the value of the path from $x$ to $y$ only depends on the value of the path
-  from $y$ to the root of its tree, and the value of the path from $x$ to the
+  from the root of $\aTree_{\mathsf{left}}$ to $y$, and the value of the path from $x$ to the
   last node of the \kl(bough){backbone} of $B$. Hence, the \kl{forward
   Ramseyan} condition can be ensured by the following finite set of equations:
   $e_i \cdot m_{\mathsf{left}} \cdot \alpha = e_i$ and
-  $m_\mathsf{left} \cdot \alpha \cdot e_i = e_i$, where $e_i$ is an idempotent
+  $m_\mathsf{left} \cdot \alpha \cdot e_i = e_i$,
+  \maelin{I don't get the second equation, isn't the first one th eonly possibility ?}
+   where $e_i$ is an idempotent
   element labelling a path between two consecutive nodes of the
   \kl(bough){backbone} of $B$, and $\alpha$ is the value of the path from $y$
   to the root of its tree $\aTree_{\mathsf{left}}$.

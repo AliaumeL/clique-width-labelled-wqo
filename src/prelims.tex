@@ -10,7 +10,7 @@ logic and quantifier-free formulas.
 qu'on ne parle que de graphe/arbre fini, alors pas besoin de repréciser fini à
 chaque fois.}
 \paragraph*{Graphs} \AP A \intro{graph} is a pair $G = (V, E)$
-where $V$ is a set of \intro{vertices} and $E \subseteq V \times V$ is a set of
+where $V$ is a set of \intro{vertices} and $E \subseteq \binom{V}{2}$ is a set of
 \intro{edges}. A graph is \intro(graph){undirected} if $(u, v) \in E$ implies
 $(v, u) \in E$ for all $u, v \in V$, and directed otherwise. In this paper we
 will focus on finite undirected graphs without self-loops. Given a set $X$, an
@@ -120,8 +120,7 @@ $\phi_{\mathsf{univ}}(x)$ and $\phi_{\mathsf{dom}}$ are tautologies.
 image of some \kl{$\MSO$-interpretation} from finite trees to finite undirected
 graphs \cite{COUR91}. It has \intro{bounded linear clique-width} if it is
 included in the image of some \kl{$\MSO$-interpretation} from linear trees
-(i.e., trees where every node has at most one non-leaf child) to finite
-undirected graphs. Equivalently, a class of graphs has \kl{bounded linear
+to finite undirected graphs. Equivalently, a class of graphs has \kl{bounded linear
 clique-width} if it is included in the image of some \kl{simple
 $\MSO$-interpretation} from finite words to finite undirected graphs.
 
