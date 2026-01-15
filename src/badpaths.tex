@@ -386,17 +386,19 @@ that they are \kl(bough){bad} (see \cref{lem:finitely-many-contexts} below).
   We want to characterise when $C[B]$ is \kl{forward Ramseyan}, and show 
   that this characterisation only depends on finitely many parameters
   of $B$.
-
-  Note that since $B$ itself is \kl{forward Ramseyan},
-  and the \kl(bough){context} $C[\square]$ is also \kl{forward Ramseyan},
-  the only way that $C[B]$ can fail to be \kl{forward Ramseyan}
-  is one of the following:
-  \maelin{Explain that these three possible case are because FR apply only to nodes $x\treeleq y$}
+  Recall that being \kl{forward Ramseyan} is a condition on the branches of
+  the trees, and is local to the \kl{$k$-neighbourhoods}.
+  As a consequence, any failure of the \kl{forward Ramseyan} condition
+  in $C[B]$ must involve nodes that are not both in 
+  $B$, both in $\aTree_{\mathsf{root}}$, both in $\aTree_{\mathsf{left}}$,
+  or both in $\aTree_{\mathsf{right}}$.
+  We can therefore restrict our attention to the following three cases.
   \begin{enumerate}
     \item \label{item:comp-fr-across} one considers two nodes $x$ and $y$ in $C[\square]$ whose path 
       goes across $B$ (i.e., $x$ is in the root subtree, and $y$ is in 
       either the left or right subtree).
-    \item \label{item:comp-fr-below} one considers a node $x$ on the branch\mael{path (branch is from root to leaf no?)} defined 
+    \item \label{item:comp-fr-below} one considers a node $x$ on the path
+      defined
       by the \kl(bough){backbone} of $B$, and $y$ in 
       the left or right subtree of $C[\square]$.
     \item \label{item:comp-fr-above} one considers a node $x$ in the root subtree of 
@@ -404,40 +406,45 @@ that they are \kl(bough){bad} (see \cref{lem:finitely-many-contexts} below).
   \end{enumerate}
 
   Note that for \cref{item:comp-fr-across}, the \kl{forward Ramseyan} condition
-  on $B$ states that for every path crossing $B$, the monoid element 
-  of the part of the path inside $B$ must be $e$, the 
-  first \kl{idempotent} element labelling $B$. Hence, this condition 
-  has finite index. \maelin{What finite index mean ?}
+  on $B$ states that for every path crossing $B$, the monoid element of the
+  part of the path inside $B$ must be the \kl{first idempotent element} of the
+  \kl{bough} $B$. As a consequence, replacing $B$ by any other \kl{bough} with
+  the same \kl{first idempotent element} does not change the value of any such
+  path, hence cannot violate the \kl{forward Ramseyan} condition.
 
-  For \cref{item:comp-fr-below}, the \kl{forward Ramseyan} condition
-  requires nodes to be in the same \kl{$l$-neighbourhood}\mael{what is $l$}. But,
-  all nodes on the branch defined by the \kl(bough){backbone} of $B$ are of 
-  \kl{split level} at least $k$. Hence, for $x$ and $y$ to be in the same
-  \kl{$l$-neighbourhood}, they must be of level exactly $k$. 
-  As a consequence, this condition only depends on 
-  the (finite set) of idempotent elements labelling the \kl{bough} $B$
-  when the \kl(bough){context} is fixed.
-  \maelin{I do not understand the last sentence}
+  For \cref{item:comp-fr-below}, the \kl{forward Ramseyan} condition considers
+  nodes that are in the same \kl{$l$-neighbourhood} for a fixed level $l$. But,
+  all nodes on the branch defined by the \kl(bough){backbone} of $B$ are of
+  \kl{split level} at least $k$. Let us assume without loss of generality that
+  $y$ belongs to $\aTree_{\mathsf{left}}$. For $x$ and $y$ to be in the same
+  \kl{$l$-neighbourhood}, they must be of level exactly $k$. As a consequence,
+  the value of the path from $x$ to $y$ only depends on the value of the path
+  from $y$ to the root of its tree, and the value of the path from $x$ to the
+  last node of the \kl(bough){backbone} of $B$. Hence, the \kl{forward
+  Ramseyan} condition can be ensured by the following finite set of equations:
+  $e_i \cdot m_{\mathsf{left}} \cdot \alpha = e_i$ and
+  $m_\mathsf{left} \cdot \alpha \cdot e_i = e_i$, where $e_i$ is an idempotent
+  element labelling a path between two consecutive nodes of the
+  \kl(bough){backbone} of $B$, and $\alpha$ is the value of the path from $y$
+  to the root of its tree $\aTree_{\mathsf{left}}$.
 
   Finally, for \cref{item:comp-fr-above}, the \kl{forward Ramseyan} condition
   concerns a node $x$ in the root subtree of $C[\square]$, and a node $y$ in
-  $B$, but not necessarily in the branch defined by the \kl(bough){backbone} of $B$.
-  Here, the \kl{forward Ramseyan} condition boils down to the following
-  equations: for each node $z$ in $B$ of level $l$, let $x$ be the closest
-  ancestor of $\square$ of level $l$ (if it exists) in $C[\square]$ and
-  $\alpha = \tlbl{\t}{x}{\square}$. Furthermore, let $y$ be a descendent
-  of $z$ in $B$ of level $l$, and $\beta$ be the $\tlbl{\t}{z}{y}$. Then, the
-  \kl{forward Ramseyan} condition requires that $\alpha \cdot \beta = \alpha$
-  and $\beta \cdot \alpha = \alpha$. Note that if this condition is satisfied,
-  then the tree is \kl{forward Ramseyan} because $C[\square]$ and $B$ are.
-  Hence, it suffices to list all possible pairs $(\alpha, l)$
-  for every level $l$ appearing in $B$ to characterise this condition.
+  $B$, but not necessarily in the branch defined by the \kl(bough){backbone} of
+  $B$. Here, to ensure that $C[B]$ is \kl{forward Ramseyan}, it suffices to
+  satisfy the following equations: for each node $z$ in $B$ of level $l$, let
+  $x$ be the closest ancestor of $\square$ of level $l$ (if it exists) in
+  $C[\square]$ and $\alpha = \tlbl{\t}{x}{\square}$. Furthermore, let $y$ be a
+  descendent of $z$ in $B$ of level $l$, and $\beta$ be the $\tlbl{\t}{z}{y}$,
+  we require that $\alpha \cdot \beta = \alpha$ and $\beta \cdot \alpha =
+  \alpha$. Hence, it suffices to list all possible pairs $(\alpha, l)$ for
+  every level $l$ appearing in $B$ to characterise this condition.
 
-  \maelin{What do you mean by Ramseyan condition ?}
-  We have proven that the \kl{forward Ramseyan} condition on $C[B]$
-  only depends on finitely many parameters of $B$. Since $M$ is finite,
-  there are finitely many possible values for these parameters (and for the
-  first idempotent element labelling $B$). This concludes the proof.
+  We have proven that, assuming that $B$ and $C[\square]$ are locally
+  \kl{forward Ramseyan}, it suffices to check finitely many parameters of $B$
+  to ensure that $C[B]$ is \kl{forward Ramseyan}. Since $M$ is finite, there
+  are finitely many possible values for these parameters, which concludes the
+  proof.
 \end{proof}
 
 \begin{lemma}

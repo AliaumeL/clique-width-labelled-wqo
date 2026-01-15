@@ -26,13 +26,12 @@ tackle the second difficulty.
       \item there exist three consecutive \kl(bough){blocks} in $H$ that are left untouched 
           by $h$.
   \end{enumerate}
-  \maelin{problem with last condition less restrictive than the one for good bough}
   An \intro{imperfect bough} is a \kl{bough} that is not a \kl{perfect bough}.
 \end{definition}
 
-Remark that every \kl{perfect bough} is a \kl{good bough}, hence every
-\kl{bad bough} is an \kl{imperfect bough}.
-\maelin{Say that you extend \cref{lem:good-boughs-wqo} to perfect bough}
+Remark that every \kl{perfect bough} is a \kl{good bough}, hence every \kl{bad
+bough} is an \kl{imperfect bough}. This allows us to lift
+\cref{lem:good-boughs-wqo} to \kl{perfect boughs}.
 
 
 \begin{lemma}
@@ -52,7 +51,7 @@ Remark that every \kl{perfect bough} is a \kl{good bough}, hence every
 
   Conversely, assume that there exist \kl{imperfect boughs} of arbitrarily
   large \kl(bough){dimension}. Then, by an argument similar to the one of 
-  \cref{lem:bad-bough-antichain}, we can construct an infinite
+  \cref{sec:obstructions}, we can construct an infinite
   labelled \kl{antichain} in the image of $\someInterp$. The only change is that 
   one also adds the \kl{bough type} of the leaves as additional labels.
   This actually follows the original proof technique of 
@@ -68,13 +67,16 @@ form its \kl(bough){backbone}. Hence, given a tree $\t$ together with a
 can ask whether this tree with distinguished nodes represents an \kl{imperfect
 bough}.
 
-
-The following \cref{fact:bough-replacement} states that one can safely perform
-such a replacement without modifying the part of the graph represented by the
-\kl(context){leaves} of $C[\square]$. This is because to determine the presence
-of edges between leaves of $C[\square]$, one only needs to know the value of
-the \kl(bough){first idempotent element} labelling the \kl{bough}, which does
-not change when replacing $B$ by a \kl{compatible bough} $H$.
+In order to do so, we will first need the following
+\cref{fact:bough-replacement}, that explains that when replacing a bough $B$ by
+a \kl{compatible bough} $H$, one does not change the part of the graph
+represented by the \kl{leaves} of the \kl{bough context} $C[\square]$. This is
+because to determine the presence of edges between leaves of $C[\square]$, one
+only needs to know the value of the \kl(bough){first idempotent element}
+labelling the \kl{bough}, which does not change when replacing $B$ by a
+\kl{compatible bough} $H$. As a consequence, it suffices to focus on the leaves
+of $B$ inside of $H$ to construct an embedding from $\someInterp(C[B])$ to
+$\someInterp(C[H])$ satisfying the conditions of \cref{def:perfect-bough}.
 	
 	
 \begin{fact}
@@ -94,23 +96,45 @@ not change when replacing $B$ by a \kl{compatible bough} $H$.
   \label{lem:recognizing-perfect-boughs}
   There exists an $\MSO$ formula that recognizes \kl{imperfect boughs}.
 \end{lemma}
-\begin{proof}[Proof Sketch]
+\begin{proof}
   The proof follows the same pattern as 
-  \cite[Lemma 19]{LOPEZ24}. The main idea is that if a \kl{bough} $B$ is
-  \kl(bough){perfect}, then the only thing that matters for a given leaf $x$ in $B$
-  is its \kl{bough type} and whether it is mapped on the left or right of the
-  untouched \kl{bough block}
-  in the \kl{bough} $H$. Hence, one can guess for every leaf 
-  in $B$ where it is mapped (left or right of the untouched block),
-  and verify that the mapping preserves edges using only MSO formulas.
+  \cite[Lemma 19]{LOPEZ24}, but adapts it from words to trees. 
+  Assume that $B$ is a \kl{perfect bough} of level $k$ inside of a tree
+  $\t = C[B]$.
+  This gives us a compatible \kl{bough} $H$ of level $k$
+  and an embedding $h \colon \someInterp(C[B]) \to \someInterp(C[H])$
+  satisfying the conditions of \cref{def:perfect-bough}.
 
-  \maelin{Give a bit more intuition, like the idea is to check if B and BBB are compaitble, which is MSO definable ?}
-  If such a mapping exists, then one can reconstruct a compatible bough $H$
-  by triplicating\mael{t'avais juste envie de dire ce mot non?} $B$, that is, letting $H \defined B B B$, and mapping leaves 
-  to their corresponding copy in $H$. The middle copy will be untouched, 
-  witnessing that $B$ is a \kl{perfect bough}.
-  This reasoning was made formal for \kl{bounded linear clique-width} in
-  \cite[Lemma 16]{LOPEZ24}, and the exact same proof works here.
+  Let us consider five copies of $B$, called $B_\mathsf{left}$,
+  $B_\mathsf{mid-1}$, $B_\mathsf{mid-2}$, $B_\mathsf{mid-3}$, and
+  $B_\mathsf{right}$, and let us define $K$ to be the \kl{bough} obtained by
+  concatenating these five copies merging $b_n$ of $B_\mathsf{left}$ with $b_0$
+  of $B_\mathsf{mid-1}$, and merging $b_n$ of $B_\mathsf{mid-1}$ with $b_0$ of
+  $B_\mathsf{mid-2}$ and so on. We claim that $B$ and $K$ are \kl{compatible
+  boughs}. 
+
+  Let us define a mapping $k \colon \someInterp(C[B]) \to
+  \someInterp(C[K])$ as follows: leaves $x$ of $B$ are mapped to their
+  corresponding leaf in $B_\mathsf{left}$ or $B_\mathsf{right}$ depending on
+  whether $h(x)$ is to the left or right of the untouched \kl{bough blocks} of
+  $H$. For leaves $x$ of $C[\square]$, we let $k(x) = x$. 
+  Thanks to \cref{fact:bough-replacement}, we know that
+  $k$ preserves edges between leaves of $C[\square]$.
+  Furthermore, because $h$ is an embedding that preserves the 
+  \kl{bough type} of leaves in $B$, and because \kl{bough types} are enough
+  to compute the presence of an edge between a leaf of $B$ and a leaf of
+  $C[\square]$ (or between two leaves of $B$), we deduce that $k$ is also an
+  embedding.
+
+  What we have shown is that if $B$ is a \kl{perfect bough}, then there exists
+  a mapping $k'$ from leaves of $B$ to $\set{ \mathsf{left}, \mathsf{right} }$
+  such that there is an edge between two leaves $x$ and $y$ of $B$ in the graph
+  $\someInterp(C[B])$ if and only if the \kl{bough types} of $x$ and $y$ are
+  such that there is an edge between $x_{k'(x)}$ and $y_{k'(y)}$ in the graph
+  $\someInterp(C[K])$. One can guess such a mapping $k'$ in Monadic Second-Order
+  logic, and then verify the required conditions on edges between leaves of $B$.
+  As a consequence, one can write an $\MSO$ formula that holds if and only if
+  $B$ is a \kl{perfect bough}.
 \end{proof}
 
 \begin{corollary}
@@ -124,21 +148,20 @@ not change when replacing $B$ by a \kl{compatible bough} $H$.
   Let us now consider the following Cost MSO formula:
   \begin{equation*}
     \Psi(N) \defined 
-    \Phi \land |\{ \text{number of elements in the backbone} \}| \leq N
+    \Phi \land |\{ \text{ \kl{dimension of the bough} } \}| \leq N
   \end{equation*}
-  \maelin{what is number of elements in the backbone, the dimension of bough, the size of the path from $b_0$ to $b_n$ ?}
   This formula takes an input parameter $N$ (a natural number),
   and decides whether the provided tree with \kl{split} and labels
   is an \kl{imperfect bough} of \kl(bough){dimension} at most $N$.
-  By \cite[Corollary 16]{COLOD10}, one can decide whether such a 
+  Because one can compare the boundedness of Cost-MSO definable functions
+  \cite[Corollary 16]{COLOD10}, one can decide whether such a 
   formula can hold for arbitrarily large values of $N$, effectively 
   answering our question.
-  \maelin{I am not familiar with this, but this is not obvious for me that \cite[Corollary 16]{COLOD10} actually imply this }
 \end{proof}
 
 
-We are now ready to prove our \cref{main:theorem}.
-\maelin{restate the thm?}
+We are now ready to prove our main \cref{main:theorem}.
+\maintheorem*
 
 \begin{proof}
   Let $\someInterp$ be an \kl{$\MSO$-interpretation}.
@@ -170,9 +193,11 @@ Let now turn our attention to hereditary classes to obtain our
   forbidden induced subgraphs \cite[Proposition 3]{DRT10}.
   Hence, if $\Cls$ has \kl{bounded clique-width} and is hereditary,
   one can assume that $\Cls$ is exactly the image of an \kl{$\MSO$-interpretation}
-  $\someInterp$ from finite trees, and the result follows from 
+  $\someInterp$ from finite trees: this is done by 
+  ensuring in the formula $\phi_{\mathsf{dom}}$ that 
+  the graph that would be produced does not contain any of these forbidden induced subgraphs.
+  The result then follows from
   \cref{main:theorem}.
-  \maelin{I don't see why you can assume that "$\Cls$ is exactly the image of an \kl{$\MSO$-interpretation}"}
 \end{proof}
 
 
