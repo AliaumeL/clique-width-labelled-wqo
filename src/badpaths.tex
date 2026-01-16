@@ -122,8 +122,12 @@ marked nested tree} representing the same graph, allowing us to leverage
 \begin{definition}
 	\label{ramseyan-branch:def}
   Let $\aTree$ be a tree and $\spt$ be a \kl{forward Ramseyan split} of height
-  $N$. Let $n \geq 1$, and let $b_0, b_1, \ldots, b_n$ be any sequence of nodes of level $k$ on a
-  branch of $\aTree$ belonging to the same \kl{$k$-neighbourhood}. A \intro{bough of level
+  $N$. Let $n \geq 1$, and let $b_0, b_1, \ldots, b_n$ nodes on
+  branch of $\aTree$ such that 
+  $b_0 \treeleq b_1 \treeleq \cdots \treeleq b_n$,
+  and for every $0 \leq i < n$, $\spt(b_i) = k$, and
+  $\spt(b_i \colon b_{i+1}) > k$.
+  A \intro{bough of level
   $k$} is the subtree of $\aTree$ induced by all nodes $x$ such that $b_0
   \treeleq x$, and $\neg (b_n \treeleq x)$, plus $b_n$ itself.
 		
@@ -288,10 +292,7 @@ the content of the following \cref{lem:important-nodes}.
   can associate the multiset of \kl(bough){dimensions} of all \kl{boughs} of
   level $k$ with \kl(bough){backbone} made of \kl{marked nodes} inside $\t$.
   Since each rewrite step decreases this multiset for the Dershowitz–Manna
-  ordering this process terminates \cite{DERMAN79}. Here it is important to
-  start with the lowest split level, since otherwise one could introduce new
-  \kl{boughs} of lower split level having arbitrarily large
-  \kl(bough){dimension} with \kl{marked nodes} in their \kl(bough){backbone}.
+  ordering this process terminates \cite{DERMAN79}.
 
 
   Let us first observe that every rewrite step preserves the fact that $\t$ is a
@@ -380,76 +381,72 @@ that all these \kl{bad boughs} are \kl(bough){compatible} (see
 \kl{bad boughs} in the \emph{same} \kl(bough){context} $C[\square]$ to witness
 that they are \kl(bough){bad} (see \cref{lem:finitely-many-contexts} below).
 
-\maelin{The proof of this lemma is sometimes unclear, but the next one that prove similar things is much more clear. You can take inspiration of the later to improve.}
-\maelin{Okok, i think my problem is that I don't see why you talk about failing the Ramseyan condition, why you caracterize when it is forward ramseyan. Is it because compatibility depends of every context ? I think I start to get it...}
 \begin{lemma}
   \label{lem:finitely-many-boughs}
   Let $k$ be a level. There are finitely many \kl{boughs} of level $k$ 
   up to \kl(bough){compatibility}.
 \end{lemma}
 \begin{proof}
-  Let $B$ be a \kl{bough} of level $k$ and $C[\square]$ be a \kl(bough){context}.
-  We want to characterise when $C[B]$ is \kl{forward Ramseyan}, and show 
-  that this characterisation only depends on finitely many parameters
-  of $B$.
-  Recall that being \kl{forward Ramseyan} is a condition on the branches of
-  the trees, and is local to the \kl{$k$-neighbourhoods}.
-  As a consequence, any failure of the \kl{forward Ramseyan} condition
-  in $C[B]$ must involve nodes that are not both in 
-  $B$, both in $\aTree_{\mathsf{root}}$, both in $\aTree_{\mathsf{left}}$,
-  or both in $\aTree_{\mathsf{right}}$.
-  We can therefore restrict our attention to the following three cases.
+  Let $B$ be a \kl{bough} of level $k$. We will prove that one can 
+  extract finitely many parameters of $B$, such that 
+  any other \kl{bough} $B'$ of level $k$ sharing these parameters
+  is \kl(bough){compatible} with $B$.
+
+  To that end, let us fix a \kl(bough){context} $C[\square]$. Assume that $\t =
+  C[B]$ is \kl{forward Ramseyan}, and we want to ensure that $\t' = C[B']$ is
+  \kl{forward Ramseyan}.  Recall that $\t'$ is \kl{forward Ramseyan} if for
+  every branch in $\t'$, for every level $l$, for every \kl{$l$-neighbourhood}
+  in this branch, and for every four nodes $x \treelt y$ and $x' \treelt y'$ in
+  this \kl{$l$-neighbourhood}, we have $\tlbl{\t'}{x}{y} \cdot
+  \tlbl{\t'}{x'}{y'} = \tlbl{\t'}{x}{y}$.
+
+  First, remark that \kl{$l$-neighbourhoods} with $l < k$ inside $\t'$ are fully
+  contained either in $B'$, or $\aTree_{\mathsf{root}}$, or
+  $\aTree_{\mathsf{left}}$,  or $\aTree_{\mathsf{right}}$. As a consequence,
+  nothing needs to be checked on such \kl{$l$-neighbourhoods} since $B'$
+  is assumed to be locally \kl{forward Ramseyan}.
+  More generally, the only possible failures of the \kl{forward Ramseyan}
+  condition in $\t'$ must involve nodes that are not all contained
+  in one of these four subtrees.
+
+  Now, let us consider \kl{$l$-neighbourhoods} with $l \geq k$.
+  If $l \geq k$, then the only \kl{$l$-neighbourhood} of a branch that
+  is not fully contained in one of the four subtrees crosses $B'$. Let us 
+  distinguish several cases based on the shape of the branch with respect 
+  to the \kl(bough){context} $C[\square]$ and the \kl{bough} $B'$.
   \begin{enumerate}
-    \item \label{item:comp-fr-across} one considers two nodes $x$ and $y$ in $C[\square]$ whose path 
-      goes across $B$ (i.e., $x$ is in the root subtree, and $y$ is in 
-      either the left or right subtree).
-    \item \label{item:comp-fr-below} one considers a node $x$ on the path
-      defined
-      by the \kl(bough){backbone} of $B$, and $y$ in 
-      the left or right subtree of $C[\square]$.
-    \item \label{item:comp-fr-above} one considers a node $x$ in the root subtree of 
-      $C[\square]$, and $y$ in the \kl{bough} $B$.
+    \item The branch containing the \kl{$l$-neighbourhood} starts in 
+      $\aTree_{\mathsf{root}}$ (possibly in $\square$), goes through $B'$, and ends in 
+      $\aTree_{\mathsf{left}}$ or $\aTree_{\mathsf{right}}$.
+    \item The branch containing the \kl{$l$-neighbourhood} starts in 
+      $\aTree_{\mathsf{root}}$ (possibly in $\square$), goes through $B'$, and ends in $B'$.
   \end{enumerate}
 
-  Note that for \cref{item:comp-fr-across}, the \kl{forward Ramseyan} condition
-  on $B$ states that for every path crossing $B$, the monoid element of the
-  part of the path inside $B$ must be the \kl{first idempotent element} of the
-  \kl{bough} $B$. As a consequence, replacing $B$ by any other \kl{bough} with
-  the same \kl{first idempotent element} does not change the value of any such
-  path, hence cannot violate the \kl{forward Ramseyan} condition.
+  In the first case, consider two nodes $x \treelt y$ and $x' \treelt y'$ in
+  the \kl{$l$-neighbourhood}. Remark that the value $\tlbl{\t'}{x}{y}$ can be
+  decomposed into a part before entering $B'$, a part inside $B'$, and a part
+  after leaving $B'$. By construction, the part inside $B'$ is one of the
+  idempotent elements labelling the \kl(bough){backbone} of $B'$. Hence, to
+  ensure that $\t'$ is \kl{forward Ramseyan} in this case, it suffices to check
+  finitely many equations involving those idempotent elements (note that the
+  number of equations depends on the shape of $C[\square]$, but not 
+  the number of elements of $M$ extracted from $B'$).
 
-  For \cref{item:comp-fr-below}, the \kl{forward Ramseyan} condition considers
-  nodes that are in the same \kl{$l$-neighbourhood} for a fixed level $l$. But,
-  all nodes on the branch defined by the \kl(bough){backbone} of $B$ are of
-  \kl{split level} at least $k$. Let us assume without loss of generality that
-  $y$ belongs to $\aTree_{\mathsf{left}}$. For $x$ and $y$ to be in the same
-  \kl{$l$-neighbourhood}, they must be of level exactly $k$. As a consequence,
-  the value of the path from $x$ to $y$ only depends on the value of the path
-  from the root of $\aTree_{\mathsf{left}}$ to $y$, and the value of the path from $x$ to the
-  last node of the \kl(bough){backbone} of $B$. Hence, the \kl{forward
-  Ramseyan} condition can be ensured by the following finite set of equations:
-  $e_i \cdot m_{\mathsf{left}} \cdot \alpha = e_i$ and
-  $m_\mathsf{left} \cdot \alpha \cdot e_i = e_i$,
-  \maelin{I don't get the second equation, isn't the first one th eonly possibility ?}
-   where $e_i$ is an idempotent
-  element labelling a path between two consecutive nodes of the
-  \kl(bough){backbone} of $B$, and $\alpha$ is the value of the path from $y$
-  to the root of its tree $\aTree_{\mathsf{left}}$.
+  In the second case, consider two nodes $x \treelt y$ and $x' \treelt y'$ in
+  the \kl{$l$-neighbourhood}. Here, the value $\tlbl{\t'}{x}{y}$ can be
+  decomposed into a part before entering $B'$, a part from $b_0'$ to the first
+  node $z$ in $B'$ of level $l$ (which is not on the \kl(bough){backbone} of
+  $B'$ if $l > k$), and a part from $z$ to $y$. Similarly, the equations
+  ensuring that $\t'$ is \kl{forward Ramseyan} in this case can be expressed
+  using the values $\tlbl{\t'}{b_0'}{z}$ for every node $z$ in $B'$, and the
+  values $\tlbl{\t'}{z}{y}$ for every node $y$ in $B'$ in the same
+  \kl{$l$-neighbourhood} as $z$ (for some branch). Note that one only cares
+  about the existence of pairs of values $(\tlbl{\t'}{b_0'}{z},
+  \tlbl{\t'}{z}{y})$ for nodes $z$ and $y$ in the same \kl{$l$-neighbourhood},
+  and there are only finitely many such pairs.
 
-  Finally, for \cref{item:comp-fr-above}, the \kl{forward Ramseyan} condition
-  concerns a node $x$ in the root subtree of $C[\square]$, and a node $y$ in
-  $B$, but not necessarily in the branch defined by the \kl(bough){backbone} of
-  $B$. Here, to ensure that $C[B]$ is \kl{forward Ramseyan}, it suffices to
-  satisfy the following equations: for each node $z$ in $B$ of level $l$, let
-  $x$ be the closest ancestor of $\square$ of level $l$ (if it exists) in
-  $C[\square]$ and $\alpha = \tlbl{\t}{x}{\square}$. Furthermore, let $y$ be a
-  descendent of $z$ in $B$ of level $l$, and $\beta$ be the $\tlbl{\t}{z}{y}$,
-  we require that $\alpha \cdot \beta = \alpha$ and $\beta \cdot \alpha =
-  \alpha$. Hence, it suffices to list all possible pairs $(\alpha, l)$ for
-  every level $l$ appearing in $B$ to characterise this condition.
-
-  We have proven that, assuming that $B$ and $C[\square]$ are locally
-  \kl{forward Ramseyan}, it suffices to check finitely many parameters of $B$
+  We have proven that, assuming that $\t = C[B]$ is
+  \kl{forward Ramseyan}, it suffices to check finitely many parameters of $B'$
   to ensure that $C[B]$ is \kl{forward Ramseyan}. Since $M$ is finite, there
   are finitely many possible values for these parameters, which concludes the
   proof.

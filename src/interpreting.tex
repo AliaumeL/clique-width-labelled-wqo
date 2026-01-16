@@ -34,25 +34,11 @@ It follows from results of the previous section that one can extract
   \kl{antichain} for the \kl{labelled induced subgraph} relation.
 \end{lemma}
 \begin{proof}
-  Assume that $\Cls$ is not
-  \kl{$\forall$-well-quasi-ordered}, and in particular, not 
-  \kl{$2$-well-quasi-ordered} by \cref{main:corollary}.
-  By
-  \cref{cor:hereditary-perfect-boughs-wqo}, 
-  it contains a subclass $\Cls'$ of \kl{bounded linear clique-width} that
-  is not \kl{$2$-well-quasi-ordered}.
-  Now, following \cite[3.2 Characterizing Labelled Well-Quasi-Ordered Classes]{LOPEZ24},
-  there is an automaton that witnesses the fact that there are 
-  \kl{imperfect boughs} of arbitrarily large \kl{dimension} in $\Cls'$
-  (they are called \emph{bad forest paths} in \cite{LOPEZ24}). By a pumping argument, \maelin{I don't know what is a pumping argument haha}
-  one can extract a sequence of the form 
-  $G_l G^n G_r$ of \kl{imperfect boughs} of arbitrarily large \kl{dimension}
-  for some fixed \kl{imperfect boughs} $G_l, G_r$ and $G$. By constructions 
-  $G^n$ must be itself an \kl{imperfect bough} for every $n \geq 1$.
-  Note that we have exactly the structure of a \kl{periodic sequence} here,
-  with $C$ being the set of pairs of labels that create edges between
-  consecutive copies of $G$, and $F$ being the set of pairs of labels that
-  create edges between non-consecutive copies of $G$.
+  Using 
+  \cref{cor:hereditary-perfect-boughs-wqo}, one can assume that $\Cls$
+  has \kl{bounded linear clique-width}. It then follows from
+  the analysis of \cite{LOPEZ24} that 
+  $\Cls$ contains a \kl{periodic sequence} $\seqof{G^r}[r \geq 1]$.
 \end{proof}
 
 \AP Let us now leverage this combinatorial structure to extract a logical

@@ -107,14 +107,15 @@ $\someInterp(C[H])$ satisfying the conditions of \cref{def:perfect-bough}.
 
   Let us consider five copies of $B$, called $B_\mathsf{left}$,
   $B_\mathsf{mid-1}$, $B_\mathsf{mid-2}$, $B_\mathsf{mid-3}$, and
-  $B_\mathsf{right}$, and let us define $K$ to be the \kl{bough} obtained by
+  $B_\mathsf{right}$, and let us define $B^5$ to be the \kl{bough} obtained by
   concatenating these five copies merging $b_n$ of $B_\mathsf{left}$ with $b_0$
   of $B_\mathsf{mid-1}$, and merging $b_n$ of $B_\mathsf{mid-1}$ with $b_0$ of
-  $B_\mathsf{mid-2}$ and so on. We claim that $B$ and $K$ are \kl{compatible
+  $B_\mathsf{mid-2}$ and so on. We claim that $B$ and $B^5$ are \kl{compatible
   boughs}. 
 
   Let us define a mapping $k \colon \someInterp(C[B]) \to
-  \someInterp(C[K])$\mael{change $k$ to some other symbol, it is for level} as follows: leaves $x$ of $B$ are mapped to their
+  \someInterp(C[B^5])$
+  as follows: leaves $x$ of $B$ are mapped to their
   corresponding leaf in $B_\mathsf{left}$ or $B_\mathsf{right}$ depending on
   whether $h(x)$ is to the left or right of the untouched \kl{bough blocks} of
   $H$. For leaves $x$ of $C[\square]$, we let $k(x) = x$. 
@@ -131,7 +132,7 @@ $\someInterp(C[H])$ satisfying the conditions of \cref{def:perfect-bough}.
   such that there is an edge between two leaves $x$ and $y$ of $B$ in the graph
   $\someInterp(C[B])$ if and only if the \kl{bough types} of $x$ and $y$ are
   such that there is an edge between $x_{k'(x)}$ and $y_{k'(y)}$ in the graph
-  $\someInterp(C[K])$. One can guess such a mapping $k'$ in Monadic Second-Order
+  $\someInterp(C[B^5])$. One can guess such a mapping $k'$ in Monadic Second-Order
   logic, and then verify the required conditions on edges between leaves of $B$.
   As a consequence, one can write an $\MSO$ formula that holds if and only if
   $B$ is a \kl{perfect bough}.
@@ -148,7 +149,7 @@ $\someInterp(C[H])$ satisfying the conditions of \cref{def:perfect-bough}.
   Let us now consider the following Cost MSO formula:
   \begin{equation*}
     \Psi(N) \defined 
-    \Phi \land |\{ \text{ \kl{dimension of the bough} } \}| \leq N
+    \Phi \land |\{ \text{ \kl{dimension of the bough} } \}| \geq N
   \end{equation*}
   This formula takes an input parameter $N$ (a natural number),
   and decides whether the provided tree with \kl{split} and labels
@@ -185,8 +186,8 @@ We are now ready to prove our main \cref{main:theorem}.
   representing the graphs, which already includes a total ordering on the leaves.
 \end{proof}
 
-\maelin{Replacement: It is easy to derive that the same holds for hereditary classes of bounded clique-width}
-Let now turn our attention to hereditary classes to obtain our 
+It is straightforward to derive that the same holds for hereditary classes of bounded clique-width,
+thus proving
 \cref{main:corollary}.
 \begin{proof}
   By a standard argument, if the class $\someInterp$ is hereditary
@@ -220,21 +221,22 @@ can be witnessed using only \kl{blocks} from a finite set.
   as \cref{lem:finitely-many-boughs,lem:finitely-many-contexts},
   and continues on the ideas of \cref{lem:recognizing-perfect-boughs}.
   The idea is that if a bough $B$ is \kl(bough){perfect}, then 
-  so is $H \defined BBB$. But this\mael{what is this ?} only depends on the \kl{bough types}
-  present in $B$. As a consequence, if $B$ and $B'$ exhibit the same 
-  \kl{bough types} for their leaves, then $B$ is \kl(bough){perfect}
-  if and only if $B'$ is  
-  \kl(bough){perfect}. If one defines an equivalence relation between
+  one can witness it by using the \kl{compatible bough} $B^5$ 
+  defined by gluing five copies of $B$ together, because we noticed
+  that perfectness essentially depends on the \kl{bough types} of the leaves
+  of $B$. 
+  Another consequence of this analysis is that if one defines an equivalence relation between
   \kl{bough blocks} of a given \kl{bough} $B$ based on the set of 
   available \kl{bough types} of its leaves, then 
   one can always replace a \kl{bough block} by another one in the same
   equivalence class without changing the \kl(bough){perfectness} of $B$.
-  Since this equivalence relation has finitely many classes, the result follows.
+  We conclude because this equivalence relation has finitely many classes.
 \end{proof}
 
 As an immediate consequence of \cref{lem:perfect-boughs-wqo} and
-\cref{lem:hereditary-perfect-boughs}, we see that 
-\maelin{Explain a bit more how you assemble this two lemma to obtain the corollary. I don't see where the linear clique-width comes from.}
+\cref{lem:hereditary-perfect-boughs}, we can transform long \kl{imperfect
+boughs} into long \kl{imperfect boughs} that are using only \kl(bough){blocks}
+from a finite set. This allows us to prove the following corollary.
 
 \begin{corollary}
   \label{cor:hereditary-perfect-boughs-wqo}
@@ -244,4 +246,35 @@ As an immediate consequence of \cref{lem:perfect-boughs-wqo} and
   every subclass of \kl{bounded linear clique-width} in $\someInterp$
   is \kl{$2$-well-quasi-ordered}.
 \end{corollary}
+\begin{proof}
+  If the image of $\someInterp$ is \kl{$2$-well-quasi-ordered},
+  then every subclass of \kl{bounded linear clique-width} in $\someInterp$
+  is also \kl{$2$-well-quasi-ordered}. On the other hand,
+  if the image of $\someInterp$ is not \kl{$2$-well-quasi-ordered},
+  then by \cref{lem:perfect-boughs-wqo} there exist \kl{imperfect boughs}
+  of arbitrarily large \kl(bough){dimension}. 
+  Let us consider the finite set of \kl(bough){blocks} $\mathbb{F}$
+  given by \cref{lem:hereditary-perfect-boughs},
+  to obtain an infinite sequence of \kl{imperfect boughs}
+  $\seqof{B_i}[i \in \Nat]$ of increasing \kl(bough){dimension}
+  using only \kl(bough){blocks} from $\mathbb{F}$.
 
+  Note that if $B$ is an \kl{imperfect bough} in some tree $\t = C[B]$, then it
+  remains an \kl{imperfect bough} in any \kl(bough){context} $C'[\square]$, as
+  the definition of \kl{perfect bough} is local to the \kl{bough} itself.
+  Hence, one can select a single \kl(bough){context} $C[\square]$ such that
+  $B_i$ is an \kl{imperfect bough} inside of $C[\square]$ for all $i \in \Nat$.
+  Similarly as in \cref{sec:obstructions}, one can then build an infinite
+  \kl{antichain} of two-labelled graphs inside of $\someInterp$ by colouring
+  vertices of $\someInterp(C[B_i])$ by $\circ$ if they come from $C[\square]$
+  and by $\bullet$ if they come from $B_i$. 
+
+  Finally, remark that the collection of graphs $\someInterp(C[B_i])$ for $i
+  \in \Nat$ has \kl{bounded linear clique-width}. Indeed, the
+  \kl(context){context} $C[\square]$ is fixed, and the \kl(bough){blocks} used
+  to build the \kl{boughs} $B_i$ come from a finite set $\mathbb{F}$. As a
+  consequence, one can represent these graphs by using one colour per node of
+  the \kl(context){context} $C[\square]$ plus one colour per node in each
+  \kl(bough){block} in $\mathbb{F}$, and write a single branch (linear)
+  expressions representing all graphs $\someInterp(C[B_i])$.
+\end{proof}
