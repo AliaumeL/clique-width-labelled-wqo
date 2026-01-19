@@ -9,22 +9,20 @@ logic and quantifier-free formulas.
 \maelin{TODO: unify $(u,v)$ and $uv$)} \maelin{Remarque globale : si tu dis
 qu'on ne parle que de graphe/arbre fini, alors pas besoin de repréciser fini à
 chaque fois.}
-\paragraph*{Graphs} \AP A \intro{graph} is a pair $G = (V, E)$
-where $V$ is a set of \intro{vertices} and $E \subseteq \binom{V}{2}$ is a set of
-\intro{edges}. A graph is \intro(graph){undirected} if $(u, v) \in E$ implies
+\paragraph*{Graphs} \AP A graph $G$ consists of a finite set $V(G)$ of vertices and a set $E(G)\subseteq \binom{V(G)}{2}$ of edges. A graph is \intro(graph){undirected} if $(u, v) \in E$ implies
 $(v, u) \in E$ for all $u, v \in V$, and directed otherwise. In this paper we
 will focus on finite undirected graphs without self-loops. Given a set $X$, an
-\intro{$X$-labelled graph} is a graph equipped with a function $\ell \colon V
+\intro{$X$-labelled graph} is a graph equipped with a function $\ell \colon V(G)
 \to X$ that assigns a label to each vertex. Given a class $\Cls$ of finite
 undirected graphs, write $\Label{X}{\Cls}$ for the class of freely $X$-labelled
-graphs in $\Cls$, i.e., the class of all \kl{$X$-labelled graphs} $G = (V, E,
+graphs in $\Cls$, i.e., the class of all \kl{$X$-labelled graphs} $ (G
 \ell)$ such that $G \in \Cls$.
 
 \AP Whenever $(X, \leq)$ is a quasi-order, we say that a graph $G$
 \intro(graph){embeds} into a graph $H$ if there exists a \intro{monomorphism}
-from $G$ to $H$, i.e., an injective function $f \colon V_G \to V_H$ such that
-for all $u, v \in V_G$, $(u, v) \in E_G$ if and only if $(f(u), f(v)) \in E_H$,
-and such that for all $v \in V_G$, we have $\ell_G(v) \leq \ell_H(f(v))$. We
+from $G$ to $H$, i.e., an injective function $f \colon V(G) \to V(H)$ such that
+for all $u, v \in V(G)$, $(u, v) \in E(G)$ if and only if $(f(u), f(v)) \in E(H)$,
+and such that for all $v \in V(G)$, we have $\ell_G(v) \leq \ell_H(f(v))$. We
 write $G \intro*\isubleq H$ to denote that $G$ \kl(graph){embeds} into $H$,
 which we also call the \reintro{induced subgraph relation}.  When no order is
 specified along a set $X$, the order relation is assumed to be equality, i.e.
@@ -36,10 +34,10 @@ The \intro{hereditary closure} of a class of graphs $\Cls$ is the smallest
 \kl{hereditary class} containing $\Cls$.
 
 \AP
-An \intro{ordered graph} is a finite undirected graph $G = (V, E)$ equipped
+An \intro{ordered graph} is a finite undirected graph $G$ equipped
 with a linear order $\leq_G$ on its vertices. The notion of \kl{induced
 subgraph relation} extends to ordered graphs by requiring that the embedding $f
-\colon V_G \to V_H$ preserves the order, i.e., for all $u, v \in V_G$, $u
+\colon V(G) \to V(H)$ preserves the order, i.e., for all $u, v \in V(G)$, $u
 \leq_G v$ if and only if $f(u) \leq_H f(v)$.
 
 \paragraph*{Well-quasi-orderings} A quasi-ordered set $(X, \leq)$ is a set $X$
