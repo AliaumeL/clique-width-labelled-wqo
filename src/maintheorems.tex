@@ -92,51 +92,11 @@ $\someInterp(C[H])$ satisfying the conditions of \cref{def:perfect-bough}.
 
 
 
-\begin{lemma}
+\begin{lemma}[name={},restate={lem:recognizing-perfect-boughs}]
   \label{lem:recognizing-perfect-boughs}
   There exists an $\MSO$ formula that recognizes \kl{imperfect boughs}.
+  \proofref{lem:recognizing-perfect-boughs}
 \end{lemma}
-\begin{proof}
-  The proof follows the same pattern as 
-  \cite[Lemma 19]{LOPEZ24}, but adapts it from words to trees. 
-  Assume that $B$ is a \kl{perfect bough} of level $k$ inside of a tree
-  $\t = C[B]$.
-  This gives us a compatible \kl{bough} $H$ of level $k$
-  and an embedding $h \colon \someInterp(C[B]) \to \someInterp(C[H])$
-  satisfying the conditions of \cref{def:perfect-bough}.
-
-  Let us consider five copies of $B$, called $B_\mathsf{left}$,
-  $B_\mathsf{mid-1}$, $B_\mathsf{mid-2}$, $B_\mathsf{mid-3}$, and
-  $B_\mathsf{right}$, and let us define $B^5$ to be the \kl{bough} obtained by
-  concatenating these five copies merging $b_n$ of $B_\mathsf{left}$ with $b_0$
-  of $B_\mathsf{mid-1}$, and merging $b_n$ of $B_\mathsf{mid-1}$ with $b_0$ of
-  $B_\mathsf{mid-2}$ and so on. We claim that $B$ and $B^5$ are \kl{compatible
-  boughs}. 
-
-  Let us define a mapping $k \colon \someInterp(C[B]) \to
-  \someInterp(C[B^5])$
-  as follows: leaves $x$ of $B$ are mapped to their
-  corresponding leaf in $B_\mathsf{left}$ or $B_\mathsf{right}$ depending on
-  whether $h(x)$ is to the left or right of the untouched \kl{bough blocks} of
-  $H$. For leaves $x$ of $C[\square]$, we let $k(x) = x$. 
-  Thanks to \cref{fact:bough-replacement}, we know that
-  $k$ preserves edges between leaves of $C[\square]$.
-  Furthermore, because $h$ is an embedding that preserves the 
-  \kl{bough type} of leaves in $B$, and because \kl{bough types} are enough
-  to compute the presence of an edge between a leaf of $B$ and a leaf of
-  $C[\square]$ (or between two leaves of $B$), we deduce that $k$ is also an
-  embedding.
-
-  What we have shown is that if $B$ is a \kl{perfect bough}, then there exists
-  a mapping $k'$ from leaves of $B$ to $\set{ \mathsf{left}, \mathsf{right} }$
-  such that there is an edge between two leaves $x$ and $y$ of $B$ in the graph
-  $\someInterp(C[B])$ if and only if the \kl{bough types} of $x$ and $y$ are
-  such that there is an edge between $x_{k'(x)}$ and $y_{k'(y)}$ in the graph
-  $\someInterp(C[B^5])$. One can guess such a mapping $k'$ in Monadic Second-Order
-  logic, and then verify the required conditions on edges between leaves of $B$.
-  As a consequence, one can write an $\MSO$ formula that holds if and only if
-  $B$ is a \kl{perfect bough}.
-\end{proof}
 
 \begin{corollary}
   One can decide whether there are \kl{imperfect boughs} of arbitrarily large
@@ -209,29 +169,14 @@ and in particular the link between \kl{$2$-well-quasi-ordering} and
 the existence of \kl{imperfect boughs} of arbitrarily large \kl(bough){dimension}
 can be witnessed using only \kl{blocks} from a finite set.
 
-\begin{lemma}
+\begin{lemma}[name={},restate={lem:hereditary-perfect-boughs}]
   \label{lem:hereditary-perfect-boughs}
   Assume that there are \kl{imperfect boughs} of arbitrarily large \kl(bough){dimension}.
   Then, there exists a finite set of blocks $\mathbb{F}$ such that 
   one can build an \kl{imperfect bough} of arbitrarily large \kl(bough){dimension}
   using only \kl(bough){blocks} from $\mathbb{F}$.
+  \proofref{lem:hereditary-perfect-boughs}
 \end{lemma}
-\begin{proof}
-  The proof follows the same pattern 
-  as \cref{lem:finitely-many-boughs,lem:finitely-many-contexts},
-  and continues on the ideas of \cref{lem:recognizing-perfect-boughs}.
-  The idea is that if a bough $B$ is \kl(bough){perfect}, then 
-  one can witness it by using the \kl{compatible bough} $B^5$ 
-  defined by gluing five copies of $B$ together, because we noticed
-  that perfectness essentially depends on the \kl{bough types} of the leaves
-  of $B$. 
-  Another consequence of this analysis is that if one defines an equivalence relation between
-  \kl{bough blocks} of a given \kl{bough} $B$ based on the set of 
-  available \kl{bough types} of its leaves, then 
-  one can always replace a \kl{bough block} by another one in the same
-  equivalence class without changing the \kl(bough){perfectness} of $B$.
-  We conclude because this equivalence relation has finitely many classes.
-\end{proof}
 
 As an immediate consequence of \cref{lem:perfect-boughs-wqo} and
 \cref{lem:hereditary-perfect-boughs}, we can transform long \kl{imperfect

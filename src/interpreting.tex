@@ -43,6 +43,8 @@ It follows from results of the previous section that one can extract
   has \kl{bounded linear clique-width}. It then follows from
   the analysis of \cite{LOPEZ24} that 
   $\Cls$ contains a \kl{periodic sequence} $\seqof{G^r}[r \geq 1]$.
+
+  \todo[inline]{Fix this part}
 \end{proof}
 
 \AP Let us now leverage this combinatorial structure to extract a logical
@@ -115,15 +117,41 @@ A spanning path of $H^r$ is a directed shortest path from $V(H_1)$ to $V(H_r)$ g
 
 \begin{corollary}
   \label{cor:not-wqo-implies-transducing-paths}
-  If a hereditary class of graphs of bounded cliquewidth is not \kl{$\forall$-well-quasi-ordered},
+  If a \kl{hereditary class}
+  of graphs of \kl{bounded clique-width} is not \kl{$\forall$-well-quasi-ordered},
   then it \kl{existentially transduces} the class of all finite paths.
 \end{corollary}
 
 \begin{lemma}\label{lem:EtransPath_notAwqo}
-	Let $\Cls$ be a hereditary class that existentially transduce every paths, then $\Cls$ is not \kl{$\forall$-well-quasi-ordered}. 
+	Let $\Cls$ be a hereditary class that 
+  \kl{existentially transduces} all paths, 
+  then $\Cls$ is not \kl{$\forall$-well-quasi-ordered}. 
 \end{lemma}
 \begin{proof}
-\mael{TODO : do we have a straightforward antichain ?}
+  Let $\someInterp = (\phi_{univ}, \phi_E, \phi_L)$ be an 
+  \kl{existential interpretation}
+  from $\Label{\Sigma}{\Cls}$ to the class of finite graphs, 
+  such that the image of $\Label{\Sigma}{\Cls}$ contains all finite paths.
+  Let us write $G_i$ for a graph in $\Label{\Sigma}{\Cls}$ such that
+  $\someInterp(G_i) = P_i$, where $P_i$ is the path on $i$ vertices.
+  Remark that if $G_i \isubleq G_j$ as labelled graphs,
+  then $P_i = \someInterp(G_i)$ is a subgraph (not necessarily induced) 
+  of $\someInterp(G_j) = P_j$. 
+  Indeed, whenever $\phi_{univ}(u)$ holds in $G_i$, it also holds in $G_j$,
+  because $G_i$ is an induced subgraph of $G_j$ and $\phi_{univ}$ is
+  existential. Similarly, whenever $\phi_E(u,v)$ holds in $G_i$, it also holds in $G_j$.
+
+  Let us consider an extra labelling information on the vertices of the graphs
+  in $\Label{\Sigma}{\Cls}$, where we color the two endpoints of each path
+  $P_n$ with two distinct colors $c_1$ and $c_2$. Using these new labels, one
+  can \kl{existentially interpret} the class of all finite paths with endpoints
+  colored with $c_1$ and $c_2$. 
+
+  Assume towards a contradiction that 
+  $\Cls$ is \kl{$\forall$-well-quasi-ordered}. Then,
+  there is a pair $i<j$ such that $G_i \isubleq G_j$ as labelled graphs. 
+  By the previous remark, this implies that $P_i$ (with coloured endpoints)
+  is a labelled subgraph of $P_j$ (with coloured endpoints), which is impossible.
 \end{proof}
 
 \maelin{The following prob need some work}
@@ -135,7 +163,7 @@ $w \in \Sigma^*$ to a graph $G_w$ whose vertex set is
 the positions of $w$, and where there is an edge between two positions
 $i + 1 < j$ if and only if $(w[i], w[j]) \in F$,
 and an edge between two consecutive positions $i$ and $i + 1$
-if and only if $(w[i], w[i + 1]) \not\in F$.  In this setting, a \intro{periodic sequence} is given by a finite word $w
+if and only if $(w[i], w[i + 1]) \not\in F$.  In this setting, a \intro{(weak) periodic sequence} is given by a finite word $w
 \in \Sigma^*$, and a finite set $F \subseteq \Sigma^2$, and defines the
 infinite set of graphs $\seqof{G_{w^r}}[r \geq 1]$.
 It is easy to see that every \kl{periodic antichain} is also a

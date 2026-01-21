@@ -213,10 +213,8 @@ the tree $C[B]$ (with split $\spt$) is \kl{forward Ramseyan}, the tree $C[B']$
         \item $h$ is an embedding of graphs,
         \item $h$ is the identity map on \kl(context){leaves} of $C[\square]$,
         \item there exist three consecutive
-            \kl(bough){blocks} in $H$ such that all their leaves
-            are left untouched by $h$.
-            \maelin{whose leaves
-            	are left untouched by $h$.}
+            \kl(bough){blocks} in $H$ whose leaves
+            	are left untouched by $h$.
     \end{enumerate}
     A \intro{bad bough} is a \kl{bough} that is not a \kl{good bough}.
 \end{definition}
@@ -310,7 +308,6 @@ the content of the following \cref{lem:important-nodes}.
   From our construction, it is clear that at every level $k$, there are at most
   $N_0 + 1$ consecutive \kl{marked nodes} in the \kl{bough backbone} of any
   \kl{bough} of level $k$.
-  \maelin{I think I have a problem here with bough backbone. Say you have $B$ with $b_0,...,b_n$. After the surgery, $h(b_0),...,h(b_n)$ are still marked and are also all in the same $k$-neighbourhood. I think you must specify that you cannot "expand" by adding another $b$ in th sequence, you need some maximality notion.}
 
   Let us now prove that the resulting tree $\t'$ is \kl{$L$-bounded} for some
   $L \in \Nat$. Assume towards a contradiction that there exists arbitrarily
@@ -322,8 +319,7 @@ the content of the following \cref{lem:important-nodes}.
   $\spt'(x_i) = \spt'(x_j)$ and $\spt'(x_i \colon x_j) = \spt'(x_{i'} \colon
   x_{j'})$ for every $0 \leq i < j \leq N_0 + 1$ and $0 \leq i' < j' \leq N_0 +
   1$. Without loss of generality, we can assume that $\spt'(x_i) < \spt'(x_i
-  \colon x_{i+1})$\mael{ $\spt'(x_i) \leq \spt'(x_i
-  	\colon x_{i+1})$?} for every $0 \leq i \leq N_0$.
+  \colon x_{i+1})$ for every $0 \leq i \leq N_0$.
   Since we only insert \kl{separating node} prior to a \kl{dummy node}, 
   we can also assume that all nodes $x_0, x_1, \ldots, x_{N_0+1}$ are
   \kl{marked nodes}.
@@ -381,76 +377,12 @@ that all these \kl{bad boughs} are \kl(bough){compatible} (see
 \kl{bad boughs} in the \emph{same} \kl(bough){context} $C[\square]$ to witness
 that they are \kl(bough){bad} (see \cref{lem:finitely-many-contexts} below).
 
-\begin{lemma}
+\begin{lemma}[name={},restate=lem:finitely-many-boughs]
   \label{lem:finitely-many-boughs}
   Let $k$ be a level. There are finitely many \kl{boughs} of level $k$ 
   up to \kl(bough){compatibility}.
+  \proofref{lem:finitely-many-boughs}
 \end{lemma}
-\begin{proof}
-  Let $B$ be a \kl{bough} of level $k$. We will prove that one can 
-  extract finitely many parameters of $B$, such that 
-  any other \kl{bough} $B'$ of level $k$ sharing these parameters
-  is \kl(bough){compatible} with $B$.
-
-  To that end, let us fix a \kl(bough){context} $C[\square]$. Assume that $\t =
-  C[B]$ is \kl{forward Ramseyan}, and we want to ensure that $\t' = C[B']$ is
-  \kl{forward Ramseyan}.  Recall that $\t'$ is \kl{forward Ramseyan} if for
-  every branch in $\t'$, for every level $l$, for every \kl{$l$-neighbourhood}
-  in this branch, and for every four nodes $x \treelt y$ and $x' \treelt y'$ in
-  this \kl{$l$-neighbourhood}, we have $\tlbl{\t'}{x}{y} \cdot
-  \tlbl{\t'}{x'}{y'} = \tlbl{\t'}{x}{y}$.
-
-  First, remark that \kl{$l$-neighbourhoods} with $l < k$ inside $\t'$ are fully
-  contained either in $B'$, or $\aTree_{\mathsf{root}}$, or
-  $\aTree_{\mathsf{left}}$,  or $\aTree_{\mathsf{right}}$. As a consequence,
-  nothing needs to be checked on such \kl{$l$-neighbourhoods} since $B'$
-  is assumed to be locally \kl{forward Ramseyan}.
-  More generally, the only possible failures of the \kl{forward Ramseyan}
-  condition in $\t'$ must involve nodes that are not all contained
-  in one of these four subtrees.
-
-  Now, let us consider \kl{$l$-neighbourhoods} with $l \geq k$.
-  If $l \geq k$, then the only \kl{$l$-neighbourhood} of a branch that
-  is not fully contained in one of the four subtrees crosses $B'$. Let us 
-  distinguish several cases based on the shape of the branch with respect 
-  to the \kl(bough){context} $C[\square]$ and the \kl{bough} $B'$.
-  \begin{enumerate}
-    \item The branch containing the \kl{$l$-neighbourhood} starts in 
-      $\aTree_{\mathsf{root}}$ (possibly in $\square$), goes through $B'$, and ends in 
-      $\aTree_{\mathsf{left}}$ or $\aTree_{\mathsf{right}}$.
-    \item The branch containing the \kl{$l$-neighbourhood} starts in 
-      $\aTree_{\mathsf{root}}$ (possibly in $\square$), goes through $B'$, and ends in $B'$.
-  \end{enumerate}
-
-  In the first case, consider two nodes $x \treelt y$ and $x' \treelt y'$ in
-  the \kl{$l$-neighbourhood}. Remark that the value $\tlbl{\t'}{x}{y}$ can be
-  decomposed into a part before entering $B'$, a part inside $B'$, and a part
-  after leaving $B'$. By construction, the part inside $B'$ is one of the
-  idempotent elements labelling the \kl(bough){backbone} of $B'$. Hence, to
-  ensure that $\t'$ is \kl{forward Ramseyan} in this case, it suffices to check
-  finitely many equations involving those idempotent elements (note that the
-  number of equations depends on the shape of $C[\square]$, but not 
-  the number of elements of $M$ extracted from $B'$).
-
-  In the second case, consider two nodes $x \treelt y$ and $x' \treelt y'$ in
-  the \kl{$l$-neighbourhood}. Here, the value $\tlbl{\t'}{x}{y}$ can be
-  decomposed into a part before entering $B'$, a part from $b_0'$ to the first
-  node $z$ in $B'$ of level $l$ (which is not on the \kl(bough){backbone} of
-  $B'$ if $l > k$), and a part from $z$ to $y$. Similarly, the equations
-  ensuring that $\t'$ is \kl{forward Ramseyan} in this case can be expressed
-  using the values $\tlbl{\t'}{b_0'}{z}$ for every node $z$ in $B'$, and the
-  values $\tlbl{\t'}{z}{y}$ for every node $y$ in $B'$ in the same
-  \kl{$l$-neighbourhood} as $z$ (for some branch). Note that one only cares
-  about the existence of pairs of values $(\tlbl{\t'}{b_0'}{z},
-  \tlbl{\t'}{z}{y})$ for nodes $z$ and $y$ in the same \kl{$l$-neighbourhood},
-  and there are only finitely many such pairs.
-
-  We have proven that, assuming that $\t = C[B]$ is
-  \kl{forward Ramseyan}, it suffices to check finitely many parameters of $B'$
-  to ensure that $C[B]$ is \kl{forward Ramseyan}. Since $M$ is finite, there
-  are finitely many possible values for these parameters, which concludes the
-  proof.
-\end{proof}
 
 \begin{lemma}
   \label{lem:finitely-many-contexts}
