@@ -158,7 +158,7 @@ conjecture to our setting.
   Let $\Cls$ be a hereditary class of finite graphs that is not
   \kl{$2$-well-quasi-ordered}.
   Then, there exists 
-  an infinite \kl{(weak) periodic antichain} in $\Cls$.
+  an infinite \kl{periodic antichain} in $\Cls$.
 \end{conjecture}
 
 \AP In 2024, Lopez \cite{LOPEZ24} studied labelled well-quasi-orderings on
@@ -184,7 +184,7 @@ defined in \cref{sec:prelims}). This also generalises the setting of
 \cite{LOPEZ24} that studied \kl{$\MSO$-interpretations} from \emph{words}. Our
 main combinatorial result is the following.
 
-\begin{theorem}[name={},restate=maintheorem]
+\begin{theorem}[name={},restate=main:theorem]
   \label{main:theorem}
   Let $\Cls$ be the image of a class of finite trees 
   under an $\MSO$ interpretation $\someInterp$. Then, the following are equivalent
@@ -212,18 +212,23 @@ Because our proof techniques exhibit structural obstructions to being
 \cite{ALM17,LOPEZ24}. The precise definitions of \kl{regular antichains} and
 \kl{periodic antichains} will be given in \cref{sec:interpreting-paths}.
 
-\begin{theorem}
+\begin{theorem}[name={},restate=thm:characterisations]
   \label{thm:characterisations}
   Let $\Cls$ be a \kl{hereditary class} of finite graphs of \kl{bounded clique-width}.
   Then, the following are equivalent:
   \begin{enumerate}
-    \item $\Cls$ is not \kl{$2$-well-quasi-ordered},
-    \item There exists a class $\Cls[D] \subseteq \Cls$
+    \item \label{item:charac:not-2wqo}
+      $\Cls$ is not \kl{$2$-well-quasi-ordered},
+    \item \label{item:charac:bounded-lin-cw}
+      There exists a class $\Cls[D] \subseteq \Cls$
       of \kl{bounded linear clique-width} which is not 
       \kl{$2$-well-quasi-ordered},
-    \item There exists a \kl{regular  antichain} in $\Cls$,
-    \item There exists a \kl{periodic antichain} in $\Cls$,
-    \item $\Cls$ \kl{existentially transduces} the class of all finite paths.
+    \item \label{item:charac:regular-antichain}
+      There exists a \kl{regular  antichain} in $\Cls$,
+    \item \label{item:charac:periodic-antichain}
+      There exists a \kl{periodic antichain} in $\Cls$,
+    \item \label{item:charac:transduces-paths}
+      $\Cls$ \kl{existentially transduces} the class of all finite paths.
   \end{enumerate}
 \end{theorem}
 
