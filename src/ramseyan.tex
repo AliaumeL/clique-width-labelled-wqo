@@ -22,7 +22,7 @@ edges of the graphs.
 
 \subsection{From Interpretation to Monoids}
 
-\AP It follows from standard arguments that to a formula $\varphi(x,y)$ over
+\AP It follows from standard arguments that to an $\MSO$ formula $\varphi(x,y)$ over
 $\Trees{\Sigma}{}$ one can associate a finite monoid $M$ and a morphism $\mu
 \colon \Sigma^* \to M$ such that for any tree $T$ and any pair of leaves $x
 \treesibleq y$ in $T$, whether $T \models \varphi(x,y)$ is entirely determined
@@ -147,16 +147,16 @@ suffices to prove that the class of trees is \kl{well-quasi-ordered} under the
 $(X, \leq_X)$.
 
 
-\AP Historically, this approach was used to prove that some classes of graphs are
-\kl{labelled-well-quasi-ordered}, see for instance the results of
+\AP Historically, this approach was used to prove that some classes of graphs
+are \kl{labelled-well-quasi-ordered}, see for instance the results of
 \cite{DING92,DRT10}. Unfortunately, the \kl{composition ordering} on trees is
-often way stricter than the \kl{induced subgraph} ordering. It was
-observed that the \kl{composition ordering} on trees is \kl{well-quasi-ordered}
-if and only if \emph{for every} $P \subseteq M^3$, the class of graphs obtained
-from trees by considering only the triples in $P$ is
+often way stricter than the \kl{induced subgraph} ordering. It was observed
+that the \kl{composition ordering} on trees is \kl{well-quasi-ordered} if and
+only if \emph{for every} $P \subseteq M^3$, the class of graphs obtained from
+trees by considering only the triples in $P$ is
 \kl{labelled-well-quasi-ordered} \cite[Theorem 24]{LOPEZ24}. To understand what
-happens for a precise choice of $P$, we need to have a finer understanding of
-the way trees can be decomposed.
+happens for a precise choice of $P$, we will develop a finer understanding of
+the trees themselves.
 
 
 \subsection{Forward Ramseyan Splits}
@@ -164,7 +164,7 @@ the way trees can be decomposed.
 \def\t{\aTree} \AP The combinatorial ingredient allowing us to  further
 decompose the trees will come from an adaptation of the classical Simon
 Factorisation Theorem for semigroups \cite{SIMO90}, adapted to trees by
-Colcombet \cite{COLC07}. The rest of this section is devoted to explaining how
+Colcombet~\cite{COLC07}. The rest of this section is devoted to explaining how
 this factorisation works, and how it can be used to define a more suitable
 ordering on trees.
 
@@ -240,9 +240,9 @@ with $x \treelt[\t] y$ and $x' \treelt[\t] y'$, we have:
 
 
 
-\AP In particular, $\tlbl{\t}{x}{y}$ is always an \intro{idempotent}:
-$\tlbl{\t}{x}{y} \cdot \tlbl{\t}{x}{y} = \tlbl{\t}{x}{y}$. However, note that
-$\tlbl{\t}{x}{y}$ and $\tlbl{\t}{x'}{y'}$ may be different \kl{idempotents}.
+\AP In particular, $\tlbl{\t}{x}{y}$ is always an \intro{idempotent}, that is,
+satisfies the equation $e \cdot e = e$. However, note that $\tlbl{\t}{x}{y}$
+and $\tlbl{\t}{x'}{y'}$ may be different \kl{idempotents}.
 
 \AP Let us illustrate how one can use \kl{forward Ramseyan splits} to compute
 efficiently the value of $\tlbl{\t}{x}{y}$ for any pair of nodes $x \treelt[\t]
@@ -316,13 +316,14 @@ split} of height $N$.
 
 \AP Let us now state the main remark that will guide the rest of this paper:
 given a branch of a tree equipped with a \kl{forward Ramseyan split} as the one
-illustrated in \cref{fast-computation:fig}, the value of $\tlbl{\t}{x}{y}$ does
-not change when inserting new nodes in the section between $z_2$ and $z_3$ as
-long as these new nodes are assigned a value of the split bigger than or equal
-to $k$, and the resulting tree is still \kl{forward Ramseyan}. A fortiori,
-whether there is an edge between two leaves of $x$ and $y$ in the resulting
-graph is not influenced by such insertions. This will guide our definition of a
-suitable ordering on trees in the upcoming \cref{sec:marked-nested-trees}.
+illustrated in \cref{fast-computation:fig}, and assuming that $z_2 \neq z_3$,
+the value of $\tlbl{\t}{x}{y}$ does not change when inserting new nodes in the
+section between $z_2$ and $z_3$ as long as these new nodes are assigned a value
+of the split bigger than or equal to $k$, and the resulting tree is still
+\kl{forward Ramseyan}. A fortiori, whether there is an edge between two leaves
+of $x$ and $y$ in the resulting graph is not influenced by such insertions.
+This will guide our definition of a suitable ordering on trees in the upcoming
+\cref{sec:marked-nested-trees}.
 
 \subsection{Marked Nested Trees}
 \label{sec:marked-nested-trees}
@@ -359,9 +360,11 @@ and that endows trees with a \kl{well-quasi-order} \cite{DERSHOWITZ200380}.
 
 \AP In the following \cref{fact:gap-embedding-gaps} we illustrate why
 \kl{gap-embeddings} are well-suited for our purpose: they respect the gaps
-induced by \kl{forward Ramseyan splits}.
+induced by \kl{forward Ramseyan splits}. One other key property of the
+\kl{gap-embedding} ordering is that it is a \kl{well-quasi-ordering} as
+recalled in \cref{thm:gap-embedding-wqo}.
 
-\begin{fact}
+\begin{fact}[name={},restate={fact:gap-embedding-gaps}]
   \label{fact:gap-embedding-gaps}
   Let $\t_1, \t_2$ be two trees and 
   $\spt_1, \spt_2$ be two \kl{forward Ramseyan splits} of height $N$ of $\t_1, \t_2$
@@ -369,15 +372,9 @@ induced by \kl{forward Ramseyan splits}.
   Then, for every $u, v$ in $\t_1$,
   if $\spt_1(u:v) > k$ and $\spt_1(v) = k$ for some $k \in \set{1, \dots, N}$,
   then $\spt_2(h(u):h(v)) \geq k$.
+  \proofref{fact:gap-embedding-gaps}
 \end{fact}
-\begin{proof}
-  This is proven by induction on the length of the path 
-  from $u$ to $v$ in $\t_1$. The base case is exactly 
-  \cref{item:gap-embedding:edge} of the definition of \kl{gap-embedding}.
-\end{proof}
 
-One other key property of the \kl{gap-embedding} ordering is that it is
-a \kl{well-quasi-ordering}.
 
 \begin{theorem}[{\cite[Theorem 3.1, Main Theorem]{DERSHOWITZ200380}}]
   \label{thm:gap-embedding-wqo}
@@ -387,10 +384,10 @@ a \kl{well-quasi-ordering}.
 \end{theorem}
 
 \AP We will now devise a suitable modification of the \kl{gap-embedding}
-ordering that will ensure that the interpretation $\someInterp$ is
-order-preserving from trees to graphs. In particular, this modification will
-take into account the edge-labelling of the trees using the monoid $M$, that 
-are not considered in the \kl{gap-embedding} ordering.
+ordering to make the interpretation $\someInterp$ order-preserving from trees
+to graphs. In particular, this modification will take into account the
+edge-labelling of the trees using the monoid $M$, that are not considered in
+the \kl{gap-embedding} ordering.
 
 \newcommand{\marked}{\mathbf{M}}
 \newcommand{\separating}{\mathbf{S}}
@@ -509,12 +506,16 @@ $(\t_n, \spt_n, \marking_n)$ does not \kl{gap-embed} into
 $(\t_m, \spt_m, \marking_m)$.
 
 \AP To recover the \kl{well-quasi-order} property, we will restrict our
-attention to trees that make a limited use of the gluing property. A
+attention to trees that make a limited use of the gluing property. An
 \kl{$L$-bounded marked nested tree} is a \kl{marked nested tree} such that any
-path of non \kl{dummy} nodes has length at most $L$. As we will see in the
-following \cref{thm:marked-nested-trees-wqo}, the class of \kl{$L$-bounded
-well-marked nested trees} is \kl{well-quasi-ordered} under the \kl{marked
-gap-embedding} ordering when labelled over a \kl{well-quasi-ordered} set.
+path of non-\kl{dummy} nodes has length at most $L$. We prove in
+\cref{thm:marked-nested-trees-wqo} that limiting the use of gluing restores the
+\kl{well-quasi-order} property. Furthermore, we show in
+\cref{lem:gap-embedding-respects-products} that \kl{gap-embeddings} between
+\kl{well-marked nested trees} encode the \kl{composition ordering} on trees
+when restricted to \kl{marked nodes}. The combination of these two results in
+\cref{cor:gap-embedding-monotone} is the main combinatorial ingredient of this
+section.
 
 \begin{theorem}
   \label{thm:marked-nested-trees-wqo}
@@ -571,7 +572,6 @@ gap-embedding} ordering when labelled over a \kl{well-quasi-ordered} set.
 \end{proof}
 
 
-
 \begin{lemma}
   \label{lem:gap-embedding-respects-products}
   Let $(\t_1, \spt_1, \marking_1)$ and
@@ -580,7 +580,7 @@ gap-embedding} ordering when labelled over a \kl{well-quasi-ordered} set.
   $(\t_1, \spt_1, \marking_1) \gemb (\t_2, \spt_2, \marking_2)$ 
   via some mapping $h$.
   For every pair of \kl{marked nodes} $x \treelt[\t_1] y$ in $\t_1$,
-  we have $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{h(y)}$.
+  we have \[ \tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{h(y)} \quad .\]
 \end{lemma}
 \begin{proof}
   We proceed by induction on the value of $\spt_1(x\colon y)$.
@@ -754,5 +754,6 @@ gap-embedding} ordering when labelled over a \kl{well-quasi-ordered} set.
   only depend on the values of
   $\tlbl{\t}{\treeRoot}{\lca(x,y)}$,
   $\tlbl{\t}{\lca(x,y)}{x}$, and
-  $\tlbl{\t}{\lca(x,y)}{y}$, all of which are \kl{marked nodes}.
+  $\tlbl{\t}{\lca(x,y)}{y}$, all of which are \kl{marked nodes}
+  because the trees are \kl{well-marked}.
 \end{proof}

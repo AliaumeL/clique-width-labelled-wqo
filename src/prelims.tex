@@ -6,16 +6,13 @@ We assume the reader to be familiar with basic notions of logic on finite
 relational structures, such as monadic second-order logic ($\MSO$), first-order
 logic and quantifier-free formulas.
 
-\maelin{TODO: unify $(u,v)$ and $uv$)} \maelin{Remarque globale : si tu dis
-qu'on ne parle que de graphe/arbre fini, alors pas besoin de repréciser fini à
-chaque fois.}
 \paragraph*{Graphs} \AP A graph $G$ consists of a finite set $V(G)$ of vertices and a set $E(G)\subseteq \binom{V(G)}{2}$ of edges. A graph is \intro(graph){undirected} if $(u, v) \in E$ implies
 $(v, u) \in E$ for all $u, v \in V$, and directed otherwise. In this paper we
 will focus on finite undirected graphs without self-loops. Given a set $X$, an
 \intro{$X$-labelled graph} is a graph equipped with a function $\ell \colon V(G)
 \to X$ that assigns a label to each vertex. Given a class $\Cls$ of finite
 undirected graphs, write $\Label{X}{\Cls}$ for the class of freely $X$-labelled
-graphs in $\Cls$, i.e., the class of all \kl{$X$-labelled graphs} $ (G
+graphs in $\Cls$, i.e., the class of all \kl{$X$-labelled graphs} $ (G,
 \ell)$ such that $G \in \Cls$.
 
 \AP Whenever $(X, \leq)$ is a quasi-order, we say that a graph $G$

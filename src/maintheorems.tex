@@ -18,13 +18,14 @@ tackle the second difficulty.
   We say that $B$ is a \intro{perfect bough} there exists a compatible
   \kl{bough} $H$ of level $k$ and 
   a map $h \colon \someInterp(C[B]) \to \someInterp(C[H])$
-  \begin{enumerate}
+  \begin{enumerate
       \item $h$ is an embedding of graphs,
-      \item $h$ is the identity map on leaves belonging $C[\square]$
+      \item $h$ is the identity map on leaves belonging $C[\square]$,
       \item the \kl{bough type} of every leaf $x$ in $H$ is the same as 
-        the \kl{bough type} of $h(x)$ in $B$.
-      \item there exist three consecutive \kl(bough){blocks} in $H$ that are left untouched 
-          by $h$.
+        the \kl{bough type} of $h(x)$ in $B$,
+      \item there exist three consecutive
+            \kl(bough){blocks} in $H$ whose leaves
+            	are left untouched by $h$.
   \end{enumerate}
   An \intro{imperfect bough} is a \kl{bough} that is not a \kl{perfect bough}.
 \end{definition}
@@ -44,8 +45,7 @@ bough} is an \kl{imperfect bough}. This allows us to lift
 \end{lemma}
 \begin{proof}
   First, if we have a bound on the \kl(bough){dimension} of \kl{imperfect boughs},
-  then we also have a bound on the \kl(bough){dimension} of \kl{bad boughs},
-  because every \kl{bad bough} is an \kl{imperfect bough}.
+  then we also have a bound on the \kl(bough){dimension} of \kl{bad boughs}.
   Hence, by \cref{lem:good-boughs-wqo}, the image of $\someInterp$ is
   \kl{$\forall$-well-quasi-ordered}.
 
@@ -146,10 +146,11 @@ We are now ready to prove our main \cref{main:theorem}.
   representing the graphs, which already includes a total ordering on the leaves.
 \end{proof}
 
-It is straightforward to derive that the same holds for hereditary classes of bounded clique-width,
-thus proving
-\cref{main:corollary}.
-\begin{proof}
+It is straightforward to derive that the same holds for hereditary classes of
+bounded clique-width, thus proving \cref{main:corollary}.
+
+
+\begin{proofof}{main:corollary}[main]
   By a standard argument, if the class $\someInterp$ is hereditary
   and \kl{$2$-well-quasi-ordered}, then it is characterised by finitely many
   forbidden induced subgraphs \cite[Proposition 3]{DRT10}.
@@ -160,7 +161,7 @@ thus proving
   the graph that would be produced does not contain any of these forbidden induced subgraphs.
   The result then follows from
   \cref{main:theorem}.
-\end{proof}
+\end{proofof}
 
 
 Let us now turn our attention to \cref{thm:characterisations},

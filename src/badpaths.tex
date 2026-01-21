@@ -5,7 +5,7 @@
 In this section, we fix a \kl{monoid interpretation} $\someInterp = (\Sigma,
 \mu, M, P)$ from trees edge-labelled over a finite alphabet $\Sigma$ to finite
 undirected graphs. We furthermore assume that all trees we consider are
-equipped with a \kl{forward Ramseyan split} $\spt$ over the monoid $M$. Our
+equipped with a \kl{forward Ramseyan split} $\spt$ over the finite monoid $M$. Our
 goal is to isolate some combinatorial obstructions to being
 \kl{$2$-well-quasi-ordered} in classes of graphs that are images of \kl{monoid
 interpretations} from trees. The key idea of this section is to start from a
@@ -191,7 +191,8 @@ of $C[B]$ are exactly the \kl{leaves} of $C[\square]$ together with the leaves
 of the \kl(bough){blocks} of $B$. Furthermore, we will often need to talk about
 the \intro(bough){first idempotent value} of a \kl{bough} $B$ defined using the
 \kl(bough){backbone} $b_0, b_1, \ldots, b_n$, which is the idempotent element
-$\tlbl{\t}{b_0}{b_1}$.
+$\tlbl{\t}{b_0}{b_1}$.\footnote{It is also the element 
+$\tlbl{\t}{b_0}{b_n}$, thanks to the \kl{forward Ramseyan} property of $\spt$.}
 
 \AP Given two \kl{boughs} $B$ and $B'$ of level $k$, and a \kl(bough){context}
 $C[\square]$, one can consider the two trees $C[B]$ and $C[B']$. These two
@@ -248,8 +249,7 @@ that \cref{item:bound-dim} implies \cref{item:forall-wqo} of
 trees, turning them into \kl{marked nested trees}. Because we can insert these
 dummy nodes in a controlled manner, we will be able to ensure that the
 resulting \kl{marked nested trees} are \kl{$L$-bounded} for some $L \in \Nat$,
-allowing us to apply \cref{thm:marked-nested-trees-wqo}. This is exactly 
-the content of the following \cref{lem:important-nodes}.
+allowing us to apply \cref{thm:marked-nested-trees-wqo}. 
 
 \begin{lemma}
     \label{lem:important-nodes}
@@ -336,7 +336,7 @@ the content of the following \cref{lem:important-nodes}.
 Let us assume that there exists a bound on the \kl(bough){dimension} of \kl{bad
 boughs}, and let us consider a \kl{well-quasi-ordered} set $(Y, \leq)$ of
 labels. Let $\seqof{G_i}[i \in \Nat]$ be an infinite sequence of graphs in
-$\Label{Y}{\someInterp(\Trees{M}{})}$. We want to show that there exist two
+$\Label{Y}{\someInterp(\Trees{\Sigma}{})}$. We want to show that there exist two
 indices $i < j$ such that $G_i$ is a \kl{labelled induced subgraph} of $G_j$.
 
 First, every graph $G_i$ can be represented as $\someInterp(\t_i)$ for some
@@ -357,7 +357,7 @@ $(\t_i, \spt_i, \marking_i) \gemb (\t_j, \spt_j, \marking_j)$. By
 \marking_i)$ is a \kl{labelled induced subgraph} of the graph interpreted from
 $(\t_j', \spt_j', \marking_j')$, when both are restricted to \kl{marked
 leaves}. We conclude that $G_i$ is a \kl{labelled induced subgraph} of $G_j$,
-hence that $\Label{Y}{\someInterp(\Trees{M}{})}$ is \kl{well-quasi-ordered}, and
+hence that $\Label{Y}{\someInterp(\Trees{\Sigma}{})}$ is \kl{well-quasi-ordered}, and
 therefore that the image of $\someInterp$ is \kl{$\forall$-well-quasi-ordered}.
 \end{proof}
 
@@ -461,8 +461,8 @@ that they are \kl(bough){bad} (see \cref{lem:finitely-many-contexts} below).
   the \kl(bough){dimension} of the \kl{boughs} $B_{i+1}$ 
   is greater than thrice the number of leaves in $B_i$.
 
-  Let us now colour every graph $\someInterp(C[B_i])$ with two labels: $\top$
-  to leaves belonging to $B_i$, and colour $\bot$ to leaves belonging to
+  Let us now colour every graph $\someInterp(C[B_i])$ with two labels: $\bullet$
+  to leaves belonging to $B_i$, and colour $\circ$ to leaves belonging to
   $C[\square]$. Because we assume that the image of $\someInterp$ is
   \kl{$2$-well-quasi-ordered}, we can extract an infinite increasing
   subsequence, and assume that for all $i < j$, there exists an embedding $f_{i,j}

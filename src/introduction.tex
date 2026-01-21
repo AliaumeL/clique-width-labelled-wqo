@@ -2,18 +2,18 @@
 \section{Introduction}
 \label{sec:introduction}
 
-\AP The theory of well-quasi-orderings (WQOs) provides a powerful combinatorial
-setting that has found applications in various areas of mathematics and
-computer science. In graph theory, the celebrated result of Robertson and
-Seymour~\cite{ROBSEY04} states that the class of all finite graphs is
-well-quasi-ordered under the minor relation, a profound result with deep
-algorithmic consequences. WQOs are also at the heart of \emph{well-structured
-transition systems}, infinite state transitions systems over which verification
-algorithms can be designed~\cite{ABDU96,ABDU98}. One of the appeal of WQOs is
-that they are closed under various operations, such as the sum and the product
-of WQOs. As an example, the closure of WQOs under the finite words, also known
-as Higman's lemma \cite{HIG52}, has been used in the verification of so-called
-\emph{lossy channel systems}~\cite{ABDU93}.
+\AP The theory of \reintro{well-quasi-orderings} (WQOs) provides a powerful
+combinatorial setting that has found applications in various areas of
+mathematics and computer science. In graph theory, the celebrated result of
+Robertson and Seymour~\cite{ROBSEY04} states that the class of all finite
+graphs is well-quasi-ordered under the minor relation, a profound result with
+deep algorithmic consequences. WQOs are also at the heart of
+\emph{well-structured transition systems}, infinite state transitions systems
+over which verification algorithms can be designed~\cite{ABDU96,ABDU98}. One of
+the appeal of WQOs is that they are closed under various operations, such as
+the sum and the product of WQOs. As an example, the closure of WQOs under the
+finite words, also known as Higman's lemma \cite{HIG52}, has been used in the
+verification of so-called \emph{lossy channel systems}~\cite{ABDU93}.
 
 
 % Well-quasi-ordered classes of graphs
@@ -117,9 +117,9 @@ conjectures in full generality, as stated in the following conjecture.
 
 \begin{conjecture}[{\cite[Conjecture 5]{DRT10}}]
     \label{cwqo:conj}
-    Let $\Cls$ be a hereditary class of finite graphs of 
+    Let $\Cls$ be a \kl{hereditary class} of finite graphs of 
     that is \kl{$2$-well-quasi-ordered}.
-    Then, $\Cls$ is of bounded clique-width.
+    Then, $\Cls$ is of \kl{bounded clique-width}.
 \end{conjecture}
 
 
@@ -146,7 +146,7 @@ formulas. This lead to the following conjecture, where
 \AP Another kind of obstruction to being \kl{$\forall$-well-quasi-ordered}
 comes from the existence of infinite antichains with a periodic structure that
 were called \reintro(weak){periodic antichains} in \cite[Section 7]{ALM17}.
-These antichains appear in \cite[Conjecture 2]{ALM17}, that considers about
+These antichains appear in \cite[Conjecture 2]{ALM17}, that is concerned with
 classes of graphs defined by finitely many excluded induced subgraphs, and
 relates the presence of these antichains to the fact that they are
 \kl{well-quasi-ordered}. Since we are interested in
@@ -200,31 +200,28 @@ From \cref{main:theorem},
 we derive the following corollary that solves
 Pouzet's conjectures for hereditary classes of bounded clique-width.
 
-\begin{corollary}
+\begin{corollary}[name={},restate=main:corollary]
   \label{main:corollary}
-  The same holds when $\Cls$ is a hereditary class of bounded clique-width graphs.
+  The conclusion of \cref{main:theorem}
+  holds when $\Cls$ is a hereditary class of bounded clique-width graphs.
 \end{corollary}
 
-Because our proof techniques exhibit structural 
-obstructions to being \kl{$2$-well-quasi-ordered}, we also 
-obtain the following characterisations in
-\cref{thm:characterisations}.
-These answer positively to the conjectures of
-\cite{ALM17,LOPEZ24}. In particular, for a hereditary class $\Cls$ to be
-\kl{$2$-well-quasi-ordered}, it suffices that it avoids very simple
-\kl{(weak) periodic antichains}.
-
+Because our proof techniques exhibit structural obstructions to being
+\kl{$2$-well-quasi-ordered}, we also obtain the following characterisations in
+\cref{thm:characterisations}. These answer positively to the conjectures of
+\cite{ALM17,LOPEZ24}. The precise definitions of \kl{regular antichains} and
+\kl{periodic antichains} will be given in \cref{sec:interpreting-paths}.
 
 \begin{theorem}
   \label{thm:characterisations}
-  Let $\Cls$ be a hereditary class of finite graphs of bounded clique-width.
+  Let $\Cls$ be a \kl{hereditary class} of finite graphs of \kl{bounded clique-width}.
   Then, the following are equivalent:
   \begin{enumerate}
     \item $\Cls$ is not \kl{$2$-well-quasi-ordered},
     \item There exists a class $\Cls[D] \subseteq \Cls$
       of \kl{bounded linear clique-width} which is not 
       \kl{$2$-well-quasi-ordered},
-    \item There exists a periodic sequence of graph forming an antichain in $\Cls$,
+    \item There exists a \kl{regular  antichain} in $\Cls$,
     \item There exists a \kl{periodic antichain} in $\Cls$,
     \item $\Cls$ \kl{existentially transduces} the class of all finite paths.
   \end{enumerate}
@@ -252,11 +249,11 @@ example.
   to form an infinite \kl{antichain}.
   On the other hand, any subclass $\Cls[D] \subseteq \Cls$ of bounded linear
   clique-width must be finite: indeed, complete binary trees have unbounded
-  linear clique-width. Finally, because \kl{strong periodic antichains} have 
+  linear clique-width. Finally, because \kl{periodic antichains} have 
   bounded linear clique-width (see \cref{sec:interpreting-paths})
-  there cannot be any \kl{strong periodic antichain} in $\Cls$.
+  there cannot be any \kl{periodic antichain} in $\Cls$.
   The \kl{existential transduction} of all finite paths from $\Cls$ is obtained
-  by transducing all induced subgraphs (see \cref{ex:transducing-all-subgraphs}), 
+  by \kl{existentially transducing} all induced subgraphs (see \cref{ex:transducing-all-subgraphs}), 
   that in particular contains all finite
   paths. 
 \end{proof}

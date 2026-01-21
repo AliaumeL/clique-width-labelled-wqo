@@ -1,3 +1,21 @@
+\clearpage 
+\section{Proofs of \cref{sec:ramseyan}}
+
+
+\begin{proofof}{fact:gap-embedding-gaps}
+  This is proven by induction on the length of the path 
+  from $u$ to $v$ in $\t_1$. The base case is exactly 
+  \cref{item:gap-embedding:edge} of the definition of \kl{gap-embedding}.
+
+  For the inductive case, let $u, v$ be two nodes in $\t_1$
+  such that $\spt_1(u:v) > k$ and $\spt_1(v) = k$ for some $k \in \set{1, \dots, N}$.
+  Let $w$ be the \kl(tree){parent} of $v$ in $\t_1$.
+  Since $\spt_1(u:v) > k$, we have $\spt_1(w) > k$.
+  By induction hypothesis, we have $\spt_2(h(u):h(w)) \geq k$.
+  Furthermore, by definition of \kl{gap-embedding}, we have $\spt_2(h(w):h(v)) \geq k$.
+  From there, we conclude that $\spt_2(h(u):h(v)) \geq k$.
+\end{proofof}
+
 \section{Proofs of \cref{sec:bad-patterns}}
 
 \begin{proofof}{lem:finitely-many-boughs}
