@@ -32,7 +32,7 @@
         % and otherwise do nothing
         \ifthenelse{\equal{#2}{appendix}}{
         % Some link to go back to the theorem
-        \marginpar{\vspace{-2em}\texttt{\small{\hyperref[#1]{$\triangleright$ Back to p.\pageref{#1}}}}}
+        \texttt{\small{\hyperref[#1]{$\triangleright$ Back to p.\pageref{#1}}}}
         }{}
     \end{proof}
 }
@@ -48,7 +48,7 @@
         % if yes, we do not print anything
         \ifdefined\isInsideRestatedTheorem
         \else
-            \marginpar{\vspace{0.6em}\texttt{\small{\hyperref[#1:proof]{$\triangleright$ Proven p.\pageref{#1:proof}}}}}
+            \texttt{\small{\hyperref[#1:proof]{$\triangleright$ Proven p.\pageref{#1:proof}}}}
         \fi
     }
 }
