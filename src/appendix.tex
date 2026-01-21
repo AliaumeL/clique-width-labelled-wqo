@@ -199,31 +199,232 @@
 
 \section{Proofs of \cref{sec:interpreting-paths}}
 
-\begin{proofof}{lem:transduction-not-wqo}
-  Let $\someInterp = (\phi_{\text{univ}}, \phi_{\text{edge}}, \phi_{\text{dom}})$ be an 
-  \kl{existential interpretation}
-  from $\Label{\Sigma}{\Cls}$ to the class of finite graphs, 
-  such that the image of $\Label{\Sigma}{\Cls}$ contains all finite paths.
-  Let us write $G_i$ for a graph in $\Label{\Sigma}{\Cls}$ such that
-  $\someInterp(G_i) = P_i$, where $P_i$ is the path on $i$ vertices.
-  Remark that if $G_i \isubleq G_j$ as labelled graphs,
-  then $P_i = \someInterp(G_i)$ is a subgraph (not necessarily induced) 
-  of $\someInterp(G_j) = P_j$. 
-  Indeed, whenever $\phi_{\text{univ}}(u)$ holds in $G_i$, it also holds in $G_j$,
-  because $G_i$ is an induced subgraph of $G_j$ and $\phi_{univ}$ is
-  existential. Similarly, whenever $\phi_{\text{edge}}(u,v)$
-  holds in $G_i$, it also holds in $G_j$.
+\begin{proofof}{lem:regular-antichain}
+  Using 
+  \cref{cor:hereditary-perfect-boughs-wqo}, one can assume that $\Cls$
+  has \kl{bounded linear clique-width}. It then follows from
+  the analysis of \cite{LOPEZ24} that 
+  $\Cls$ contains a \kl{periodic sequence} $\seqof{G^r}[r \geq 1]$.
+  Let us redo the argument here for the sake of completeness.
 
-  Let us consider an extra labelling information on the vertices of the graphs
-  in $\Label{\Sigma}{\Cls}$, where we color the two endpoints of each path
-  $P_n$ with two distinct colors $\triangleright$ and $\triangleleft$.
-  Using these new labels, one
-  can \kl{existentially interpret} the class of all finite paths with endpoints
-  colored with $\triangleright$ and $\triangleleft$.
+  Let us assume that $\Cls$ is not \kl{$\forall$-well-quasi-ordered}. We will
+  start similarly as in the proof of \cref{cor:hereditary-perfect-boughs-wqo},
+  and assume without loss of generality that $\Cls$ is the image of 
+  a \kl{monoid interpretation}.
+  Using \cref{lem:hereditary-perfect-boughs} and \cref{lem:perfect-boughs-wqo},
+  we obtain one \kl(bough){context} $C[\square]$, a finite set $\mathbb{F}$ of
+  \kl(bough){blocks} and a sequence $\seqof{B_i}[i \in \Nat]$ of \kl{boughs}
+  built using \kl(bough){blocks} from $\mathbb{F}$ and such that for every $i
+  \in \Nat$, $B_i$ is an \kl{imperfect bough} in the \kl(bough){context}
+  $C[\square]$. 
 
-  Assume towards a contradiction that 
-  $\Cls$ is \kl{$\forall$-well-quasi-ordered}. Then,
-  there is a pair $i<j$ such that $G_i \isubleq G_j$ as labelled graphs. 
-  By the previous remark, this implies that $P_i$ (with coloured endpoints)
-  is a labelled subgraph of $P_j$ (with coloured endpoints), which is impossible.
+  We can encode $B_i$ as a word $w_i$ on the finite alphabet $\mathbb{F}$.
+  Similarly as in \cref{lem:recognizing-perfect-boughs}, we can construct an
+  $\MSO$ formula that decides whether a word $w \in \mathbb{F}^*$ encodes an
+  \kl{imperfect bough} in the (fixed) \kl(bough){context} $C[\square]$. Because
+  the language $L_\text{imperfect}$ of such words is regular and infinite,
+  there exist three words $u,v,w$ in $\mathbb{F}^*$ such that $u w^n v \in
+  L_\text{imperfect}$ for all $n \in \Nat$.
+
+  From $w$, one can create the desired graph $G$, and the sets $F$ and $C$. The
+  vertices of $G$ are the leaves of the \kl{bough blocks} composing $w$, and
+  edges are exactly those prescribed by the interpretation $\someInterp$ on
+  $C[w]$. Remark that an edge between vertices in two distinct copies of $w$ in
+  among vertices of $w^n$ in the graph $\someInterp(C[uw w^n wv])$ depends on
+  the order of the vertices, and whether the two copies are adjacent or not
+  because of the \kl{forward Ramseyan} property. We use as colours for the
+  vertices of $G$ their \kl{bough types} and their precise location in the word
+  $w$. Using this finite information, one can construct $F$ and $C$ such that
+  $G^n$ is the induced subgraph of $C[u w w^n w v]$ obtained by considering
+  vertices from the inner $w^n$ part.
+
+  We have extracted a \kl{regular sequence} of graphs that belongs to $\Cls$
+  because the latter is a \kl{hereditary class}, and because $\Cls$ is the 
+  image of $\someInterp$.\footnote{Otherwise, the graphs $\someInterp(C[u w w^n w v])$
+  may not belong to $\Cls$.}
+
+  Let us now prove that 
+  it is in fact a \kl{regular antichain}. Assume towards a contradiction 
+  that it is not.
+  Then, without loss of generality, there exists a \kl{labelled embedding}
+  $h$
+  from $G^n$ into $G^\ell$ with $n < \ell$, such that 
+  \begin{enumerate}
+    \item $h$ acts as the identity from the first copy of $G$ in 
+      $G^n$ to the first copy of $G$ in $G^\ell$,
+    \item $h$ acts as the identity from the last copy of $G$ in $G^n$
+      to the last copy of $G$ in $G^\ell$,
+    \item $h$ leaves three consecutive copies of $G$ untouched in $G^\ell$.
+  \end{enumerate}
+
+  Remark that one can extent $h$ to be the identity on the 
+  context $C[uw \square wv]$ and conclude that 
+  $uw w^n wv$ is a \kl{perfect bough} in the context $C[\square]$.
+  This is absurd.
 \end{proofof}
+
+
+
+\begin{proofof}{lem:paths-transduction}
+Let $\Cls =  \seqof{G^r}[r \geq 1]$ and let $\lab \colon V(G) \to \Sigma$ be
+its labelling function with sets  $C, F \subseteq \Sigma^2$. 
+
+Without loss of generality, assume that $\lab$ is injective up to duplicating
+labels from $\Sigma$, and assume that $|\Sigma| = |V(G)|$. In the rest of this
+proof, we will assume that $r \geq 3$. For $i \leq r$, we denote the $i$-th
+copy of $G$ in $G^r$ by $G_i$, and by $u_i \in G^r$ the $i$-th copy of $u\in
+V(G)$. We will proceed in two steps, we first define a formula producing a
+directed graph where there is a directed shortest path from $G_1$ to $G_r$
+going through every $G_i$, but there may exist arcs going from $G_i$ to $G_j$
+for $j\leq i$. We will then show how to handle theses backward arcs, and
+produce arbitrarily long paths.
+
+We define the following quantifier-free formula that uses the edge predicate on 
+$G^r$ and the labelling function $\ell \colon V(G^r) \to \Sigma$.
+\begin{equation}
+  \phi_{\rightarrow}(u,v) = \lnot (E(u,v) \Leftrightarrow (l(u),l(v)) \in F)
+  \quad .
+\end{equation}
+Informally, $\phi_{\rightarrow}(u,v)$ creates an arc $(u,v)$ if the edge
+relation between $u,v \in G^r$ differs if $u$ and $v$ are put far away form
+each other in this order.\footnote{It could be that $u$ can be in a copy of $G$ that comes
+after the one of $v$ in $G^r$.}
+
+\def\Jint{\pathInterp} Let $H^r = \Jint(G^r)$ where $\Jint \defined (\top,
+\phi_{\rightarrow}, \top)$ as a quantifier-free interpretation. Note that $H$
+is a directed graph as $\phi_{\rightarrow}$ is not symmetric. However, we will
+show how to existentially interpret paths from the resulting directed graph.
+
+First, let us observe that in $H^r$ there is no arc between two non-consecutive
+copies.  
+
+\begin{claim}\label{clm:nolongforwardarc}
+	For $(u_i,v_j) \in E(H^r)$ only if $j\leq i+1$.
+\end{claim}
+\begin{claimproof}
+If $j \geq i+1$, then $(u,v) \in E(G^r)$ if and only if $(l(u),l(v)) \in F$ by definition of $G^r$.
+\end{claimproof}
+
+Then, let us remark that  if there is a backward arc from the $i$-th copy to
+the $j$-th copy with $j<i$, then for every other previous copy, this arc also
+exist.
+
+\begin{claim}\label{clm:regularbackward}
+	If $(u_i,v_j) \in E(H^r)$ for $j<i$ then for every $j'\leq i$, $(u_i,v_{j'}) \in E(H^r)$.
+\end{claim}
+
+\AP A \intro{spanning path} of $H^r$ is a directed shortest path from $V(H_1)$
+to $V(H_r)$ going through at least one vertex from each $V(H_i)$. Because $G^r$
+is a \kl{regular antichain}, such a path must exist.
+
+\begin{claim} \label{clm:spanningpath}
+  There is a \kl{spanning path} in $H^r$.
+\end{claim}
+\begin{claimproof}
+  Let $V_i^+$ be the vertices of $H_i$ such that there is an arc from $H_{i-1}$
+  to them,  $V_i^-$ be the vertices of $H_i$ such that there is an arc from
+  them to $H_{i+1}$, and $V_i^o$ be the remaining vertices of $V(H_i)$.	
+
+  Suppose there is no \kl{spanning path} in $H^r$, by
+  \cref{clm:nolongforwardarc}, it has to be because, for some $i$, either there
+  is no path in $H_i$ from $V_i^+$ to $V_i^-$, or that they are empty (i.e.
+  there is no arc from $H_i$ to $H_{i+1}$, in which case $V_i^o = V(H_ i)$).
+
+  Let $C_i^+$ (resp. $C_i^-$) be the vertices of $H_i$ that can be reached from
+  $V_i^+$ (resp. that can reach $V_i^-$),  and $C_i^o$ the remaining vertices
+  of such that there is an arc from $H_{i-1}$ to them,  $V_i^-$ be the vertices
+  of $H_i$.
+
+  We now argue that if there is no spanning path, then one can embed $G^r$ into
+  $G^{r+2+\ell}$ for any $\ell \geq 0$. Fix $1<i<r$, and define the mapping $h$
+  as follows: map the first $i-1$ copies of $G$ in $G^r$ and $V_i^+$ and
+  $V_i^o$ to the corresponding first $i$ copies in $G^{r+2}$; and to the $r-i$
+  $i+2+\ell$-th copy of $G$ in $G^{r+2+\ell}$; finally, $V_i^-$ is mapped to
+  the $i+2+\ell$-th copy of $G$ in $G^{r+2+\ell}$, and the last copies of $G$
+  in $G^r$ are mapped to the last copies of $G$ in $G^{r+2+\ell}$.
+
+  It is clear from construction that the middle part of $G^{r+2+\ell}$ is left
+  untouched by this mapping, and that the first and last copies of $G$ in $G^r$
+  are mapped to the first and last copies of $G$ in $G^{r+2+\ell}$.
+
+  Assume towards a contradiction that that this is not an embedding of the
+  underlying graphs, then it means that there is $u \in V_i^+ \cup V_i^o$ and
+  $v\in V_i^-$ such that $(u,v) \in E(G^r)$ and $(h(u),h(v)) \notin E(G^{r+2})$
+  or the reverse. However as $(h(u),h(v))$ is entirely defined by
+  $(\lab(u),\lab(v))$ and $F$, it means that $\phi_{\rightarrow}(u,v)$ is
+  satisfied and $(u,v)\in E(H^r)$.
+
+	Hence if there is no spanning path, then $(G^r)_{r\geq 1}$ is not a
+  \kl{regular antichain}.
+\end{claimproof}
+
+Assuming $r > |V(G)|$, there are two vertices $u_i$ and $u_j$, $i<j$, in the
+spanning path of $H^r$, which are copies of the same vertex $u\in V(G)$. Take
+these two vertices to be such that the distance $d$ from $u_i$ to $u_j$ is the
+smallest possible in $H^r$. Let $t = j - i$, this is the period of $P$, i.e.
+the number of copies of $G$ it has to go through until it comes back to a copy
+of the same vertex. Let $Q = u^1,u^2,\dots, u^d, u_1$ be the vertices
+corresponding to the period. In particular, $Q$ induce a spanning path of
+$H^{t+1}$ (assuming $u^i$ is mapped to the correct copy) and $Q^r$ induce a
+spanning path of $H^{t \times r +1}$. 
+
+
+Let us do a case analysis based on the presence of backward edges on the
+\kl{spanning path} represented by $Q^r$. If there are no such edges, then the
+directed path can be turned into an undirected path by considering the
+symmetrisation of $\phi_{\rightarrow}$. This immediately shows that the
+\kl{existential interpretation} $(\top, \phi_{\rightarrow}(x,y) \vee
+\phi_{\rightarrow}(y,x), \top)$ generates graphs containing arbitrarily large
+finite paths, and therefore one can \kl{existentially transduce} all finite
+paths from $\Cls$.
+
+For the difficult case, let us assume that there exists a backward arc $(u,v)
+\in E(H^r)$ along the spanning path with  $u \in P_i$ and $v\in P_j$ with
+$i>j$, then by \cref{clm:regularbackward} this arc exists between every copy of
+$u$ and $v$ where $v$ is an earlier copy than the one of $u$. In particular
+this means that for every $u,v$ such that $v$ appears earlier on the spanning
+path, $\dist_{H^r}(u,v) \leq 2d$ where $d$ is the length of $Q$:
+$$\dist_{H^r}(u,v) \leq \dist_{H^r}(u,x) +1 +\dist_{H^r}(y,v),$$ where $(x,y)
+\in E(H^r)$ is a backward arc such that $x$ appear after $u$ and $y$ before
+$v$.
+  
+We are now ready to transduces paths in the difficult case. Consider $H^{2tr
++1}$, let $u$ be the beginning of $Q$ and $c = \lab(u)$. To guarantee that the
+distance between two consecutive copies of $u$ in $Q^{2tr}$ is $2d$ we recolour
+every other copy of $u$ along $Q^{2tr}$ by a dummy colour $c'$. Furthermore
+recolour every copy of $u$ not in $Q^{2tr}$ by the same colour. Define now the
+formula 
+\begin{equation}
+  \phi_{\operatorname{Path}}(u,v) 
+  \defined 
+  \land \begin{cases}
+  \dist_{H^r}(u,v)\leq 2d \\
+  \dist_{H^r}(v,u)\leq 2d \\
+  \ell(u) = \ell(v) = c
+\end{cases}
+\quad .
+\end{equation}
+
+Notice that this formula
+only uses existential quantifier (recall that $\phi_{\rightarrow}$ which is
+used to define $\dist_{H^r}$ is quantifier-free). This formula create a path on
+the vertices $u^1,u^3,u^5, \dots, u^{2tr+1} \in Q^{2tr} $, moreover this path
+is undirected as $\phi_P(u,v)$ is symmetric. The interpretation $\mathcal{K}
+\defined (\top, \phi_{\operatorname{Path}}, \phi_{\text{univ}})$, where
+$\phi_{\text{univ}}(u) = l(u) = c$ (recall that only $u^1,u^3,u^5, \dots,
+u^{2tr+1}$ are the only vertices with colour $c$).
+
+In particular $\mathcal{K}(G^{2tr +1}) = P_r$ where $P_r$ is the path on $r$
+vertices, and the conclusion follows.  
+\end{proofof}
+
+\begin{proofof}{cor:periodicgraph_WPA}
+  We already observed that \kl{periodic antichains}
+  are \kl{regular antichains}.
+  For the converse direction,
+  observe that the sequence of vertices obtained from \kl{spanning path}
+  \cref{clm:spanningpath} correspond  to a \kl{periodic antichain}, with $\Sigma$
+  being the labels used on vertices of the path, and $F$ defined according to
+  $G$.
+\end{proofof}
+

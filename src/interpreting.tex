@@ -88,21 +88,12 @@ and $\triangleleft$. It follows results from \cite{LOPEZ24} and our previous
 non-\kl{$\forall$-well-quasi-ordered} hereditary classes of graphs of
 \kl{bounded clique-width}.
 
-\begin{lemma}
+\begin{lemma}[name={},restate=lem:regular-antichain]
   \label{lem:regular-antichain}
   Let $\Cls$ be a \kl{hereditary class} of graphs of \kl{bounded clique-width}
   that is not \kl{$\forall$-well-quasi-ordered}. Then, it contains 
   a \kl{regular antichain}.
 \end{lemma}
-\begin{proof}
-  Using 
-  \cref{cor:hereditary-perfect-boughs-wqo}, one can assume that $\Cls$
-  has \kl{bounded linear clique-width}. It then follows from
-  the analysis of \cite{LOPEZ24} that 
-  $\Cls$ contains a \kl{periodic sequence} $\seqof{G^r}[r \geq 1]$.
-
-  \todo[inline]{Fix this part}
-\end{proof}
 
 \AP Our next goal is to show that can \kl{existentially transduce} all finite
 paths from a \kl{regular antichain}. Remark that \kl{split-permutation graphs}
@@ -117,79 +108,64 @@ obstruction to being \kl{$\forall$-well-quasi-ordered}.
   then $\Cls$ is not \kl{$\forall$-well-quasi-ordered}. 
   \proofref{lem:transduction-not-wqo}
 \end{lemma}
-
-\begin{lemma}
-  \label{lem:paths-transduction}
-  Let  $\Cls$ be a \kl{periodic sequence} forming an antichain defined as in \cref{lem:regular-antichain}. Then $\Cls$ \kl{existentially transduce}
-  the class of all finite paths.
-\end{lemma}
 \begin{proof}
+  Let $\someInterp = (\phi_{\text{univ}}, \phi_{\text{edge}}, \phi_{\text{dom}})$ be an 
+  \kl{existential interpretation}
+  from $\Label{\Sigma}{\Cls}$ to the class of finite graphs, 
+  such that the image of $\Label{\Sigma}{\Cls}$ contains all finite paths.
+  Let us write $G_i$ for a graph in $\Label{\Sigma}{\Cls}$ such that
+  $\someInterp(G_i) = P_i$, where $P_i$ is the path on $i$ vertices.
+  Remark that if $G_i \isubleq G_j$ as labelled graphs,
+  then $P_i = \someInterp(G_i)$ is a subgraph (not necessarily induced) 
+  of $\someInterp(G_j) = P_j$. 
+  Indeed, whenever $\phi_{\text{univ}}(u)$ holds in $G_i$, it also holds in $G_j$,
+  because $G_i$ is an induced subgraph of $G_j$ and $\phi_{univ}$ is
+  existential. Similarly, whenever $\phi_{\text{edge}}(u,v)$
+  holds in $G_i$, it also holds in $G_j$.
 
-\AP Let $\Cls =  \seqof{G^r}[r \geq 1]$ and let $\lab \colon V(G) \to \Sigma$ be its labelling function with sets  $C, F \subseteq \Sigma^2$. 
-Moreover assume that $\lab$ is injective up to duplicating labels from $\Sigma$, in particular $|\Sigma| = |V(G)|$. For $i\leq r$, we denote the $i$-th copy of $G$ in $G^r$ by $G_i$, and by $u_i \in G^r$ the $i$-th copy of $u\in V(G)$. We will proceed in two steps, we first define a formula producing a directed graph where there is a directed shortest path from $G_1$ to $G_r$ going through every $G_i$, but there may exist arcs going from $G_i$ to $G_j$ for $j\leq i$. We will then show how to handle theses backward arcs, and produce a path $P_{r-2}$.
+  Let us consider an extra labelling information on the vertices of the graphs
+  in $\Label{\Sigma}{\Cls}$, where we color the two endpoints of each path
+  $P_n$ with two distinct colors $\triangleright$ and $\triangleleft$.
+  Using these new labels, one
+  can \kl{existentially interpret} the class of all finite paths with endpoints
+  colored with $\triangleright$ and $\triangleleft$.
 
-\AP
-Define the following formula:
-$$\phi_{\rightarrow}(u,v) = \lnot ((u,v) \in E(G^r) \Leftrightarrow (l(u),l(v)) \in F) $$
-Notice that this formula is quantifier-free. Informally, $\phi_{\rightarrow}(u,v)$ creates an arc $(u,v)$ if the edge relation between $u,v \in G^r$ differs if $u$ and $v$ are put far away form each other in this order (note that $u$ can be in a copy of $G$ that comes after the one of $v$ in $G^r$).
-Let $H^r = \someInterp(G^r)$ for $\someInterp = (\top, \phi_{\rightarrow}, \top)$, note that $H$ is a directed graph as $\phi_{\rightarrow}$ is not symmetric. 
-First, observe that in $H^r$ there is no arc between two non-consecutive copies.  
-
-\begin{claim}\label{clm:nolongforwardarc}
-	For $(u_i,v_j) \in E(H^r)$ only if $j\leq i+1$.
-\end{claim}
-\begin{claimproof}
-	If $j \geq i+1$, then $uv \in E(G^r)$ if and only if $(l(u),l(v)) \in F$ by definition of $G^r$.
-\end{claimproof}
-
-From definition, it is clear that if there is a backward arc from the $i$-th copy to the $j$-th copy with $j<i$, then for every other previous copy, this arc also exist.
-
-\begin{claim}\label{clm:regularbackward}
-	If $(u_i,v_j) \in E(H^r)$ for $j<i$ then for every $j'\leq i$, $(u_i,v_{j'}) \in E(H^r)$.
-\end{claim}
-
-A spanning path of $H^r$ is a directed shortest path from $V(H_1)$ to $V(H_r)$ going through at least one vertex from each $V(H_i)$.
-
-\begin{claim} \label{clm:spanningpath}
-	There is a spanning path in $H^r$.
-\end{claim}
-\begin{claimproof}
-	Let $V_i^+$ be the vertices of $H_i$ such that there is an arc from $H_{i-1}$ to them,  $V_i^-$ be the vertices of $H_i$ such that there is an arc from them to $H_{i+1}$, and $V_i^o$ be the remaining vertices of $V(H_i)$.	
-	Suppose there is no spanning path in $H^r$, by \cref{clm:nolongforwardarc}, it have to be because either there is no path in $H_i$ from $V_i^+$ to $V_i^-$, or that they are empty (i.e. there is no arc from $H_i$ to $H_{i+1}$, in which case $V_i^o = V(H_ i)$).
-	Let $C_i^+$ (resp. $C_i^-$) be the vertices of $H_i$ that can be reached from $V_i^+$ (resp. that can reach $V_i^-$),  and $C_i^o$ the remaining vertices of such that there is an arc from $H_{i-1}$ to them,  $V_i^-$ be the vertices of $H_i$.
-	We now argue that if there is no spanning path, then one can embed $G^r$ into $G^{r+2}$. Fix $1<i<r$, and define the mapping $h$ as follows: map the first $i-1$ copies of $G$ in $G^r$ and $V_i^+$ and $V_i^o$ to the corresponding first $i$ copies in $G^{r+2}$; and to the $r-i$ $i+2$-th copy of $G$ in $G^{r+2}$; finally, $V_i^-$ is mapped to the $i+2$-th copy of $G$ in $G^{r+2}$, and the last copies of $G$ in $G^r$ are mapped to the last copies of $G$ in $G^{r+2}$.
-	It is clear from construction that the $i+1$-th copy of $G$ in $G^r$ is left untouched by this mapping and that the first. 
-	Suppose now that this is not a correct embedding, then it means that there is $u \in V_i^+ \cup V_i^o$ and $v\in V_i^-$ such that $(u,v) \in E(G^r)$ and $(h(u),h(v)) \notin E(G^{r+2})$ or the reverse. 
-	However as $(h(u),h(v))$ is entirely defined by $(\lab(u),\lab(v))$ and $F$, it means that $\phi_{\rightarrow}(u,v)$ is satisfied and $(u,v)\in E(H^r)$.
-	Hence if there is no spanning path, then $(G^r)_{r\geq 1}$ is not an antichain.
-\end{claimproof}
-
-  \AP
-  Assuming $r > |V(G)|$, there is two vertices $u_i$ and $u_j$, $i<j$, in the spanning path of $H^r$, which are copies of the same vertex $u\in V(G)$. Take these two vertices to be such that the distance $d$ from $u_i$ to $u_j$ is the smallest possible in $H^r$. Let $t = j-i$, this is the period of $P$, i.e. the number of copies of $G$ it have to go through until it come back to a copy of the same vertex.   
-  Let $Q = u^1,u^2,\dots, u^d, u_1$ be the vertices corresponding to the period. In particular, $Q$ induce a spanning path of $H^{t+1}$ (assuming $u^i$ is mapped to the correct copy) and $Q^r$ induce a spanning path of $H^{tr +1}$. 
-  %furthermore assume that it is periodic, i.e. that $P$ go through the same sequence of vertices in each $H_i$, say $P_i =  u_i^1 \dots u_i^p$, and $P=P_1P_2\dots P_r $. 
-  
-  \AP
-  If there is a backward arc $(u,v) \in E(H^r)$ along the spanning path with  $u \in P_i$ and $v\in P_j$ with $i>j$, then by \cref{clm:regularbackward} this arc exists between every copy of $u$ and $v$ where $v$ is an earlier copy than the one of $u$. 
-  In particular this means that for every $u,v$ such that $v$ appears earlier on the spanning path, $\dist_{H^r}(u,v) \leq 2d$ where $d$ is the length of $Q$: $$\dist_{H^r}(u,v) \leq \dist_{H^r}(u,x) +1 +\dist_{H^r}(y,v),$$ where $(x,y) \in E(H^r)$ is a backward arc such that $x$ appear after $u$ and $y$ before $v$.
-  
-  \AP We are now ready to transduces paths. Consider $H^{2tr +1}$, let $u$ be the beginning of $Q$ and $c = \lab(u)$. To guarantee that the distance between two consecutive copies of $u$ in $Q^{2tr}$ is $2d$ we recolour every other copy of $u$ along $Q^{2tr}$ by a dummy colour $c'$. Furthermore recolour every copy of $u$ not in $Q^{2tr}$ by the same colour.
-  Define now the formula $$\phi_{\operatorname{Path}}(u,v) = \dist_{H^r}(u,v)\leq 2d \land \dist_{H^r}(v,u)\leq 2d \land \ell(u) = \ell(v) = c.$$ Notice that this formula only uses existential quantifier (recall that $\phi_{\rightarrow}$ which is used to define $\dist_{H^r}$ is quantifier-free).
-  This formula create a path on the vertices $u^1,u^3,u^5, \dots, u^{2tr+1} \in Q^{2tr} $, moreover this path is undirected as $\phi_P(u,v)$ is symmetric. The interpretation $\someInterp = (\top, \phi_{\operatorname{Path}}, \phi_{univ})$, where $\phi_{univ}(u) = l(u) = c$ (recall that only $u^1,u^3,u^5, \dots, u^{2tr+1}$ are the only vertices with colour $c$).
-  In particular $\someInterp(G^{2tr +1}) = P_r$ where $P_r$ is the path on $r$ vertices, and the conclusion follows.  
+  Assume towards a contradiction that 
+  $\Cls$ is \kl{$\forall$-well-quasi-ordered}. Then,
+  there is a pair $i<j$ such that $G_i \isubleq G_j$ as labelled graphs. 
+  By the previous remark, this implies that $P_i$ (with coloured endpoints)
+  is a labelled subgraph of $P_j$ (with coloured endpoints), which is impossible.
 \end{proof}
-	
- The following corollary follows from \cref{lem:regular-antichain} and
- \cref{lem:paths-transduction}.
 
+\begin{lemma}[name={},restate=lem:paths-transduction]
+  \label{lem:paths-transduction}
+  Let $\Cls$ be a \kl{regular antichain}. 
+  Then $\Cls$ \kl{existentially transduces}
+  the class of all finite paths.
+  \proofref{lem:paths-transduction}
+\end{lemma}
+\begin{proof}[Proof sketch]
+Let $\Cls =  \seqof{G^r}[r \geq 1]$ and let $\lab \colon V(G) \to \Sigma$ be
+its labelling function with sets  $C, F \subseteq \Sigma^2$. 
+Without loss of generality, assume that $\lab$ is injective up to duplicating
+labels from $\Sigma$, and assume that $|\Sigma| = |V(G)|$. 
+We define the following quantifier-free formula that uses the edge predicate on 
+$G^r$ and the labelling function $\ell \colon V(G^r) \to \Sigma$.
+\begin{equation*}
+  \phi_{\rightarrow}(u,v) = \lnot (E(u,v) \Leftrightarrow (l(u),l(v)) \in F)
+  \quad .
+\end{equation*}
+Informally, $\phi_{\rightarrow}(u,v)$ creates an arc $(u,v)$ if the edge
+relation between $u,v \in G^r$ differs if $u$ and $v$ are put far away form
+each other in this order.\footnote{It could be that $u$ can be in a copy of $G$ that comes
+after the one of $v$ in $G^r$.}
 
-\begin{corollary}
-  \label{cor:not-wqo-implies-transducing-paths}
-  If a \kl{hereditary class}
-  of graphs of \kl{bounded clique-width} is not \kl{$\forall$-well-quasi-ordered},
-  then it \kl{existentially transduces} the class of all finite paths.
-\end{corollary}
-
+To obtain a path, we first show that one can obtain a long directed 
+shortest path from the first copy of $G$ to the last copy of $G$. Then,
+from this so-called \emph{spanning path}, we extract undirected paths 
+by analysing the shape of potential ``backward edges'' along the directed
+path using existential formulas built upon $\phi_\rightarrow$.
+\end{proof}
 
 \AP Finally we provide a last structural characterisation defined in
 \cite[Section 7]{ALM17} that is not \kl{$\forall$-well-quasi-ordered} similar
@@ -212,7 +188,7 @@ to periodic sequence of graphs.
   \label{ex:periodic-sequence}
   Let us consider the word $w = \circ \bullet$, and 
   $C \defined \set{(\circ,\bullet)}$ and $F \defined \set{(\circ,\circ), (\bullet,\circ)}$.
-  The graph $G_{w^n}$ is again the \kl{split-permutation graph of size $n$}. 
+  The graph $G_{w^n}$ is the \kl{split-permutation graph of size $n$}. 
 \end{example}
 
 \AP It is immediate to see that \kl{periodic sequences} are a special case of
@@ -228,36 +204,32 @@ antichain} into a \kl{periodic antichain}, it follows from our proof of
 paths from a \kl{regular antichain}, we actually isolate a \kl{periodic
 antichain}. This answers positively to \cref{lozin:conj} in our setting.
 
-\begin{corollary}
+\begin{corollary}[name={},restate=cor:periodicgraph_WPA]
 	\label{cor:periodicgraph_WPA}
-	Let $\Cls$ be a hereditary class, then $\Cls$ contains a periodic sequence of graph forming an antichain if and only if it contains a weak periodic antichain.
+  Let $\Cls$ be a \kl{hereditary class}, then $\Cls$ contains a 
+  \kl{regular antichain} if and only if it contains a
+  \kl{periodic antichain}.
+  \proofref{cor:periodicgraph_WPA}
 \end{corollary}
-\begin{proof}
-	Observe that the sequence of vertices obtained from spanning path \cref{clm:spanningpath} correspond  to a periodic antichain, with $\Sigma$ being the labels used on vertices of the path, and $F$ defined according to $G$.
-\end{proof}
-
 
 \begin{proofof}{thm:characterisations}[main]
-  First,
-  \cref{item:charac:bounded-lin-cw,item:charac:regular-antichain,item:charac:periodic-antichain}
-  construct antichains, hence prove that $\Cls$ is not \kl{$\forall$-well-quasi-ordered}. 
-  Similarly, \cref{lem:transduction-not-wqo}
-  shows that \cref{item:charac:transduces-paths} implies
-  that $\Cls$ is not \kl{$\forall$-well-quasi-ordered}.
-   As a consequence, every item of the theorem implies 
-  \cref{item:charac:not-2wqo} since 
-  \kl{$\forall$-well-quasi-ordered} classes
-  are exactly the 
-  \kl{$2$-well-quasi-ordered} classes
-  by \cref{main:corollary}.
-    
-  Conversely, \cref{item:charac:not-2wqo} implies
-  \cref{item:charac:bounded-lin-cw} using \cref{cor:hereditary-perfect-boughs-wqo},
-  \cref{item:charac:regular-antichain}
-  by \cref{lem:regular-antichain},
-  \cref{item:charac:periodic-antichain}
-  leveraging \cref{cor:periodicgraph_WPA},
-  and \cref{item:charac:transduces-paths}
-  from \cref{cor:not-wqo-implies-transducing-paths}.
+  First, \cref{item:charac:transduces-paths} implies 
+  \cref{item:charac:not-2wqo} by \cref{lem:transduction-not-wqo}
+  and the fact that \kl{$2$-well-quasi-orderings} 
+  and \kl{$\forall$-well-quasi-orderings} coincide in our setting
+  thanks to \cref{main:theorem}.
+
+  Then, \cref{item:charac:not-2wqo} $\iff$ \cref{item:charac:bounded-lin-cw}
+  was obtained by our analysis in \cref{cor:hereditary-perfect-boughs-wqo}.
+  This analysis was refined to prove that \cref{item:charac:not-2wqo} implies
+  \cref{item:charac:regular-antichain} in \cref{lem:regular-antichain}. Then,
+  we proved in \cref{lem:paths-transduction} that one can \kl{existentially
+  transduce paths} from a \kl{regular antichain}, and therefore, we obtain
+  \cref{item:charac:regular-antichain} implies
+  \cref{item:charac:transduces-paths}.
+
+  Finally, the equivalence of \cref{item:charac:regular-antichain}
+  and \cref{item:charac:periodic-antichain} was obtained 
+  in \cref{cor:periodicgraph_WPA}.
 \end{proofof}
 
