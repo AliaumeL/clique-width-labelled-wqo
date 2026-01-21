@@ -8,7 +8,7 @@
 %   in the `src` directory.
 % - If you want to update the template itself (e.g., change the layout), please
 %   edit the `defaults/asmart/asmart-small.tex` file instead.
-\documentclass[sigconf,review,,screen]{acmart}
+\documentclass[sigconf,anonymous,review,,screen]{acmart}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -38,13 +38,14 @@
 % math packages
 \usepackage{stmaryrd,upgreek}
 \usepackage{thmtools}
-%\usepackage{keytheorems}
+
 
 % adding new theorems, taken from  
 % https://github.com/borisveytsman/acmart/issues/399
 \AtEndPreamble{%
 \theoremstyle{acmdefinition}
 \newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{remark}[theorem]{Remark}
 \newtheorem{fact}[theorem]{Fact}
 \newtheorem{claim}[theorem]{Claim}
 \Crefname{assumption}{Assumption}{Assumptions}
@@ -87,8 +88,6 @@
 \usepackage[capitalise,noabbrev,nameinlink]{cleveref}
 \usepackage[composition,hyperref,xcolor,cleveref]{knowledge}
 \knowledgeconfigure{notion}
-
-
 
 
 % Tables 
@@ -167,35 +166,24 @@
 \begin{document}
 
 \title{Well-quasi-ordered classes of bounded clique-width \\
-       main 63025d0c2bb13d7ba1f53e4ace38ba72f7888dc2 \\
-       2026-01-08 10:38:40 +0100
+       main 2364017944ceeeb0e8607e4bb92820f13e1e9d92 \\
+       2026-01-19 21:13:19 +0100
 }
 
 
-    \author{Aliaume Lopez}
-  \email{aliaume.lopez@bordeaux-inp.fr}
-  \orcid{0000-0002-4205-327X}
-      \affiliation{
-      \institution{INP Bordeaux, LaBRI, CNRS}
-      \city{Bordeaux}
-      \country{France}
-    }
-      \author{Maël Dumas}
-  \email{mdumas@mimuw.edu.pl}
-  \orcid{}
-      \affiliation{
-      \institution{University of Warsaw}
-      \city{Warsaw}
-      \country{Poland}
-    }
-      \renewcommand{\shortauthors}{%
-    A. Lopez, M. Dumas%
-  }
+\author{
+    Anonymized for review
+}
+\affiliation{
+  \institution{Anonymous}
+  \city{Anonymous}
+  \country{Anonymous}
+}
 
 \date{\today}
 %
 \begin{abstract}
-    We study classes of graphs with bounded clique-width that are well-quasi-ordered by the induced subgraph relation, in the presence of labels on the vertices. We prove that, given a finite presentation of a class of graphs, one can decide whether the class is labelled-well-quasi-ordered. This solves an open problem raised by Daligault, Rao and Thomassé in 2010. From our proof techniques, we also derive (restricted versions of) conjectures of Pouzet regarding well-quasi-ordering of graphs under the induced subgraph relation. Finally, we provide a structural characterization of those classes as those that are of bounded clique-width and do not existentially transduce the class of all finite paths.
+    We study classes of graphs with bounded clique-width that are well-quasi-ordered by the induced subgraph relation, in the presence of labels on the vertices. We prove that, given a finite presentation of a class of graphs, one can decide whether the class is labelled-well-quasi-ordered. This solves an open problem raised by Daligault, Rao and Thomassé in 2010. From our proof techniques, we also derive (restricted versions of) conjectures of Pouzet regarding well-quasi-ordering of graphs under the induces subgraph relation. Finally, we provide a structural characterization of those classes as those that are of bounded clique-width and do not existentially transduce the class of all finite paths.
 \end{abstract}
 
 \begin{CCSXML}
@@ -244,16 +232,14 @@ a \kl[kl-usage]{notion} points to its \intro[kl-usage]{definition}.
 \input{src/conclusion}
 
 % Include acknowledgements
-\begin{acks}
-
-
-\end{acks}
 
 % Include the bibliography
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{papers.bib}
 
 % If there are any appendices, we include them here.
+\appendix
+\input{src/appendix.tex}
 
 
 \end{document}

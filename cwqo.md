@@ -1,7 +1,7 @@
 ---
 draft: true
 camera-ready: false
-anonymous: false
+anonymous: true
 acmart:
   format: sigconf
 bibliography:
@@ -15,6 +15,8 @@ header-includes: |
   \usepackage{todonotes}
   \newcommand{\mael}[1]{\todo[color=violet!40]{#1}}
   \newcommand{\maelin}[1]{\todo[inline,size=\normalsize,color=violet!40,caption={}]{Mael: #1}}
+appendix:
+  - src/appendix.tex
 ---
 
 
