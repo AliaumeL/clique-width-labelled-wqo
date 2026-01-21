@@ -1,0 +1,132 @@
+\section{Proofs of \cref{sec:bad-patterns}}
+
+\begin{proofof}{lem:finitely-many-boughs}
+  Let $\t = C[B]$ be a tree obtained by plugging a \kl{bough} $B$ of level
+  $k$ inside a \kl(bough){context} $C[\square]$. Our goal 
+  is to extract finitely many parameters from $B$ 
+  (independently of $C[\square]$) such that any other \kl{bough} $B'$ of level $k$
+  with the same parameters is \kl(bough){compatible} with $B$.
+  These parameters will be elements of $M$ or tuples thereof,
+  and since $M$ is finite, we will immediately conclude.
+
+  To that end, let us fix a \kl(bough){context} $C[\square]$. Assume that $\t =
+  C[B]$ is \kl{forward Ramseyan}: we want to ensure that $\t' = C[B']$ is
+  \kl{forward Ramseyan} of any $B'$ with the same parameters. 
+  Recall that $\t'$ is \kl{forward Ramseyan} if for
+  every branch in $\t'$, for every level $l$, for every \kl{$l$-neighbourhood}
+  in this branch, and for every four nodes $x \treelt y$ and $x' \treelt y'$ in
+  this \kl{$l$-neighbourhood}, we have $\tlbl{\t'}{x}{y} \cdot
+  \tlbl{\t'}{x'}{y'} = \tlbl{\t'}{x}{y}$.
+
+  First, remark that \kl{$l$-neighbourhoods} with $l < k$ inside $\t'$ are fully
+  contained either in $B'$, or $\aTree_{\mathsf{root}}$, or
+  $\aTree_{\mathsf{left}}$,  or $\aTree_{\mathsf{right}}$. As a consequence,
+  nothing needs to be checked on such \kl{$l$-neighbourhoods} since $B'$
+  is assumed to be locally \kl{forward Ramseyan}.
+  More generally, the only possible failures of the \kl{forward Ramseyan}
+  condition in $\t'$ must involve nodes that are not all contained
+  in one of these four subtrees.
+
+  Now, let us consider \kl{$l$-neighbourhoods} with $l \geq k$.
+  If $l \geq k$, then the only \kl{$l$-neighbourhood} of a branch that
+  is not fully contained in one of the four subtrees crosses $B'$. Let us 
+  distinguish several cases based on the shape of the branch with respect 
+  to the \kl(bough){context} $C[\square]$ and the \kl{bough} $B'$.
+  \begin{enumerate}
+    \item The branch containing the \kl{$l$-neighbourhood} starts in 
+      $\aTree_{\mathsf{root}}$ (possibly in $\square$), goes through $B'$, and ends in 
+      $\aTree_{\mathsf{left}}$ or $\aTree_{\mathsf{right}}$.
+    \item The branch containing the \kl{$l$-neighbourhood} starts in 
+      $\aTree_{\mathsf{root}}$ (possibly in $\square$), goes through $B'$, and ends in $B'$.
+  \end{enumerate}
+
+  In the first case, consider two nodes $x \treelt y$ and $x' \treelt y'$ in
+  the \kl{$l$-neighbourhood}. Remark that the value $\tlbl{\t'}{x}{y}$ can be
+  decomposed into a part before entering $B'$, a part inside $B'$, and a part
+  after leaving $B'$. By construction, the part inside $B'$ is one of the
+  idempotent elements labelling the \kl(bough){backbone} of $B'$. Hence, to
+  ensure that $\t'$ is \kl{forward Ramseyan} in this case, it suffices to check
+  finitely many equations involving those idempotent elements (note that the
+  number of equations depends on the shape of $C[\square]$, but not 
+  the number of elements of $M$ extracted from $B'$).
+
+  In the second case, consider two nodes $x \treelt y$ and $x' \treelt y'$ in
+  the \kl{$l$-neighbourhood}. Here, the value $\tlbl{\t'}{x}{y}$ can be
+  decomposed into a part before entering $B'$, a part from $b_0'$ to the first
+  node $z$ in $B'$ of level $l$ (which is not on the \kl(bough){backbone} of
+  $B'$ if $l > k$), and a part from $z$ to $y$. Similarly, the equations
+  ensuring that $\t'$ is \kl{forward Ramseyan} in this case can be expressed
+  using the values $\tlbl{\t'}{b_0'}{z}$ for every node $z$ in $B'$, and the
+  values $\tlbl{\t'}{z}{y}$ for every node $y$ in $B'$ in the same
+  \kl{$l$-neighbourhood} as $z$ (for some branch). Note that one only cares
+  about the existence of pairs of values $(\tlbl{\t'}{b_0'}{z},
+  \tlbl{\t'}{z}{y})$ for nodes $z$ and $y$ in the same \kl{$l$-neighbourhood},
+  and there are only finitely many such pairs.
+
+  We have proven that, assuming that $\t = C[B]$ is
+  \kl{forward Ramseyan}, it suffices to check finitely many parameters of $B'$
+  to ensure that $C[B]$ is \kl{forward Ramseyan}. Since $M$ is finite, there
+  are finitely many possible values for these parameters, which concludes the
+  proof.
+\end{proofof}
+
+\section{Proofs of \cref{sec:hereditary-classes}}
+
+\begin{proofof}{lem:recognizing-perfect-boughs}
+  The proof follows the same pattern as 
+  \cite[Lemma 19]{LOPEZ24}, but adapts it from words to trees. 
+  Assume that $B$ is a \kl{perfect bough} of level $k$ inside of a tree
+  $\t = C[B]$.
+  This gives us a compatible \kl{bough} $H$ of level $k$
+  and an embedding $h \colon \someInterp(C[B]) \to \someInterp(C[H])$
+  satisfying the conditions of \cref{def:perfect-bough}.
+
+  Let us consider five copies of $B$, called $B_\mathsf{left}$,
+  $B_\mathsf{mid-1}$, $B_\mathsf{mid-2}$, $B_\mathsf{mid-3}$, and
+  $B_\mathsf{right}$, and let us define $B^5$ to be the \kl{bough} obtained by
+  concatenating these five copies merging $b_n$ of $B_\mathsf{left}$ with $b_0$
+  of $B_\mathsf{mid-1}$, and merging $b_n$ of $B_\mathsf{mid-1}$ with $b_0$ of
+  $B_\mathsf{mid-2}$ and so on. We claim that $B$ and $B^5$ are \kl{compatible
+  boughs}. 
+
+  Let us define a mapping $k \colon \someInterp(C[B]) \to
+  \someInterp(C[B^5])$
+  as follows: leaves $x$ of $B$ are mapped to their
+  corresponding leaf in $B_\mathsf{left}$ or $B_\mathsf{right}$ depending on
+  whether $h(x)$ is to the left or right of the untouched \kl{bough blocks} of
+  $H$. For leaves $x$ of $C[\square]$, we let $k(x) = x$. 
+  Thanks to \cref{fact:bough-replacement}, we know that
+  $k$ preserves edges between leaves of $C[\square]$.
+  Furthermore, because $h$ is an embedding that preserves the 
+  \kl{bough type} of leaves in $B$, and because \kl{bough types} are enough
+  to compute the presence of an edge between a leaf of $B$ and a leaf of
+  $C[\square]$ (or between two leaves of $B$), we deduce that $k$ is also an
+  embedding.
+
+  What we have shown is that if $B$ is a \kl{perfect bough}, then there exists
+  a mapping $k'$ from leaves of $B$ to $\set{ \mathsf{left}, \mathsf{right} }$
+  such that there is an edge between two leaves $x$ and $y$ of $B$ in the graph
+  $\someInterp(C[B])$ if and only if the \kl{bough types} of $x$ and $y$ are
+  such that there is an edge between $x_{k'(x)}$ and $y_{k'(y)}$ in the graph
+  $\someInterp(C[B^5])$. One can guess such a mapping $k'$ in Monadic Second-Order
+  logic, and then verify the required conditions on edges between leaves of $B$.
+  As a consequence, one can write an $\MSO$ formula that holds if and only if
+  $B$ is a \kl{perfect bough}.
+\end{proofof}
+
+\begin{proofof}{lem:hereditary-perfect-boughs}
+  The proof follows the same pattern 
+  as \cref{lem:finitely-many-boughs,lem:finitely-many-contexts},
+  and continues on the ideas of \cref{lem:recognizing-perfect-boughs}.
+  The idea is that if a bough $B$ is \kl(bough){perfect}, then 
+  one can witness it by using the \kl{compatible bough} $B^5$ 
+  defined by gluing five copies of $B$ together, because we noticed
+  that perfectness essentially depends on the \kl{bough types} of the leaves
+  of $B$. 
+  Another consequence of this analysis is that if one defines an equivalence relation between
+  \kl{bough blocks} of a given \kl{bough} $B$ based on the set of 
+  available \kl{bough types} of its leaves, then 
+  one can always replace a \kl{bough block} by another one in the same
+  equivalence class without changing the \kl(bough){perfectness} of $B$.
+  We conclude because this equivalence relation has finitely many classes.
+\end{proofof}
