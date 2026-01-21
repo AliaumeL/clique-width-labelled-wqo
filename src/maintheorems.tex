@@ -70,13 +70,14 @@ bough}.
 In order to do so, we will first need the following
 \cref{fact:bough-replacement}, that explains that when replacing a bough $B$ by
 a \kl{compatible bough} $H$, one does not change the part of the graph
-represented by the \kl{leaves} of the \kl{bough context} $C[\square]$. This is
-because to determine the presence of edges between leaves of $C[\square]$, one
-only needs to know the value of the \kl(bough){first idempotent element}
-labelling the \kl{bough}, which does not change when replacing $B$ by a
-\kl{compatible bough} $H$. As a consequence, it suffices to focus on the leaves
-of $B$ inside of $H$ to construct an embedding from $\someInterp(C[B])$ to
-$\someInterp(C[H])$ satisfying the conditions of \cref{def:perfect-bough}.
+represented by the \kl(context){leaves} of the \kl{bough context} $C[\square]$.
+This is because to determine the presence of edges between leaves of
+$C[\square]$, one only needs to know the value of the \kl(bough){first
+idempotent element} labelling the \kl{bough}, which does not change when
+replacing $B$ by a \kl{compatible bough} $H$. As a consequence, it suffices to
+focus on the leaves of $B$ inside of $H$ to construct an embedding from
+$\someInterp(C[B])$ to $\someInterp(C[H])$ satisfying the conditions of
+\cref{def:perfect-bough}.
 	
 	
 \begin{fact}
@@ -216,10 +217,10 @@ from a finite set. This allows us to prove the following corollary.
 
   Finally, remark that the collection of graphs $\someInterp(C[B_i])$ for $i
   \in \Nat$ has \kl{bounded linear clique-width}. Indeed, the
-  \kl(context){context} $C[\square]$ is fixed, and the \kl(bough){blocks} used
+  \kl(bough){context} $C[\square]$ is fixed, and the \kl(bough){blocks} used
   to build the \kl{boughs} $B_i$ come from a finite set $\mathbb{F}$. As a
   consequence, one can represent these graphs by using one colour per node of
-  the \kl(context){context} $C[\square]$ plus one colour per node in each
+  the \kl(bough){context} $C[\square]$ plus one colour per node in each
   \kl(bough){block} in $\mathbb{F}$, and write a single branch (linear)
   expressions representing all graphs $\someInterp(C[B_i])$.
 \end{proof}

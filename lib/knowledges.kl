@@ -15,6 +15,7 @@
   | existentially transduces
   | existentially transducing
   | existential transduction
+  | existentially transduce
 \knowledge{notion}
   | $\MSO $-interpretation
   | $\MSO $-interpretations
@@ -25,6 +26,7 @@
 \knowledge{notion}
   | existential interpretation
   | existentially interprets
+  | existentially interpret
 
 
 
@@ -54,23 +56,20 @@
  | induced subgraph relation
  | labelled induced subgraph
  | embeds@graph
-\knowledge{notion}
- | labelled-well-quasi-ordered
- | labelled-wqo
-\knowledge{notion}
- | wqo-well-quasi-ordered
- | wqo-wqo
 
 \knowledge{notion}
  | monomorphism
  | graph embedding
  | embedding@graph
+ | embedding of graphs
+ | labelled embedding
 
 
 \knowledge{notion}
  | hereditary class of graphs
  | hereditary class
  | hereditary@class
+ | hereditary classes
 \knowledge{notion}
  | hereditary closure
 
@@ -158,11 +157,13 @@
  | $2$-well-quasi-ordered
  | $2$-well-quasi-ordering
  | $2$-WQO
+ | $2$-well-quasi-orderings
 
 \knowledge{notion}
  | $\forall $-well-quasi-ordered
  | $\forall $-WQO
  | $\forall $-well-quasi-ordering
+ | $\forall $-well-quasi-orderings
 
 
 \knowledge{notion}
@@ -209,11 +210,13 @@
  | split level
  | split@depth
  | depth@split
+ | splits
 \knowledge{notion}
  | $k$-neighbourhoods
  | $k$-neighbourhood
  | $k$-neighbours
  | $l$-neighbourhood
+ | $l$-neighbourhoods
 
 \knowledge{notion}
   | independent at level $k$
@@ -239,10 +242,13 @@
 \knowledge{notion}
   | marked nested tree
   | marked nested trees
+  | marking
+  | markings
 \knowledge{notion}
   | well-marked
   | well-marked nested trees
   | well-marked nested tree
+  
 
 \knowledge{notion}
   | gap-embeds@marked
@@ -295,19 +301,20 @@
 \knowledge{notion}
  | periodic sequence (of graphs)
  | periodic sequence
+ | periodic sequence
+ | periodic sequences
 \knowledge{notion}
  | periodic antichains
  | periodic antichain
- | (strong) periodic antichains
- | strong periodic antichain
+
 
 \knowledge{notion}
-  | (weak) periodic sequence
-  | weak periodic sequence
+ | regular sequence (of graphs)
+ | regular sequence
+ | regular sequences
 \knowledge{notion}
-  | periodic antichains@weak
-  | (weak) periodic antichain
-  | weak periodic antichain
+ | regular antichains
+ | regular antichain
 
 
 
@@ -328,6 +335,11 @@
 \knowledge{notion}
   | bough type
   | bough types
+
+\knowledge{notion}
+  | first idempotent value@bough
+  | first idempotent element@bough
+  | idempotent value@bough
 
 \knowledge{notion}
   | block@bough
@@ -361,6 +373,12 @@
 \knowledge{notion}
   | contexts@bough
   | context@bough
+  | bough context
+
+
+\knowledge{notion}
+  | leaves@context
+  | leaf@context
 
 \knowledge{notion}
  | context type
@@ -379,3 +397,17 @@
   | imperfect bough
   | imperfect boughs
   | imperfect@bough
+
+
+%
+% Split permutations
+% 
+\knowledge{notion}
+ | split-permutation graph
+ | split-permutation graphs
+ | split-permutation graph of size $n$
+
+% spanning paths ...
+\knowledge{notion}
+ | spanning path
+ | spanning paths
