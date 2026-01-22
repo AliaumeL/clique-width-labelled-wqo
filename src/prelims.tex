@@ -4,7 +4,7 @@
 
 We assume the reader to be familiar with basic notions of logic on finite
 relational structures, such as monadic second-order logic ($\MSO$), first-order
-logic and quantifier-free formulas.
+logic and quantifier-free formulae.
 
 \paragraph*{Graphs} \AP A graph $G$ consists of a finite set $V(G)$ of vertices
 and a set $E(G)\subseteq \binom{V(G)}{2}$ of edges. A graph is
@@ -23,8 +23,8 @@ from $G$ to $H$, i.e., an injective function $f \colon V(G) \to V(H)$ such that
 for all $u, v \in V(G)$, $(u, v) \in E(G)$ if and only if $(f(u), f(v)) \in E(H)$,
 and such that for all $v \in V(G)$, we have $\lab_G(v) \leq \lab_H(f(v))$. We
 write $G \intro*\isubleq H$ to denote that $G$ \kl(graph){embeds} into $H$,
-which we also call the \reintro{induced subgraph relation}.  When no order is
-specified along a set $X$, the order relation is assumed to be equality, i.e.
+which we also call the \reintro{induced subgraph relation}. When no order is
+specified on a set $X$, the order relation is assumed to be equality, i.e.
 $(X, =)$.
 
 \AP A class of graphs $\Cls$ is a \intro{hereditary class} if it is closed under
@@ -59,7 +59,7 @@ and $\Cls$ is \intro{$\forall$-well-quasi-ordered} if for every
     \kl{well-quasi-order} $(X, \leq)$, the class
     $(\Label{X}{\Cls}, \isubleq)$ is \kl{well-quasi-ordered}.
 
-Finally, a class of graph is \intro{orderably well-quasi-ordered} (resp.
+Finally, a class of graphs is \intro{orderably well-quasi-ordered} (resp.
 \reintro{orderably $k$-well-quasi-ordered}, resp. \reintro{orderably
 $\forall$-well-quasi-ordered}) if there is a way to equip each graph $G$ in
 $\Cls$ with a linear order $\leq_G$ on its vertices such that the resulting
@@ -71,7 +71,7 @@ class of \kl{ordered graphs} is \kl{well-quasi-ordered} (resp.
 
 
 \paragraph*{Trees} \AP In this paper, \intro{trees} are finite, binary, and
-ordered (have \intro(child){left} and \reintro{right children}). They are
+ordered (they have \intro(child){left} and \reintro{right children}). They are
 understood as finite relational structures over the signature $\sigma =
 (\treeleq, \treesibleq)$ where $\treeleq$ is the \intro{ancestor relation}, and
 $\treesibleq$ is the \intro{sibling order} on the nodes of the tree, extended
@@ -80,7 +80,7 @@ to all pairs of nodes as a topological order. In a tree $\aTree$, the
 being left implicit when clear from context. The set of \intro(tree){leaves} is
 denoted by $\Leaves{\aTree}$. Given two nodes $x$ and $y$ in a tree $T$, their
 \intro{least common ancestor} is denoted by $\intro*\lca(x,y)$. We will often
-use the \intro{parent relation}, which state that $y$ is the unique immediate
+use the \intro{parent relation}, which states that $y$ is the unique immediate
 \kl(tree){ancestor} of $x$.
 
 \AP As in the case of graphs, we will consider vertex-labelled trees where
@@ -88,18 +88,18 @@ labels are taken from a \kl{well-quasi-order} $(X, \leq)$. We will also
 consider edge-labelled trees, typically using a finite set of labels $\Sigma$.
 The class of vertex-labelled and edge-labelled trees is denoted by
 $\Trees{\Sigma}{X}$.	The sets $\Sigma$ or $X$ are omitted when unused (i.e.,
-$\Trees{}{}$ denotes the class of unlabelled trees) Given two nodes $x,y$ such
+$\Trees{}{}$ denotes the class of unlabelled trees). Given two nodes $x,y$ such
 that $y$ is an \kl(tree){ancestor} of $x$, the notation $\intro*\tword{x}{y}$
 denotes the \emph{word} in $\Sigma^*$ obtained by reading the labels of the
-edges on the path from $x$ to $y$ in $\aTree$, we can leave $\aTree$ implicit
-if clear from context.
+edges on the path from $x$ to $y$ in $\aTree$; we leave $\aTree$ implicit
+when clear from context.
 
 \paragraph*{Bounded Clique-Width} \AP An \intro{$\MSO$-interpretation}
 $\someInterp$ from $\Trees{\Sigma}{}$ to finite undirected graphs is given by a
-tuple of $\MSO$ formulas that specify how to respectively: select a subset of
-the leaves of tree to be the vertices of the graph $\phi_{\mathsf{univ}}(x)$,
-define the edges of the graph $\phi_{\mathsf{edge}}(x,y)$, and define the
-domain of the interpretation $\phi_{\mathsf{dom}}$. An interpretation
+tuple of $\MSO$ formulae that specify how to, respectively, select a subset of
+the leaves of the tree to be the vertices of the graph ($\phi_{\mathsf{univ}}(x)$),
+define the edges of the graph ($\phi_{\mathsf{edge}}(x,y)$), and define the
+domain of the interpretation ($\phi_{\mathsf{dom}}$). An interpretation
 $\someInterp$ is called \intro(interpretation){simple} if
 $\phi_{\mathsf{univ}}(x)$ and $\phi_{\mathsf{dom}}$ are tautologies.
 
@@ -107,13 +107,13 @@ $\phi_{\mathsf{univ}}(x)$ and $\phi_{\mathsf{dom}}$ are tautologies.
 \begin{example}
 	\label{ex:mso-interp-cycles}
 	An \kl{$\MSO$-interpretation} $\someInterp$ from $\Trees{}{}$ to finite undirected graphs
-	that produces all paths can be defined as follows: 
-	$\phi_{\mathsf{dom}}$ is the formula that is true on linear trees (i.e., trees where every node has at most one non-leaf child),
+	that produces all paths can be defined as follows:
+	$\phi_{\mathsf{dom}}$ is the formula that holds on linear trees (i.e., trees where every node has at most one non-leaf child),
 	$\phi_{\mathsf{univ}}(x)$ is the formula that is true if and only if $x$ is a leaf and its sibling is not a leaf,
-	$\phi_{\mathsf{edge}}(x,y)$ is the formula that is true if and only if are at distance exactly $3$.
+	$\phi_{\mathsf{edge}}(x,y)$ is the formula that is true if and only if $x$ and $y$ are at distance exactly $3$.
 \end{example}
 
-\AP A class of graph has \intro{bounded clique-width} if it is included in the
+\AP A class of graphs has \intro{bounded clique-width} if it is included in the
 image of some \kl{$\MSO$-interpretation} from finite trees to finite undirected
 graphs \cite{COUR91}. It has \intro{bounded linear clique-width} if it is
 included in the image of some \kl{$\MSO$-interpretation} from linear trees
@@ -123,19 +123,19 @@ $\MSO$-interpretation} from finite words to finite undirected graphs.
 
 
 \paragraph{Transductions from graphs to graphs} \AP Another notion of logical
-transformation that will be relevant in this paper is that of \kl{existential
+transformation relevant in this paper is that of \kl{existential
 transduction} and \kl{existential interpretation} that were mentioned in
 \cref{thm:characterisations,conj:path-transduction}, and are defined in a
 similar way as \kl{$\MSO$-interpretations}.
 
 \AP An \intro{existential interpretation} from (labelled) graphs to graphs is
-given by an existential first order formula $\phi_{\text{univ}}(x)$ that
-selects the vertices of the interpreted graph, an existential first order
-formula $\phi_{\text{edge}}(x,y)$ that define the edges of the interpreted
-graph, and an existential first order formula $\phi_{\text{dom}}$ that selects
+given by an existential first-order formula $\phi_{\text{univ}}(x)$ that
+selects the vertices of the interpreted graph, an existential first-order
+formula $\phi_{\text{edge}}(x,y)$ that defines the edges of the interpreted
+graph, and an existential first-order formula $\phi_{\text{dom}}$ that selects
 the graphs of $\Cls$ on which the interpretation is defined. The semantics is
 that for every graph $G \in \Cls$ satisfying $\phi_{\text{dom}}$, the
-interpreted graph $\mathcal{I}(G)$ has for vertex set the vertices of $G$
+interpreted graph $\mathcal{I}(G)$ has as vertex set the vertices of $G$
 satisfying $\phi_{\text{univ}}$, and has an edge between two vertices $(u,v)$ if
 and only if $G$ satisfies $\phi_{\text{edge}}(u,v)$ (which is assumed to be
 symmetric and irreflexive on the selected vertices). A class $\Cls$
