@@ -10,7 +10,7 @@ our \cref{cor:hereditary-perfect-boughs-wqo}. The second one is a notion of
 the heart of their \cite[Conjecture 2]{ALM17} that we adapted to our setting in
 \cref{lozin:conj}. Those structural notions encode ``path-like'' behaviour, and
 we actually manage to extract from those all finite paths using an
-\kl{existential interpretation}, answering positively to
+\kl{existential transduction}, answering positively to
 \cref{conj:path-transduction}.
 
 \begin{definition}
@@ -93,6 +93,7 @@ non-\kl{$\forall$-well-quasi-ordered} hereditary classes of graphs of
   Let $\Cls$ be a \kl{hereditary class} of graphs of \kl{bounded clique-width}
   that is not \kl{$\forall$-well-quasi-ordered}. Then, it contains 
   a \kl{regular antichain}.
+  \proofref{lem:regular-antichain}
 \end{lemma}
 
 \AP Our next goal is to show that can \kl{existentially transduce} all finite
@@ -161,9 +162,9 @@ each other in this order.\footnote{It could be that $u$ can be in a copy of $G$ 
 after the one of $v$ in $G^r$.}
 
 To obtain a path, we first show that one can obtain a long directed 
-shortest path from the first copy of $G$ to the last copy of $G$. Then,
+shortest path from the first copy of $G$ to the last copy of $G$, going through every copy of $G$. Then,
 from this so-called \emph{spanning path}, we extract undirected paths 
-by analysing the shape of potential ``backward edges'' along the directed
+by analysing the behaviour of potential ``backward edges'' along the directed
 path using existential formulas built upon $\phi_\rightarrow$.
 \end{proof}
 
@@ -197,12 +198,15 @@ to periodic sequence of graphs.
 \kl{antichain} for the \kl{labelled induced subgraph} relation when vertices of
 $G_{w^r}$ are not labelled, except for the first and last vertices respectively
 labelled by $\triangleright$ and $\triangleleft$.
+\maelin{In the original definition of~\cite{ALM17}, it was required by \kl{periodic sequences}  to have $C = \Sigma^2 \setminus F$. It is easy to verify that with this condition a \kl{periodic sequence} is an \kl{antichain} if the first and last vertices are labelled.  }
 
 While it is not immediate from the definitions that one can turn a \kl{regular
 antichain} into a \kl{periodic antichain}, it follows from our proof of
 \cref{lem:paths-transduction} that when we \kl{existentially transduce} all
 paths from a \kl{regular antichain}, we actually isolate a \kl{periodic
-antichain}. This answers positively to \cref{lozin:conj} in our setting.
+antichain}. 
+
+% This answers positively to \cref{lozin:conj} in our setting.
 
 \begin{corollary}[name={},restate=cor:periodicgraph_WPA]
 	\label{cor:periodicgraph_WPA}

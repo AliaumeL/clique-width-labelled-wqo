@@ -282,7 +282,7 @@ produce arbitrarily long paths.
 We define the following quantifier-free formula that uses the edge predicate on 
 $G^r$ and the labelling function $\ell \colon V(G^r) \to \Sigma$.
 \begin{equation}
-  \phi_{\rightarrow}(u,v) = \lnot (E(u,v) \Leftrightarrow (\lab(u),\lab(v)) \in F)
+  \phi_{\rightarrow}(u,v) \defined \lnot (E(u,v) \Leftrightarrow (\lab(u),\lab(v)) \in F)
   \quad .
 \end{equation}
 Informally, $\phi_{\rightarrow}(u,v)$ creates an arc $(u,v)$ if the edge
@@ -295,8 +295,7 @@ after the one of $v$ in $G^r$.}
 is a directed graph as $\phi_{\rightarrow}$ is not symmetric. However, we will
 show how to existentially interpret paths from the resulting directed graph.
 
-First, let us observe that in $H^r$ there is no arc between two non-consecutive
-copies.  
+First, let us observe that in $H^r$ there is no arc from a copy $i$ to a copy $j> i+1$.
 
 \begin{claim}\label{clm:nolongforwardarc}
 	For $(u_i,v_j) \in E(H^r)$ only if $j\leq i+1$.
@@ -314,8 +313,7 @@ exist.
 \end{claim}
 
 \AP A \intro{spanning path} of $H^r$ is a directed shortest path from $V(H_1)$
-to $V(H_r)$ going through at least one vertex from each $V(H_i)$. Because $G^r$
-is a \kl{regular antichain}, such a path must exist.
+to $V(H_r)$ going through at least one vertex from each $V(H_i)$. The following claim, show that a \kl{spanning path} must exist in $H^r$ because  $G^r$ is a \kl{regular antichain}.
 
 \begin{claim} \label{clm:spanningpath}
   There is a \kl{spanning path} in $H^r$.
@@ -332,16 +330,14 @@ is a \kl{regular antichain}, such a path must exist.
 
   Let $C_i^+$ (resp. $C_i^-$) be the vertices of $H_i$ that can be reached from
   $V_i^+$ (resp. that can reach $V_i^-$),  and $C_i^o$ the remaining vertices
-  of such that there is an arc from $H_{i-1}$ to them,  $V_i^-$ be the vertices
   of $H_i$.
 
-  We now argue that if there is no spanning path, then one can embed $G^r$ into
+  We now argue that if there is no \kl{spanning path}, then one can embed $G^r$ into
   $G^{r+2+\ell}$ for any $\ell \geq 0$. Fix $1<i<r$, and define the mapping $h$
   as follows: map the first $i-1$ copies of $G$ in $G^r$ and $V_i^+$ and
-  $V_i^o$ to the corresponding first $i$ copies in $G^{r+2}$; and to the $r-i$
-  $i+2+\ell$-th copy of $G$ in $G^{r+2+\ell}$; finally, $V_i^-$ is mapped to
-  the $i+2+\ell$-th copy of $G$ in $G^{r+2+\ell}$, and the last copies of $G$
-  in $G^r$ are mapped to the last copies of $G$ in $G^{r+2+\ell}$.
+  $V_i^o$ to the corresponding first $i$ copies in $G^{r+2}$; $V_i^-$ is mapped to
+  the $i+2+\ell$-th copy of $G$ in $G^{r+2+\ell}$; and the last $r-i$ copies of $G$
+  in $G^r$ are mapped to the last $r-i$ copies of $G$ in $G^{r+2+\ell}$.
 
   It is clear from construction that the middle part of $G^{r+2+\ell}$ is left
   untouched by this mapping, and that the first and last copies of $G$ in $G^r$
@@ -352,9 +348,7 @@ is a \kl{regular antichain}, such a path must exist.
   $v\in V_i^-$ such that $(u,v) \in E(G^r)$ and $(h(u),h(v)) \notin E(G^{r+2})$
   or the reverse. However as $(h(u),h(v))$ is entirely defined by
   $(\lab(u),\lab(v))$ and $F$, it means that $\phi_{\rightarrow}(u,v)$ is
-  satisfied and $(u,v)\in E(H^r)$.
-
-	Hence if there is no spanning path, then $(G^r)_{r\geq 1}$ is not a
+  satisfied and $(u,v)\in E(H^r)$.	Hence if there is no \kl{spanning path}, then $(G^r)_{r\geq 1}$ is not a
   \kl{regular antichain}.
 \end{claimproof}
 
@@ -363,27 +357,24 @@ spanning path of $H^r$, which are copies of the same vertex $u\in V(G)$. Take
 these two vertices to be such that the distance $d$ from $u_i$ to $u_j$ is the
 smallest possible in $H^r$. Let $t = j - i$, this is the period of $P$, i.e.
 the number of copies of $G$ it has to go through until it comes back to a copy
-of the same vertex. Let $Q = u^1,u^2,\dots, u^d, u_1$ be the vertices
-corresponding to the period. In particular, $Q$ induce a spanning path of
-$H^{t+1}$ (assuming $u^i$ is mapped to the correct copy) and $Q^r$ induce a
-spanning path of $H^{t \times r +1}$. 
+of the same vertex. Let $Q = u^1,u^2,\dots, u^d, u^1$ be the vertices
+corresponding to the period. In particular, $Q$ induces a \kl{spanning path} of
+$H^{t+1}$ (assuming $u^i$ is mapped to the correct copy) and $Q^r$ induces a
+spanning path of $H^{t \times r +1}$. Here $Q^r$ denotes $Q$ repeated $r$ times where the ending $u^1$ and beginning $u^1$ of two consecutive repetition are identified.
 
 
 Let us do a case analysis based on the presence of backward edges on the
 \kl{spanning path} represented by $Q^r$. If there are no such edges, then the
 directed path can be turned into an undirected path by considering the
-symmetrisation of $\phi_{\rightarrow}$. This immediately shows that the
-\kl{existential interpretation} $(\top, \phi_{\rightarrow}(x,y) \vee
-\phi_{\rightarrow}(y,x), \top)$ generates graphs containing arbitrarily large
-finite paths, and therefore one can \kl{existentially transduce} all finite
+symmetrisation of $\phi_{\rightarrow}$  and taking induced subgraph (which can be done by adding a vertex-selecting formula and $|\Sigma|$ selecting colours), hence \kl{existentially transduce} all finite
 paths from $\Cls$.
 
 For the difficult case, let us assume that there exists a backward arc $(u,v)
-\in E(H^r)$ along the spanning path with  $u \in P_i$ and $v\in P_j$ with
+\in E(H^r)$ along the \kl{spanning path} with  $u \in P_i$ and $v\in P_j$ with
 $i>j$, then by \cref{clm:regularbackward} this arc exists between every copy of
 $u$ and $v$ where $v$ is an earlier copy than the one of $u$. In particular
 this means that for every $u,v$ such that $v$ appears earlier on the spanning
-path, $\dist_{H^r}(u,v) \leq 2d$ where $d$ is the length of $Q$:
+path, $\dist_{H^r}(u,v) \leq 2d$ (recall $d$ is the length of $Q$):
 $$\dist_{H^r}(u,v) \leq \dist_{H^r}(u,x) +1 +\dist_{H^r}(y,v),$$ where $(x,y)
 \in E(H^r)$ is a backward arc such that $x$ appear after $u$ and $y$ before
 $v$.
@@ -392,7 +383,7 @@ We are now ready to transduces paths in the difficult case. Consider $H^{2tr
 +1}$, let $u$ be the beginning of $Q$ and $c = \lab(u)$. To guarantee that the
 distance between two consecutive copies of $u$ in $Q^{2tr}$ is $2d$ we recolour
 every other copy of $u$ along $Q^{2tr}$ by a dummy colour $c'$. Furthermore
-recolour every copy of $u$ not in $Q^{2tr}$ by the same colour. Define now the
+recolour every copy of $u$ not in $Q^{2tr}$ with the same colour. Define now the
 formula 
 \begin{equation}
   \phi_{\operatorname{Path}}(u,v) 
@@ -411,7 +402,7 @@ used to define $\dist_{H^r}$ is quantifier-free). This formula create a path on
 the vertices $u^1,u^3,u^5, \dots, u^{2tr+1} \in Q^{2tr} $, moreover this path
 is undirected as $\phi_P(u,v)$ is symmetric. The interpretation $\mathcal{K}
 \defined (\top, \phi_{\operatorname{Path}}, \phi_{\text{univ}})$, where
-$\phi_{\text{univ}}(u) = l(u) = c$ (recall that only $u^1,u^3,u^5, \dots,
+$\phi_{\text{univ}}(u) \defined l(u) = c$ (recall that only $u^1,u^3,u^5, \dots,
 u^{2tr+1}$ are the only vertices with colour $c$).
 
 In particular $\mathcal{K}(G^{2tr +1}) = P_r$ where $P_r$ is the path on $r$
@@ -424,7 +415,6 @@ vertices, and the conclusion follows.
   For the converse direction,
   observe that the sequence of vertices obtained from \kl{spanning path}
   \cref{clm:spanningpath} correspond  to a \kl{periodic antichain}, with $\Sigma$
-  being the labels used on vertices of the path, and $F$ defined according to
-  $G$.
+  being the labels used on vertices of the path, set $F$ defined according to $G$, and $C = \Sigma^2 \setminus F$.
 \end{proofof}
 
