@@ -2,7 +2,7 @@
 \section{Bad Patterns in Images of Interpretations}
 \label{sec:bad-patterns}
 
-In this section, we fix a \kl{monoid interpretation} $\someInterp = (\Sigma,
+In this section we fix a \kl{monoid interpretation} $\someInterp = (\Sigma,
 \mu, M, P)$ from trees edge-labelled over a finite alphabet $\Sigma$ to finite
 undirected graphs. We furthermore assume that all trees we consider are
 equipped with a \kl{forward Ramseyan split} $\spt$ over the finite monoid $M$. Our
@@ -122,17 +122,14 @@ marked nested tree} representing the same graph, allowing us to leverage
 \begin{definition}
 	\label{ramseyan-branch:def}
   Let $\aTree$ be a tree and $\spt$ be a \kl{forward Ramseyan split} of height
-  $N$. Let $n \geq 1$, and let $b_0, b_1, \ldots, b_n$ nodes on
-  branch of $\aTree$ such that 
-  $b_0 \treeleq b_1 \treeleq \cdots \treeleq b_n$,
-  and for every $0 \leq i < n$, $\spt(b_i) = k$, and
-  $\spt(b_i \colon b_{i+1}) > k$.
-  A \intro{bough of level
-  $k$} is the subtree of $\aTree$ induced by all nodes $x$ such that $b_0
-  \treeleq x$, and $\neg (b_n \treeleq x)$, plus $b_n$ itself.
-		
-	We say that the \intro(bough){dimension} of the \kl{bough} $B$ is $n$,
-	and that $b_0, b_1, \ldots, b_n$ form the \intro(bough){backbone} of $B$.
+  $N$. Let $n \geq 1$, and let $b_0, b_1, \ldots, b_n$ be nodes on a branch of
+  $\aTree$ such that $b_0 \treeleq b_1 \treeleq \cdots \treeleq b_n$, and for
+  every $0 \leq i < n$, $\spt(b_i) = k$ and $\spt(b_i \colon b_{i+1}) > k$. A
+  \intro{bough of level $k$} is the subtree of $\aTree$ induced by all nodes $x$
+  such that $b_0 \treeleq x$ and $\neg (b_n \treeleq x)$, plus $b_n$ itself.
+	
+	We say that the \intro(bough){dimension} of the \kl{bough} $B$ is $n$, and
+	that $b_0, b_1, \ldots, b_n$ form the \intro(bough){backbone} of $B$.
 \end{definition}
 
 \AP Let $B$ be a \kl{bough of level $k$} in $\aTree$
@@ -167,21 +164,20 @@ with respect to a given \kl{bough} $B$. There are only finitely
 many possible \kl{bough types} because $M$ is finite.
 
 
-\AP In the rest of the paper, we will often rely on some tree surgery operation
-consisting in replacing a \kl{bough} in a tree by some other \kl{bough}. Given
-a \kl{bough} $B$ in a tree $\t$ defined using a \kl(bough){backbone} $b_0$,
-$b_1$, \ldots, $b_n$, we write $\t = C[B]$ to denote that $\t$ can be obtained
-by plugging the \kl{bough} $B$ into a \intro(bough){context} $C[\square]$.
-Formally, a \reintro(bough){context} $C[\square]$ is given by a tree
-$\t_{\mathsf{root}}$ with a distinguished leaf $\square$, together with two
-trees $\t_{\mathsf{left}}$ and $\t_{\mathsf{right}}$, and two monoid elements
-$m_{\mathsf{left}}$ and $m_{\mathsf{right}}$. These three elements are
-represented as dashed lines in \cref{partitionning-a-graph:fig}. The tree
-$C[B]$ is then obtained as follows: one first attaches $\t_{\mathsf{left}}$ as
-the left subtree of $b_n$ with an edge labelled $m_{\mathsf{left}}$, then one
-attaches $\t_{\mathsf{right}}$ as the right subtree of $b_n$ with an edge
-labelled $m_{\mathsf{right}}$, and finally, one replaces the distinguished leaf
-$\square$ in $\t_{\mathsf{root}}$ by the node $b_0$.
+\AP Throughout the paper, we often rely on tree surgery operations consisting of
+replacing a \kl{bough} in a tree by another \kl{bough}. Given a \kl{bough} $B$
+in a tree $\t$ defined using a \kl(bough){backbone} $b_0, b_1, \ldots, b_n$, we
+write $\t = C[B]$ to denote that $\t$ is obtained by plugging the \kl{bough} $B$
+into a \intro(bough){context} $C[\square]$. Formally, a \reintro(bough){context}
+$C[\square]$ is given by a tree $\t_{\mathsf{root}}$ with a distinguished leaf
+$\square$, together with two trees $\t_{\mathsf{left}}$ and $\t_{\mathsf{right}}$,
+and two monoid elements $m_{\mathsf{left}}$ and $m_{\mathsf{right}}$. These
+elements are represented as dashed lines in \cref{partitionning-a-graph:fig}.
+The tree $C[B]$ is then obtained as follows: one first attaches
+$\t_{\mathsf{left}}$ as the left subtree of $b_n$ with an edge labelled
+$m_{\mathsf{left}}$, then attaches $\t_{\mathsf{right}}$ as the right subtree of
+$b_n$ with an edge labelled $m_{\mathsf{right}}$, and finally replaces the
+distinguished leaf $\square$ in $\t_{\mathsf{root}}$ with the node $b_0$.
 
 \AP In order to simplify statements, we will say that the
 \intro(context){leaves} of a \kl(bough){context} $C[\square]$ are the leaves of
@@ -195,27 +191,24 @@ $\tlbl{\t}{b_0}{b_1}$.\footnote{It is also the element
 $\tlbl{\t}{b_0}{b_n}$, thanks to the \kl{forward Ramseyan} property of $\spt$.}
 
 \AP Given two \kl{boughs} $B$ and $B'$ of level $k$, and a \kl(bough){context}
-$C[\square]$, one can consider the two trees $C[B]$ and $C[B']$. These two
-trees have edges labelled with $M$, and are equipped with \kl{splits} induced
-by the \kl{splits} on $C[\square]$ and $B$ (resp. $B'$). We say that $B$ and
-$B'$ are \intro(bough){compatible} if they share the same \kl(bough){first
-idempotent value}, and if for every \kl(bough){context} $C[\square]$ such that
-the tree $C[B]$ (with split $\spt$) is \kl{forward Ramseyan}, the tree $C[B']$
-(with split $\spt'$) is also \kl{forward Ramseyan}.
+$C[\square]$, one can consider the trees $C[B]$ and $C[B']$. These trees have
+edges labelled over $M$ and are equipped with \kl{splits} induced by the
+\kl{splits} on $C[\square]$ and $B$ (resp. $B'$). We say that $B$ and $B'$ are
+\intro(bough){compatible} if they share the same \kl(bough){first idempotent
+value} and if for every \kl(bough){context} $C[\square]$ such that the tree
+$C[B]$ (with split $\spt$) is \kl{forward Ramseyan}, the tree $C[B']$ (with
+split $\spt'$) is also \kl{forward Ramseyan}.
 
 \begin{definition}
     \label{good-bough:def}
-    Let $B$ be a \kl{bough} of level $k$ in a tree $\t = C[B]$.
-    We say that $B$ is a \intro{good bough} if, 
-    there exists a \kl{compatible bough} $H$ of level $k$,
-    and a map $h \colon \someInterp(C[B]) \to \someInterp(C[H])$
-    such that:
+    Let $B$ be a \kl{bough} of level $k$ in a tree $\t = C[B]$. We say that $B$
+    is a \intro{good bough} if there exists a \kl{compatible bough} $H$ of level
+    $k$ and a map $h \colon \someInterp(C[B]) \to \someInterp(C[H])$ such that:
     \begin{enumerate}
         \item $h$ is an embedding of graphs,
         \item $h$ is the identity map on \kl(context){leaves} of $C[\square]$,
-        \item there exist three consecutive
-            \kl(bough){blocks} in $H$ whose leaves
-            	are left untouched by $h$.
+        \item there exist three consecutive \kl(bough){blocks} in $H$ whose leaves
+            are left untouched by $h$.
     \end{enumerate}
     A \intro{bad bough} is a \kl{bough} that is not a \kl{good bough}.
 \end{definition}
@@ -242,12 +235,12 @@ It is clear that \cref{item:forall-wqo} implies \cref{item:2-wqo}. In
 \subsection{Using the Gap Embedding}
 \label{sec:gap-embedding}
 
-In this section, we will leverage \cref{thm:marked-nested-trees-wqo} to prove
+In this section, we leverage \cref{thm:marked-nested-trees-wqo} to prove
 that \cref{item:bound-dim} implies \cref{item:forall-wqo} of
-\cref{lem:good-boughs-wqo}. The main idea will be to use the bound on the
+\cref{lem:good-boughs-wqo}. The main idea is to use the bound on the
 \kl(bough){dimension} of \kl{bad boughs} to insert ``dummy nodes'' inside our
 trees, turning them into \kl{marked nested trees}. Because we can insert these
-dummy nodes in a controlled manner, we will be able to ensure that the
+dummy nodes in a controlled manner, we are able to ensure that the
 resulting \kl{marked nested trees} are \kl{$L$-bounded} for some $L \in \Nat$,
 allowing us to apply \cref{thm:marked-nested-trees-wqo}. 
 
@@ -262,14 +255,11 @@ allowing us to apply \cref{thm:marked-nested-trees-wqo}.
     when the latter is restricted to vertices corresponding to \kl{marked leaves}.
 \end{lemma}
 \begin{proof}
-  We proceed iteratively starting from the tree $\t$
-  where every node is set as a \kl{marked node}.
-  A rewrite step is as follows:
-  given a \kl{bough backbone} $b_0, b_1, \ldots, b_n$ defining a \kl{bough} $B$
-  of level $k$,
-  where all nodes of the \kl{bough backbone} are \kl{marked nodes}, and $n > N_0$. 
-  We know that $B$ is a \kl{good bough} by assumption and 
-  write $\t = C[B]$.
+  We proceed iteratively, starting from the tree $\t$ where every node is set as
+  a \kl{marked node}. A rewrite step works as follows: given a \kl{bough
+  backbone} $b_0, b_1, \ldots, b_n$ defining a \kl{bough} $B$ of level $k$ where
+  all nodes of the \kl{bough backbone} are \kl{marked nodes} and $n > N_0$, we
+  know that $B$ is a \kl{good bough} by assumption, and we write $\t = C[B]$.
 
   By definition of \kl{good boughs}, there exists a \kl{compatible bough} $H$
   and a map $h \colon \someInterp(C[B]) \to \someInterp(C[H])$ satisfying the
@@ -279,10 +269,10 @@ allowing us to apply \cref{thm:marked-nested-trees-wqo}.
   the same \kl{marking} as in $\t$. For nodes of $H$, we identify the three
   consecutive \kl(bough){blocks} whose leaves are left untouched by $h$ as
   $\BBlock[H]{z_i}{z_{i+1}}$, $\BBlock[H]{z_{i+1}}{z_{i+2}}$, and
-  $\BBlock[H]{z_{i+2}}{z_{i+3}}$. We set all of these nodes as \kl{dummy
-  nodes} except $z_i$ and $z_{i+3}$ that are set as \kl{marked nodes}, and
-  $z_{i+1}$ that is set as a \kl{separating node}. Finally, all other nodes of
-  $H$ are set as \kl{marked nodes}.
+  $\BBlock[H]{z_{i+2}}{z_{i+3}}$. We mark all these nodes as \kl{dummy nodes}
+  except $z_i$ and $z_{i+3}$, which are marked as \kl{marked nodes}, and
+  $z_{i+1}$, which is marked as a \kl{separating node}. Finally, all other
+  nodes of $H$ are marked as \kl{marked nodes}.
 
   We claim that one can apply these rewrite steps as follows: first, apply them
   to \kl{boughs} of minimal split level until exhaustion, and then proceed with
@@ -300,10 +290,9 @@ allowing us to apply \cref{thm:marked-nested-trees-wqo}.
   Let us now prove that every rewrite step preserves the fact that the graph
   $\someInterp(\t)$ restricted to vertices corresponding to \kl{marked leaves}
   is an \kl{induced subgraph} of $\someInterp(\t')$ restricted to vertices
-  corresponding to \kl{marked leaves}. This is a direct consequence of the fact
-  that $h \colon \someInterp(C[B]) \to \someInterp(C[H])$ is an \kl{embedding
-  of graphs}, and of the fact that $h$ is the identity on \kl(context){leaves}
-  of $C[\square]$.
+  corresponding to \kl{marked leaves}. This follows directly from the fact that
+  $h \colon \someInterp(C[B]) \to \someInterp(C[H])$ is an \kl{embedding of
+  graphs} and that $h$ is the identity on \kl(context){leaves} of $C[\square]$.
 
   From our construction, it is clear that at every level $k$, there are at most
   $N_0 + 1$ consecutive \kl{marked nodes} in the \kl{bough backbone} of any
@@ -355,27 +344,26 @@ By  \cref{thm:marked-nested-trees-wqo}, there exist two trees $(\t_i', \spt_i',
 $(\t_i, \spt_i, \marking_i) \gemb (\t_j, \spt_j, \marking_j)$. By
 \cref{cor:gap-embedding-monotone}, the graph interpreted from $(\t_i, \spt_i,
 \marking_i)$ is a \kl{labelled induced subgraph} of the graph interpreted from
-$(\t_j', \spt_j', \marking_j')$, when both are restricted to \kl{marked
-leaves}. We conclude that $G_i$ is a \kl{labelled induced subgraph} of $G_j$,
-hence that $\Label{Y}{\someInterp(\Trees{\Sigma}{})}$ is \kl{well-quasi-ordered}, and
-therefore that the image of $\someInterp$ is \kl{$\forall$-well-quasi-ordered}.
+$(\t_j', \spt_j', \marking_j')$ when both are restricted to \kl{marked leaves}.
+We conclude that $G_i$ is a \kl{labelled induced subgraph} of $G_j$, and thus
+$\Label{Y}{\someInterp(\Trees{\Sigma}{})}$ is \kl{well-quasi-ordered}. Therefore,
+the image of $\someInterp$ is \kl{$\forall$-well-quasi-ordered}.
 \end{proof}
 
 \subsection{Obstructions}
 \label{sec:obstructions}
 
-\AP In this section, we will prove \cref{item:2-wqo} implies
-\cref{item:bound-dim} of \cref{lem:good-boughs-wqo}. We will proceed by
-contraposition and assume that there exist \kl{bad boughs} of arbitrarily large
-\kl(bough){dimension}, and we will leverage this to construct an infinite
-\kl{antichain} in the image of $\someInterp$ using two colours. In order to
-build such an infinite \kl{antichain}, we will try to extract from an infinite
-sequence of \kl{bad boughs} of increasing \kl(bough){dimension} some
-incomparable graphs. To do so, we will first show that we can safely assume
-that all these \kl{bad boughs} are \kl(bough){compatible} (see
-\cref{lem:finitely-many-boughs} below), and that one can place all these
-\kl{bad boughs} in the \emph{same} \kl(bough){context} $C[\square]$ to witness
-that they are \kl(bough){bad} (see \cref{lem:finitely-many-contexts} below).
+\AP In this section we prove that \cref{item:2-wqo} implies \cref{item:bound-dim}
+of \cref{lem:good-boughs-wqo}. We proceed by contraposition and assume that
+there exist \kl{bad boughs} of arbitrarily large \kl(bough){dimension}. We use
+this to construct an infinite \kl{antichain} in the image of $\someInterp$ using
+two colours. To build such an infinite \kl{antichain}, we extract from an
+infinite sequence of \kl{bad boughs} of increasing \kl(bough){dimension} some
+incomparable graphs. We first show that all these \kl{bad boughs} can be assumed
+to be \kl(bough){compatible} (see \cref{lem:finitely-many-boughs} below), and
+that we can place all these \kl{bad boughs} in the \emph{same} \kl(bough){context}
+$C[\square]$ to witness that they are \kl(bough){bad} (see
+\cref{lem:finitely-many-contexts} below).
 
 \begin{lemma}[name={},restate=lem:finitely-many-boughs]
   \label{lem:finitely-many-boughs}
@@ -403,18 +391,16 @@ that they are \kl(bough){bad} (see \cref{lem:finitely-many-contexts} below).
   witnessing that $B$ is a \kl{good bough} in $C[B]$
   with respect to $H$.
 
-  First, one only needs to consider the edges between leaves of $B$
-  or edges between leaves of $B$ and leaves of $C[\square]$. Indeed, 
-  the map $h$ acts as the identity on leaves of $C[\square]$, so edges
-  are preserved there.
+  First, we only need to consider edges between leaves of $B$ or edges between
+  leaves of $B$ and leaves of $C[\square]$. Indeed, the map $h$ acts as the
+  identity on leaves of $C[\square]$, so edges are preserved there.
 
-  The fact that there are edges between leaves of $B$ only depends on their
-  respective \kl{bough types} and the value of
-  $\tlbl{\aTree_{\mathsf{root}}}{\treeRoot}{\square}$. As a consequence, any
-  two \kl(bough){contexts} sharing the same value for the path from the root to $\square$
-  do not change the edges between leaves of $B$ (or $H$). Since there
-  are finitely many monoid elements, there are finitely many possible values
-  for this path.
+  The presence of edges between leaves of $B$ depends only on their respective
+  \kl{bough types} and the value of $\tlbl{\aTree_{\mathsf{root}}}{\treeRoot}{\square}$.
+  Consequently, any two \kl(bough){contexts} sharing the same value for the path
+  from the root to $\square$ do not change the edges between leaves of $B$ (or
+  $H$). Since there are finitely many monoid elements, there are finitely many
+  possible values for this path.
 
   Let us now consider edges between leaves of $B$ and leaves of $C[\square]$.
   Similarly as for the leaves in \kl{boughs}, one can associate to every leaf
@@ -447,17 +433,16 @@ that they are \kl(bough){bad} (see \cref{lem:finitely-many-contexts} below).
 
 \begin{proof}[Proof of \cref{item:2-wqo} implies \cref{item:bound-dim} of \cref{lem:good-boughs-wqo}]
 
-  Let us assume towards a contradiction that the class of graphs obtained as
-  images of $\someInterp$ is \kl{$2$-well-quasi-ordered}, but that there exist
-  \kl{bad boughs} of arbitrarily large \kl(bough){dimension}. Let
-  $\seqof{B_i}[i \geq 1]$ be an infinite sequence of such \kl{bad boughs}. Without
-  loss of generality, one can assume that all \kl{boughs} $B_i$ have the same
-  level $k$, and are pairwise \kl(bough){compatible}, by
-  \cref{lem:finitely-many-boughs}.
+  Assume towards a contradiction that the class of graphs obtained as images of
+  $\someInterp$ is \kl{$2$-well-quasi-ordered}, but that there exist \kl{bad
+  boughs} of arbitrarily large \kl(bough){dimension}. Let $\seqof{B_i}[i \geq 1]$
+  be an infinite sequence of such \kl{bad boughs}. Without loss of generality,
+  we can assume that all \kl{boughs} $B_i$ have the same level $k$ and are
+  pairwise \kl(bough){compatible}, by \cref{lem:finitely-many-boughs}.
 
-  Using \cref{lem:finitely-many-contexts}, one can extract one \kl(bough){context}
+  Using \cref{lem:finitely-many-contexts}, we can extract one \kl(bough){context}
   $C[\square]$ such that infinitely many \kl{boughs} $B_i$ are \kl{bad boughs}
-  in $C[B_i]$. Finally, one can extract further to assume that 
+  in $C[B_i]$. Finally, we can extract further to assume that 
   the \kl(bough){dimension} of the \kl{boughs} $B_{i+1}$ 
   is greater than thrice the number of leaves in $B_i$.
 

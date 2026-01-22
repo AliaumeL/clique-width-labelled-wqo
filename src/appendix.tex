@@ -3,7 +3,7 @@
 
 
 \begin{proofof}{fact:gap-embedding-gaps}
-  This is proven by induction on the length of the path 
+  We prove this by induction on the length of the path 
   from $u$ to $v$ in $\t_1$. The base case is exactly 
   \cref{item:gap-embedding:edge} of the definition of \kl{gap-embedding}.
 
@@ -11,35 +11,35 @@
   such that $\spt_1(u:v) > k$ and $\spt_1(v) = k$ for some $k \in \set{1, \dots, N}$.
   Let $w$ be the \kl(tree){parent} of $v$ in $\t_1$.
   Since $\spt_1(u:v) > k$, we have $\spt_1(w) > k$.
-  By induction hypothesis, we have $\spt_2(h(u):h(w)) \geq k$.
+  By the induction hypothesis, we have $\spt_2(h(u):h(w)) \geq k$.
   Furthermore, by definition of \kl{gap-embedding}, we have $\spt_2(h(w):h(v)) \geq k$.
-  From there, we conclude that $\spt_2(h(u):h(v)) \geq k$.
+  Hence $\spt_2(h(u):h(v)) \geq k$.
 \end{proofof}
 
 \begin{proofof}{thm:marked-nested-trees-wqo}
-  We provide a function $f$ that maps \kl{$L$-bounded well-marked nested trees}
-  into \kl{nested trees} labelled over a \kl{well-quasi-ordered} set,
-  such that if there exists a 
-  \kl{gap-embedding} between $f(\t_1, \spt_1, \marking_1)$ and $f(\t_2, \spt_2, \marking_2)$,
+  We define a function $f$ that maps \kl{$L$-bounded well-marked nested trees}
+  to \kl{nested trees} labelled over a \kl{well-quasi-ordered} set,
+  such that if there exists a \kl{gap-embedding}
+  between $f(\t_1, \spt_1, \marking_1)$ and $f(\t_2, \spt_2, \marking_2)$,
   then $\t_1 \gemb \t_2$ as \kl{marked nested trees}.
-  Using \cref{thm:gap-embedding-wqo}, this will conclude the proof. 
+  Using \cref{thm:gap-embedding-wqo}, this concludes the proof. 
 
-  One can encode \cref{item:gap-embedding:root,item:gap-embedding:leaves,item:gap-embedding:marking,item:gap-embedding:local,item:gap-embedding:neighbourhood} of \cref{def:gap-embedding}
+  We can encode \cref{item:gap-embedding:root,item:gap-embedding:leaves,item:gap-embedding:marking,item:gap-embedding:local,item:gap-embedding:neighbourhood} of \cref{def:gap-embedding}
   by adding suitable labels to the nodes of the trees. Formally,
   we define a new labelling of the nodes of a tree $\t$ as follows: we add to each node $x$ of $\t$
   the label $\tlbl{\t}{z}{x}$ for every $k \in \set{1, \dots, N}$,
   where $z$ is the least ancestor of $x$ such that $\spt(z) = k$,
   or a special symbol $\bot$ if no such ancestor exists.
-  Furthermore, if $y$ is the immediate left (resp. right) child of $x$ in $\t$,
+  Furthermore, if $y$ is the immediate left (respectively right) child of $x$ in $\t$,
   we also add the label $\tlbl{\t}{x}{y}$ to $x$,
   or the special symbol $\bot$ if no such child exists.
-  We also distinguish the root by adding a special label $\mathsf{root}$,
+  We distinguish the root by adding a special label $\mathsf{root}$,
   and we add a special label $\mathsf{leaf}$ to every leaf.
   Finally, we also add the label $\marking(x)$ to $x$.
   Since $M$ is finite, the new labelling is still over a \kl{well-quasi-ordered} set. 
 
   It remains to ensure that the mapping $h$ is gluing on non-\kl{dummy} nodes.
-  To that end, we will modify the \kl{split} $\spt$ into a new split $\spt'$ as follows:
+  To that end, we modify the \kl{split} $\spt$ into a new split $\spt'$ as follows:
   for every non-\kl{dummy} node $x$, we have that $x$ is the $i$th element 
   in a maximal path of non-\kl{dummy} nodes $x_1 \treelt[\t] x_2 \treelt[\t] \cdots \treelt[\t] x_n$
   that contains $x$. Because the tree is \kl{$L$-bounded}, we have $n \leq L$.
@@ -47,17 +47,17 @@
 
   Note that any \kl{gap-embedding} $h$ from
   $(\t_1, \spt'_1)$ to $(\t_2, \spt'_2)$
-  is necessarily gluing on non-\kl{dummy} nodes: 
-  assume that $\marking_1(y) \in \set{\marked, \separating}$,
+  is necessarily gluing on non-\kl{dummy} nodes. 
+  Assume that $\marking_1(y) \in \set{\marked, \separating}$,
   and let $x$ be the parent of $y$ in $\t_1$.
   Since $\spt'_1(y) = N + 1 + i$, we know that 
   $\spt'_2(h(x)\colon h(y)) \geq \spt'_1(y) = N + 1 + i$.
-  But this means that between $h(x)$ and $h(y)$
+  This means that between $h(x)$ and $h(y)$
   there are only nodes with \kl{split depth} greater or equal than $N + 1 + i$.
   If $i = 1$ (i.e., $y$ is the first node of a maximal path of non-\kl{dummy} nodes),
   then there is no such node, and $h(x)$ is the parent of $h(y)$.
   Otherwise, $\spt'_1(x) = N + i > N$, and therefore 
-  the path from $h(x)$ to $h(y)$ contains only non \kl{dummy} nodes.
+  the path from $h(x)$ to $h(y)$ contains only non-\kl{dummy} nodes.
   Since the split values have been chosen to be strictly increasing inside
   maximal paths of non-\kl{dummy} nodes,
   there is no such node, and $h(x)$ is the parent of $h(y)$.
@@ -67,33 +67,33 @@
 
 \begin{proofof}{lem:finitely-many-boughs}
   Let $\t = C[B]$ be a tree obtained by plugging a \kl{bough} $B$ of level
-  $k$ inside a \kl(bough){context} $C[\square]$. Our goal 
+  $k$ inside a \kl(bough){context} $C[\square]$. Our aim 
   is to extract finitely many parameters from $B$ 
   (independently of $C[\square]$) such that any other \kl{bough} $B'$ of level $k$
   with the same parameters is \kl(bough){compatible} with $B$.
   These parameters will be elements of $M$ or tuples thereof,
-  and since $M$ is finite, we will immediately conclude.
+  and since $M$ is finite, this immediately gives finiteness.
 
-  To that end, let us fix a \kl(bough){context} $C[\square]$. Assume that $\t =
-  C[B]$ is \kl{forward Ramseyan}: we want to ensure that $\t' = C[B']$ is
-  \kl{forward Ramseyan} of any $B'$ with the same parameters. 
-  Recall that $\t'$ is \kl{forward Ramseyan} if for
-  every branch in $\t'$, for every level $l$, for every \kl{$l$-neighbourhood}
-  in this branch, and for every four nodes $x \treelt y$ and $x' \treelt y'$ in
+  To that end, fix a \kl(bough){context} $C[\square]$. Assume that $\t =
+  C[B]$ is \kl{forward Ramseyan}. We want to ensure that $\t' = C[B']$ is
+  \kl{forward Ramseyan} for any $B'$ with the same parameters. 
+  Recall that $\t'$ is \kl{forward Ramseyan} if, for
+  every branch in $\t'$, every level $l$, every \kl{$l$-neighbourhood}
+  in this branch, and every four nodes $x \treelt y$ and $x' \treelt y'$ in
   this \kl{$l$-neighbourhood}, we have $\tlbl{\t'}{x}{y} \cdot
   \tlbl{\t'}{x'}{y'} = \tlbl{\t'}{x}{y}$.
 
   First, remark that \kl{$l$-neighbourhoods} with $l < k$ inside $\t'$ are fully
   contained either in $B'$, or $\aTree_{\mathsf{root}}$, or
-  $\aTree_{\mathsf{left}}$,  or $\aTree_{\mathsf{right}}$. As a consequence,
+  $\aTree_{\mathsf{left}}$, or $\aTree_{\mathsf{right}}$. As a consequence,
   nothing needs to be checked on such \kl{$l$-neighbourhoods} since $B'$
   is assumed to be locally \kl{forward Ramseyan}.
   More generally, the only possible failures of the \kl{forward Ramseyan}
   condition in $\t'$ must involve nodes that are not all contained
   in one of these four subtrees.
 
-  Now, let us consider \kl{$l$-neighbourhoods} with $l \geq k$.
-  If $l \geq k$, then the only \kl{$l$-neighbourhood} of a branch that
+  Now, consider \kl{$l$-neighbourhoods} with $l \geq k$.
+  In that case, the only \kl{$l$-neighbourhood} of a branch that
   is not fully contained in one of the four subtrees crosses $B'$. Let us 
   distinguish several cases based on the shape of the branch with respect 
   to the \kl(bough){context} $C[\square]$ and the \kl{bough} $B'$.
@@ -106,13 +106,13 @@
   \end{enumerate}
 
   In the first case, consider two nodes $x \treelt y$ and $x' \treelt y'$ in
-  the \kl{$l$-neighbourhood}. Remark that the value $\tlbl{\t'}{x}{y}$ can be
+  the \kl{$l$-neighbourhood}. The value $\tlbl{\t'}{x}{y}$ can be
   decomposed into a part before entering $B'$, a part inside $B'$, and a part
   after leaving $B'$. By construction, the part inside $B'$ is one of the
   idempotent elements labelling the \kl(bough){backbone} of $B'$. Hence, to
   ensure that $\t'$ is \kl{forward Ramseyan} in this case, it suffices to check
   finitely many equations involving those idempotent elements (note that the
-  number of equations depends on the shape of $C[\square]$, but not 
+  number of equations depends on the shape of $C[\square]$, but not on
   the number of elements of $M$ extracted from $B'$).
 
   In the second case, consider two nodes $x \treelt y$ and $x' \treelt y'$ in
@@ -125,10 +125,10 @@
   values $\tlbl{\t'}{z}{y}$ for every node $y$ in $B'$ in the same
   \kl{$l$-neighbourhood} as $z$ (for some branch). Note that one only cares
   about the existence of pairs of values $(\tlbl{\t'}{b_0'}{z},
-  \tlbl{\t'}{z}{y})$ for nodes $z$ and $y$ in the same \kl{$l$-neighbourhood},
+  	lbl{\t'}{z}{y})$ for nodes $z$ and $y$ in the same \kl{$l$-neighbourhood},
   and there are only finitely many such pairs.
 
-  We have proven that, assuming that $\t = C[B]$ is
+  We have proved that, assuming that $\t = C[B]$ is
   \kl{forward Ramseyan}, it suffices to check finitely many parameters of $B'$
   to ensure that $C[B]$ is \kl{forward Ramseyan}. Since $M$ is finite, there
   are finitely many possible values for these parameters, which concludes the
@@ -140,21 +140,21 @@
 \begin{proofof}{lem:recognizing-perfect-boughs}
   The proof follows the same pattern as 
   \cite[Lemma 19]{LOPEZ24}, but adapts it from words to trees. 
-  Assume that $B$ is a \kl{perfect bough} of level $k$ inside of a tree
+  Assume that $B$ is a \kl{perfect bough} of level $k$ inside a tree
   $\t = C[B]$.
   This gives us a compatible \kl{bough} $H$ of level $k$
   and an embedding $h \colon \someInterp(C[B]) \to \someInterp(C[H])$
   satisfying the conditions of \cref{def:perfect-bough}.
 
-  Let us consider five copies of $B$, called $B_\mathsf{left}$,
+  Consider five copies of $B$, called $B_\mathsf{left}$,
   $B_\mathsf{mid-1}$, $B_\mathsf{mid-2}$, $B_\mathsf{mid-3}$, and
-  $B_\mathsf{right}$, and let us define $B^5$ to be the \kl{bough} obtained by
-  concatenating these five copies merging $b_n$ of $B_\mathsf{left}$ with $b_0$
-  of $B_\mathsf{mid-1}$, and merging $b_n$ of $B_\mathsf{mid-1}$ with $b_0$ of
-  $B_\mathsf{mid-2}$ and so on. We claim that $B$ and $B^5$ are \kl{compatible
+  $B_\mathsf{right}$. Define $B^5$ to be the \kl{bough} obtained by
+  concatenating these five copies, merging $b_n$ of $B_\mathsf{left}$ with $b_0$
+  of $B_\mathsf{mid-1}$, merging $b_n$ of $B_\mathsf{mid-1}$ with $b_0$ of
+  $B_\mathsf{mid-2}$, and so on. We claim that $B$ and $B^5$ are \kl{compatible
   boughs}. 
 
-  Let us define a mapping $k \colon \someInterp(C[B]) \to
+  Define a mapping $k \colon \someInterp(C[B]) \to
   \someInterp(C[B^5])$
   as follows: leaves $x$ of $B$ are mapped to their
   corresponding leaf in $B_\mathsf{left}$ or $B_\mathsf{right}$ depending on
@@ -163,12 +163,12 @@
   Thanks to \cref{fact:bough-replacement}, we know that
   $k$ preserves edges between leaves of $C[\square]$.
   Furthermore, because $h$ is an embedding that preserves the 
-  \kl{bough type} of leaves in $B$, and because \kl{bough types} are enough
+  \kl{bough type} of leaves in $B$, and because \kl{bough types} suffice
   to compute the presence of an edge between a leaf of $B$ and a leaf of
   $C[\square]$ (or between two leaves of $B$), we deduce that $k$ is also an
   embedding.
 
-  What we have shown is that if $B$ is a \kl{perfect bough}, then there exists
+  We have therefore shown that if $B$ is a \kl{perfect bough}, then there exists
   a mapping $k'$ from leaves of $B$ to $\set{ \mathsf{left}, \mathsf{right} }$
   such that there is an edge between two leaves $x$ and $y$ of $B$ in the graph
   $\someInterp(C[B])$ if and only if the \kl{bough types} of $x$ and $y$ are
@@ -182,10 +182,10 @@
 \begin{proofof}{lem:hereditary-perfect-boughs}
   The proof follows the same pattern 
   as \cref{lem:finitely-many-boughs,lem:finitely-many-contexts},
-  and continues on the ideas of \cref{lem:recognizing-perfect-boughs}.
+  and continues along the ideas of \cref{lem:recognizing-perfect-boughs}.
   The idea is that if a bough $B$ is \kl(bough){perfect}, then 
   one can witness it by using the \kl{compatible bough} $B^5$ 
-  defined by gluing five copies of $B$ together, because we noticed
+  defined by gluing five copies of $B$ together, because we observed
   that perfectness essentially depends on the \kl{bough types} of the leaves
   of $B$. 
   Another consequence of this analysis is that if one defines an equivalence relation between
@@ -201,25 +201,25 @@
 
 \begin{proofof}{lem:regular-antichain}
   Using 
-  \cref{cor:hereditary-perfect-boughs-wqo}, one can assume that $\Cls$
+  \cref{cor:hereditary-perfect-boughs-wqo}, one may assume that $\Cls$
   has \kl{bounded linear clique-width}. It then follows from
   the analysis of \cite{LOPEZ24} that 
   $\Cls$ contains a \kl{periodic sequence} $\seqof{G^r}[r \geq 1]$.
-  Let us redo the argument here for the sake of completeness.
+  We restate the argument here for completeness.
 
-  Let us assume that $\Cls$ is not \kl{$\forall$-well-quasi-ordered}. We will
-  start similarly as in the proof of \cref{cor:hereditary-perfect-boughs-wqo},
+  Assume that $\Cls$ is not \kl{$\forall$-well-quasi-ordered}. We proceed as
+  in the proof of \cref{cor:hereditary-perfect-boughs-wqo},
   and assume without loss of generality that $\Cls$ is the image of 
   a \kl{monoid interpretation}.
   Using \cref{lem:hereditary-perfect-boughs} and \cref{lem:perfect-boughs-wqo},
   we obtain one \kl(bough){context} $C[\square]$, a finite set $\mathbb{F}$ of
-  \kl(bough){blocks} and a sequence $\seqof{B_i}[i \in \Nat]$ of \kl{boughs}
+  \kl(bough){blocks}, and a sequence $\seqof{B_i}[i \in \Nat]$ of \kl{boughs}
   built using \kl(bough){blocks} from $\mathbb{F}$ and such that for every $i
   \in \Nat$, $B_i$ is an \kl{imperfect bough} in the \kl(bough){context}
   $C[\square]$. 
 
   We can encode $B_i$ as a word $w_i$ on the finite alphabet $\mathbb{F}$.
-  Similarly as in \cref{lem:recognizing-perfect-boughs}, we can construct an
+  As in \cref{lem:recognizing-perfect-boughs}, we can construct an
   $\MSO$ formula that decides whether a word $w \in \mathbb{F}^*$ encodes an
   \kl{imperfect bough} in the (fixed) \kl(bough){context} $C[\square]$. Because
   the language $L_\text{imperfect}$ of such words is regular and infinite,
@@ -229,9 +229,9 @@
   From $w$, one can create the desired graph $G$, and the sets $F$ and $C$. The
   vertices of $G$ are the leaves of the \kl{bough blocks} composing $w$, and
   edges are exactly those prescribed by the interpretation $\someInterp$ on
-  $C[w]$. Remark that an edge between vertices in two distinct copies of $w$ in
-  among vertices of $w^n$ in the graph $\someInterp(C[uw w^n wv])$ depends on
-  the order of the vertices, and whether the two copies are adjacent or not
+  $C[w]$. An edge between vertices in two distinct copies of $w$ among vertices
+  of $w^n$ in the graph $\someInterp(C[uw w^n wv])$ depends on
+  the order of the vertices, and on whether the two copies are adjacent
   because of the \kl{forward Ramseyan} property. We use as colours for the
   vertices of $G$ their \kl{bough types} and their precise location in the word
   $w$. Using this finite information, one can construct $F$ and $C$ such that
@@ -244,7 +244,7 @@
   may not belong to $\Cls$.}
 
   Let us now prove that 
-  it is in fact a \kl{regular antichain}. Assume towards a contradiction 
+  it is in fact a \kl{regular antichain}. Assume for contradiction 
   that it is not.
   Then, without loss of generality, there exists a \kl{labelled embedding}
   $h$
@@ -257,7 +257,7 @@
     \item $h$ leaves three consecutive copies of $G$ untouched in $G^\ell$.
   \end{enumerate}
 
-  Remark that one can extent $h$ to be the identity on the 
+  One can extend $h$ to be the identity on the 
   context $C[uw \square wv]$ and conclude that 
   $uw w^n wv$ is a \kl{perfect bough} in the context $C[\square]$.
   This is absurd.
@@ -271,12 +271,12 @@ its labelling function with sets  $C, F \subseteq \Sigma^2$.
 
 Without loss of generality, assume that $\lab$ is injective up to duplicating
 labels from $\Sigma$, and assume that $|\Sigma| = |V(G)|$. In the rest of this
-proof, we will assume that $r \geq 3$. For $i \leq r$, we denote the $i$-th
-copy of $G$ in $G^r$ by $G_i$, and by $u_i \in G^r$ the $i$-th copy of $u\in
-V(G)$. We will proceed in two steps, we first define a formula producing a
+proof, we assume that $r \geq 3$. For $i \leq r$, we denote the $i$th
+copy of $G$ in $G^r$ by $G_i$, and by $u_i \in G^r$ the $i$th copy of $u\in
+V(G)$. We proceed in two steps: first we define a formula producing a
 directed graph where there is a directed shortest path from $G_1$ to $G_r$
 going through every $G_i$, but there may exist arcs going from $G_i$ to $G_j$
-for $j\leq i$. We will then show how to handle theses backward arcs, and
+for $j\leq i$. We then show how to handle these backward arcs, and
 produce arbitrarily long paths.
 
 We define the following quantifier-free formula that uses the edge predicate on 

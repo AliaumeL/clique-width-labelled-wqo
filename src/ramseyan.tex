@@ -2,16 +2,16 @@
 \section{From Interpretations to Nested Trees}
 \label{sec:ramseyan}
 
-As a first step towards proving \cref{main:theorem}, we are going to
-transform a \kl{simple $\MSO$-interpretation} from trees to graphs into a more
-combinatorial object that will make the interpretation \emph{quantifier-free}.
-To that end, we will chain two standard transformations from automata theory:
-the first one is to transform an \kl{$\MSO$-interpretation} into a so-called
-\kl{monoid interpretation}, and the second one is to factorise the trees using
-\kl{forward Ramseyan splits} (nested trees) \cite{COLC07}. Finally, we will
-show that the natural ordering on \kl{nested trees} (the \kl{gap embedding}) is
-\emph{almost} such that the resulting interpretation is order preserving from
-\kl{nested trees} to graphs.
+As a first step towards proving \cref{main:theorem}, we transform a
+\kl{simple $\MSO$-interpretation} from trees to graphs into a more
+combinatorial object that renders the interpretation \emph{quantifier-free}.
+To that end, we chain two standard transformations from automata theory: we
+first convert an \kl{$\MSO$-interpretation} into a so-called \kl{monoid
+interpretation}, and then factorise the trees using \kl{forward Ramseyan
+splits} (nested trees) \cite{COLC07}. Finally, we show that the natural
+ordering on \kl{nested trees} (the \kl{gap embedding}) is \emph{almost}
+order-preserving for the resulting interpretation from \kl{nested trees} to
+graphs.
 
 \AP  Let us fix for the rest of the section a finite alphabet $\Sigma$ and a
 \kl{simple $\MSO$-interpretation} $\someInterp$ from $\Trees{\Sigma}{}$ to
@@ -31,26 +31,23 @@ $\mu(\tword{\treeRoot}{z})$ where $z = \lca(x,y)$ is the \kl{least common
 ancestor} of $x$ and $y$. We refer to the book on Tree Automata Techniques and
 Applications for a comprehensive overview of the connection between Monadic
 Second Order Logic on trees, and tree automata \cite{TATA08}. In the rest of
-the section, we will fix such a monoid $M$ and morphism $\mu$. To simplify
-notations, we will write $\intro*\tlbl{\aTree}{x}{y}$ for $\mu(\tword{x}{y})$, that
+the section, we fix such a monoid $M$ and morphism $\mu$. To simplify
+notations, we write $\intro*\tlbl{\aTree}{x}{y}$ for $\mu(\tword{x}{y})$, that
 is, the product of the labels of the edges on the path from $x$ to $y$ in $\aTree$.
 
 \AP As a consequence, one can collect in a subset $P \subseteq M^3$ all the
-triples $(a,b,c)$ corresponding to a satisfying assignments
-of the formula $\varphi(x,y)$. This is illustrated in
-\cref{interpretation-to-monoid:fig}.
-We define a \intro{monoid interpretation} from trees
-labelled over $M$ to finite undirected graphs to be a tuple 
-$(\Sigma, \mu, M, P)$ where $\Sigma$ is a finite alphabet,
-$\mu \colon \Sigma^* \to M$ is a morphism to a finite monoid $M$,
-and $P \subseteq M^3$ is a subset of triples of elements of $M$.
-The interpretation works as follows: given a tree $\aTree$ whose edges are labelled
-by elements of $\Sigma$, the vertices of the interpreted graph are the leaves of
-$T$, and there is an edge between two leaves $x \treesibleq y$ if and only if
-the triple $(\tlbl{\aTree}{\treeRoot}{\lca(x,y)},
-\tlbl{\aTree}{\lca(x,y)}{x}, \tlbl{\aTree}{\lca(x,y)}{y})$ is in $P$.
+triples $(a,b,c)$ that correspond to satisfying assignments of the formula
+$\varphi(x,y)$, as illustrated in \cref{interpretation-to-monoid:fig}. We
+define a \intro{monoid interpretation} from trees labelled over $M$ to finite
+undirected graphs to be a tuple $(\Sigma, \mu, M, P)$ where $\Sigma$ is a
+finite alphabet, $\mu \colon \Sigma^* \to M$ is a morphism to a finite monoid
+$M$, and $P \subseteq M^3$ is a subset of triples of elements of $M$. The
+interpretation works as follows: given a tree $\aTree$ whose edges are labelled
+by elements of $\Sigma$, the vertices of the interpreted graph are the leaves
+of $T$, and there is an edge between two leaves $x \treesibleq y$ if and only
+if the triple $(\tlbl{\aTree}{\treeRoot}{\lca(x,y)}, \tlbl{\aTree}{\lca(x,y)}{x}, \tlbl{\aTree}{\lca(x,y)}{y})$ belongs to $P$.
 
-Adding the function $\tlbl{T}{x}{y}$ to the signature of trees, and assuming 
+Adding the function $\tlbl{T}{x}{y}$ to the signature of trees, and assuming
 that $\lca$ is also part of the signature, we can rewrite the formula
 $\varphi(x,y)$ as a quantifier-free formula as follows:
 \begin{equation}
@@ -103,10 +100,10 @@ $\varphi(x,y)$ as a quantifier-free formula as follows:
     \label{interpretation-to-monoid:fig}
 \end{figure}
 
-The main idea driving this paper is that understanding when a class of graphs
-is \kl{$\forall$-well-quasi-ordered} can be reduced to finding a suitable
+The main idea driving this paper is that deciding when a class of graphs is
+\kl{$\forall$-well-quasi-ordered} reduces to finding a suitable
 \kl{well-quasi-order} on trees such that the interpretation $\someInterp$ is
-\emph{order-preserving} from trees to graphs, leveraging the following standard
+\emph{order-preserving} from trees to graphs, leveraging the standard
 \cref{fact:surjective-wqo}.
 
 \begin{fact}[Folklore]
@@ -130,43 +127,43 @@ is \kl{$\forall$-well-quasi-ordered} can be reduced to finding a suitable
 %  Since $f$ is order-preserving, we have $y_i = f(x_i) \leq_Y f(x_j) = y_j$.
 %\end{proof}
 
-\AP One candidate ordering on trees is the \intro{composition ordering} defined
-as follows. Given two trees $\aTree_1$ and $\aTree_2$ labelled over a monoid
-$M$, we say that $\aTree_1$ is less than $\aTree_2$ in the \kl{composition
-ordering}, written $\aTree_1 \cmpleq \aTree_2$, if there exists a map $h \colon
-\aTree_1 \to \aTree_2$ that maps leaves to leaves, respects the relation
-$\lca$, $\treesibleq$, and the function $\tlbl{}{\cdot}{\cdot}$. This ordering
-is naturally extended to node-labelled trees by asking that for every node $x$
-in $\aTree_1$, the label of $x$ is less or equal than the label of $h(x)$ in
-$\aTree_2$. It is straightforward to check that the interpretation
-$\someInterp$ is order-preserving from trees equipped with the \kl{composition
-ordering} to graphs equipped with the \kl{induced subgraph} ordering. Hence, to
-prove that the image of $\someInterp$ is \kl{$\forall$-well-quasi-ordered}, it
-suffices to prove that the class of trees is \kl{well-quasi-ordered} under the
+\AP One candidate ordering on trees is the \intro{composition ordering}. Given
+two trees $\aTree_1$ and $\aTree_2$ labelled over a monoid $M$, we say that
+$\aTree_1$ is less than $\aTree_2$ in the \kl{composition ordering}, written
+$\aTree_1 \cmpleq \aTree_2$, if there exists a map $h \colon \aTree_1 \to
+\aTree_2$ that maps leaves to leaves and respects $\lca$, $\treesibleq$, and
+$\tlbl{}{{\cdot}}{{\cdot}}$. This ordering naturally extends to
+node-labelled trees by requiring that for every node $x$ in $\aTree_1$, the
+label of $x$ is less than or equal to the label of $h(x)$ in $\aTree_2$. It is
+straightforward to check that the interpretation $\someInterp$ is
+order-preserving from trees equipped with the \kl{composition ordering} to
+graphs equipped with the \kl{induced subgraph} ordering. Hence, to show that
+the image of $\someInterp$ is \kl{$\forall$-well-quasi-ordered}, it suffices to
+prove that the class of trees is \kl{well-quasi-ordered} under the
 \kl{composition ordering} when labelled using a \kl{well-quasi-ordered} set
 $(X, \leq_X)$.
 
 
-\AP Historically, this approach was used to prove that some classes of graphs
-are \kl{$\forall$-well-quasi-ordered}, see for instance the results of
+\AP Historically, this approach has been used to prove that some classes of
+graphs are \kl{$\forall$-well-quasi-ordered}; see for instance the results of
 \cite{DING92,DRT10}. Unfortunately, the \kl{composition ordering} on trees is
-often way stricter than the \kl{induced subgraph} ordering. It was observed
+often much stricter than the \kl{induced subgraph} ordering. It was observed
 that the \kl{composition ordering} on trees is \kl{well-quasi-ordered} if and
 only if \emph{for every} $P \subseteq M^3$, the class of graphs obtained from
 trees by considering only the triples in $P$ is
-\kl{$\forall$-well-quasi-ordered} \cite[Theorem 24]{LOPEZ24}. To understand what
-happens for a precise choice of $P$, we will develop a finer understanding of
-the trees themselves.
+\kl{$\forall$-well-quasi-ordered} \cite[Theorem 24]{LOPEZ24}. To understand
+what happens for a specific choice of $P$, we will develop a finer
+understanding of the trees themselves.
 
 
 \subsection{Forward Ramseyan Splits}
 
-\def\t{\aTree} \AP The combinatorial ingredient allowing us to  further
-decompose the trees will come from an adaptation of the classical Simon
+\def\t{\aTree} \AP The combinatorial ingredient that allows us to further
+decompose the trees comes from an adaptation of the classical Simon
 Factorisation Theorem for semigroups \cite{SIMO90}, adapted to trees by
-Colcombet~\cite{COLC07}. The rest of this section is devoted to explaining how
-this factorisation works, and how it can be used to define a more suitable
-ordering on trees.
+Colcombet~\cite{COLC07}. The rest of this section explains how this
+factorisation works and how it can be used to define a more suitable ordering
+on trees.
 
 \AP A \intro{split of height $N$} of a tree $\t$ is a mapping $\spt$ from the
 nodes of $T$ to $\set{1, \dots, N}$. Given a split $\spt$ and two nodes $x
@@ -175,13 +172,12 @@ $\spt(z)$ for $x \treelt[\t] z \treelt[\t] y$, and $N+1$ otherwise.
 In particular, if $y$ is a child of $x$, then $\spt(x \colon y) = N+1$.
 
 \AP Two elements $x \treelt[\t] y$ such that $\spt(x) = \spt(y) = k$ are
-\intro{$k$-neighbours} if $\spt(x \colon y) \geq k$. For every branch of the
-tree, being \kl{$k$-neighbours} is an equivalence relation on the nodes of the
-tree having value $k$ in the split belonging to said branch. A \kl{split}
-induces a hierarchical structure on every branch of the tree, based on the
-\kl{$k$-neighbourhoods}. We illustrate the situation in
-\cref{split-on-branch:fig}. We will refer to the value of $\spt(x)$ as the
-\reintro{split depth} of the node $x$.
+\intro{$k$-neighbours} if $\spt(x \colon y) \geq k$. Along every branch, being
+\kl{$k$-neighbours} is an equivalence relation on the nodes of the branch that
+take value $k$ in the split. A \kl{split} thus induces a hierarchical
+structure on each branch based on its \kl{$k$-neighbourhoods}. We illustrate
+the situation in \cref{split-on-branch:fig}. We refer to the value of
+$\spt(x)$ as the \reintro{split depth} of the node $x$.
 
 \begin{figure}
   \centering 
@@ -241,22 +237,21 @@ with $x \treelt[\t] y$ and $x' \treelt[\t] y'$, we have:
 
 
 \AP In particular, $\tlbl{\t}{x}{y}$ is always an \intro{idempotent}, that is,
-satisfies the equation $e \cdot e = e$. However, note that $\tlbl{\t}{x}{y}$
-and $\tlbl{\t}{x'}{y'}$ may be different \kl{idempotents}.
+it satisfies $e \cdot e = e$. However, $\tlbl{\t}{x}{y}$ and
+$\tlbl{\t}{x'}{y'}$ may be different \kl{idempotents}.
 
 \AP Let us illustrate how one can use \kl{forward Ramseyan splits} to compute
 efficiently the value of $\tlbl{\t}{x}{y}$ for any pair of nodes $x \treelt[\t]
-y$. We say that $x$ and $y$ are \intro{independent at level $k$} if $\spt(x:y)
-= k$ and there exist three nodes $z_1, z_2, z_3$ such that $x \treeleq[\t] z_1
-\treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$ and $\spt(z_1) = \spt(z_2) =
-\spt(z_3) = k$, and $\spt(x\colon z_1) > k$, $\spt(z_1 \colon z_2) > k$, and $\spt(z_3\colon y) >
-k$. The idea being that $x$ and $y$ are \emph{separated} by at least
-one \kl{$k$-neighbourhood}.
-In the case of \kl{independence at level $k$}, we can use the property of
-\kl{forward Ramseyan splits} to 
-compute $\tlbl{\t}{x}{y}$ without ever looking at the section
-between $z_2$ and $z_3$, leading to a fast (and first-order definable) computation.
-We refer to \cite[Lemma 3]{COLC07} for more details on this computation.
+y$. We say that $x$ and $y$ are \intro{independent at level $k$} if
+$\spt(x:y) = k$ and there exist three nodes $z_1, z_2, z_3$ such that
+$x \treeleq[\t] z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$,
+$\spt(z_1) = \spt(z_2) = \spt(z_3) = k$, and $\spt(x\colon z_1) > k$,
+$\spt(z_1 \colon z_2) > k$, and $\spt(z_3\colon y) > k$. In essence, $x$ and
+$y$ are \emph{separated} by at least one \kl{$k$-neighbourhood}. In this case,
+we can exploit \kl{forward Ramseyan splits} to compute $\tlbl{\t}{x}{y}$
+without inspecting the section between $z_2$ and $z_3$, leading to a fast (and
+first-order definable) computation. We refer to \cite[Lemma 3]{COLC07} for
+further details.
 
 \begin{figure}
     \centering
@@ -308,31 +303,30 @@ We refer to \cite[Lemma 3]{COLC07} for more details on this computation.
     \label{fast-computation:fig}
 \end{figure}
 
-\AP The main theorem of \cite{COLC07} is that for every finite monoid $M$,
-there exists a finite depth $N$ such that for every tree $\aTree$ edge-labelled
-using $M$, there exists a forward Ramseyan split of height $N$ for $\aTree$. We can
-therefore assume that our trees are always equipped with a \kl{forward Ramseyan
-split} of height $N$. 
+\AP The main theorem of \cite{COLC07} states that for every finite monoid $M$
+there exists a finite depth $N$ such that for every tree $\aTree$
+edge-labelled using $M$, there is a forward Ramseyan split of height $N$ for
+$\aTree$. We can therefore assume that our trees are always equipped with a
+\kl{forward Ramseyan split} of height $N$. 
 
-\AP Let us now state the main remark that will guide the rest of this paper:
-given a branch of a tree equipped with a \kl{forward Ramseyan split} as the one
-illustrated in \cref{fast-computation:fig}, and assuming that $z_2 \neq z_3$,
-the value of $\tlbl{\t}{x}{y}$ does not change when inserting new nodes in the
-section between $z_2$ and $z_3$ as long as these new nodes are assigned a value
-of the split bigger than or equal to $k$, and the resulting tree is still
-\kl{forward Ramseyan}. A fortiori, whether there is an edge between two leaves
-of $x$ and $y$ in the resulting graph is not influenced by such insertions.
-This will guide our definition of a suitable ordering on trees in the upcoming
-\cref{sec:marked-nested-trees}.
+\AP We now state the main remark that guides the rest of the paper: given a
+branch of a tree equipped with a \kl{forward Ramseyan split} as in
+\cref{fast-computation:fig}, and assuming that $z_2 \neq z_3$, the value of
+$\tlbl{\t}{x}{y}$ does not change when inserting new nodes in the section
+between $z_2$ and $z_3$, provided these new nodes are assigned a split value at
+least $k$ and the resulting tree remains \kl{forward Ramseyan}. A fortiori,
+whether there is an edge between the leaves $x$ and $y$ in the resulting graph
+is not affected by such insertions. This observation guides our definition of a
+suitable ordering on trees in the upcoming \cref{sec:marked-nested-trees}.
 
 \subsection{Marked Nested Trees}
 \label{sec:marked-nested-trees}
 
-In this section, we will show how the notion of \kl{forward Ramseyan split} gets 
-us closer to defining a \kl{well-quasi-order} on trees that is suitable for our purpose.
-A first step is to notice that there already exists a notion of embedding 
-that somehow respects \kl{forward Ramseyan splits}, called \kl{gap-embeddings}
-and that endows trees with a \kl{well-quasi-order} \cite{DERSHOWITZ200380}.
+In this section we show how the notion of \kl{forward Ramseyan split} brings us
+closer to defining a \kl{well-quasi-order} on trees that suits our purpose. A
+first step is to note that there already exists a notion of embedding that
+respects \kl{forward Ramseyan splits}, namely \kl{gap-embeddings}, which endow
+trees with a \kl{well-quasi-order} \cite{DERSHOWITZ200380}.
 
 \begin{definition}[{\cite[Definition 3.3]{DERSHOWITZ200380}}]
   A \intro{gap-embedding} between trees $\t_1, \t_2$
@@ -358,11 +352,11 @@ and that endows trees with a \kl{well-quasi-order} \cite{DERSHOWITZ200380}.
   the label of $x$ is less than or equal to the label of $h(x)$ in $\t_2$.
 \end{definition}
 
-\AP In the following \cref{fact:gap-embedding-gaps} we illustrate why
-\kl{gap-embeddings} are well-suited for our purpose: they respect the gaps
-induced by \kl{forward Ramseyan splits}. One other key property of the
-\kl{gap-embedding} ordering is that it is a \kl{well-quasi-ordering} as
-recalled in \cref{thm:gap-embedding-wqo}.
+\AP In \cref{fact:gap-embedding-gaps} we illustrate why \kl{gap-embeddings}
+are well suited to our purpose: they respect the gaps induced by
+\kl{forward Ramseyan splits}. Another key property of the \kl{gap-embedding}
+ordering is that it is a \kl{well-quasi-ordering}, as recalled in
+\cref{thm:gap-embedding-wqo}.
 
 \begin{fact}[name={},restate={fact:gap-embedding-gaps}]
   \label{fact:gap-embedding-gaps}
@@ -383,7 +377,7 @@ recalled in \cref{thm:gap-embedding-wqo}.
   even under the assumption that nodes are labelled with a \kl{well-quasi-ordered} set $(X, \leq_X)$.
 \end{theorem}
 
-\AP We will now devise a suitable modification of the \kl{gap-embedding}
+\AP We now devise modified version of the \kl{gap-embedding}
 ordering to make the interpretation $\someInterp$ order-preserving from trees
 to graphs. In particular, this modification will take into account the
 edge-labelling of the trees using the monoid $M$, that are not considered in
@@ -395,24 +389,24 @@ the \kl{gap-embedding} ordering.
 \newcommand{\marking}{\rho}
 
 \begin{definition}
-  A \intro{marked nested tree} is a tuple $(\t, \spt, \marking)$ where
-  $\t$ is a tree whose edges are labelled over a finite monoid $M$,
-  $\spt$ is a forward Ramseyan split of height $N$ of $\t$,
-  and $\marking$ is a function from the nodes of $\t$ to $\set{\marked, \separating, \dummy}$, 
-  respectively called \intro(nodes){marked}, \intro(nodes){separating}, and \intro(nodes){dummy} nodes.
+  A \intro{marked nested tree} is a tuple $(\t, \spt, \marking)$ where $\t$ is
+  a tree whose edges are labelled over a finite monoid $M$, $\spt$ is a forward
+  Ramseyan split of height $N$ of $\t$, and $\marking$ is a function from the
+  nodes of $\t$ to $\set{\marked, \separating, \dummy}$, respectively called
+  \intro(nodes){marked}, \intro(nodes){separating}, and \intro(nodes){dummy}
+  nodes.
 
   A \kl{marked nested tree} $(\t, \spt, \marking)$ is \intro{well-marked} if
-  the \kl{marked nodes} contain the root of $\t$, are closed under 
-  the \kl{least common ancestor} operation, and furthermore satisfy that
-  for every $x \treelt[\t] z_1 \treelt[\t] y$ such that 
-  $\spt(x\colon z_1) > k$, $\spt(z_1) = k$, and  $\spt(z_1\colon y) \geq k$ for some $k \in \set{1, \dots, N}$,
-  if $x$ and $y$ are \kl{marked nodes}, then there exists $z_2, z_3$
-  such that 
+  the \kl{marked nodes} contain the root of $\t$, are closed under the
+  \kl{least common ancestor} operation, and furthermore satisfy that for every
+  $x \treelt[\t] z_1 \treelt[\t] y$ with $\spt(x\colon z_1) > k$, $\spt(z_1)
+  = k$, and $\spt(z_1\colon y) \geq k$ for some $k \in \set{1, \dots, N}$, if
+  $x$ and $y$ are \kl{marked nodes}, then there exist $z_2, z_3$ such that
   $x \treelt[\t] z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$,
-  $\spt(z_1) = \spt(z_2) = \spt(z_3) = k$, 
-  $\spt(x\colon z_1) > k$, $\spt(z_1\colon z_2) > k$, $\spt(z_2\colon z_3) \geq k$, 
-  and $\spt(z_3\colon y) \geq k$,
-  with $\marking(z_1) = \marked$, and $\marking(z_2) \in \set{\marked, \separating}$.
+  $\spt(z_1) = \spt(z_2) = \spt(z_3) = k$, $\spt(x\colon z_1) > k$,
+  $\spt(z_1\colon z_2) > k$, $\spt(z_2\colon z_3) \geq k$, and
+  $\spt(z_3\colon y) \geq k$, with $\marking(z_1) = \marked$ and
+  $\marking(z_2) \in \set{\marked, \separating}$.
   A graphical illustration of the condition is provided below:
   \begin{center}
     \begin{tikzpicture}[xscale=2,yscale=0.5]
@@ -494,9 +488,8 @@ the \kl{gap-embedding} ordering.
 
 \AP Unlike the \kl{gap-embedding} ordering of \cref{thm:gap-embedding-wqo}, the
 \kl{marked gap-embedding} ordering of \cref{def:gap-embedding} is not a
-\kl{well-quasi-order} because of the gluing condition of
-\cref{item:gap-embedding:gluing}.
-We can create an infinite \kl{antichain} by 
+\kl{well-quasi-order} because of the gluing condition in
+\cref{item:gap-embedding:gluing}. We can create an infinite \kl{antichain} by
 considering the infinite sequence of trees
 $(\t_n, \spt_n, \marking_n)$ where $\t_n$ is a branch of length $n+1$,
 $\spt_n$ assigns the value $1$ to every node of $\t_n$,
