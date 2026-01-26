@@ -1,16 +1,3 @@
-% Upgreek letters
-\makeatletter
-\newcommand\mathgr[1]{\tokcycle
-  {\addcytoks{##1}}
-  {\processtoks{##1}}
-  {\ifcsname up\expandafter\@gobble\string##1\endcsname
-   \addcytoks[1]{\csname up\expandafter\@gobble\string##1\endcsname}%
-    \else\addcytoks{##1}\fi}
-  {\addcytoks{##1}}{#1}%
-  \expandafter\mathrm\expandafter{\the\cytoks}%
-}
-\makeatother
-
 
 % Create a new macro proofof
 % taking as input a label of a theorem

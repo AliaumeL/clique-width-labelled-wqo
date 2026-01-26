@@ -1,5 +1,6 @@
 title: "Well-quasi-ordered classes of bounded clique-width"
 license: "CC-BY-SA 4.0"
+repository: https://github.com/AliaumeL/clique-width-labelled-wqo
 abstract: |
   We study classes of graphs with bounded clique-width that 
   are well-quasi-ordered by the induced subgraph relation, 
@@ -17,6 +18,13 @@ abstract: |
   classes as those that are of bounded clique-width and 
   do not existentially transduce the class of all finite paths.
 author:
+  - name: "Maël Dumas"
+    initials: "M. Dumas"
+    affiliation: 
+      - name: "University of Warsaw"
+        country: "Poland"
+        city: "Warsaw"
+    email: m.dumas2@uw.edu.pl
   - name: "Aliaume Lopez"
     initials: "A. Lopez"
     orcid: "0000-0002-4205-327X"
@@ -27,13 +35,6 @@ author:
     arxiv: alopez_3
     github: AliaumeL
     email: aliaume.lopez@bordeaux-inp.fr
-  - name: "Maël Dumas"
-    initials: "M. Dumas"
-    affiliation: 
-      - name: "University of Warsaw"
-        country: "Poland"
-        city: "Warsaw"
-    email: m.dumas2@uw.edu.pl
 keywords:
   - "well-quasi-ordering"
   - "clique-width"

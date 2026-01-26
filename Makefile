@@ -8,11 +8,19 @@ SRC=src/*.tex             \
     ensps-colorscheme.sty \
     $(PAPER).md
 
-all: $(PAPER).pdf
+all: $(PAPER).sigconf.pdf
 
 # Default target: create the pdf file
 %.pdf: %.tex 
 	latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" $<
+
+$(PAPER).arxiv.txt: ./paper-meta.yaml
+	pandoc -t plain \
+		     --output $(PAPER).arxiv.txt \
+				 --template=./arxiv-submission.txt \
+				 --metadata-file=./paper-meta.yaml \
+				 --wrap=none \
+		     $(PAPER).md
 
 $(PAPER).sigconf.tex: $(SRC) ./paper-meta.yaml
 	pandoc -t latex \
@@ -22,12 +30,23 @@ $(PAPER).sigconf.tex: $(SRC) ./paper-meta.yaml
 			 --wrap=none \
 		     $(PAPER).md
 
+$(PAPER).plain.tex: $(SRC) ./paper-meta.yaml
+	pandoc -t latex \
+		     --output $(PAPER).plain.tex \
+			 --defaults plain \
+			 --metadata-file=./paper-meta.yaml \
+			 --metadata=draft:false \
+			 --metadata=camera-ready:true \
+			 --metadata=anonymous:false \
+			 --wrap=none \
+		     $(PAPER).md
+
 # Create a single file tex document for arXiv
-$(PAPER).arxiv.tex: $(PAPER).plain.tex ./paper-meta.yaml
-	latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" $(PAPER).plain.tex
-	latexpand -o $(PAPER).arxiv.tex         \
-		        --empty-comments          \
-		        --expand-bbl $(PAPER).plain.tex \
+$(PAPER).arxiv.tex: $(PAPER).plain.pdf ./paper-meta.yaml
+	latexpand -o $(PAPER).arxiv.tex           \
+		        --empty-comments                \
+		        --expand-bbl $(PAPER).plain.bbl \
+						--verbose \
 						$(PAPER).plain.tex
 	@rm $(PAPER).plain.*
 
@@ -36,8 +55,7 @@ $(PAPER).arxiv.tar.gz: $(PAPER).arxiv.tex
 	tar -czf $(PAPER).arxiv.tar.gz \
            $(PAPER).arxiv.tex    \
 			 plainurl.bst              \
-			 ensps-colorscheme.sty     \
-       ./LICENSE
+			 ensps-colorscheme.sty
 
 $(PAPER).arxiv.pdf: $(PAPER).arxiv.tar.gz
 	# create temporary directory

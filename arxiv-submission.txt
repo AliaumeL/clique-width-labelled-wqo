@@ -1,0 +1,22 @@
+$title$
+
+$for(author)$$author.name$$sep$, $endfor$
+
+Abstract
+
+$abstract$
+
+Keywords
+  $for(keywords)$$keywords$$sep$, $endfor$
+
+Classification
+
+$for(classification/pairs)$
+  $it.key$
+    $for(it.value)$$it.id$$sep$,  $endfor$
+$sep$
+$endfor$
+
+
+
+
