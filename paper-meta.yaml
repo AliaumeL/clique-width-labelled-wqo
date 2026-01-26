@@ -20,11 +20,12 @@ abstract: |
 author:
   - name: "Maël Dumas"
     initials: "M. Dumas"
+    orcid: 0009-0004-8906-9801
     affiliation: 
       - name: "University of Warsaw"
         country: "Poland"
         city: "Warsaw"
-    email: m.dumas2@uw.edu.pl
+    email: mdumas@mimuw.edu.pl
   - name: "Aliaume Lopez"
     initials: "A. Lopez"
     orcid: "0000-0002-4205-327X"
@@ -51,3 +52,4 @@ classification:
     desc: "Formal languages and automata theory"
   - id: "10002950.10003624.10003633"
     desc: "Graph theory"
+funding: Maël Dumas was supported by the ERC project BUKA (n° 101126229) (during his employment in BUKA) and project BOBR (during his employment in BOBR) that received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (grant agreement No. 948057).
