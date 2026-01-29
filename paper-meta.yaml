@@ -17,7 +17,7 @@ abstract: |
   Finally, we provide a structural characterization of those 
   classes as those that are of bounded clique-width and 
   do not existentially transduce the class of all finite paths.
-acknowledgments: !
+acknowledgments: |
   The authors would like to thank the Zygmunt Zaleski fundation
   for supporting the authors during the preparation of this work.
 author:
