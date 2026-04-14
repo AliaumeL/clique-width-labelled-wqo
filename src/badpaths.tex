@@ -122,7 +122,7 @@ marked nested tree} representing the same graph, allowing us to leverage
 \begin{definition}
 	\label{ramseyan-branch:def}
   Let $\aTree$ be a tree and $\spt$ be a \kl{forward Ramseyan split} of height
-  $N$. Let $n \geq 1$, and let $b_0, b_1, \ldots, b_n$ be nodes on a branch of
+  $N$. Let $n \geq 1$, and let $b_0, b_1, \ldots, b_n$\mael{distinct ?} be nodes on a branch of
   $\aTree$ such that $b_0 \treeleq b_1 \treeleq \cdots \treeleq b_n$, and for
   every $0 \leq i < n$, $\spt(b_i) = k$ and $\spt(b_i \colon b_{i+1}) > k$. A
   \intro{bough of level $k$} is the subtree of $\aTree$ induced by all nodes $x$
@@ -132,6 +132,7 @@ marked nested tree} representing the same graph, allowing us to leverage
 	that $b_0, b_1, \ldots, b_n$ form the \intro(bough){backbone} of $B$.
 \end{definition}
 
+\todo[inline]{double check bough definition and subsequent notation}
 \AP Let $B$ be a \kl{bough of level $k$} in $\aTree$
 and let $b_0, b_1, \ldots, b_n$ be its \kl(bough){backbone}.
 Given indices $i < j$, 
@@ -208,7 +209,7 @@ split $\spt'$) is also \kl{forward Ramseyan}.
         \item $h$ is an embedding of graphs,
         \item $h$ is the identity map on \kl(context){leaves} of $C[\square]$,
         \item there exist three consecutive \kl(bough){blocks} in $H$ whose leaves
-            are left untouched by $h$.
+            are left untouched\todo{clarify} by $h$.
     \end{enumerate}
     A \intro{bad bough} is a \kl{bough} that is not a \kl{good bough}.
 \end{definition}
@@ -265,14 +266,14 @@ allowing us to apply \cref{thm:marked-nested-trees-wqo}.
   and a map $h \colon \someInterp(C[B]) \to \someInterp(C[H])$ satisfying the
   three conditions of \cref{good-bough:def}. Let us define $\t' = C[H]$, which
   is still \kl{forward Ramseyan} by definition of \kl{compatible boughs}. Let
-  us now define the \kl{marking} of $\t'$. For nodes of $C[\square]$, we keep
-  the same \kl{marking} as in $\t$. For nodes of $H$, we identify the three
+  us now define the vertex-labelling\mael{changed marking as (vertex)-labelling in this paragraph} of $\t'$. For nodes of $C[\square]$, we keep
+  the same vertex-labelling as in $\t$. For nodes of $H$, we identify the three
   consecutive \kl(bough){blocks} whose leaves are left untouched by $h$ as
   $\BBlock[H]{z_i}{z_{i+1}}$, $\BBlock[H]{z_{i+1}}{z_{i+2}}$, and
-  $\BBlock[H]{z_{i+2}}{z_{i+3}}$. We mark all these nodes as \kl{dummy nodes}
-  except $z_i$ and $z_{i+3}$, which are marked as \kl{marked nodes}, and
-  $z_{i+1}$, which is marked as a \kl{separating node}. Finally, all other
-  nodes of $H$ are marked as \kl{marked nodes}.
+  $\BBlock[H]{z_{i+2}}{z_{i+3}}$. We label all these nodes as \kl{dummy nodes}
+  except $z_i$ and $z_{i+3}$, which are labelled as \kl{marked nodes}, and
+  $z_{i+1}$, which is labelled as a \kl{separating node}. Finally, all other
+  nodes of $H$ are labelled as \kl{marked nodes}.
 
   We claim that one can apply these rewrite steps as follows: first, apply them
   to \kl{boughs} of minimal split level until exhaustion, and then proceed with

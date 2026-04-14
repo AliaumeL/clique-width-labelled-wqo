@@ -36,6 +36,7 @@
 
 % configure some theorems
 \newtheorem{theorem}{Theorem}
+\numberwithin{theorem}{section}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -176,6 +177,7 @@
 \usepackage{todonotes}
 \newcommand{\mael}[1]{\todo[color=violet!40]{#1}}
 \newcommand{\maelin}[1]{\todo[inline,size=\normalsize,color=violet!40,caption={}]{Mael: #1}}
+\newcommand{\maelup}[1]{{\color{blue}#1}}
 
 % we include libraries (tex files) usually written in the `lib` directory
 \input{lib/aliaume.tex}
@@ -209,6 +211,7 @@ Aliaume Lopez\thanks{INP Bordeaux, LaBRI, CNRS}
 % Print the abstract
 \begin{abstract}
     We study classes of graphs with bounded clique-width that are well-quasi-ordered by the induced subgraph relation, in the presence of labels on the vertices. We prove that, given a finite presentation of a class of graphs, one can decide whether the class is labelled-well-quasi-ordered. This solves an open problem raised by Daligault, Rao and Thomassé in 2010, and answers positively to two conjectures of Pouzet in the restricted case of bounded clique-width classes. Namely, we prove that being labelled-well-quasi-ordered by a set of size 2 or by a well-quasi-ordered infinite set are equivalent conditions, and that in such cases, one can freely assume that the graphs are equipped with a total ordering on their vertices. Finally, we provide a structural characterization of those classes as those that are of bounded clique-width and do not existentially transduce the class of all finite paths.
+    \maelin{Regarding the sentence "This solves an open problem raised by Daligault, Rao and Thomassé in 2010". We do nothing regarding their Conjecture 5 (this is solved by Szymon's gang). I am not sure what we do relate to their conjecture 4, which is a more general conjecture than the one of Pouzet? It is not clear for me that we should mention them in the asbtract.}
 \end{abstract}
 
 \paragraph{Keywords:}

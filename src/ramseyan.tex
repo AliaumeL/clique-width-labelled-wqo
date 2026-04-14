@@ -41,7 +41,7 @@ $\varphi(x,y)$, as illustrated in \cref{interpretation-to-monoid:fig}. We
 define a \intro{monoid interpretation} from trees labelled over $M$ to finite
 undirected graphs to be a tuple $(\Sigma, \mu, M, P)$ where $\Sigma$ is a
 finite alphabet, $\mu \colon \Sigma^* \to M$ is a morphism to a finite monoid
-$M$, and $P \subseteq M^3$ is a subset of triples of elements of $M$. The
+$M$, and $P \subseteq M^3$ is a set of triples of elements of $M$. The
 interpretation works as follows: given a tree $\aTree$ whose edges are labelled
 by elements of $\Sigma$, the vertices of the interpreted graph are the leaves
 of $T$, and there is an edge between two leaves $x \treesibleq y$ if and only
@@ -128,7 +128,7 @@ The main idea driving this paper is that deciding when a class of graphs is
 %\end{proof}
 
 \AP One candidate ordering on trees is the \intro{composition ordering}. Given
-two trees $\aTree_1$ and $\aTree_2$ labelled over a monoid $M$, we say that
+two trees $\aTree_1$ and $\aTree_2$ edge-labelled over a monoid $M$, we say that
 $\aTree_1$ is less than $\aTree_2$ in the \kl{composition ordering}, written
 $\aTree_1 \cmpleq \aTree_2$, if there exists a map $h \colon \aTree_1 \to
 \aTree_2$ that maps leaves to leaves and respects $\lca$, $\treesibleq$, and
@@ -165,8 +165,9 @@ Colcombet~\cite{COLC07}. The rest of this section explains how this
 factorisation works and how it can be used to define a more suitable ordering
 on trees.
 
+\maelin{Revoir la définition/notation our split}
 \AP A \intro{split of height $N$} of a tree $\t$ is a mapping $\spt$ from the
-nodes of $T$ to $\set{1, \dots, N}$. Given a split $\spt$ and two nodes $x
+nodes of $\aTree$ to $\set{1, \dots, N}$. Given a split $\spt$ and two nodes $x
 \treelt[\t] y$, we define $\spt(x \colon y)$ to be the minimal value of
 $\spt(z)$ for $x \treelt[\t] z \treelt[\t] y$, and $N+1$ otherwise.
 In particular, if $y$ is a child of $x$, then $\spt(x \colon y) = N+1$.
@@ -377,7 +378,7 @@ ordering is that it is a \kl{well-quasi-ordering}, as recalled in
   even under the assumption that nodes are labelled with a \kl{well-quasi-ordered} set $(X, \leq_X)$.
 \end{theorem}
 
-\AP We now devise modified version of the \kl{gap-embedding}
+\AP We now devise a modified version of the \kl{gap-embedding}
 ordering to make the interpretation $\someInterp$ order-preserving from trees
 to graphs. In particular, this modification will take into account the
 edge-labelling of the trees using the monoid $M$, that are not considered in
@@ -396,6 +397,9 @@ the \kl{gap-embedding} ordering.
   \intro(nodes){marked}, \intro(nodes){separating}, and \intro(nodes){dummy}
   nodes.
 
+
+\todo[inline]{The definition of `well-marked' needs tidying up. First, it's currently quantified over every $x$, $z_1$ and $y$, but then we have the additional condition `if $x$ and $y$ are marked nodes', while later it says that also $\rho(z_1)=\mathbf{M}$. What is being quantified over to check whether this definition holds? Additionally, `$\mathfrak{s}(z_1)=k$' is said twice, as is `$\mathfrak{s}(x:z_1)>k$', and there is the perennial issue of interpreting what to do when, e.g., $z_2=z_3$ or $z_3=y$.}
+  
   A \kl{marked nested tree} $(\t, \spt, \marking)$ is \intro{well-marked} if
   the \kl{marked nodes} contain the root of $\t$, are closed under the
   \kl{least common ancestor} operation, and furthermore satisfy that for every
@@ -631,26 +635,26 @@ section.
   then we can strengthen the inequality to a strict one,
   i.e., $\spt(h(u)\colon h(v)) > k$ even when $\spt(v) \neq k$.
   This is because of \cref{item:gap-embedding:gluing},
-  which ensures that the immediate parent of $h(v)$
-  is the image of the immediate parent of $v$, which has a split value
-  strictly greater than $k$, and we conclude by the previous argument.\footnote{The case where there are no intermediate nodes between $u$ and $v$ happens if $v$ is the immediate child of $u$, 
+  which ensures that the parent of $h(v)$
+  is the image of the parent of $v$, which has a split value
+  strictly greater than $k$, and we conclude by the previous argument.\footnote{The case where there are no intermediate nodes between $u$ and $v$ happens if $v$ is the child of $u$, 
   in which case the property is given directly by the 
   gluing property.}
 
   Using these facts we conclude that:
   \begin{align*}
     \spt_2(h(x)\colon h(z_1))   &> k 
-                          & \text{because $z_1$ is a \kl(nodes){marked},}
+                          & \text{because $z_1$ is \kl(nodes){marked},}
                           \\
     \spt_2(h(z_1)\colon h(z_2)) &> k
-                          & \text{because $z_2$ is a \kl(nodes){marked}
+                          & \text{because $z_2$ is \kl(nodes){marked}
                                    or \kl(nodes){separating},}
                           \\
     \spt_2(h(z_2)\colon h(z_3)) &\geq k
                                 & \text{by \cref{fact:gap-embedding-gaps},}
                           \\
     \spt_2(h(z_3)\colon h(y))   &> k
-                          & \text{because $y$ is a \kl(nodes){marked},}                               
+                          & \text{because $y$ is \kl(nodes){marked},}                               
   \end{align*}
 
   Now, we can compute the values of $a$, $b$, and $d$:

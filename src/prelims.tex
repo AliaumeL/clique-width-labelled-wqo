@@ -7,7 +7,8 @@ relational structures, such as monadic second-order logic ($\MSO$), first-order
 logic and quantifier-free formulae.
 
 \paragraph*{Graphs} \AP A graph $G$ consists of a finite set $V(G)$ of vertices
-and a set $E(G)\subseteq \binom{V(G)}{2}$ of edges. A graph is
+and a set $E(G)\subseteq  V(G)^2$ %\binom{V(G)}{2}$ 
+of edges. A graph is
 \intro(graph){undirected} if $(u, v) \in E$ implies $(v, u) \in E$ for all $u,
 v \in V$, and directed otherwise. In this paper we will focus on finite
 undirected graphs without self-loops. Given a set $X$, an \intro{$X$-labelled
@@ -75,7 +76,7 @@ ordered (they have \intro(child){left} and \reintro{right children}). They are
 understood as finite relational structures over the signature $\sigma =
 (\treeleq, \treesibleq)$ where $\treeleq$ is the \intro{ancestor relation}, and
 $\treesibleq$ is the \intro{sibling order} on the nodes of the tree, extended
-to all pairs of nodes as a topological order. In a tree $\aTree$, the
+to all pairs of nodes as a topological order.\mael{is the topological order used anywhere ?} In a tree $\aTree$, the
 \intro(tree){root} is denoted by $\intro*\treeRoot(\aTree)$, with $\aTree$
 being left implicit when clear from context. The set of \intro(tree){leaves} is
 denoted by $\Leaves{\aTree}$. Given two nodes $x$ and $y$ in a tree $T$, their
@@ -89,7 +90,7 @@ consider edge-labelled trees, typically using a finite set of labels $\Sigma$.
 The class of vertex-labelled and edge-labelled trees is denoted by
 $\Trees{\Sigma}{X}$.	The sets $\Sigma$ or $X$ are omitted when unused (i.e.,
 $\Trees{}{}$ denotes the class of unlabelled trees). Given two nodes $x,y$ such
-that $y$ is an \kl(tree){ancestor} of $x$, the notation $\intro*\tword{x}{y}$
+that $x$ is an \kl(tree){ancestor} of $y$, the notation $\intro*\tword{x}{y}$
 denotes the \emph{word} in $\Sigma^*$ obtained by reading the labels of the
 edges on the path from $x$ to $y$ in $\aTree$; we leave $\aTree$ implicit
 when clear from context.

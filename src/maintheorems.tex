@@ -21,8 +21,8 @@ address the second difficulty.
   \begin{enumerate}
       \item $h$ is an embedding of graphs,
       \item $h$ is the identity map on \kl(context){leaves} of $C[\square]$,
-      \item the \kl{bough type} of every leaf $x$ in $H$ is the same as 
-        the \kl{bough type} of $h(x)$ in $B$,
+      \item the \kl{bough type} of every leaf $x$ in $B$ is the same as 
+        the \kl{bough type} of $h(x)$ in $H$,
       \item there exist three consecutive
             \kl(bough){blocks} in $H$ whose leaves
             	are left untouched by $h$.
@@ -36,12 +36,12 @@ bough} is an \kl{imperfect bough}. This allows us to lift
 
 
 \begin{lemma}
-  \label{lem:perfect-boughs-wqo}
-  The image of $\someInterp$ is \kl{$2$-well-quasi-ordered} 
-  if and only if
-  the image of $\someInterp$ is \kl{$\forall$-well-quasi-ordered} 
-  if and only if 
-  there exists a bound on the \kl(bough){dimension} of \kl{imperfect boughs}.
+  \label{lem:perfect-boughs-wqo} The following are equivalent:
+  \begin{enumerate}
+    \item the image of $\someInterp$ is \kl{$2$-well-quasi-ordered},
+    \item the image of $\someInterp$ is \kl{$\forall$-well-quasi-ordered},
+    \item there exists a bound on the \kl(bough){dimension} of \kl{imperfect boughs}.
+  \end{enumerate}
 \end{lemma}
 \begin{proof}
   First, if we have a bound on the \kl(bough){dimension} of \kl{imperfect boughs},
@@ -85,7 +85,7 @@ $\someInterp(C[B])$ to $\someInterp(C[H])$ satisfying the conditions of
   Let $\t = C[B]$ be a tree with a \kl{bough} $B$ of level $k$, 
   and let $H$ be a \kl{bough} that is \kl(bough){compatible}
   with $B$. Let $\t' = C[H]$ be the tree obtained by replacing $B$ by $H$ in $\t$.
-  Then, the subraph of $\someInterp(\t)$ induced by the \kl(context){leaves} in 
+  Then, the subgraph of $\someInterp(\t)$ induced by the \kl(context){leaves} in 
   the \kl(bough){context} $C[\square]$ equals the 
   subgraph of $\someInterp(\t')$ induced by the \kl(context){leaves} in
   the \kl(bough){context} $C[\square]$.
@@ -151,7 +151,7 @@ bounded clique-width, thus proving \cref{main:corollary}.
 
 
 \begin{proofof}{main:corollary}[main]
-  By a standard argument, if the class $\someInterp$ is hereditary
+  By a standard argument, if the class $\Cls$ is hereditary
   and \kl{$2$-well-quasi-ordered}, then it is characterised by finitely many
   forbidden induced subgraphs \cite[Proposition 3]{DRT10}.
   Thus, if $\Cls$ has \kl{bounded clique-width} and is hereditary,
@@ -186,8 +186,8 @@ from a finite set. This allows us to prove the following corollary.
 
 \begin{corollary}
   \label{cor:hereditary-perfect-boughs-wqo}
-  Assume that the class $\someInterp$ is \kl(class){hereditary}.
-  Then, the image of $\someInterp$ is \kl{$2$-well-quasi-ordered}
+  %Assume that the class $\someInterp$ is \kl(class){hereditary}.  Then, 
+  The image of $\someInterp$ is \kl{$2$-well-quasi-ordered}
   if and only if 
   every subclass of \kl{bounded linear clique-width} in $\someInterp$
   is \kl{$2$-well-quasi-ordered}.
