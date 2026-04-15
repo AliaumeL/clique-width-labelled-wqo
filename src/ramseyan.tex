@@ -165,20 +165,33 @@ Colcombet~\cite{COLC07}. The rest of this section explains how this
 factorisation works and how it can be used to define a more suitable ordering
 on trees.
 
-\maelin{Revoir la définition/notation our split}
-\AP A \intro{split of height $N$} of a tree $\t$ is a mapping $\spt$ from the
+\AP A \intro{split of height $N$} of a tree $\aTree$ is a mapping $\spt$ from the
 nodes of $\aTree$ to $\set{1, \dots, N}$. Given a split $\spt$ and two nodes $x
-\treelt[\t] y$, we define $\spt(x \colon y)$ to be the minimal value of
+\treeleq[\t] y$\mael{Fix for $\spt(x \colon x)$}, we define $\spt(x \colon y)$ to be the minimal value of
 $\spt(z)$ for $x \treelt[\t] z \treelt[\t] y$, and $N+1$ otherwise.
-In particular, if $y$ is a child of $x$, then $\spt(x \colon y) = N+1$.
+In particular, if $x=y$ or $y$ is a child of $x$, then $\spt(x \colon y) = N+1$.
 
 \AP Two elements $x \treelt[\t] y$ such that $\spt(x) = \spt(y) = k$ are
-\intro{$k$-neighbours} if $\spt(x \colon y) \geq k$. Along every branch, being
-\kl{$k$-neighbours} is an equivalence relation on the nodes of the branch that
-take value $k$ in the split. A \kl{split} thus induces a hierarchical
+\intro{$k$-neighbours} if $\spt(x \colon y) \geq k$. 
+Along every branch, being \kl{$k$-neighbours} is an equivalence relation on the nodes of the branch that take value $k$ in the split. 
+A \kl{split} thus induces a hierarchical
 structure on each branch based on its \kl{$k$-neighbourhoods}. We illustrate
 the situation in \cref{split-on-branch:fig}. We refer to the value of
 $\spt(x)$ as the \reintro{split depth} of the node $x$.
+
+\maelin{Reformulation of the above definitions:\\
+For a split $\spt$, two nodes $x, y$ of $\aTree$ such that $\spt(x) = \spt(y) = k$ are \intro{$k$-neighbours} if either
+\begin{itemize}
+  \item $x \treelt[\t] y$ and $\spt(x \colon y) \geq k$, or
+  \item $y \treelt[\t] x$ and $\spt(y \colon x) \geq k$.
+\end{itemize}
+Along every branch, being \kl{$k$-neighbours} is a non-reflexive equivalence relation on the nodes of the branch that take value $k$ in the split. 
+A \kl{split} thus induces a hierarchical
+structure on each branch. We say that a \intro{$k$-neighbourhood} is a maximal set of $k$-neighbours along a branch. We illustrate
+the situation in \cref{split-on-branch:fig}. We refer to the value of
+$\spt(x)$ as the \reintro{split depth} of the node $x$. \\
+If we chose to use this def, be careful to report this to other occurence (and we may define backbone of bough as subset of a $k$-neighborhood). I am unsure if we want to exclude or not $k$-neighborhood of 1 element (with this definition we do because of non-reflexivity).
+}
 
 \begin{figure}
   \centering 
@@ -228,7 +241,7 @@ $\spt(x)$ as the \reintro{split depth} of the node $x$.
 
 \AP A \kl{split} $\spt$ is \intro{forward Ramseyan} if for every $k \in \set{1,
 \dots, N}$, every branch $b$ of the tree, 
-and every $x, y, x', y'$ in the same class of \kl{$k$-neighbourhood} inside the branch $b$,
+and every $x, y, x', y'$ in the same class of \kl{$k$-neighbourhood}\todo{careful} inside the branch $b$,
 with $x \treelt[\t] y$ and $x' \treelt[\t] y'$, we have: 
 \begin{equation}
   \label{fake-idempotent:eq} 
@@ -248,7 +261,7 @@ $\spt(x:y) = k$ and there exist three nodes $z_1, z_2, z_3$ such that
 $x \treeleq[\t] z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$,
 $\spt(z_1) = \spt(z_2) = \spt(z_3) = k$, and $\spt(x\colon z_1) > k$,
 $\spt(z_1 \colon z_2) > k$, and $\spt(z_3\colon y) > k$. In essence, $x$ and
-$y$ are \emph{separated} by at least one \kl{$k$-neighbourhood}. In this case,
+$y$ are \emph{separated} by at least one \kl{$k$-neighbourhood}.\todo{careful} In this case,
 we can exploit \kl{forward Ramseyan splits} to compute $\tlbl{\t}{x}{y}$
 without inspecting the section between $z_2$ and $z_3$, leading to a fast (and
 first-order definable) computation. We refer to \cite[Lemma 3]{COLC07} for
@@ -259,29 +272,29 @@ further details.
     \begin{tikzpicture}[xscale=0.75, yscale=0.7]
         \node (s) at (-0.5,-1) {$\spt \colon $};
         \node (x) at (0,0) {$x$};
-        \node[A4] (z1) at (2,0) {$z_1$};
-        \node[A4] (z2) at (4,0) {$z_2$};
-        \node (z3) at (6,0) {$\cdots$};
-        \node[A4] (z4) at (8,0) {$z_3$};
-        \node (y) at (10,0) {$y$};
+        \node[A4] (z1) at (3,0) {$z_1$};
+        \node[A4] (z2) at (6,0) {$z_2$};
+        \node (z3) at (9,0) {$\cdots$};
+        \node[A4] (z4) at (12,0) {$z_3$};
+        \node (y) at (15,0) {$y$};
 
-        \node[A4] at (2,-1) {$k$};
-        \node[A4] at (4,-1) {$k$};
-        \node[A4] at (8,-1) {$k$};
-        \node (xz1) at (1,-1) {$> k$};
-        \node (z1z2) at (3,-1) {$> k$};
-        \node (z4y) at (9,-1) {$> k$};
-        \node (z2z3) at (6,-1) {$\geq k$};
+        \node[A4] at (3,-1) {$k$};
+        \node[A4] at (6,-1) {$k$};
+        \node[A4] at (12,-1) {$k$};
+        \node (xz1) at (1.5,-1) {$> k$};
+        \node (z1z2) at (4.5,-1) {$> k$};
+        \node (z4y) at (13.5,-1) {$> k$};
+        \node (z2z3) at (9,-1) {$\geq k$};
 
-        \draw (0.2,-0.5) rectangle (9.8,-1.5);
-        \draw (1.7,-0.5) -- (1.7, -1.5);
-        \draw (2.3,-0.5) -- (2.3, -1.5);
+        \draw (0.2,-0.5) rectangle (14.8,-1.5);
+        \draw (2.7,-0.5) -- (2.7, -1.5);
+        \draw (3.3,-0.5) -- (3.3, -1.5);
 
-        \draw (3.7,-0.5) -- (3.7, -1.5);
-        \draw (4.3,-0.5) -- (4.3, -1.5);
+        \draw (5.7,-0.5) -- (5.7, -1.5);
+        \draw (6.3,-0.5) -- (6.3, -1.5);
 
-        \draw (7.7,-0.5) -- (7.7, -1.5);
-        \draw (8.3,-0.5) -- (8.3, -1.5);
+        \draw (11.7,-0.5) -- (11.7, -1.5);
+        \draw (12.3,-0.5) -- (12.3, -1.5);
 
 
         \draw[->] (x) -- 
@@ -296,13 +309,66 @@ further details.
         node[midway, above] {$\tlbl{\t}{z_3}{y}$}
         (y);
 
-        \draw[->,A2] (z1) -- (2, 1.5) -- (8, 1.5) -- (z4);
-        \node at (5, 2) {$\tlbl{\t}{z_1}{z_2} = \tlbl{\t}{z_1}{z_3}$};
+        \draw[->,A2] (z1) -- (3, 1.5) -- 
+        node[midway, above, color=black] {$\tlbl{\t}{z_1}{z_2} = \tlbl{\t}{z_1}{z_3}$}
+        (12, 1.5) -- (z4);
     \end{tikzpicture}
     \caption{Fast computation of the value $\tlbl{\t}{x}{y}$ provided a \kl{forward Ramseyan split},
     using the fact that $x$ and $y$ are \kl{independent at level $k$}.}
     \label{fast-computation:fig}
 \end{figure}
+
+
+%%%%%%%%%%%% SMALL VERSION %%%%%%%%%%%%%%%%%%%%%%
+% \begin{figure}
+%     \centering
+%     \begin{tikzpicture}[xscale=0.75, yscale=0.7]
+%         \node (s) at (-0.5,-1) {$\spt \colon $};
+%         \node (x) at (0,0) {$x$};
+%         \node[A4] (z1) at (2,0) {$z_1$};
+%         \node[A4] (z2) at (4,0) {$z_2$};
+%         \node (z3) at (6,0) {$\cdots$};
+%         \node[A4] (z4) at (8,0) {$z_3$};
+%         \node (y) at (10,0) {$y$};
+
+%         \node[A4] at (2,-1) {$k$};
+%         \node[A4] at (4,-1) {$k$};
+%         \node[A4] at (8,-1) {$k$};
+%         \node (xz1) at (1,-1) {$> k$};
+%         \node (z1z2) at (3,-1) {$> k$};
+%         \node (z4y) at (9,-1) {$> k$};
+%         \node (z2z3) at (6,-1) {$\geq k$};
+
+%         \draw (0.2,-0.5) rectangle (9.8,-1.5);
+%         \draw (1.7,-0.5) -- (1.7, -1.5);
+%         \draw (2.3,-0.5) -- (2.3, -1.5);
+
+%         \draw (3.7,-0.5) -- (3.7, -1.5);
+%         \draw (4.3,-0.5) -- (4.3, -1.5);
+
+%         \draw (7.7,-0.5) -- (7.7, -1.5);
+%         \draw (8.3,-0.5) -- (8.3, -1.5);
+
+
+%         \draw[->] (x) -- 
+%         node[midway, above] {$\tlbl{\aTree}{x}{z_1}$}
+%         (z1);
+%         \draw[->] (z1) --
+%         node[midway, above] {$\tlbl{\t}{z_1}{z_2}$}
+%         (z2);
+%         \draw[->] (z2) -- (z3);
+%         \draw[->] (z3) -- (z4);
+%         \draw[->] (z4) -- 
+%         node[midway, above] {$\tlbl{\t}{z_3}{y}$}
+%         (y);
+
+%         \draw[->,A2] (z1) -- (2, 1.5) -- (8, 1.5) -- (z4);
+%         \node at (5, 2) {$\tlbl{\t}{z_1}{z_2} = \tlbl{\t}{z_1}{z_3}$};
+%     \end{tikzpicture}
+%     \caption{Fast computation of the value $\tlbl{\t}{x}{y}$ provided a \kl{forward Ramseyan split},
+%     using the fact that $x$ and $y$ are \kl{independent at level $k$}.}
+%     \label{fast-computation:fig}
+% \end{figure}
 
 \AP The main theorem of \cite{COLC07} states that for every finite monoid $M$
 there exists a finite depth $N$ such that for every tree $\aTree$
@@ -399,19 +465,35 @@ the \kl{gap-embedding} ordering.
 
 
 \todo[inline]{The definition of `well-marked' needs tidying up. First, it's currently quantified over every $x$, $z_1$ and $y$, but then we have the additional condition `if $x$ and $y$ are marked nodes', while later it says that also $\rho(z_1)=\mathbf{M}$. What is being quantified over to check whether this definition holds? Additionally, `$\mathfrak{s}(z_1)=k$' is said twice, as is `$\mathfrak{s}(x:z_1)>k$', and there is the perennial issue of interpreting what to do when, e.g., $z_2=z_3$ or $z_3=y$.}
-  
-  A \kl{marked nested tree} $(\t, \spt, \marking)$ is \intro{well-marked} if
+
+
+\maelup{
+  \AP A \kl{marked nested tree} $(\t, \spt, \marking)$ is \intro{well-marked} if
   the \kl{marked nodes} contain the root of $\t$, are closed under the
   \kl{least common ancestor} operation, and furthermore satisfy that for every
   $x \treelt[\t] z_1 \treelt[\t] y$ with $\spt(x\colon z_1) > k$, $\spt(z_1)
   = k$, and $\spt(z_1\colon y) \geq k$ for some $k \in \set{1, \dots, N}$, if
-  $x$ and $y$ are \kl{marked nodes}, then there exist $z_2, z_3$ such that
-  $x \treelt[\t] z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$,
-  $\spt(z_1) = \spt(z_2) = \spt(z_3) = k$, $\spt(x\colon z_1) > k$,
+  $x$ and $y$ are \kl{marked nodes}, then so is $Z_1$ and there exist $z_2, z_3$ such that
+  $z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$,
+  $\spt(z_2) = \spt(z_3) = k$, 
   $\spt(z_1\colon z_2) > k$, $\spt(z_2\colon z_3) \geq k$, and
-  $\spt(z_3\colon y) \geq k$, with $\marking(z_1) = \marked$ and
-  $\marking(z_2) \in \set{\marked, \separating}$.
-  A graphical illustration of the condition is provided below:
+  $\spt(z_3\colon y) \geq k$, with  $\marking(z_2) \in \set{\marked, \separating}$.
+  A graphical illustration of the condition is provided below:}
+
+  \maelin{Suggestion above, but the definition is still extremely convoluted. It's always disturbing the $z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$.}
+
+  % \AP A \kl{marked nested tree} $(\t, \spt, \marking)$ is \intro{well-marked} if
+  % the \kl{marked nodes} contain the root of $\t$, are closed under the
+  % \kl{least common ancestor} operation, and furthermore satisfy that for every
+  % $x \treelt[\t] z_1 \treelt[\t] y$ with $\spt(x\colon z_1) > k$, $\spt(z_1)
+  % = k$, and $\spt(z_1\colon y) \geq k$ for some $k \in \set{1, \dots, N}$, if
+  % $x$ and $y$ are \kl{marked nodes}, then there exist $z_2, z_3$ such that
+  % $x \treelt[\t] z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$,
+  % $\spt(z_1) = \spt(z_2) = \spt(z_3) = k$, $\spt(x\colon z_1) > k$,
+  % $\spt(z_1\colon z_2) > k$, $\spt(z_2\colon z_3) \geq k$, and
+  % $\spt(z_3\colon y) \geq k$, with $\marking(z_1) = \marked$ and
+  % $\marking(z_2) \in \set{\marked, \separating}$.
+  % A graphical illustration of the condition is provided below:
   \begin{center}
     \begin{tikzpicture}[xscale=2,yscale=0.5]
       % illustrate well-marked condition
@@ -666,6 +748,7 @@ section.
     \tlbl{\t_1}{z_3}{y} & = d 
     &\text{by \cref{item:gap-embedding:neighbourhood}.}
   \end{align*}
+  \maelin{is $\tlbl{\t_1}{z_3}{y}$ well-defined for empty-words ?}
 
   Finally, because $h(x)$ and $h(y)$ are \kl{independent at level $k$},
   and so are $x$ and $y$,

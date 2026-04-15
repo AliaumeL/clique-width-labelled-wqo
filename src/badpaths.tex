@@ -72,25 +72,43 @@ marked nested tree} representing the same graph, allowing us to leverage
         \node[branchProj] (tx) at (3,2) {};
         \node[branchProj] (ty) at (7,2) {};
 
-        \draw[localType, <-] (x)  -- 
-        node[midway, left] {$\BtL(x)$} (tx);
-        (tx);
-        \draw[localType, ->] (tx) -- 
-        node[midway, below] {$\BrL(x)$}
-        (b2);
-        \draw[localType, <-] (tx) -- 
-        node[midway, below] {$\BlL(x)$}
-        (b1);
+        
+        \node at (1.5,1.65) {$\Bu(x)$};
+        \node at (2.5,1.65) {$\Ba(x)$};
+        \node at (3.5,1.65) {$\Bd(x)$};
+        
+        \node at (5.5,1.65) {$\Bu(y)$};
+        \node at (6.5,1.65) {$\Ba(y)$};
+        \node at (7.5,1.65) {$\Bd(y)$};
 
-        \draw[localType, <-] (y)  -- 
-        node[midway, left] {$\BtL(y)$} 
-        (ty);
-        \draw[localType, ->] (ty) -- 
-        node[midway, below] {$\BrL(y)$}
-        (b4);
-        \draw[localType, <-] (ty) --
-        node[midway, below] {$\BlL(y)$}
-        (b3);
+        \draw[localType, <-] (x)  --  (tx);
+        \draw[localType, ->] (tx) --  (b2);
+        \draw[localType, <-] (tx) --  (b1);
+
+        \draw[localType, <-] (y)  --  (ty);
+        \draw[localType, ->] (ty) --  (b4);
+        \draw[localType, <-] (ty) --  (b3);
+
+
+        % \draw[localType, <-] (x)  -- 
+        % node[midway, left] {$\BtL(x)$} (tx);
+        % (tx);
+        % \draw[localType, ->] (tx) -- 
+        % node[midway, below] {$\BrL(x)$}
+        % (b2);
+        % \draw[localType, <-] (tx) -- 
+        % node[midway, below] {$\BlL(x)$}
+        % (b1);
+
+        % \draw[localType, <-] (y)  -- 
+        % node[midway, left] {$\BtL(y)$} 
+        % (ty);
+        % \draw[localType, ->] (ty) -- 
+        % node[midway, below] {$\BrL(y)$}
+        % (b4);
+        % \draw[localType, <-] (ty) --
+        % node[midway, below] {$\BlL(y)$}
+        % (b3);
 
         \draw[dashed] (9,2.5) -- (10,2.1) -- (10,2.9) -- cycle;
         \draw[dashed] (9,1.5) -- (10,1.1) -- (10,1.9) -- cycle;
@@ -127,12 +145,12 @@ marked nested tree} representing the same graph, allowing us to leverage
   every $0 \leq i < n$, $\spt(b_i) = k$ and $\spt(b_i \colon b_{i+1}) > k$. A
   \intro{bough of level $k$} is the subtree of $\aTree$ induced by all nodes $x$
   such that $b_0 \treeleq x$ and $\neg (b_n \treeleq x)$, plus $b_n$ itself.
-	
-	We say that the \intro(bough){dimension} of the \kl{bough} $B$ is $n$, and
+		We say that the \intro(bough){dimension} of the \kl{bough} $B$ is $n$, and
 	that $b_0, b_1, \ldots, b_n$ form the \intro(bough){backbone} of $B$.
 \end{definition}
 
-\todo[inline]{double check bough definition and subsequent notation}
+\maelin{I think the current definition of Bough is fine, and that for a given bough of level $k$ (defined from a backbone), the backbone is uniquely defined. But we might add that whenever we define a bough $B$ we think of it as a subtree with a highlighted root-leaf branch}
+
 \AP Let $B$ be a \kl{bough of level $k$} in $\aTree$
 and let $b_0, b_1, \ldots, b_n$ be its \kl(bough){backbone}.
 Given indices $i < j$, 
@@ -144,18 +162,24 @@ When $j = i + 1$,  this set of nodes is called a \intro(bough){block}. We also r
 illustration of the resulting partition
 of the tree $\aTree$ with respect to a given \kl{bough} $B$.
 
-\AP For every leaf $x \in \BBlock[\aTree]{b_0}{b_n}$, we define $\intro*\Bt(x)
-\defined \lca(x,b_n)$. Moreover, we define $\intro*\Bl(x)$ (resp.
-$\intro*\Br(x)$) to be the maximal (resp. minimal) element of the backbone
-$b_0, b_1, \ldots, b_n$ such that $\Bl(x) \treeleq \Bt(x) \treeleq \Br(x)$.
-Using these reference points, we define the following monoid elements 
+\AP For every leaf $x$ of $\t$ that is in $\BBlock[\aTree]{b_0}{b_n}$, we define $\intro*\Ba(x)
+\defined \lca(x,b_n)$. Moreover, we define $\intro*\Bu(x)$ (resp.
+$\intro*\Bd(x)$) to be the maximal (resp. minimal) element of the backbone
+$b_0, b_1, \ldots, b_n$ such that $\Bu(x) \treeleq \Ba(x) \treeleq \Bd(x)$.
+Using these reference points, we define the following tuple monoid elements 
 associated to a leaf $x$ in a \kl(bough){block} of $B$:
 \begin{align*}
-  \intro*\BtL(x) &\defined \tlbl{\t}{\Bt(x)}{x}, \\
-  \intro*\BlL(x) &\defined \tlbl{\aTree}{\Bl(x)}{\Bt(x)}, \\
-  \intro*\BrL(x) &\defined \tlbl{\t}{\Bt(x)}{\Br(x)}, \\
-  \intro*\BrootL(x) &\defined \tlbl{\aTree}{\treeRoot}{\Bl(x)}.
-\end{align*}
+  (\tlbl{\t}{\Ba(x)}{x}, \;
+  \tlbl{\aTree}{\Bu(x)}{\Ba(x)}, \;
+  \tlbl{\t}{\Ba(x)}{\Bd(x)}, \;
+  \tlbl{\aTree}{\treeRoot}{\Bu(x)}).
+\end{align*}\mael{simplified notation as we didn't use $\BtL(x)$ + changed to ancestor, up, down instead of t,left,right }
+% \begin{align*}
+%   \intro*\BtL(x) &\defined \tlbl{\t}{\Bt(x)}{x}, \\
+%   \intro*\BlL(x) &\defined \tlbl{\aTree}{\Bl(x)}{\Bt(x)}, \\
+%   \intro*\BrL(x) &\defined \tlbl{\t}{\Bt(x)}{\Br(x)}, \\
+%   \intro*\BrootL(x) &\defined \tlbl{\aTree}{\treeRoot}{\Bl(x)}.
+% \end{align*}
 We call this tuple 
 the \intro{bough type} of the leaf $x$ with respect to the \kl{bough} $B$.
 We again refer to 
@@ -208,8 +232,7 @@ split $\spt'$) is also \kl{forward Ramseyan}.
     \begin{enumerate}
         \item $h$ is an embedding of graphs,
         \item $h$ is the identity map on \kl(context){leaves} of $C[\square]$,
-        \item there exist three consecutive \kl(bough){blocks} in $H$ whose leaves
-            are left untouched\todo{clarify} by $h$.
+        \item there exist three consecutive \kl(bough){blocks} in $H$ whose leaves are left untouched\footnote{Here we say that a leaf of $H$ if the corresponding vertex of $\someInterp(C[H])$ is not in the image of $h$. } by $h$.
     \end{enumerate}
     A \intro{bad bough} is a \kl{bough} that is not a \kl{good bough}.
 \end{definition}
