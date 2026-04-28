@@ -1,3 +1,4 @@
+$schema: file:///home/aliaume/Code/pandoc-papers/paper-meta.schema.json
 title: "Well-quasi-ordered classes of bounded clique-width"
 license: "CC-BY-SA 4.0"
 repository: https://github.com/AliaumeL/clique-width-labelled-wqo
