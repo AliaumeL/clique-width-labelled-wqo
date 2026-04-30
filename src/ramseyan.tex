@@ -22,18 +22,20 @@ edges of the graphs.
 
 \subsection{From Interpretation to Monoids}
 
-\AP It follows from standard arguments that to an $\MSO$ formula $\varphi(x,y)$ over
-$\Trees{\Sigma}{}$ one can associate a finite monoid $M$ and a morphism $\mu
-\colon \Sigma^* \to M$ such that for any tree $T$ and any pair of leaves $x
-\treesibleq y$ in $T$, whether $T \models \varphi(x,y)$ is entirely determined
-by the values of $\mu(\tword{z}{x})$, $\mu(\tword{z}{y})$ and
+\AP It follows from standard arguments that to an $\MSO$ formula $\varphi(x,y)$
+over $\Trees{\Sigma}{}$ one can associate a finite monoid $M$ and a morphism
+$\mu \colon \Sigma^* \to M$ such that for any tree $T$ and any pair of leaves
+$x \treesibleq y$ in $T$, whether $T \models \varphi(x,y)$ is entirely
+determined by the values of $\mu(\tword{z}{x})$, $\mu(\tword{z}{y})$ and
 $\mu(\tword{\treeRoot}{z})$ where $z = \lca(x,y)$ is the \kl{least common
 ancestor} of $x$ and $y$. We refer to the book on Tree Automata Techniques and
 Applications for a comprehensive overview of the connection between Monadic
 Second Order Logic on trees, and tree automata \cite{TATA08}. In the rest of
 the section, we fix such a monoid $M$ and morphism $\mu$. To simplify
 notations, we write $\intro*\tlbl{\aTree}{x}{y}$ for $\mu(\tword{x}{y})$, that
-is, the product of the labels of the edges on the path from $x$ to $y$ in $\aTree$.
+is, the product of the labels of the edges on the path from $x$ to $y$ in
+$\aTree$. If the path is empty (i.e., $x=y$), then $\tlbl{\aTree}{x}{y}$ is the
+identity element of $M$.
 
 \AP As a consequence, one can collect in a subset $P \subseteq M^3$ all the
 triples $(a,b,c)$ that correspond to satisfying assignments of the formula
@@ -165,33 +167,22 @@ Colcombet~\cite{COLC07}. The rest of this section explains how this
 factorisation works and how it can be used to define a more suitable ordering
 on trees.
 
-\AP A \intro{split of height $N$} of a tree $\aTree$ is a mapping $\spt$ from the
-nodes of $\aTree$ to $\set{1, \dots, N}$. Given a split $\spt$ and two nodes $x
-\treeleq[\t] y$\mael{Fix for $\spt(x \colon x)$}, we define $\spt(x \colon y)$ to be the minimal value of
-$\spt(z)$ for $x \treelt[\t] z \treelt[\t] y$, and $N+1$ otherwise.
-In particular, if $x=y$ or $y$ is a child of $x$, then $\spt(x \colon y) = N+1$.
+\AP A \intro{split of height $N$} of a tree $\aTree$ is a mapping $\spt$ from
+the nodes of $\aTree$ to $\set{1, \dots, N}$. Given a split $\spt$ and two
+nodes $x \treeleq[\t] y$, we define $\spt(x \colon y)$ to be the minimal value
+of $\spt(z)$ for $x \treelt[\t] z \treelt[\t] y$, and $N+1$ otherwise. In
+particular, if $x=y$ or $y$ is a child of $x$, then $\spt(x \colon y) = N+1$.
 
-\AP Two elements $x \treelt[\t] y$ such that $\spt(x) = \spt(y) = k$ are
-\intro{$k$-neighbours} if $\spt(x \colon y) \geq k$. 
-Along every branch, being \kl{$k$-neighbours} is an equivalence relation on the nodes of the branch that take value $k$ in the split. 
-A \kl{split} thus induces a hierarchical
-structure on each branch based on its \kl{$k$-neighbourhoods}. We illustrate
-the situation in \cref{split-on-branch:fig}. We refer to the value of
-$\spt(x)$ as the \reintro{split depth} of the node $x$.
 
-\maelin{Reformulation of the above definitions:\\
-For a split $\spt$, two nodes $x, y$ of $\aTree$ such that $\spt(x) = \spt(y) = k$ are \intro{$k$-neighbours} if either
-\begin{itemize}
-  \item $x \treelt[\t] y$ and $\spt(x \colon y) \geq k$, or
-  \item $y \treelt[\t] x$ and $\spt(y \colon x) \geq k$.
-\end{itemize}
-Along every branch, being \kl{$k$-neighbours} is a non-reflexive equivalence relation on the nodes of the branch that take value $k$ in the split. 
-A \kl{split} thus induces a hierarchical
-structure on each branch. We say that a \intro{$k$-neighbourhood} is a maximal set of $k$-neighbours along a branch. We illustrate
-the situation in \cref{split-on-branch:fig}. We refer to the value of
-$\spt(x)$ as the \reintro{split depth} of the node $x$. \\
-If we chose to use this def, be careful to report this to other occurence (and we may define backbone of bough as subset of a $k$-neighborhood). I am unsure if we want to exclude or not $k$-neighborhood of 1 element (with this definition we do because of non-reflexivity).
-}
+\AP Let us fix a branch $B$ of $\aTree$, that is, a maximal set of nodes of
+$\aTree$ that are pairwise comparable for $\treeleq$. We define an equivalence
+relation on the notes of $B$ as follows: two nodes $x$ and $y$ of $B$ are in
+the same class if $\spt(x) = \spt(y) = k$ and $\spt(x \colon y) \geq k$. A
+\kl{split} thus induces a hierarchical structure on each branch based on its
+\kl{$k$-neighbourhoods}. We illustrate the situation in
+\cref{split-on-branch:fig}. We refer to the value of $\spt(x)$ as the
+\reintro{split depth} of the node $x$.
+
 
 \begin{figure}
   \centering 
@@ -240,8 +231,8 @@ If we chose to use this def, be careful to report this to other occurence (and w
 \end{figure}
 
 \AP A \kl{split} $\spt$ is \intro{forward Ramseyan} if for every $k \in \set{1,
-\dots, N}$, every branch $b$ of the tree, 
-and every $x, y, x', y'$ in the same class of \kl{$k$-neighbourhood}\todo{careful} inside the branch $b$,
+\dots, N}$, every branch $B$ of the tree, 
+and every $x, y, x', y'$ in the same \kl{$k$-neighbourhood} of $B$,
 with $x \treelt[\t] y$ and $x' \treelt[\t] y'$, we have: 
 \begin{equation}
   \label{fake-idempotent:eq} 
@@ -260,8 +251,7 @@ y$. We say that $x$ and $y$ are \intro{independent at level $k$} if
 $\spt(x:y) = k$ and there exist three nodes $z_1, z_2, z_3$ such that
 $x \treeleq[\t] z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$,
 $\spt(z_1) = \spt(z_2) = \spt(z_3) = k$, and $\spt(x\colon z_1) > k$,
-$\spt(z_1 \colon z_2) > k$, and $\spt(z_3\colon y) > k$. In essence, $x$ and
-$y$ are \emph{separated} by at least one \kl{$k$-neighbourhood}.\todo{careful} In this case,
+$\spt(z_1 \colon z_2) > k$, and $\spt(z_3\colon y) > k$. In this case,
 we can exploit \kl{forward Ramseyan splits} to compute $\tlbl{\t}{x}{y}$
 without inspecting the section between $z_2$ and $z_3$, leading to a fast (and
 first-order definable) computation. We refer to \cite[Lemma 3]{COLC07} for
@@ -748,7 +738,6 @@ section.
     \tlbl{\t_1}{z_3}{y} & = d 
     &\text{by \cref{item:gap-embedding:neighbourhood}.}
   \end{align*}
-  \maelin{is $\tlbl{\t_1}{z_3}{y}$ well-defined for empty-words ?}
 
   Finally, because $h(x)$ and $h(y)$ are \kl{independent at level $k$},
   and so are $x$ and $y$,

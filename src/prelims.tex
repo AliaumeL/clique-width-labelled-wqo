@@ -6,7 +6,7 @@ We assume the reader to be familiar with basic notions of logic on finite
 relational structures, such as monadic second-order logic ($\MSO$), first-order
 logic and quantifier-free formulae.
 
-\paragraph*{Graphs} \AP A graph $G$ consists of a finite set $V(G)$ of vertices
+\subparagraph*{Graphs} \AP A graph $G$ consists of a finite set $V(G)$ of vertices
 and a set $E(G)\subseteq  V(G)^2$ %\binom{V(G)}{2}$ 
 of edges. A graph is
 \intro(graph){undirected} if $(u, v) \in E$ implies $(v, u) \in E$ for all $u,
@@ -40,7 +40,7 @@ subgraph relation} extends to ordered graphs by requiring that the embedding $f
 \colon V(G) \to V(H)$ preserves the order, i.e., for all $u, v \in V(G)$, $u
 \leq_G v$ if and only if $f(u) \leq_H f(v)$.
 
-\paragraph*{Well-quasi-orderings} A quasi-ordered set $(X, \leq)$ is a set $X$
+\subparagraph*{Well-quasi-orderings} A quasi-ordered set $(X, \leq)$ is a set $X$
 with a reflexive and transitive relation $\leq$. A sequence $\seqof{x_i}$ of
 elements in $X$ is \intro(sequence){good} if there exist $i < j$ such that $x_i
 \leq x_j$. A quasi-ordered set is \intro{well-quasi-ordered} (\reintro{wqo}) if
@@ -71,18 +71,17 @@ class of \kl{ordered graphs} is \kl{well-quasi-ordered} (resp.
 
 
 
-\paragraph*{Trees} \AP In this paper, \intro{trees} are finite, binary, and
+\subparagraph*{Trees} \AP In this paper, \intro{trees} are finite, binary, and
 ordered (they have \intro(child){left} and \reintro{right children}). They are
 understood as finite relational structures over the signature $\sigma =
 (\treeleq, \treesibleq)$ where $\treeleq$ is the \intro{ancestor relation}, and
-$\treesibleq$ is the \intro{sibling order} on the nodes of the tree, extended
-to all pairs of nodes as a topological order.\mael{is the topological order used anywhere ?} In a tree $\aTree$, the
-\intro(tree){root} is denoted by $\intro*\treeRoot(\aTree)$, with $\aTree$
-being left implicit when clear from context. The set of \intro(tree){leaves} is
-denoted by $\Leaves{\aTree}$. Given two nodes $x$ and $y$ in a tree $T$, their
-\intro{least common ancestor} is denoted by $\intro*\lca(x,y)$. We will often
-use the \intro{parent relation}, which states that $y$ is the unique immediate
-\kl(tree){ancestor} of $x$.
+$\treesibleq$ is the \intro{sibling order} on the nodes of the tree. In a tree
+$\aTree$, the \intro(tree){root} is denoted by $\intro*\treeRoot(\aTree)$, with
+$\aTree$ being left implicit when clear from context. The set of
+\intro(tree){leaves} is denoted by $\Leaves{\aTree}$. Given two nodes $x$ and
+$y$ in a tree $T$, their \intro{least common ancestor} is denoted by
+$\intro*\lca(x,y)$. We will often use the \intro{parent relation}, which states
+that $y$ is the unique immediate \kl(tree){ancestor} of $x$.
 
 \AP As in the case of graphs, we will consider vertex-labelled trees where
 labels are taken from a \kl{well-quasi-order} $(X, \leq)$. We will also
@@ -95,7 +94,7 @@ denotes the \emph{word} in $\Sigma^*$ obtained by reading the labels of the
 edges on the path from $x$ to $y$ in $\aTree$; we leave $\aTree$ implicit
 when clear from context.
 
-\paragraph*{Bounded Clique-Width} \AP An \intro{$\MSO$-interpretation}
+\subparagraph*{Bounded Clique-Width} \AP An \intro{$\MSO$-interpretation}
 $\someInterp$ from $\Trees{\Sigma}{}$ to finite undirected graphs is given by a
 tuple of $\MSO$ formulae that specify how to, respectively, select a subset of
 the leaves of the tree to be the vertices of the graph ($\phi_{\mathsf{univ}}(x)$),
@@ -123,7 +122,7 @@ clique-width} if it is included in the image of some \kl{simple
 $\MSO$-interpretation} from finite words to finite undirected graphs.
 
 
-\paragraph{Transductions from graphs to graphs} \AP Another notion of logical
+\subparagraph*{Transductions from graphs to graphs} \AP Another notion of logical
 transformation relevant in this paper is that of \kl{existential
 transduction} and \kl{existential interpretation} that were mentioned in
 \cref{thm:characterisations,conj:path-transduction}, and are defined in a
@@ -157,4 +156,16 @@ interprets} $\mathcal{D}$.
   $\phi_{\text{univ}}(x)$ is the formula that is true if and only if $x$ is labelled with $\bullet$,
   $\phi_{\text{edge}}(x,y)$ is the formula that is true if and only if there is an edge between $x$ and $y$ in the original graph.
 \end{example}
+
+Let us remark that if a (non-hereditary) class of graphs having \kl{bounded
+clique-width} is \kl{$3$-well-quasi-ordered}, then its \kl{hereditary closure}
+is \kl{$2$-well-quasi-ordered}, and therefore the class itself is
+\kl{$\forall$-well-quasi-ordered}. In particular, one gets a generalisation of
+\cref{main:theorem} (resp. \cref{main:corollary}) to non-hereditary classes of
+graphs of \kl{bounded clique-width}, up to replacing \kl{$2$-well-quasi-ordered} by
+\kl{$3$-well-quasi-ordered}. As stated in the introduction, we strongly believe that our
+results can be extended to non-hereditary classes of graphs of \kl{bounded
+clique-width} without this increase in the number of labels, with minimal
+changes in the proofs. 
+
 

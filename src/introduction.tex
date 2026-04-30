@@ -9,16 +9,12 @@ Robertson and Seymour~\cite{ROBSEY04} states that the class of all finite
 graphs is well-quasi-ordered under the minor relation, a profound result with
 deep algorithmic consequences. WQOs are also at the heart of
 \emph{well-structured transition systems}, infinite-state transition systems
-over which verification algorithms can be designed~\cite{ABDU96,ABDU98}. 
-One appealing feature of WQOs is that they are closed under various operations,
-such as the sum and the product of WQOs. As an example, the closure of WQOs
-over finite words, also known as Higman's lemma \cite{HIG52}, has been used in the
+over which verification algorithms can be designed~\cite{ABDU96,ABDU98}. One
+appealing feature of WQOs is that they are closed under various operations,
+such as the sum and the product of WQOs. As an example, the fact that $X^*$
+(finite words having elements of $X$ as letters) is a WQO whenever $X$ is a
+WQO, also known as Higman's lemma \cite{HIG52}, has been used in the
 verification of so-called \emph{lossy channel systems}~\cite{ABDU93}.
-
-\maelin{This sentence does not make sense: `the closure' is not also known as `Higman's lemma'. (That lemma is the statement that the given closure is a WQO.)
-\\
-I agree that this sentence does not make sense. Do you mean that wqo are closed under taking finite words of them ?
-}
 
 % Well-quasi-ordered classes of graphs
 \AP Undirected finite graphs are naturally equipped with the \reintro{induced
@@ -33,9 +29,7 @@ subgraph relation: for instance, the class of all finite paths, or the class of
 all finite cliques. 
 Distinguishing which classes of (finite) graphs are
 well-quasi-ordered under the induced subgraph relation is a long-standing open
-problem in graph theory, dating back to Pouzet's seminal work \cite{POUZ72}.
-\maelin{"While Pouzet's 1972 work is indeed seminal, this sentence does Kruskal and Nash-Williams a disservice, as they were working on similar ideas in the 1960s." \\
-Il parle du tree theorem de kruskal~\cite{KRUSK60,NASH63} là ? où il y a plus ?}
+problem in graph theory.
 
 \AP In general, there is little hope of characterising all such classes, since
 any countable order with finite infixes can be embedded into the induced
@@ -151,17 +145,6 @@ formulae. This led to the following conjecture, where
 \end{conjecture}
 
 
-\maelin{(re)move this paragraph ? (to contributions, after/before thm6)}
-
-\AP Another type of obstruction to being \kl{$\forall$-well-quasi-ordered}
-comes from the existence of infinite antichains with a periodic structure that
-were called \reintro{periodic antichains} in \cite[Section 7]{ALM17}. These
-antichains appear in \cite[Conjecture 2]{ALM17}, that is concerned with classes
-of graphs defined by finitely many excluded induced subgraphs, and relates the
-presence of these antichains to the fact that they are \kl{well-quasi-ordered}.
-We show that in our setting, containing such \kl{periodic antichains} is
-equivalent to being not \kl{$2$-well-quasi-ordered}. 
-
 % Since we are interested in
 %\kl{$2$-well-quasi-ordering}, we propose hereafter an adaptation of this
 %conjecture to our setting.
@@ -189,7 +172,7 @@ these techniques could be refined to work on classes of bounded clique-width
 \kl{$2$-well-quasi-ordering} and \kl{$\forall$-well-quasi-ordering}.
 
 
-\paragraph{Contributions} \AP Our main contribution is \cref{main:theorem},
+\paragraph*{Contributions} \AP Our main contribution is \cref{main:theorem},
 which answers positively to the conjectures of \cite{LOPEZ24}. To that end, we
 first consider a generalisation of the framework of \cite{DRT10} from NLC graph
 expressions to \kl{$\MSO$-interpretations} from trees (these will be formally
@@ -209,26 +192,32 @@ main combinatorial result is the following.
   \end{enumerate}
 \end{theorem}
 
-From \cref{main:theorem},
-we derive the following corollary that solves
-Pouzet's conjectures for hereditary classes of bounded clique-width.
+From \cref{main:theorem}, we derive the following corollary that solves
+Pouzet's conjectures for \kl{hereditary classes} of \kl{bounded clique-width}.
+This trades the decidability of \cref{main:theorem} to handle more
+classes.\footnote{There are uncountably many \kl{hereditary classes} of
+\kl{bounded clique-width}, but only countably many images of trees under $\MSO$
+interpretations.}
 
-\maelin{Do we want to sell this as a corollary and not a theorem, this is our main result}
-
-\begin{corollary}[name={},restate=main:corollary]
+\begin{theorem}[name={},restate=main:corollary]
   \label{main:corollary}
   The conclusion of \cref{main:theorem}
-  holds when $\Cls$ is a hereditary class of bounded clique-width graphs.
-\end{corollary}
+  holds when $\Cls$ is a \kl{hereditary class} of graphs having \kl{bounded clique-width}.
+\end{theorem}
 
 
-Because our proof techniques exhibit structural obstructions to being
-\kl{$2$-well-quasi-ordered}, we also obtain the following characterisations in
-\cref{thm:characterisations}. These answer positively to the conjectures of
-\cite{ALM17,LOPEZ24}. The precise definitions of \kl{regular antichains} and
-\kl{periodic antichains} will be given in \cref{sec:interpreting-paths}.
+Because our proofs are constructive and combinatorial, we can derive from them
+obstructions to being \kl{$\forall$-well-quasi-ordered}, which we list in
+\cref{thm:characterisations}. In our statements, we use infinite antichains
+with a periodic structure that were called \reintro{periodic antichains} in
+\cite[Section 7]{ALM17}. These antichains appear in \cite[Conjecture 2]{ALM17},
+that is concerned with classes of graphs defined by finitely many excluded
+induced subgraphs, and relates the presence of these antichains to the fact
+that they are \kl{well-quasi-ordered}. We show that in our setting, containing
+such \kl{periodic antichains} is equivalent to being not
+\kl{$2$-well-quasi-ordered}. The precise definitions of \kl{regular antichains}
+and \kl{periodic antichains} will be given in \cref{sec:interpreting-paths}.
 
-\maelin{I don't see why we prove the conjecture of ~\cite{ALM17}. "Conjecture 2. There is a function $f : N \to N $ such that the class X of graphs defined by a finite collection C of forbidden induced subgraphs is well-quasi-ordered by the induced subgraph relation if and only if $X$ contains no periodic infinite antichains of period at most $f (t(C ))$."}
 
 \begin{theorem}[name={},restate=thm:characterisations]
   \label{thm:characterisations}
@@ -249,6 +238,7 @@ Because our proof techniques exhibit structural obstructions to being
       $\Cls$ \kl{existentially transduces} the class of all finite paths.
   \end{enumerate}
 \end{theorem}
+
 
 We strongly believe that the results of \cref{main:corollary} extend to
 non-hereditary classes of bounded clique-width graphs, but for the sake of
