@@ -38,6 +38,14 @@ $(PAPER).lipics.tex: $(SRC) ./paper-meta.yaml
 			 --wrap=none \
 		     $(PAPER).md
 
+$(PAPER).lics.tex: $(PAPER).lipics.pdf
+	latexpand -o $(PAPER).lics.tex           \
+		      --empty-comments                 \
+			  --verbose 					   \
+			  $(PAPER).lipics.tex
+
+
+
 $(PAPER).plain.tex: $(SRC) ./paper-meta.yaml
 	pandoc -t latex \
 		     --output $(PAPER).plain.tex \
@@ -64,6 +72,18 @@ $(PAPER).arxiv.tar.gz: $(PAPER).arxiv.tex
            $(PAPER).arxiv.tex    \
 			 plainurl.bst              \
 			 ensps-colorscheme.sty
+
+$(PAPER).lics.tar.gz: $(PAPER).lics.tex
+	tar -czf $(PAPER).lics.tar.gz \
+		     $(PAPER).lics.tex \
+			 plainurl.bst \
+			 lipics-logo-bw.pdf \
+			 orcid.pdf \
+			 lipics-v2021.cls \
+			 ensps-colorscheme.sty \
+			 papers.bib \
+			 cc-by.pdf \
+			 paper-meta.yaml
 
 $(PAPER).arxiv.pdf: $(PAPER).arxiv.tar.gz
 	# create temporary directory

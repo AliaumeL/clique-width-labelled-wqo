@@ -7,9 +7,13 @@ that enjoys many structural characterisations, and where most conjectures from
 the literature on labelled well-quasi-orderings hold true. We consider these
 results as a first step towards understanding the landscape of labelled
 well-quasi-orderings of graphs and other relational structures.
-
-A natural research direction would be to consider other classes of relational
-structures. We strongly believe that our techniques can be adapted to the case
+Note that we proved a very strong dichotomy result for hereditary
+classes of graphs of bounded clique-width: either they are not
+\kl{$2$-well-quasi-ordered} or the \kl{induced subgraph} relation on them is
+simpler than the \kl{gap-embedding} relation on trees. We conjecture that this
+dichotomy extends to all hereditary classes of graphs: there is nothing beyond
+(nested) trees.
+We strongly believe that our techniques can be adapted to the case
 of finite relational structures over a finite relational signature. Another
 interesting direction would be to consider non-hereditary classes of graphs of
 bounded clique-width. In this case, we also believe that our techniques can be
@@ -19,39 +23,44 @@ A fundamental limitation of our work is that we assume classes to be of
 \kl{bounded clique-width}. We believe that classes of graphs that are
 \kl{$2$-well-quasi-ordered} are necessarily of \kl{bounded clique-width} (see
 \cref{cwqo:conj}), and a first step would be to show that every
-such class is \emph{monadically dependent}.
+such class is \emph{monadically dependent}, a notion originating from 
+model theory \cite{baldwin85}
+that has been recently investigated in finite model theory 
+with the belief that it characterises tractable model checking for 
+first-order formulas (see for instance \cite{dreier24} and \cite{dreier2024flipbreakability}).
+We actually conjecture a stronger statement, that does not involve labelling
+the graphs of the class.
 
-Another question left unanswered by our work is whether we can
+\begin{conjecture}
+  \label{conj:wqo-mon-dep}
+  Every \kl{hereditary class} of graphs that is 
+  \kl{well-quasi-ordered} by the \kl{induced subgraph} relation is \emph{monadically dependent}.
+\end{conjecture}
+
+Even in the case of classes having \kl{bounded clique-width}, there are 
+several unanswered conjectures that are refinement of our results.
+For instance, can we
 \kl{existentially interpret} all paths in every \kl{hereditary class} of graphs
 that is not \kl{$\forall$-well-quasi-ordered} (and of \kl{bounded
 clique-width}). An argument similar to \cref{lem:transduction-not-wqo} shows
 that if a class \kl{existentially interprets} all paths, then it is not
 \kl{$2$-well-quasi-ordered}, but the converse direction remains open.
 
-Finally, note that we proved a very strong dichotomy result for hereditary
-classes of graphs of bounded clique-width: either they are not
-\kl{$2$-well-quasi-ordered} or the \kl{induced subgraph} relation on them is
-simpler than the \kl{gap-embedding} relation on trees. We conjecture that this
-dichotomy extends to all hereditary classes of graphs: there is nothing beyond
-(nested) trees.
-
-\begin{quote}
-path we obtain an infinite antichain.  Moreover, being \kl{$\ell$-wqo}
-entails being \kl{$k$-wqo} for all $k\leq\ell$ and similarly being
-\kl{$n^-$-wqo} entails being \kl{$m^-$-wqo} for all $m\leq n$.
-Finally, if $\mathscr C$ is \kl{$2$-wqo} then it is \kl{$n^-$-wqo} for
-all~$n$ \cite[Lemma~5.2]{braunfeld21}.
-\end{quote}
-
+Similarly, we focused on classes that are \kl{$2$-well-quasi-ordered}
+as our simplest possible labelling. However, there are other 
+ways to add information to the graphs: one can distinguish $n$ vertices
+(adding $n$ constants), or one can assume that the labelling 
+itself is ordered by $a \leq b$ ; adapting the notion of embedding in each case. 
+It is clear that a class that is 
+\kl{$2$-well-quasi-ordered} will be \kl{well-quasi-ordered} when
+finitely many constants are added to distinguish nodes 
+\cite[Lemma 5.2]{braunfeld21}, and that it will still be 
+\kl{well-quasi-ordered} when \kl{freely labelling} the class
+with to comparable labels $a \leq b$. We believe that the converse holds.
 
 \begin{conjecture}
-  \label{conj:wqo-mon-dep}
   Every \kl{hereditary class} of graphs that is 
-  \kl{well-quasi-ordered} by the \kl{induced subgraph} relation is \kl{monadically dependent}.
-\end{conjecture}
-
-\begin{conjecture}
-  \label{conj:cwqo-2minwqo}
-  Every \kl{hereditary class} of graphs that is 
-  \kl{$2^-$-well-quasi-ordered} by the \kl{induced subgraph} relation is \kl{$2$-well-quasi-ordered} by the \kl{induced subgraph} relation.
+  \kl{well-quasi-ordered} by the \kl{induced subgraph} relation 
+  with \emph{two} additional constants
+  is \kl{$2$-well-quasi-ordered}. 
 \end{conjecture}

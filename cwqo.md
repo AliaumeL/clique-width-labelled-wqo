@@ -16,10 +16,20 @@ header-includes: |
   \newcommand{\mael}[1]{\todo[color=violet!40]{#1}}
   \newcommand{\maelup}[1]{\emph #1}
   \newcommand{\maelin}[1]{\todo[inline,size=\normalsize,color=violet!40,caption={}]{Mael: #1}}
-appendix:
-  - src/appendix.tex
+lipics:
+  editor-macros: |
+    \EventEditors{Claudia Faggian and Joost-Pieter Katoen}
+    \EventNoEds{2}
+    \EventLongTitle{41st Annual Symposium on Logic in Computer Science (LICS 2026)}
+    \EventShortTitle{LICS 2026}
+    \EventAcronym{LICS}
+    \EventYear{2026}
+    \EventDate{July 20--23, 2026}
+    \EventLocation{Lisbon, Portugal}
+    \EventLogo{}
+    \SeriesVolume{380}
+    \ArticleNo{32}
 ---
-
 
 \input{src/introduction}
 \input{src/prelims}
