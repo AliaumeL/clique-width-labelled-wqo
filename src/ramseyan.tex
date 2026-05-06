@@ -452,69 +452,59 @@ the \kl{gap-embedding} ordering.
   nodes of $\t$ to $\set{\marked, \separating, \dummy}$, respectively called
   \intro(nodes){marked}, \intro(nodes){separating}, and \intro(nodes){dummy}
   nodes.
-
-
-\todo[inline]{The definition of `well-marked' needs tidying up. First, it's currently quantified over every $x$, $z_1$ and $y$, but then we have the additional condition `if $x$ and $y$ are marked nodes', while later it says that also $\rho(z_1)=\mathbf{M}$. What is being quantified over to check whether this definition holds? Additionally, `$\mathfrak{s}(z_1)=k$' is said twice, as is `$\mathfrak{s}(x:z_1)>k$', and there is the perennial issue of interpreting what to do when, e.g., $z_2=z_3$ or $z_3=y$.}
-
-
-\maelup{
-  \AP A \kl{marked nested tree} $(\t, \spt, \marking)$ is \intro{well-marked} if
-  the \kl{marked nodes} contain the root of $\t$, are closed under the
-  \kl{least common ancestor} operation, and furthermore satisfy that for every
-  $x \treelt[\t] z_1 \treelt[\t] y$ with $\spt(x\colon z_1) > k$, $\spt(z_1)
-  = k$, and $\spt(z_1\colon y) \geq k$ for some $k \in \set{1, \dots, N}$, if
-  $x$ and $y$ are \kl{marked nodes}, then so is $Z_1$ and there exist $z_2, z_3$ such that
-  $z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$,
-  $\spt(z_2) = \spt(z_3) = k$, 
-  $\spt(z_1\colon z_2) > k$, $\spt(z_2\colon z_3) \geq k$, and
-  $\spt(z_3\colon y) \geq k$, with  $\marking(z_2) \in \set{\marked, \separating}$.
-  A graphical illustration of the condition is provided below:}
-
-  \maelin{Suggestion above, but the definition is still extremely convoluted. It's always disturbing the $z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$.}
-
-  % \AP A \kl{marked nested tree} $(\t, \spt, \marking)$ is \intro{well-marked} if
-  % the \kl{marked nodes} contain the root of $\t$, are closed under the
-  % \kl{least common ancestor} operation, and furthermore satisfy that for every
-  % $x \treelt[\t] z_1 \treelt[\t] y$ with $\spt(x\colon z_1) > k$, $\spt(z_1)
-  % = k$, and $\spt(z_1\colon y) \geq k$ for some $k \in \set{1, \dots, N}$, if
-  % $x$ and $y$ are \kl{marked nodes}, then there exist $z_2, z_3$ such that
-  % $x \treelt[\t] z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y$,
-  % $\spt(z_1) = \spt(z_2) = \spt(z_3) = k$, $\spt(x\colon z_1) > k$,
-  % $\spt(z_1\colon z_2) > k$, $\spt(z_2\colon z_3) \geq k$, and
-  % $\spt(z_3\colon y) \geq k$, with $\marking(z_1) = \marked$ and
-  % $\marking(z_2) \in \set{\marked, \separating}$.
-  % A graphical illustration of the condition is provided below:
+  \AP A \kl{marked nested tree} $(\t, \spt, \marking)$ is \intro{well-marked}
+  if the following conditions hold:
+  \begin{enumerate}
+    \item $\marking(\treeRoot) = \marked$,
+    \item \kl{marked nodes} are closed under \kl{least common ancestors},
+    \item for every pair of \kl{marked nodes} $x \treelt[\t] y$, if
+    $k = \spt(x\colon y) \leq N$, then there exist nodes $z_1, z_2, z_3$ such that
+    $
+      x \treeleq[\t] z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y
+    $,
+    $
+      \spt(z_1) = \spt(z_2) = \spt(z_3) = k
+    $,
+    $
+      \spt(x\colon z_1) > k,\quad
+      \spt(z_1\colon z_2) > k,\quad
+      \spt(z_2\colon z_3) \geq k,\quad
+      \spt(z_3\colon y) > k
+    $, 
+    and
+    $ 
+      \marking(z_1) = \marked,\qquad
+      \marking(z_2) \in \set{\marked, \separating}
+    $.
+  \end{enumerate}
+  This can be represented using the following figure
   \begin{center}
-    \begin{tikzpicture}[xscale=2,yscale=0.5]
-      % illustrate well-marked condition
-      \node (x) at (0,0) {$x$};
-      \node (z1) at (1,0) {$z_1$};
-      \node (z2) at (2,0) {$z_2$};
-      \node (z3) at (3,0) {$z_3$};
-      \node (y) at (4,0) {$y$};
+  \begin{tikzpicture}[xscale=2,yscale=0.5]
+    \node (x) at (0,0) {$x$};
+    \node (z1) at (1,0) {$z_1$};
+    \node (z2) at (2,0) {$z_2$};
+    \node (z3) at (3,0) {$z_3$};
+    \node (y) at (4,0) {$y$};
 
-      \node (sptz1) at (1,-1) {$k$};
-      \node (sptz2) at (2,-1) {$k$};
-      \node (sptz3) at (3,-1) {$k$};
-      \node (sptxz1) at (0.5,-0.7) {$> k$};
-      \node (sptz1z2) at (1.5,-0.7) {$> k$};
-      \node (sptz3y) at (3.5,-0.7) {$\geq k$};
-      \node (sptz1z3) at (2.5,-0.7) {$\geq k$};
+    \node at (1,-1) {$k$};
+    \node at (2,-1) {$k$};
+    \node at (3,-1) {$k$};
+    \node at (0.5,-0.7) {$> k$};
+    \node at (1.5,-0.7) {$> k$};
+    \node at (2.5,-0.7) {$\geq k$};
+    \node at (3.5,-0.7) {$> k$};
 
-      \node (markedx) at (0,1) {$\marked$};
-      \node (markedy) at (4,1) {$\marked$};
-      \node (markedz1) at (1,1) {$\marked$};
-      \node (markedz2) at (2,1) {$\in \{\marked, \separating\}$};
-      \node (notmarkedz3) at (3,1) {$\in \{\marked, \separating, \dummy\}$};
+    \node at (0,1) {$\marked$};
+    \node at (4,1) {$\marked$};
+    \node at (1,1) {$\marked$};
+    \node at (2,1) {$\in \{\marked, \separating\}$};
+    \node at (3,1) {$\in \{\marked, \separating, \dummy\}$};
 
-      \draw[->] (x) -- (z1);
-      \draw[->] (z1) -- (z2);
-      \draw[->] (z2) -- (z3);
-      \draw[->] (z3) -- (y);
-
-
-
-    \end{tikzpicture}
+    \draw[->] (x) -- (z1);
+    \draw[->] (z1) -- (z2);
+    \draw[->] (z2) -- (z3);
+    \draw[->] (z3) -- (y);
+  \end{tikzpicture}
   \end{center}
 \end{definition}
 
@@ -617,7 +607,7 @@ section.
 
   Otherwise, let $k = \spt_1(x:y) \leq N$. Since $(\t_1, \spt_1, \marking_1)$ is \kl{well-marked},
   there exists $z_1, z_2, z_3$ such that
-  $x \treelt[\t_1] z_1 \treelt[\t_1] z_2 \treeleq[\t_1] z_3 \treeleq[\t_1] y$,
+  $x \treeleq[\t_1] z_1 \treelt[\t_1] z_2 \treeleq[\t_1] z_3 \treeleq[\t_1] y$,
   $\spt_1(z_1) = \spt_1(z_2) = \spt_1(z_3) = k$, and 
   $\spt_1(x\colon z_1) > k$, $\spt_1(z_1\colon z_2) > k$, $\spt_1(z_2\colon z_3) \geq k$, and $\spt_1(z_3\colon y) > k$, 
   with $\marking_1(z_1) = \marked$, and $\marking_1(z_2) \in \set{\marked, \separating}$.
@@ -732,7 +722,7 @@ section.
   Now, we can compute the values of $a$, $b$, and $d$:
   \begin{align*}
     \tlbl{\t_1}{x}{z_1} & = a
-    &\text{by induction hypothesis,} \\
+    &\text{by induction hypothesis if $x \treelt[\t_1] z_1$, and trivially if $x=z_1$,} \\
     \tlbl{\t_1}{z_1}{z_2} & = b
     &\text{by \cref{item:gap-embedding:neighbourhood},} \\
     \tlbl{\t_1}{z_3}{y} & = d 
