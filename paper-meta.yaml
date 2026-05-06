@@ -8,8 +8,7 @@ abstract: |
   in the presence of labels on the vertices. We prove that,
   given a finite presentation of a class of graphs,
   one can decide whether the class is labelled-well-quasi-ordered.
-  This solves an open problem raised by Daligault, Rao and Thomassé
-  in 2010, and answers positively to two conjectures of Pouzet
+  This answers positively to two conjectures of Pouzet
   in the restricted case of bounded clique-width classes. Namely,
   we prove that being labelled-well-quasi-ordered by a set of size 2
   or by a well-quasi-ordered infinite set are equivalent conditions,

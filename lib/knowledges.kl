@@ -43,6 +43,7 @@
 \knowledge{notion}
  | edges
 \knowledge{notion}
+ | freely labelling
  | $X$-labelled graph
  | $X$-labelled@graph
  | labelled graph
@@ -155,6 +156,7 @@
 \knowledge{notion}
  | $k$-well-quasi-ordered
  | $2$-well-quasi-ordered
+ | $3$-well-quasi-ordered
  | $2$-well-quasi-ordering
  | $2$-WQO
  | $2$-well-quasi-orderings
