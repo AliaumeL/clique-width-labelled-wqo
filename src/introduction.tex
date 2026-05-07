@@ -2,19 +2,25 @@
 \section{Introduction}
 \label{sec:introduction}
 
-\AP The theory of \reintro{well-quasi-orderings} (WQOs) provides a powerful
-combinatorial setting that has found applications in various areas of
-mathematics and computer science. In graph theory, the celebrated result of
-Robertson and Seymour~\cite{ROBSEY04} states that the class of all finite
-graphs is well-quasi-ordered under the minor relation, a profound result with
-deep algorithmic consequences. WQOs are also at the heart of
-\emph{well-structured transition systems}, infinite-state transition systems
-over which verification algorithms can be designed~\cite{ABDU96,ABDU98}. One
-appealing feature of WQOs is that they are closed under various operations,
-such as the sum and the product of WQOs. As an example, the fact that $X^*$
-(finite words having elements of $X$ as letters) is a WQO whenever $X$ is a
-WQO, also known as Higman's lemma \cite{HIG52}, has been used in the
-verification of so-called \emph{lossy channel systems}~\cite{ABDU93}.
+\AP The theory of \reintro{well-quasi-orderings} (WQOs)
+provides a powerful combinatorial setting that has found
+applications in various areas of mathematics and computer
+science. In graph theory, the celebrated result of
+Robertson and Seymour~\cite{ROBSEY04} states that the
+class of all finite graphs is well-quasi-ordered under
+the minor relation, a profound result with deep
+algorithmic consequences. WQOs are also at the heart of
+\emph{well-structured transition systems}, infinite-state
+transition systems over which verification algorithms can
+be designed~\cite{ABDU96,ABDU98}. One appealing feature
+of WQOs is that they are closed under various operations,
+such as the sum and the product of WQOs. As an example,
+Higman's lemma \cite{HIG52} states that if $X$ is a WQO,
+then the set $X^*$ of finite words over $X$ is also a WQO
+under the subword embedding relation, and this result has
+been used in the verification of so-called \emph{lossy
+channel systems}~\cite{ABDU93}.
+
 
 % Well-quasi-ordered classes of graphs
 \AP Undirected finite graphs are naturally equipped with the \reintro{induced
@@ -192,7 +198,7 @@ main combinatorial result is the following.
   \end{enumerate}
 \end{theorem}
 
-From \cref{main:theorem}, we derive the following corollary that solves
+From \cref{main:theorem}, we derive the following theorem that solves
 Pouzet's conjectures for \kl{hereditary classes} of \kl{bounded clique-width}.
 This trades the decidability of \cref{main:theorem} to handle more
 classes.\footnote{There are uncountably many \kl{hereditary classes} of

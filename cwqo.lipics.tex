@@ -12,11 +12,12 @@
     a4paper,
     UKenglish,
     cleveref,
-    autoref,
+    autoref,pdfa,
     thm-restate]{lipics-v2021}
 
 
 
+\nolinenumbers
 
 % graphics packages
 \usepackage{graphicx}
@@ -35,7 +36,7 @@
 
 
 % links inside the document
-\usepackage[composition,hyperref,xcolor,cleveref]{knowledge}
+\usepackage[electronic,hyperref,xcolor,cleveref]{knowledge}
 \knowledgeconfigure{notion}
 
 % Tables 
@@ -51,10 +52,11 @@
 % Maths
 \usepackage{amssymb,stmaryrd}
 % create a fact environment
+\usepackage{cancel}
 \theoremstyle{theorem}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{plain}
 \newtheorem{fact}[theorem]{Fact}
-
-
 
 % Proofs
 \usepackage{bussproofs}
@@ -130,7 +132,7 @@
        {University of Warsaw}
        {mdumas@mimuw.edu.pl}
        {https://orcid.org/0009-0004-8906-9801}
-       {}
+       {Maël Dumas was supported by the ERC project BUKA (n° 101126229) (during his employment in BUKA) and project BOBR (during his employment in BOBR) that received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme (grant agreement No.~948057).}
 \author{Aliaume Lopez}
        {INP Bordeaux, LaBRI, CNRS}
        {aliaume.lopez@bordeaux-inp.fr}
@@ -148,9 +150,14 @@
 
 \category{} %optional, e.g. invited paper
 
+\relatedversiondetails[cite={fullVersionArxiv}]{Full version}{https://arxiv.org/abs/2601.18571}
 
 
+\acknowledgements{%
+The authors would like to thank the Zygmunt Zaleski fundation for supporting the authors during the preparation of this work.%
+}
 
+ 
 \newcommand{\repositoryUrl}{\url{https://github.com/AliaumeL/clique-width-labelled-wqo}}
 
 \EventEditors{Claudia Faggian and Joost-Pieter Katoen}
@@ -195,6 +202,6 @@ a \kl[kl-usage]{notion} points to its \intro[kl-usage]{definition}.
 \bibliography{papers.bib}
 
 % If there are any appendices, we include them here.
-%\input{src/appendix.tex}
+
 
 \end{document}

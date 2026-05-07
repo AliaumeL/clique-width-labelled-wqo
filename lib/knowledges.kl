@@ -47,6 +47,7 @@
  | $X$-labelled graph
  | $X$-labelled@graph
  | labelled graph
+ | labelled graphs
  | $X$-labelled graphs
 \knowledge{notion}
  | $X$-induced quasi-order
@@ -156,6 +157,7 @@
 
 \knowledge{notion}
  | $k$-well-quasi-ordered
+ | $k$-well-quasi-ordering
  | $2$-well-quasi-ordered
  | $3$-well-quasi-ordered
  | $2$-well-quasi-ordering
