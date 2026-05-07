@@ -459,23 +459,26 @@ the \kl{gap-embedding} ordering.
     \item \kl{marked nodes} are closed under \kl{least common ancestors},
     \item for every pair of \kl{marked nodes} $x \treelt[\t] y$, if
     $k = \spt(x\colon y) \leq N$, then there exist nodes $z_1, z_2, z_3$ such that
-    $
+    \begin{itemize}
+      \item  $
       x \treeleq[\t] z_1 \treelt[\t] z_2 \treeleq[\t] z_3 \treeleq[\t] y
     $,
-    $
+      \item     $
       \spt(z_1) = \spt(z_2) = \spt(z_3) = k
     $,
-    $
+      \item     $
       \spt(x\colon z_1) > k,\quad
       \spt(z_1\colon z_2) > k,\quad
       \spt(z_2\colon z_3) \geq k,\quad
       \spt(z_3\colon y) > k
     $, 
     and
-    $ 
-      \marking(z_1) = \marked,\qquad
+    \item     $ 
+      \marking(z_1) = \marked$, $
       \marking(z_2) \in \set{\marked, \separating}
     $.
+    \end{itemize}
+   
   \end{enumerate}
   This can be represented using the following figure
   \begin{center}
