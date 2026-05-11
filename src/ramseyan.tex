@@ -585,201 +585,109 @@ section.
   $(\t_1, \spt_1, \marking_1) \gemb (\t_2, \spt_2, \marking_2)$ 
   via some mapping $h$.
   For every pair of \kl{marked nodes} $x \treelt[\t_1] y$ in $\t_1$,
-  we have \[ \tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{h(y)} \quad .\]
+  we have $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{h(y)}$.
 \end{lemma}
 \begin{proof}
-  We proceed by induction on the value of $\spt_1(x\colon y)$
-  and the number of nodes between $x$ and $y$.
-  If $\spt_1(x\colon y) = N+1$, then $y$ is a child of $x$.
-  Because $y$ is a \kl{marked node}, then by 
-  \cref{item:gap-embedding:gluing} we know that 
-  $h(y)$ is a child of $h(x)$.
-  Therefore, by \cref{item:gap-embedding:local},
-  we have $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{h(y)}$.
+  We proceed by lexicographic induction on
+  $(\spt_1(x\colon y), \; \ell(x,y))$,
+  where $\ell(x,y)$ is the number of strict descendants on the path from $x$
+  to $y$.
+  If $\spt_1(x\colon y)=N+1$, then $y$ is a child of $x$. Since $y$ is
+  \kl{marked}, \cref{item:gap-embedding:gluing} yields that $h(y)$ is a child
+  of $h(x)$, and then \cref{item:gap-embedding:local} gives
+  $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{h(y)}$.
+  For the induction steps, will use the following claim.
+  \begin{claim}
+    \label{claim:gap-gluing-strict}
+    Let $u \treelt[\t_1] v$ with $\spt_1(v)=k$ and $\spt_1(u\colon v)>k$.
+    If $\marking_1(v) \in \set{\marked,\separating}$, then
+    $\spt_2(h(u)\colon h(v))>k$.
+  \end{claim}
+  \begin{claimproof}
+    The non-strict inequality $\spt_2(h(u)\colon h(v))\geq k$ follows from
+    \cref{fact:gap-embedding-gaps}. Since $v$ is non-\kl{dummy},
+    \cref{item:gap-embedding:gluing} identifies the parent of $h(v)$ as the image
+    of the parent of $v$, and therefore the first step above $h(v)$ cannot create
+    a split value below or equal to $k$. Hence the inequality is strict.
+  \end{claimproof}
 
-  Otherwise, let $k = \spt_1(x:y) \leq N$. 
-  % TODO: 
-  % introduce z_1, the closest node to x with depth k
-  % x \treelt z_1 \treelt y 
-  % spt(x:z_1) > k
-  % spt(z_1:y) ≥ k
-  %
-  % Claim: (gluing) if z is separating or marked, then 
-  % spt(z' : z) > k implies spt(h(z'):h(z)) > k
-  % because of gluing on non-dummy nodes.
-  %
-  %
-  % case0: z_1 is the only one with depth k, i.e. spt(z_1:y) > k.
-  %   - conclude by induction on x:z_1, z_1:y
-  %   
-  % case1: spt(x) ≠ k. 
-  %   then z_1 must be marked. 
-  %   - z_1:y is smaller in length
-  %   - x:z_1 uses bigger K. 
-  %   - conclude by induction in both cases
-  %
-  % case2: spt(x) = k
-  %    then z_1 must be separating or marked
-  %    Let us introduce z_2 the first ancestor of y of depth k,
-  %    and z_3 the first ancestor of h(y) of depth k.
-  %   - [x:z_1] = [h(x):h(z_1)] because x is the first ancestor of z_1 with depth k
-  %     and so is h(x) because of Claim (gluing), we conclude by \cref{item:gap-embedding:neighbourhood}
-  %   - [z_2:y] = [z_3: h(y)]  because z_2 is the first ancestor of y with depth k 
-  %     z_3 [...] h(y) 
-  %     and \cref{item:gap-embedding:neighbourhood}
-  %   - [z_1:z_2] = [h(z_1):h(z_2)] because z_1 is the first ancestor of z_2 
-  %     and z_2 is separating or Marked (Claim gluing), hence
-  %     h(z_1) is the first k-ancestor of h(z_2) and we conclude by 
-  %     \cref{item:gap-embedding:neighbourhood}
-  %   - [x:z_1] = [x : z_2] by ramseyan property
-  %   - [h(x) : h(z_1)] = [h(x) : z_3] by ramseyan property
-  %   - [x : y] = [x : z_2 ] [ z_2 : y ] 
-  %             = [x : z_1 ] [ z_2 : y ] 
-  %             = [h(x) : h(z_1)] [ z_3 : h(y)]
-  %             = [h(x) : z_3 ] [z_3 : h(y)]
-  %             = [h(x) : h(y)]
+  Assume that $k \defined \spt_1(x\colon y) \leq N$.
+  Let $z_1$ be the first node on the path from $x$ to $y$ (strictly below $x$)
+  such that $\spt_1(z_1)=k$. Then $\spt_1(x\colon z_1)>k$ and
+  $\spt_1(z_1\colon y)\geq k$. 
   
-  
-  Since $(\t_1, \spt_1, \marking_1)$ is \kl{well-marked},
-  there exists $z_1, z_2, z_3$ such that
-  $x \treeleq[\t_1] z_1 \treelt[\t_1] z_2 \treeleq[\t_1] z_3 \treeleq[\t_1] y$,
-  $\spt_1(z_1) = \spt_1(z_2) = \spt_1(z_3) = k$, and 
-  $\spt_1(x\colon z_1) > k$, $\spt_1(z_1\colon z_2) > k$, $\spt_1(z_2\colon z_3) \geq k$, and $\spt_1(z_3\colon y) > k$, 
-  with $\marking_1(z_1) = \marked$, and $\marking_1(z_2) \in \set{\marked, \separating}$.
-  This is depicted in the following figure:
+  \textbf{If $\spt(x) \neq k$.}
+  By \cref{item:mt-different-depth}, $z_1$ is \kl(node){marked} (by \cref{item:mt-different-depth}), and we are in the following situation.
   \begin{center}
-    \begin{tikzpicture}
-        \node (x) at (0,0) {$x$};
-        \node (z1) at (2,0) {$z_1$};
-        \node (z2) at (4,0) {$z_2$};
-        \node (z3) at (6,0) {$z_3$};
-        \node (y) at (8,0) {$y$};
-
-        \node at (1,-0.2) {$> k$};
-        \node at (3,-0.2) {$> k$};
-        \node at (5,-0.2) {$\geq k$};
-        \node at (7,-0.2) {$> k$};
-
-        \node[below=0.02cm of z1] {$k$};
-        \node[below=0.02cm of z2] {$k$};
-        \node[below=0.02cm of z3] {$k$};
-
-        \draw[->] (x) --
-        node[midway, above] {$\tlbl{\t_1}{x}{z_1}$}
-        (z1);
-        \draw[->] (z1) --
-        node[midway, above] {$\tlbl{\t_1}{z_1}{z_2}$}
-        (z2);
-        \draw[->] (z2) --
-        node[midway, above] {$\tlbl{\t_1}{z_2}{z_3}$}
-        (z3);
-        \draw[->] (z3) --
-        node[midway, above] {$\tlbl{\t_1}{z_3}{y}$}
-        (y);
+    \begin{tikzpicture}[xscale=1.25,yscale=0.65]
+      \node (x) at (0,0) {$x$};
+      \node (z1) at (2,0) {$z_1$};
+      \node (y) at (4,0) {$y$};
+      \draw[->] (x) -- (z1);
+      \draw[->] (z1) -- (y);
+      \node at (1,-0.35) {$>k$};
+      \node at (3,-0.35) {$\geq k$};
+      \node at (2,-0.9) {$k$};
+      \node at (4,-0.9) {$k$};
+      \node at (0,1) {$\marked$};
+      \node at (2,1) {$\marked$};
+      \node at (4,1) {$\marked$};
     \end{tikzpicture}
   \end{center}
+  By \cref{claim:gap-gluing-strict}, we know that 
+  $\spt(h(x):h(z_1)) > k$. Therefore,
+  \cref{item:gap-embedding:neighbourhood} ensures that 
+  $\tlbl{\t_1}{x}{z_1}=\tlbl{\t_2}{h(x)}{h(z_1)}$.
+  By induction hypothesis, because
+  $\ell(z_1, y)$ is strictly smaller than $\ell(x, y)$ with the same \kl{split depth} $k$, and both nodes are \kl(node){marked},
+  we have $\tlbl{\t_1}{z_1}{y}=\tlbl{\t_2}{h(z_1)}{h(y)}$.
+  As a consequence,  $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{h(y)}$.
 
-  By applying the \kl{gap-embedding} $h$,
-  we have the following configuration inside $\t_2$, where
-  we used the notations
-  $a = \tlbl{\t_2}{h(x)}{h(z_1)}$,
-  $b = \tlbl{\t_2}{h(z_1)}{h(z_2)}$,
-  $c = \tlbl{\t_2}{h(z_2)}{h(z_3)}$,
-  and $d = \tlbl{\t_2}{h(z_3)}{h(y)}$.
-
+  We can therefore without loss of generality assume that $\spt(x) = k$.
+  Because $\t$ is \kl{well-marked}, we know that $z_1$ is \kl(node){non-dummy}
+  by \cref{item:mt-same-depth}. We are therefore in the following situation:
   \begin{center}
-    \begin{tikzpicture}[
-      xscale=0.9,
-      % style for `dummy` nodes
-      dummy/.style={B1},
-      marked/.style={A1},
-      separating/.style={A2},
-      value/.style={A1},
-    ]
-        \node[marked] (hx) at (0,0) {$h(x)$};
-        \node[marked] (hz1) at (2,0) {$h(z_1)$};
-        \node (hz2) at (4,0) {$h(z_2)$};
-        \node (hz3) at (6,0) {$h(z_3)$};
-        \node[marked] (hy) at (8,0) {$h(y)$};
-
-        \node at (1,-0.2) {$> k$};
-        \node at (3,-0.2) {$> k$};
-        \node at (5,-0.2) {$\geq k$};
-        \node at (7,-0.2) {$> k$}; 
-        \node[below=0.02cm of hz1] {$k$};
-        \node[below=0.02cm of hz2] {$k$};
-        \node[below=0.02cm of hz3] {$k$};
-
-        \draw[->] (hx) --
-        node[midway, above, value] {$a$}
-        (hz1);
-        \draw[->] (hz1) --
-        node[midway, above, value] {$b$}
-        (hz2);
-        \draw[->] (hz2) --
-        node[midway, above, value] {$c$}
-        (hz3);
-        \draw[->] (hz3) --
-        node[midway, above, value] {$d$}
-        (hy);
+    \begin{tikzpicture}[xscale=1.25,yscale=0.65]
+      \node (x) at (0,0) {$x$};
+      \node (z1) at (2,0) {$z_1$};
+      \node (y) at (4,0) {$y$};
+      \draw[->] (x) -- (z1);
+      \draw[->] (z1) -- (y);
+      \node at (1,-0.35) {$>k$};
+      \node at (3,-0.35) {$\geq k$};
+      \node at (0,-0.9) {$k$};
+      \node at (2,-0.9) {$k$};
+      \node at (0,1) {$\marked$};
+      \node at (4,1) {$\marked$};
+      \node at (2,1) {$\in \{\marked, \separating\}$};
     \end{tikzpicture}
   \end{center}
+  
+  By \cref{claim:gap-gluing-strict}, we know that 
+  $\spt(h(x):h(z_1)) > k$. Hence,
+  \cref{item:gap-embedding:neighbourhood} ensures that 
+  $\tlbl{\t_1}{x}{z_1}=\tlbl{\t_2}{h(x)}{h(z_1)}$.
+  Let $z_2$ be the first node below $z_1$ on the path to $y$
+  with $\spt_1(z_2)=k$, and let $z_3$ be the first ancestor of $h(y)$ in
+  $\t_2$ with split value $k$.
+  By \cref{claim:gap-gluing-strict} and \cref{item:gap-embedding:neighbourhood}, we obtain
+  $\tlbl{\t_1}{z_2}{y} = \tlbl{\t_2}{z_3}{h(y)}$.
 
-  Let us briefly argue the inequalities on the splits 
-  on the above paths. The non-strict inequalities 
-  follow from \cref{fact:gap-embedding-gaps}. 
-  Furthermore, if $v$ is a \kl{marked node} or a \kl{separating node},
-  then we can strengthen the inequality to a strict one,
-  i.e., $\spt(h(u)\colon h(v)) > k$ even when $\spt(v) \neq k$.
-  This is because of \cref{item:gap-embedding:gluing},
-  which ensures that the parent of $h(v)$
-  is the image of the parent of $v$, which has a split value
-  strictly greater than $k$, and we conclude by the previous argument.\footnote{The case where there are no intermediate nodes between $u$ and $v$ happens if $v$ is the child of $u$, 
-  in which case the property is given directly by the 
-  gluing property.}
-
-  Using these facts we conclude that:
-  \begin{align*}
-    \spt_2(h(x)\colon h(z_1))   &> k 
-                          & \text{because $z_1$ is \kl(nodes){marked},}
-                          \\
-    \spt_2(h(z_1)\colon h(z_2)) &> k
-                          & \text{because $z_2$ is \kl(nodes){marked}
-                                   or \kl(nodes){separating},}
-                          \\
-    \spt_2(h(z_2)\colon h(z_3)) &\geq k
-                                & \text{by \cref{fact:gap-embedding-gaps},}
-                          \\
-    \spt_2(h(z_3)\colon h(y))   &> k
-                          & \text{because $y$ is \kl(nodes){marked},}                               
-  \end{align*}
-
-  Now, we can compute the values of $a$, $b$, and $d$:
-  \begin{align*}
-    \tlbl{\t_1}{x}{z_1} & = a
-    &\text{by induction hypothesis if $x \treelt[\t_1] z_1$, and trivially if $x=z_1$,} \\
-    \tlbl{\t_1}{z_1}{z_2} & = b
-    &\text{by \cref{item:gap-embedding:neighbourhood},} \\
-    \tlbl{\t_1}{z_3}{y} & = d 
-    &\text{by \cref{item:gap-embedding:neighbourhood}.}
-  \end{align*}
-
-  Finally, because $h(x)$ and $h(y)$ are \kl{independent at level $k$},
-  and so are $x$ and $y$,
-  we have by \cref{fake-idempotent:eq} that
+  Since $x$ and $z_2$ are in the same \kl{$k$-neighbourhood}, and similarly
+  $h(x)$ and $z_3$ are in the same \kl{$k$-neighbourhood}, \cref{fake-idempotent:eq}
+  yields
+  $\tlbl{\t_1}{x}{z_1}=\tlbl{\t_1}{x}{z_2}$,
+  and $\tlbl{\t_2}{h(x)}{h(z_1)}=\tlbl{\t_2}{h(x)}{z_3}$.
+  Therefore
   \begin{align*}
     \tlbl{\t_1}{x}{y}
-          & = \tlbl{\t_1}{x}{z_1} \cdot
-              \tlbl{\t_1}{z_1}{z_2} \cdot
-              \tlbl{\t_1}{z_2}{z_3} \cdot
-              \tlbl{\t_1}{z_3}{y} \\
-          & = \tlbl{\t_1}{x}{z_1} \cdot
-              \tlbl{\t_1}{z_1}{z_2} \cdot
-              \tlbl{\t_1}{z_3}{y} \\
-          & = a \cdot b \cdot d \\
-          & = a \cdot b \cdot c \cdot d \\
-    & = \tlbl{\t_2}{h(x)}{h(y)} \quad . \qedhere
+      &= \tlbl{\t_1}{x}{z_2}\cdot\tlbl{\t_1}{z_2}{y} \\
+      &= \tlbl{\t_1}{x}{z_1}\cdot\tlbl{\t_1}{z_2}{y} \\
+      &= \tlbl{\t_2}{h(x)}{h(z_1)}\cdot\tlbl{\t_2}{z_3}{h(y)} \\
+      &= \tlbl{\t_2}{h(x)}{z_3}\cdot\tlbl{\t_2}{z_3}{h(y)} \\
+      &= \tlbl{\t_2}{h(x)}{h(y)}.
   \end{align*}
+  This concludes all cases and the induction.
 \end{proof}
 
 
