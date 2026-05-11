@@ -588,7 +588,8 @@ section.
   we have \[ \tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{h(y)} \quad .\]
 \end{lemma}
 \begin{proof}
-  We proceed by induction on the value of $\spt_1(x\colon y)$.
+  We proceed by induction on the value of $\spt_1(x\colon y)$
+  and the number of nodes between $x$ and $y$.
   If $\spt_1(x\colon y) = N+1$, then $y$ is a child of $x$.
   Because $y$ is a \kl{marked node}, then by 
   \cref{item:gap-embedding:gluing} we know that 
@@ -596,7 +597,50 @@ section.
   Therefore, by \cref{item:gap-embedding:local},
   we have $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{h(y)}$.
 
-  Otherwise, let $k = \spt_1(x:y) \leq N$. Since $(\t_1, \spt_1, \marking_1)$ is \kl{well-marked},
+  Otherwise, let $k = \spt_1(x:y) \leq N$. 
+  % TODO: 
+  % introduce z_1, the closest node to x with depth k
+  % x \treelt z_1 \treelt y 
+  % spt(x:z_1) > k
+  % spt(z_1:y) ≥ k
+  %
+  % Claim: (gluing) if z is separating or marked, then 
+  % spt(z' : z) > k implies spt(h(z'):h(z)) > k
+  % because of gluing on non-dummy nodes.
+  %
+  %
+  % case0: z_1 is the only one with depth k, i.e. spt(z_1:y) > k.
+  %   - conclude by induction on x:z_1, z_1:y
+  %   
+  % case1: spt(x) ≠ k. 
+  %   then z_1 must be marked. 
+  %   - z_1:y is smaller in length
+  %   - x:z_1 uses bigger K. 
+  %   - conclude by induction in both cases
+  %
+  % case2: spt(x) = k
+  %    then z_1 must be separating or marked
+  %    Let us introduce z_2 the first ancestor of y of depth k,
+  %    and z_3 the first ancestor of h(y) of depth k.
+  %   - [x:z_1] = [h(x):h(z_1)] because x is the first ancestor of z_1 with depth k
+  %     and so is h(x) because of Claim (gluing), we conclude by \cref{item:gap-embedding:neighbourhood}
+  %   - [z_2:y] = [z_3: h(y)]  because z_2 is the first ancestor of y with depth k 
+  %     z_3 [...] h(y) 
+  %     and \cref{item:gap-embedding:neighbourhood}
+  %   - [z_1:z_2] = [h(z_1):h(z_2)] because z_1 is the first ancestor of z_2 
+  %     and z_2 is separating or Marked (Claim gluing), hence
+  %     h(z_1) is the first k-ancestor of h(z_2) and we conclude by 
+  %     \cref{item:gap-embedding:neighbourhood}
+  %   - [x:z_1] = [x : z_2] by ramseyan property
+  %   - [h(x) : h(z_1)] = [h(x) : z_3] by ramseyan property
+  %   - [x : y] = [x : z_2 ] [ z_2 : y ] 
+  %             = [x : z_1 ] [ z_2 : y ] 
+  %             = [h(x) : h(z_1)] [ z_3 : h(y)]
+  %             = [h(x) : z_3 ] [z_3 : h(y)]
+  %             = [h(x) : h(y)]
+  
+  
+  Since $(\t_1, \spt_1, \marking_1)$ is \kl{well-marked},
   there exists $z_1, z_2, z_3$ such that
   $x \treeleq[\t_1] z_1 \treelt[\t_1] z_2 \treeleq[\t_1] z_3 \treeleq[\t_1] y$,
   $\spt_1(z_1) = \spt_1(z_2) = \spt_1(z_3) = k$, and 
