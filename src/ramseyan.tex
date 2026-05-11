@@ -178,10 +178,10 @@ particular, if $x=y$ or $y$ is a child of $x$, then $\spt(x \colon y) = N+1$.
 of $\aTree$ that are pairwise comparable for $\treeleq$. Two nodes $x$ and
 $y$ of $B$ are \intro{directed $k$-neighbours} if $\spt(x) = \spt(y) = k$
 and $\spt(x \colon y) \geq k$. These two nodes are \intro{$k$-neighbours}
-if they are \intro{directed $k$-neighbours} in either direction. This
+if they are \kl{directed $k$-neighbours} in either direction. This
 defines an equivalence relation on the nodes of $B$ for every $k \in
 \set{1, \dots, N}$, and a \kl{split} thus induces a hierarchical structure
-on each branch based on its \intro{$k$-neighbourhoods}. We illustrate the
+on each branch based on its \reintro{$k$-neighbourhoods}. We illustrate the
 situation in \cref{split-on-branch:fig}. We refer to the value of
 $\spt(x)$ as the \reintro{split depth} of the node $x$.
 
@@ -593,7 +593,7 @@ section.
   where $\ell(x,y)$ is the number of strict descendants on the path from $x$
   to $y$.
   If $\spt_1(x\colon y)=N+1$, then $y$ is a child of $x$. Since $y$ is
-  \kl{marked}, \cref{item:gap-embedding:gluing} yields that $h(y)$ is a child
+  \kl(node){marked}, \cref{item:gap-embedding:gluing} yields that $h(y)$ is a child
   of $h(x)$, and then \cref{item:gap-embedding:local} gives
   $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{h(y)}$.
   For the induction steps, will use the following claim.

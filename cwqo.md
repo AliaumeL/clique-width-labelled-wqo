@@ -1,6 +1,6 @@
 ---
 draft: false 
-camera-ready: true 
+camera-ready: false 
 anonymous: false 
 acmart:
   format: sigconf

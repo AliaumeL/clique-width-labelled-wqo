@@ -217,8 +217,10 @@
  | depth@split
  | splits
 \knowledge{notion}
- | $k$-neighbourhoods
+ | directed $k$-neighbours
+\knowledge{notion}
  | $k$-neighbourhood
+ | $k$-neighbourhoods
  | $k$-neighbours
  | $l$-neighbourhood
  | $l$-neighbourhoods
@@ -240,6 +242,7 @@
 
 \knowledge{notion}
   | dummy nodes
+  | non-dummy@node
   | dummy@nodes
   | dummy@node
   | dummy

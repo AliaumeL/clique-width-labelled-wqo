@@ -12,12 +12,11 @@
     a4paper,
     UKenglish,
     cleveref,
-    autoref,pdfa,
+    autoref,
     thm-restate]{lipics-v2021}
 
 
 
-\nolinenumbers
 
 % graphics packages
 \usepackage{graphicx}
@@ -52,10 +51,11 @@
 % Maths
 \usepackage{amssymb,stmaryrd}
 % create a fact environment
+\usepackage{cancel}
 \theoremstyle{theorem}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{plain}
 \newtheorem{fact}[theorem]{Fact}
-
-
 
 % Proofs
 \usepackage{bussproofs}
@@ -131,7 +131,7 @@
        {University of Warsaw}
        {mdumas@mimuw.edu.pl}
        {https://orcid.org/0009-0004-8906-9801}
-       {}
+       {Maël Dumas was supported by the ERC project BUKA (n° 101126229) (during his employment in BUKA) and project BOBR (during his employment in BOBR) that received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme (grant agreement No.~948057).}
 \author{Aliaume Lopez}
        {INP Bordeaux, LaBRI, CNRS}
        {aliaume.lopez@bordeaux-inp.fr}
@@ -153,9 +153,10 @@
 
 
 \acknowledgements{%
-\acknowledgements{The authors would like to thank the Zygmunt Zaleski fundation for supporting the authors during the preparation of this work.}
+The authors would like to thank the Zygmunt Zaleski fundation for supporting the authors during the preparation of this work.%
 }
 
+ 
 \newcommand{\repositoryUrl}{\url{https://github.com/AliaumeL/clique-width-labelled-wqo}}
 
 \EventEditors{Claudia Faggian and Joost-Pieter Katoen}
