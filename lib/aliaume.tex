@@ -1,3 +1,24 @@
+\newcommand{\ExternalLink}{%
+    \tikz[x=1.2ex, y=1.2ex, baseline=-0.05ex]{% 
+        \begin{scope}[x=1ex, y=1ex]
+            \clip (-0.1,-0.1) 
+                --++ (-0, 1.2) 
+                --++ (0.6, 0) 
+                --++ (0, -0.6) 
+                --++ (0.6, 0) 
+                --++ (0, -1);
+            \path[draw, 
+                line width = 0.5, 
+                rounded corners=0.5] 
+                (0,0) rectangle (1,1);
+        \end{scope}
+        \path[draw, line width = 0.5] (0.5, 0.5) 
+            -- (1, 1);
+        \path[draw, line width = 0.5] (0.6, 1) 
+            -- (1, 1) -- (1, 0.6);
+        }
+    }
+
 
 % Create a new macro proofof
 % taking as input a label of a theorem
@@ -30,7 +51,14 @@
 \NewDocumentCommand{\proofref}{ m }{
     % checks if the label #1:proof exists, if yes
     % it creates a link to it, otherwise it writes nothing
-    \IfRefUndefinedExpandable{#1:proof}{}{
+    \IfRefUndefinedExpandable{#1:proof}{
+
+      % stretch to put on the right of the page
+      \hfill\begin{minipage}{0.9\textwidth}
+        \raggedleft
+        \small{\emph{\ExternalLink Proven in the full version \cite{fullVersionArxiv}}}
+      \end{minipage}
+    }{
         % Checks if we are inside a restated theorem
         % if yes, we do not print anything
         \ifdefined\isInsideRestatedTheorem
@@ -90,3 +118,5 @@
 }
 
 \NewDocumentCommand{\restate}{ m }{\ifcsname #1\endcsname\csname #1\endcsname*\fi}
+
+

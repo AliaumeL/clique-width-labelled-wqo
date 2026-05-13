@@ -404,7 +404,10 @@ trees with a \kl{well-quasi-order} \cite{DERSHOWITZ200380}.
       \label{item:gap-embedding:edge}
       satisfies the edge gap property:
       for every edge $x \treelt[\t] y$ in $\t_1$,
-      $\spt_2(h(x) \colon h(y)) \geq \spt_1(y)$.
+      $\spt_2(h(x) \colon h(y)) \geq \spt_1(y)$,
+    \item 
+      \label{item:gap-embedding:split}
+      preserves split values: for every node $x$ in $\t_1$, $\spt_2(h(x)) = \spt_1(x)$.
   \end{enumerate}
   If the trees are node-labelled by a set $(X, \leq_X)$,
   we further require that for every node $x$ in $\t_1$,
@@ -456,7 +459,7 @@ the \kl{gap-embedding} ordering.
   nodes.
   \AP A \kl{marked nested tree} $(\t, \spt, \marking)$ is \intro{well-marked}
   if the following conditions hold:
-  \begin{enumerate}
+  \begin{enumerate}[(i)]
     \item \label{item:mt-root-marked}$\marking(\treeRoot) = \marked$,
     \item \label{item:mt-lca} \kl{marked nodes} are closed under \kl{least common ancestors},
     \item \label{item:mt-same-depth} for every pair of nodes $x \treelt[\t] y$ such that 
@@ -468,35 +471,6 @@ the \kl{gap-embedding} ordering.
     $\spt(x) \neq \spt(y)$, $\spt(y) = k$ and $\spt(x:y) > k$,
     then $y$ must be \kl(node){marked}.
   \end{enumerate}
-  This can be represented using the following figure
-  \begin{center}
-  \begin{tikzpicture}[xscale=2,yscale=0.5]
-    \node (x) at (0,0) {$x$};
-    \node (z1) at (1,0) {$z_1$};
-    \node (z2) at (2,0) {$z_2$};
-    \node (z3) at (3,0) {$z_3$};
-    \node (y) at (4,0) {$y$};
-
-    \node at (1,-1) {$k$};
-    \node at (2,-1) {$k$};
-    \node at (3,-1) {$k$};
-    \node at (0.5,-0.7) {$> k$};
-    \node at (1.5,-0.7) {$> k$};
-    \node at (2.5,-0.7) {$\geq k$};
-    \node at (3.5,-0.7) {$> k$};
-
-    \node at (0,1) {$\marked$};
-    \node at (4,1) {$\marked$};
-    \node at (1,1) {$\marked$};
-    \node at (2,1) {$\in \{\marked, \separating\}$};
-    \node at (3,1) {$\in \{\marked, \separating, \dummy\}$};
-
-    \draw[->] (x) -- (z1);
-    \draw[->] (z1) -- (z2);
-    \draw[->] (z2) -- (z3);
-    \draw[->] (z3) -- (y);
-  \end{tikzpicture}
-  \end{center}
 \end{definition}
 
 \NewDocumentCommand{\gemb}{}{\leq_{\mathrm{gap}}}
@@ -511,9 +485,9 @@ the \kl{gap-embedding} ordering.
   $(\t_1, \spt_1, \marking_1) \gemb (\t_2, \spt_2, \marking_2)$,
   if there exists a mapping $h \colon \t_1 \to \t_2$ that
   \begin{enumerate}
-    % start numbering at 4 
+    % start numbering at 5 
     % for this specific enumerate 
-    \setcounter{enumi}{3}
+    \setcounter{enumi}{4}
 
     \item[$\star$] \label{item:gap-embedding:gap} is a \kl{gap embedding} from $(\t_1, \spt_1)$ to $(\t_2, \spt_2)$,
 
@@ -605,19 +579,29 @@ section.
   \end{claim}
   \begin{claimproof}
     The non-strict inequality $\spt_2(h(u)\colon h(v))\geq k$ follows from
-    \cref{fact:gap-embedding-gaps}. Since $v$ is non-\kl{dummy},
+    \cref{fact:gap-embedding-gaps}. 
+    Since $v$ is non-\kl{dummy},
     \cref{item:gap-embedding:gluing} identifies the parent of $h(v)$ as the image
-    of the parent of $v$, and therefore the first step above $h(v)$ cannot create
-    a split value below or equal to $k$. Hence the inequality is strict.
+    of the parent of $v$. Assume towards a contradiction that some node
+    $h(u) \treelt[\t_2] z \treelt[\t_2] h(v)$ has split value $k$.
+    It cannot be that $z$ is the parent of $h(v)$ since this one has 
+    \kl{split value} strictly larger than $k$ by \cref{item:gap-embedding:split}.
+    Hence, there exists an edge $u' \treelt[\t_1] v'$ in $\t_1$
+    such that $u \treeleq[\t_1] u' \treelt[\t_1] v' \treelt[\t_1] v$,
+    and $h(u') \treelt[\t_2] z \treelt[\t_2] h(v')$. 
+    By \cref{item:gap-embedding:split}, $\spt_1(u') = \spt_1(v') > k$,
+    and by \cref{item:gap-embedding:edge}, $\spt_2(h(u')\colon h(v')) > k$,
+    contradicting the fact that $\spt_2(z) = k$.
   \end{claimproof}
 
-  Assume that $k \defined \spt_1(x\colon y) \leq N$.
-  Let $z_1$ be the first node on the path from $x$ to $y$ (strictly below $x$)
-  such that $\spt_1(z_1)=k$. Then $\spt_1(x\colon z_1)>k$ and
-  $\spt_1(z_1\colon y)\geq k$. 
+  Assume that $k \defined \spt_1(x\colon y) \leq N$. Let $z_1$ be the first
+  node on the path from $x$ to $y$ (not equal to either $x$ or $y$), such that
+  $\spt_1(z_1)=k$. Then $\spt_1(x\colon z_1)>k$ and $\spt_1(z_1\colon y)\geq
+  k$. We distinguish two cases.
   
   \textbf{If $\spt(x) \neq k$.}
-  By \cref{item:mt-different-depth}, $z_1$ is \kl(node){marked} (by \cref{item:mt-different-depth}), and we are in the following situation.
+  By \cref{item:mt-different-depth}, $z_1$ is \kl(node){marked},
+  and we are in the following situation:
   \begin{center}
     \begin{tikzpicture}[xscale=1.25,yscale=0.65]
       \node (x) at (0,0) {$x$};
@@ -628,22 +612,22 @@ section.
       \node at (1,-0.35) {$>k$};
       \node at (3,-0.35) {$\geq k$};
       \node at (2,-0.9) {$k$};
-      \node at (4,-0.9) {$k$};
+      \node at (0,-0.9) {$\neq k$};
       \node at (0,1) {$\marked$};
       \node at (2,1) {$\marked$};
       \node at (4,1) {$\marked$};
     \end{tikzpicture}
   \end{center}
-  By \cref{claim:gap-gluing-strict}, we know that 
-  $\spt(h(x):h(z_1)) > k$. Therefore,
-  \cref{item:gap-embedding:neighbourhood} ensures that 
-  $\tlbl{\t_1}{x}{z_1}=\tlbl{\t_2}{h(x)}{h(z_1)}$.
+  By induction hypothesis, because $\spt(x:z_1) > k$ and both 
+  $x$ and $z_1$ are \kl(node){marked}, we have $\tlbl{\t_1}{x}{z_1}=\tlbl{\t_2}{h(x)}{h(z_1)}$.
   By induction hypothesis, because
-  $\ell(z_1, y)$ is strictly smaller than $\ell(x, y)$ with the same \kl{split depth} $k$, and both nodes are \kl(node){marked},
+  $\ell(z_1, y)$ is strictly smaller than $\ell(x, y)$ 
+  with the same \kl{split depth} $k$, and both nodes are \kl(node){marked},
   we have $\tlbl{\t_1}{z_1}{y}=\tlbl{\t_2}{h(z_1)}{h(y)}$.
   As a consequence,  $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{h(y)}$.
 
-  We can therefore without loss of generality assume that $\spt(x) = k$.
+
+  \textbf{Otherwise, $\spt(x) = k$.}
   Because $\t$ is \kl{well-marked}, we know that $z_1$ is \kl(node){non-dummy}
   by \cref{item:mt-same-depth}. We are therefore in the following situation:
   \begin{center}
@@ -662,23 +646,25 @@ section.
       \node at (2,1) {$\in \{\marked, \separating\}$};
     \end{tikzpicture}
   \end{center}
-  
+  If $\marking(z_1) = \marked$, then the same reasoning as in the previous case applies.
+  Hence, we focus on the case where $\marking(z_1) = \separating$.
   By \cref{claim:gap-gluing-strict}, we know that 
   $\spt(h(x):h(z_1)) > k$. Hence,
   \cref{item:gap-embedding:neighbourhood} ensures that 
   $\tlbl{\t_1}{x}{z_1}=\tlbl{\t_2}{h(x)}{h(z_1)}$.
-  Let $z_2$ be the first node below $z_1$ on the path to $y$
-  with $\spt_1(z_2)=k$, and let $z_3$ be the first ancestor of $h(y)$ in
+  Let $z_2$ be the first ancestor of $y$ with \kl{split value} $k$, 
+  and let $w_2$ be the first ancestor of $h(y)$ in
   $\t_2$ with split value $k$.
-  By \cref{claim:gap-gluing-strict} and \cref{item:gap-embedding:neighbourhood}, we obtain
-  $\tlbl{\t_1}{z_2}{y} = \tlbl{\t_2}{z_3}{h(y)}$.
+  By \cref{item:gap-embedding:neighbourhood}, we obtain
+  $\tlbl{\t_1}{z_2}{y} = \tlbl{\t_2}{w_2}{h(y)}$.
 
   Since $x$ and $z_2$ are in the same \kl{$k$-neighbourhood}, and similarly
   $h(x)$ and $z_3$ are in the same \kl{$k$-neighbourhood}, \cref{fake-idempotent:eq}
   yields
-  $\tlbl{\t_1}{x}{z_1}=\tlbl{\t_1}{x}{z_2}$,
-  and $\tlbl{\t_2}{h(x)}{h(z_1)}=\tlbl{\t_2}{h(x)}{z_3}$.
-  Therefore
+  $\tlbl{\t_1}{x}{z_2}=\tlbl{\t_1}{x}{z_1} \cdot \tlbl{\t_1}{z_1}{z_2}
+  = \tlbl{\t_1}{x}{z_1}$,
+  and similarly, $\tlbl{\t_2}{h(x)}{h(z_1)}=\tlbl{\t_2}{h(x)}{z_3}$.
+  Therefore,
   \begin{align*}
     \tlbl{\t_1}{x}{y}
       &= \tlbl{\t_1}{x}{z_2}\cdot\tlbl{\t_1}{z_2}{y} \\
