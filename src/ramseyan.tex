@@ -564,7 +564,7 @@ section.
 \begin{proof}
   We proceed by lexicographic induction on
   $(\spt_1(x\colon y), \; \ell(x,y))$,
-  where $\ell(x,y)$ is the number of strict descendants on the path from $x$
+  where $\ell(x,y)$ is the number of nodes on the path from $x$
   to $y$.
   If $\spt_1(x\colon y)=N+1$, then $y$ is a child of $x$. Since $y$ is
   \kl(node){marked}, \cref{item:gap-embedding:gluing} yields that $h(y)$ is a child
@@ -580,26 +580,24 @@ section.
   \begin{claimproof}
     The non-strict inequality $\spt_2(h(u)\colon h(v))\geq k$ follows from
     \cref{fact:gap-embedding-gaps}. 
+    Assume towards a contradiction that some node
+    $h(u) \treelt[\t_2] z \treelt[\t_2] h(v)$ has split value $k$.
     Since $v$ is non-\kl{dummy},
     \cref{item:gap-embedding:gluing} identifies the parent of $h(v)$ as the image
-    of the parent of $v$. Assume towards a contradiction that some node
-    $h(u) \treelt[\t_2] z \treelt[\t_2] h(v)$ has split value $k$.
-    It cannot be that $z$ is the parent of $h(v)$ since this one has 
-    \kl{split value} strictly larger than $k$ by \cref{item:gap-embedding:split}.
+    of the parent $w$ of $v$. Thus, it cannot be that $z = h(w)$ since by \cref{item:gap-embedding:split}, $\spt_2(h(w)) = \spt_1(w) > k$.
     Hence, there exists an edge $u' \treelt[\t_1] v'$ in $\t_1$
     such that $u \treeleq[\t_1] u' \treelt[\t_1] v' \treelt[\t_1] v$,
     and $h(u') \treelt[\t_2] z \treelt[\t_2] h(v')$. 
-    By \cref{item:gap-embedding:split}, $\spt_1(u') = \spt_1(v') > k$,
-    and by \cref{item:gap-embedding:edge}, $\spt_2(h(u')\colon h(v')) > k$,
+    However, by \cref{item:gap-embedding:edge}, $\spt_2(h(u')\colon h(v')) \geq \spt_1(v') > k$,
     contradicting the fact that $\spt_2(z) = k$.
   \end{claimproof}
 
-  Assume that $k \defined \spt_1(x\colon y) \leq N$. Let $z_1$ be the first
+  Assume that $k \defined \spt_1(x\colon y) \leq N$, in particular, $y$ is not a child of $x$. Let $z_1$ be the first
   node on the path from $x$ to $y$ (not equal to either $x$ or $y$), such that
   $\spt_1(z_1)=k$. Then $\spt_1(x\colon z_1)>k$ and $\spt_1(z_1\colon y)\geq
   k$. We distinguish two cases.
   
-  \textbf{If $\spt(x) \neq k$.}
+  \textbf{If $\spt_1(x) \neq k$.}
   By \cref{item:mt-different-depth}, $z_1$ is \kl(node){marked},
   and we are in the following situation:
   \begin{center}
@@ -618,16 +616,16 @@ section.
       \node at (4,1) {$\marked$};
     \end{tikzpicture}
   \end{center}
-  By induction hypothesis, because $\spt(x:z_1) > k$ and both 
+  By induction hypothesis, because $\spt_1(x:z_1) > k$ and both 
   $x$ and $z_1$ are \kl(node){marked}, we have $\tlbl{\t_1}{x}{z_1}=\tlbl{\t_2}{h(x)}{h(z_1)}$.
-  By induction hypothesis, because
+  Again, by induction hypothesis, because
   $\ell(z_1, y)$ is strictly smaller than $\ell(x, y)$ 
   with the same \kl{split depth} $k$, and both nodes are \kl(node){marked},
   we have $\tlbl{\t_1}{z_1}{y}=\tlbl{\t_2}{h(z_1)}{h(y)}$.
   As a consequence,  $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{h(y)}$.
 
 
-  \textbf{Otherwise, $\spt(x) = k$.}
+  \textbf{Otherwise, $\spt_1(x) = k$.}
   Because $\t$ is \kl{well-marked}, we know that $z_1$ is \kl(node){non-dummy}
   by \cref{item:mt-same-depth}. We are therefore in the following situation:
   \begin{center}
@@ -649,28 +647,27 @@ section.
   If $\marking(z_1) = \marked$, then the same reasoning as in the previous case applies.
   Hence, we focus on the case where $\marking(z_1) = \separating$.
   By \cref{claim:gap-gluing-strict}, we know that 
-  $\spt(h(x):h(z_1)) > k$. Hence,
+  $\spt_2(h(x):h(z_1)) > k$. Hence,
   \cref{item:gap-embedding:neighbourhood} ensures that 
   $\tlbl{\t_1}{x}{z_1}=\tlbl{\t_2}{h(x)}{h(z_1)}$.
-  Let $z_2$ be the first ancestor of $y$ with \kl{split value} $k$, 
+  Let $z_2$ be the first ancestor of $y$ with split value $k$, 
   and let $w_2$ be the first ancestor of $h(y)$ in
   $\t_2$ with split value $k$.
   By \cref{item:gap-embedding:neighbourhood}, we obtain
   $\tlbl{\t_1}{z_2}{y} = \tlbl{\t_2}{w_2}{h(y)}$.
 
-  Since $x$ and $z_2$ are in the same \kl{$k$-neighbourhood}, and similarly
-  $h(x)$ and $z_3$ are in the same \kl{$k$-neighbourhood}, \cref{fake-idempotent:eq}
-  yields
+  Since $x$ and $z_2$ are in the same \kl{$k$-neighbourhood} 
+  and the fact that the split $s_1$ is forward Ramseyan (\cref{fake-idempotent:eq})   yields
   $\tlbl{\t_1}{x}{z_2}=\tlbl{\t_1}{x}{z_1} \cdot \tlbl{\t_1}{z_1}{z_2}
-  = \tlbl{\t_1}{x}{z_1}$,
-  and similarly, $\tlbl{\t_2}{h(x)}{h(z_1)}=\tlbl{\t_2}{h(x)}{z_3}$.
+  = \tlbl{\t_1}{x}{z_1}$. Similarly, 
+  $\tlbl{\t_2}{h(x)}{h(z_1)}=\tlbl{\t_2}{h(x)}{w_2}$ since $h(x)$ and $w_2$ are in the same \kl{$k$-neighbourhood}.
   Therefore,
   \begin{align*}
     \tlbl{\t_1}{x}{y}
       &= \tlbl{\t_1}{x}{z_2}\cdot\tlbl{\t_1}{z_2}{y} \\
       &= \tlbl{\t_1}{x}{z_1}\cdot\tlbl{\t_1}{z_2}{y} \\
-      &= \tlbl{\t_2}{h(x)}{h(z_1)}\cdot\tlbl{\t_2}{z_3}{h(y)} \\
-      &= \tlbl{\t_2}{h(x)}{z_3}\cdot\tlbl{\t_2}{z_3}{h(y)} \\
+      &= \tlbl{\t_2}{h(x)}{h(z_1)}\cdot\tlbl{\t_2}{w_2}{h(y)} \\
+      &= \tlbl{\t_2}{h(x)}{w_2}\cdot\tlbl{\t_2}{w_2}{h(y)} \\
       &= \tlbl{\t_2}{h(x)}{h(y)}.
   \end{align*}
   This concludes all cases and the induction.
