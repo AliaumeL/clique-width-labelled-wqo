@@ -81,7 +81,7 @@ finite paths using an \kl{existential transduction}, answering positively to
 
 \AP A \intro{regular antichain} is a \kl{regular sequence} that is an
 \kl{antichain} for the \kl{labelled induced subgraph} relation when vertices of
-$G^r$ are labelled by their color in $G$, and the first and last copies of $G$
+$G^r$ are labelled by their colour in $G$, and the first and last copies of $G$
 in $G^r$ are additionally labelled by two distinct new labels $\triangleright$
 and $\triangleleft$. It follows results from \cite{LOPEZ24} and our previous
 \cref{sec:hereditary-classes} that such structures can be found in
@@ -189,11 +189,11 @@ obstruction to being \kl{$\forall$-well-quasi-ordered}.
   holds in $G_i$, it also holds in $G_j$.
 
   Let us consider an extra labelling information on the vertices of the graphs
-  in $\Label{\Sigma}{\Cls}$, where we color the two endpoints of each path
-  $P_n$ with two distinct colors $\triangleright$ and $\triangleleft$.
+  in $\Label{\Sigma}{\Cls}$, where we colour the two endpoints of each path
+  $P_n$ with two distinct colours $\triangleright$ and $\triangleleft$.
   Using these new labels, one
   can \kl{existentially interpret} the class of all finite paths with endpoints
-  colored with $\triangleright$ and $\triangleleft$.
+  coloured with $\triangleright$ and $\triangleleft$.
 
   Assume towards a contradiction that 
   $\Cls$ is \kl{$\forall$-well-quasi-ordered}. Then,
@@ -215,8 +215,8 @@ Let $\Cls =  \seqof{G^r}[r \geq 1]$ and let $\lab \colon V(G) \to \Sigma$ be
 its labelling function with sets  $C, F \subseteq \Sigma^2$. 
 
 Without loss of generality, assume that $\lab$ is injective up to duplicating
-labels from $\Sigma$, and assume that $|\Sigma| = |V(G)|$. In the rest of this
-proof, we assume that $r \geq 3$. For $i \leq r$, we denote the $i$th
+labels from $\Sigma$, and assume that $|\Sigma| = |V(G)|$. In the remainder of this
+proof, we assume that $r > |V(G)|$. For $i \leq r$, we denote the $i$th
 copy of $G$ in $G^r$ by $G_i$, and by $u_i \in G^r$ the $i$th copy of $u\in
 V(G)$. We proceed in two steps: first we define a formula producing a
 directed graph where there is a directed shortest path from $G_1$ to $G_r$
@@ -224,7 +224,7 @@ going through every $G_i$, but there may exist arcs going from $G_i$ to $G_j$
 for $j\leq i$. We then show how to handle these backward arcs, and
 produce arbitrarily long paths.
 
-We define the following quantifier-free formula that uses the edge predicate on 
+Define the following quantifier-free formula that uses the edge predicate on 
 $G^r$ and the labelling function $\ell \colon V(G^r) \to \Sigma$.
 \begin{equation}
   \phi_{\rightarrow}(u,v) \defined \lnot (E(u,v) \Leftrightarrow (\lab(u),\lab(v)) \in F)
@@ -232,8 +232,8 @@ $G^r$ and the labelling function $\ell \colon V(G^r) \to \Sigma$.
 \end{equation}
 Informally, $\phi_{\rightarrow}(u,v)$ creates an arc $(u,v)$ if the edge
 relation between $u,v \in G^r$ differs if $u$ and $v$ are put far away form
-each other in this order.\footnote{It could be that $u$ can be in a copy of $G$ that comes
-after the one of $v$ in $G^r$.}
+each other in this order. Note that it could be that $u$ can be in a copy of $G$ that comes
+after the one of $v$ in $G^r$.
 
 \def\Jint{\pathInterp} Let $H^r = \Jint(G^r)$ where $\Jint \defined (\top,
 \phi_{\rightarrow}, \top)$ as a quantifier-free interpretation. Note that $H$
@@ -250,135 +250,74 @@ If $j \geq i+1$, then $(u,v) \in E(G^r)$ if and only if $(l(u),l(v)) \in F$ by d
 \end{claimproof}
 
 Then, let us remark that  if there is a backward arc from the $i$-th copy to
-the $j$-th copy with $j<i$, then for every other previous copy, this arc also
-exist.
+the $j$-th copy with $j<i-1$, this arc also
+exists between every pair of copies respecting $j<i-1$.
 
 \begin{claim}\label{clm:regularbackward}
-	If $(u_i,v_j) \in E(H^r)$ for $j<i$ then for every $j'\leq i$, $(u_i,v_{j'}) \in E(H^r)$.
+	If $(u_i,v_j) \in E(H^r)$ for $j<i-1$ then for every $j' < i'-1$, $(u_{i'},v_{j'}) \in E(H^r)$.
 \end{claim}
 
 \AP A \intro{spanning path} of $H^r$ is a directed shortest path from $V(H_1)$
-to $V(H_r)$ going through at least one vertex from each $V(H_i)$. The following claim, show that a \kl{spanning path} must exist in $H^r$ because  $G^r$ is a \kl{regular antichain}.
+to $V(H_r)$ going through at least one vertex from each $V(H_i)$. The following claim shows that a \kl{spanning path} must exist in $H^r$ because $G^r$ is a \kl{regular antichain}.
 
 \begin{claim} \label{clm:spanningpath}
   There is a \kl{spanning path} in $H^r$.
 \end{claim}
 \begin{claimproof}
-  Let $V_i^+$ be the vertices of $H_i$ such that there is an arc from $H_{i-1}$
-  to them,  $V_i^-$ be the vertices of $H_i$ such that there is an arc from
-  them to $H_{i+1}$, and $V_i^o$ be the remaining vertices of $V(H_i)$.	
+  First observe that by \cref{clm:nolongforwardarc}, any path from $V(H_1)$
+to $V(H_r)$ must be \kl{spanning path}.
+  Let $A$ be the set of vertices $V(H_1)$ plus all vertices reachable from it in $H^r$. Let $B$ be the set of vertices $V(H_r)$ plus all vertices that can reach it in $H^r$. If $A\cap B \neq \emptyset$, then there is a \kl{spanning path} in $H^r$.
+  
+  Suppose now that $A\cap B =\emptyset$, we argue that there is an embedding of $G^r$ into $G^{2r+1}$, where the first and last copy of $G$ in $G^r$ are mapped to the ones of $G^{2r+1}$, which is a contradiction with the \kl{regular antichain} assumption.
+  
+  Let $C = V(H^r) \setminus (A\cup B)$. Consider the following mapping $h$ of $G^r$ into $G^{2r+1}$: map $A\cup C$ to the first $r$ copies of $G^{2r+1}$, and $B$ to its last $r$ copies. 
 
-  Suppose there is no \kl{spanning path} in $H^r$, by
-  \cref{clm:nolongforwardarc}, it has to be because, for some $i$, either there
-  is no path in $H_i$ from $V_i^+$ to $V_i^-$, or that they are empty (i.e.
-  there is no arc from $H_i$ to $H_{i+1}$, in which case $V_i^o = V(H_ i)$).
-
-  Let $C_i^+$ (resp. $C_i^-$) be the vertices of $H_i$ that can be reached from
-  $V_i^+$ (resp. that can reach $V_i^-$),  and $C_i^o$ the remaining vertices
-  of $H_i$.
-
-  We now argue that if there is no \kl{spanning path}, then one can embed $G^r$ into
-  $G^{r+2+\ell}$ for any $\ell \geq 0$. Fix $1<i<r$, and define the mapping $h$
-  as follows: map the first $i-1$ copies of $G$ in $G^r$ and $V_i^+$ and
-  $V_i^o$ to the corresponding first $i$ copies in $G^{r+2}$; $V_i^-$ is mapped to
-  the $i+2+\ell$-th copy of $G$ in $G^{r+2+\ell}$; and the last $r-i$ copies of $G$
-  in $G^r$ are mapped to the last $r-i$ copies of $G$ in $G^{r+2+\ell}$.
-
-  It is clear from construction that the middle part of $G^{r+2+\ell}$ is left
-  untouched by this mapping, and that the first and last copies of $G$ in $G^r$
-  are mapped to the first and last copies of $G$ in $G^{r+2+\ell}$.
-
-  Assume towards a contradiction that that this is not an embedding of the
-  underlying graphs, then it means that there is $u \in V_i^+ \cup V_i^o$ and
-  $v\in V_i^-$ such that $(u,v) \in E(G^r)$ and $(h(u),h(v)) \notin E(G^{r+2})$
-  or the reverse. However as $(h(u),h(v))$ is entirely defined by
-  $(\lab(u),\lab(v))$ and $F$, it means that $\phi_{\rightarrow}(u,v)$ is
-  satisfied and $(u,v)\in E(H^r)$.	Hence if there is no \kl{spanning path}, then $(G^r)_{r\geq 1}$ is not a
-  \kl{regular antichain}.
+  Assume towards a contradiction that $h$ is not an embedding, then there is $u \in A \cup C$ and $v\in B$ such that $(u,v) \in E(G^r)$ and $(h(u),h(v)) \notin E(G^{2r+1})$ or the converse. Since $G_{r+1}$ is left untouched by $h$, it follows that the edge $(h(u),h(v))$ depends only on $(\lab(u),\lab(v)$ and $F$. In particular, it implies that $\phi_{\rightarrow}(u,v)$ is satisfied and $(u,v)\in E(H^r)$, which is incompatible with the choice of $A,B,C$, a contradiction.
 \end{claimproof}
 
-Assuming $r > |V(G)|$, there are two vertices $u_i$ and $u_j$, $i<j$, in the
-spanning path of $H^r$, which are copies of the same vertex $u\in V(G)$. Take
-these two vertices to be such that the distance $d$ from $u_i$ to $u_j$ is the
-smallest possible in $H^r$. Let $t = j - i$, this is the period of $P$, i.e.
-the number of copies of $G$ it has to go through until it comes back to a copy
-of the same vertex. Let $Q = u^1,u^2,\dots, u^d, u^1$ be the vertices
-corresponding to the period. In particular, $Q$ induces a \kl{spanning path} of
-$H^{t+1}$ (assuming $u^i$ is mapped to the correct copy) and $Q^r$ induces a
-spanning path of $H^{t \times r +1}$. Here $Q^r$ denotes $Q$ repeated $r$ times where the ending $u^1$ and beginning $u^1$ of two consecutive repetition are identified.
+Let $Q$ be the smallest possible path between two copies $u_a$ and $u_b$ of the same vertex $u\in V(G)$, such that $a<b$, and with respect to that, pick $a$ to be the smallest possible. Since there is a \kl{spanning path} in $H^r$ and that  $r > |V(G)|$, such a path exists. 
+Let $d$ be the length of $Q$, and $t = b-a$. Denote the vertices of $Q$ as follows $$Q = v^1_{x_1}, v^2_{x_2}, \dots ,v^d_{x_d},v^1_{x_1+t}$$ 
+where $v^j_{x_j}$ is $x_j$-th copy of $v^j$ in $H^r$, in particular $v^1_{x_1}=u_a$ and $v^1_{x_d+t}=u_b$. By the choice of $Q$, $v^i\neq v^j$ for $i\neq j$ and note that $x_j > x_{j+1}$ is possible, meaning that the path $Q$ may use a backward arc $(v^j_{x_j}, v^{j+1}_{x_{j+1}}) \in H^r$. %Let $t = b-a$
+Define now 
+$$Q^r = Q_0,Q_1, \dots Q_{r-1}, v^1_{x_1+tr} \quad \text{where} \quad  Q_i = v^1_{x_1+ti}, \dots ,v^d_{x_d+ti}.$$
+While the sequence of vertices $Q^r$ is well-defined in $H^{dr+1}$ and forms a directed path in it, it may not induce a directed path. 
+In particular, there may be backward arc from $Q_j$ to $Q_i$ for $i<j$. We say that an arc is $c$-long if it goes from $Q_{i+c}$ to $Q_i$.
 
 
-Let us do a case analysis based on the presence of backward edges on the
-\kl{spanning path} represented by $Q^r$. If there are no such edges, then the
-directed path can be turned into an undirected path by considering the
-symmetrisation of $\phi_{\rightarrow}$  and taking induced subgraph (which can be done by adding a vertex-selecting formula and $|\Sigma|$ selecting colours), hence \kl{existentially transduce} all finite
-paths from $\Cls$.
+Suppose first that there exists a $c<2d$ such that for $c'\geq c$ there is no $c'$-long arc. 
+It follows that for all $i$, there is no path from $u_{a+t(i+c)}$ to $u_{a+ti}$ in $Q_r$ and in particular that $u_{a+t(i+c+1)}$ is at distance strictly more than $cd$ from $u_{u_a+ti}$ in the subgraph of $H^{dr+1}$ induced by $Q^r$. 
+%First consider the subgraph of $H^{dr+1}$ induced by $Q^r$, this can be done simply by highlighting the vertices of $Q^r$, at most doubling the set of colours. 
+We are now ready to transduce the paths. First we colour $u_{a+tci}$ by $\bullet$ for every $i\geq 0$. Define now the formula
 
-For the difficult case, let us assume that there exists a backward arc $(u,v)
-\in E(H^r)$ along the \kl{spanning path} with  $u \in P_i$ and $v\in P_j$ with
-$i>j$, then by \cref{clm:regularbackward} this arc exists between every copy of
-$u$ and $v$ where $v$ is an earlier copy than the one of $u$. In particular
-this means that for every $u,v$ such that $v$ appears earlier on the spanning
-path, $\dist_{H^r}(u,v) \leq 2d$ (recall $d$ is the length of $Q$):
-$$\dist_{H^r}(u,v) \leq \dist_{H^r}(u,x) +1 +\dist_{H^r}(y,v),$$ where $(x,y)
-\in E(H^r)$ is a backward arc such that $x$ appear after $u$ and $y$ before
-$v$.
-  
-We are now ready to transduces paths in the difficult case. Consider $H^{2tr
-+1}$, let $u$ be the beginning of $Q$ and $c = \lab(u)$. To guarantee that the
-distance between two consecutive copies of $u$ in $Q^{2tr}$ is $2d$ we recolour
-every other copy of $u$ along $Q^{2tr}$ by a dummy colour $c'$. Furthermore
-recolour every copy of $u$ not in $Q^{2tr}$ with the same colour. Define now the
-formula 
 \begin{equation}
-  \phi_{\operatorname{Path}}(u,v) 
-  \defined 
-  \land \begin{cases}
-  \dist_{H^r}(u,v)\leq 2d \\
-  \dist_{H^r}(v,u)\leq 2d \\
-  \ell(u) = \ell(v) = c
-\end{cases}
-\quad .
+  \phi_{\operatorname{Path}}(u,v)  \defined (\dist_{Q^r}(u,v)\leq cd \lor 
+  \dist_{Q^r}(v,u)\leq cd) \land 
+  \ell(u) = \ell(v) = \bullet.
 \end{equation}
 
-Notice that this formula
-only uses existential quantifier (recall that $\phi_{\rightarrow}$ which is
-used to define $\dist_{H^r}$ is quantifier-free). This formula create a path on
-the vertices $u^1,u^3,u^5, \dots, u^{2tr+1} \in Q^{2tr} $, moreover this path
-is undirected as $\phi_P(u,v)$ is symmetric. The interpretation $\mathcal{K}
+Notice that this formula only uses existential quantifier, indeed recall that $\phi_{\rightarrow}$ which is used to define $\dist_{Q^r}$ is quantifier-free, and that we can restrict ourselves to the subgraph induced by $Q^r$ by choosing an adequate colouring of $H^{dr+1}$. 
+From the previous observations, this formula creates a path on the vertices $u_{a}, u_{a+tc}, u_{a+2tc},\dots, u_{a+itc}, \dots$, moreover this path
+is undirected as $\phi_P(u,v)$ is symmetric. Therefore, we can define the interpretation $\mathcal{K}
 \defined (\top, \phi_{\operatorname{Path}}, \phi_{\text{univ}})$, where
-$\phi_{\text{univ}}(u) \defined l(u) = c$ (recall that only $u^1,u^3,u^5, \dots,
-u^{2tr+1}$ are the only vertices with colour $c$).
+$\phi_{\text{univ}}(u) \defined l(u) = \bullet$ such that for every $r\in \mathbb{N}$, there is $r'$ and a colouring of $G^{r'}$ such that $\mathcal{K}(G^{r'}) = P_r$ where $P_r$ is the path on $r$ vertices. 
 
-In particular $\mathcal{K}(G^{2tr +1}) = P_r$ where $P_r$ is the path on $r$
-vertices, and the conclusion follows.  
+
+
+Suppose now that there is a $c$-long arc $e$ with $c\geq 2d$. Observe that there is a copy of $G$ between the elements of $Q_i$ and $Q_{i+c}$ that is disjoint from both of them.
+Then, by \cref{clm:regularbackward}, since there is a backward arc $e$ from $Q_{i+c}$ to $Q_i$ then there is also one from $Q_{i+2c}$ to $Q_{i-1}$, say $e'$. 
+It follows that in $Q^r$, there is a path from $u_{a+t(i+2c)}$ to $u_{a+ti}$ of length at most $2dc$ using $e$. By definition of $Q^r$ there is also a path of length $2dc$ from $u_{a+ti}$ to $u_{a+t(i+2c)}$.
+We are now ready to transduce the paths. First we colour $u_{a+2tci}$ by $\bullet$ for every $i\geq 1$. Define now the formula
+
+\begin{equation}
+  \phi_{\operatorname{Path}}(u,v)  \defined \dist_{Q^r}(u,v)\leq 2cd \land 
+  \dist_{Q^r}(v,u)\leq 2cd \land 
+  \ell(u) = \ell(v) = \bullet.
+\end{equation}
+
+This formula creates a path on the vertices $u_{a+2tc}, u_{a+4tc},\dots, u_{a+2itc}, \dots$, moreover this path
+is undirected as $\phi_P(u,v)$ is symmetric. As in the previous case, this formula allows us to define an interpretation $\mathcal{K}
+\defined (\top, \phi_{\operatorname{Path}}, \phi_{\text{univ}})$ of the class of all paths, concluding the proof.
 \end{proof}
-
-
-\begin{comment}
-\begin{proof}[Proof sketch]
-Let $\Cls =  \seqof{G^r}[r \geq 1]$ and let $\lab \colon V(G) \to \Sigma$ be
-its labelling function with sets  $C, F \subseteq \Sigma^2$. 
-Without loss of generality, assume that $\lab$ is injective up to duplicating
-labels from $\Sigma$, and assume that $|\Sigma| = |V(G)|$. 
-We define the following quantifier-free formula that uses the edge predicate on 
-$G^r$ and the labelling function $\ell \colon V(G^r) \to \Sigma$.
-\begin{equation*}
-  \phi_{\rightarrow}(u,v) = \lnot (E(u,v) \Leftrightarrow (\lab(u),\lab(v)) \in F)
-  \quad .
-\end{equation*}
-Informally, $\phi_{\rightarrow}(u,v)$ creates an arc $(u,v)$ if the edge
-relation between $u,v \in G^r$ differs if $u$ and $v$ are put far away form
-each other in this order.\footnote{It could be that $u$ can be in a copy of $G$ that comes
-after the one of $v$ in $G^r$.}
-
-To obtain a path, we first show that one can obtain a long directed 
-shortest path from the first copy of $G$ to the last copy of $G$, going through every copy of $G$. Then,
-from this so-called \emph{spanning path}, we extract undirected paths 
-by analysing the behaviour of potential ``backward edges'' along the directed
-path using existential formulas built upon $\phi_\rightarrow$.
-\end{proof}
-\end{comment}
 
 \AP Finally we provide a last structural characterisation defined in
 \cite[Section 7]{ALM17} that is not \kl{$\forall$-well-quasi-ordered} similar
