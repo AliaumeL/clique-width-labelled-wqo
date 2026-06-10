@@ -477,14 +477,12 @@ the \kl{gap-embedding} ordering.
   \begin{enumerate}[(i)]
     \item \label{item:mt-root-marked}$\marking(\treeRoot) = \marked$,
     \item \label{item:mt-lca} \kl{marked nodes} are closed under \kl{least common ancestors},
-    \item \label{item:mt-same-depth} for every pair of nodes $x \treelt[\t] y$ such that 
-    $x$ is \kl(node){marked},
-    $\spt(x) = \spt(y) = k$ and $\spt(x:y) > k$,
-    then $y$ must be either \kl(node){marked} or \kl(node){separating},
-    \item \label{item:mt-different-depth} for every pair of nodes $x \treelt[\t] y$ such that 
-    $x$ is \kl(node){marked},
-    $\spt(x) \neq \spt(y)$, $\spt(y) = k$ and $\spt(x:y) > k$,
-    then $y$ must be \kl(node){marked}.
+  \end{enumerate}
+  Furthermore, for every pair of marked nodes $x \treelt[\t] y$, let $z$ be the first internal node on the path from $x$ to $y$ such that $\spt(z) =  \spt(x:y) = k$. If $z$ exists then the following conditions hold:
+  \begin{enumerate}[(i)]
+    \setcounter{enumi}{2}
+    \item \label{item:mt-same-depth} if $\spt(x) = k$ then $z$ must be  \kl(node){marked} or \kl(node){separating},
+    \item \label{item:mt-different-depth} if $\spt(x) \neq k$ then $z$ must be \kl(node){marked}.
   \end{enumerate}
 \end{definition}
 
