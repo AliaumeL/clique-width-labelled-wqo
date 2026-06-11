@@ -269,78 +269,179 @@ dummy nodes in a controlled manner, we are able to ensure that the
 resulting \kl{marked nested trees} are \kl{$L$-bounded} for some $L \in \Nat$,
 allowing us to apply \cref{thm:marked-nested-trees-wqo}. 
 
+
+
 \begin{lemma}
     \label{lem:important-nodes}
     Assume that there exists a bound $N_0$ on the \kl(bough){dimension} of \kl{bad
     boughs}. Then, for every tree $\t$ equipped with a \kl{forward Ramseyan split} $\spt$, 
-    one can effectively construct a \kl{well-marked nested tree} $(\t', \spt', \marking)$ 
-    that is \kl{$L$-bounded} for some $L \in \Nat$, and such that
-    $\someInterp(\t)$ is an \kl{induced subgraph} 
-    of $\someInterp(\t')$,
-    when the latter is restricted to vertices corresponding to \kl{marked leaves}.
+    one can effectively construct a \kl{well-marked nested tree} $(\t', \spt', \marking')$ 
+    that is \kl{$L$-bounded} for some $L \in \Nat$, and such that $\someInterp(\t)$ is isomorphic to $\someInterp(\t')$ restricted to the vertices corresponding to \kl{marked leaves}.
 \end{lemma}
+
+
 \begin{proof}
-  We proceed iteratively, starting from the tree $\t$ where every node is set as
-  a \kl{marked node}. A rewrite step works as follows: given a \kl{bough
-  backbone} $b_0, b_1, \ldots, b_n$ defining a \kl{bough} $B$ of level $k$ where
-  all nodes of the \kl{bough backbone} are \kl{marked nodes} and $n > N_0$, we
-  know that $B$ is a \kl{good bough} by assumption, and we write $\t = C[B]$.
+Given a well-marked nested tree $(\t, \spt, \marking)$, we say that a bough of level $k$ is non-dummy if every node in its backbone is non-dummy.
+We will show the following claim by induction.
 
-  By definition of \kl{good boughs}, there exists a \kl{compatible bough} $H$
-  and a map $h \colon \someInterp(C[B]) \to \someInterp(C[H])$ satisfying the
-  three conditions of \cref{good-bough:def}. Let us define $\t' = C[H]$, which
-  is still \kl{forward Ramseyan} by definition of \kl{compatible boughs}. Let
-  us now define the vertex-labelling of $\t'$. For nodes of $C[\square]$, we keep
-  the same vertex-labelling as in $\t$. For nodes of $H$, we identify the three
-  consecutive \kl(bough){blocks} whose leaves are left untouched by $h$ as
-  $\BBlock[H]{z_i}{z_{i+1}}$, $\BBlock[H]{z_{i+1}}{z_{i+2}}$, and
-  $\BBlock[H]{z_{i+2}}{z_{i+3}}$. We label all these nodes as \kl{dummy nodes}
-  except $z_i$ and $z_{i+3}$, which are labelled as \kl{marked nodes}, and
-  $z_{i+1}$, which is labelled as a \kl{separating node}. Finally, all other
-  nodes of $H$ are labelled as \kl{marked nodes}.
+\begin{claim} \label{clm:induction_marked}  
+For $k\in \{1,\dots, N+1\}$, for every well-marked nested tree $(\t, \spt, \marking)$ there is a well-marked nested tree $(\t', \spt', \marking')$ such that:
+\begin{enumerate}[a]
+  \item  $(\t, \spt, \marking) \gemb (\t', \spt', \marking')$ witnessed by a mapping $h$, \label{it:induction_marked1}
+  \item the mapping $h$ is a bijection between the marked leaves of $\t$ and $\t'$, \label{it:induction_marked2}
+  \item every non-dummy bough of level at least $k$ of $(\t', \spt', \marking')$ is of dimension at most $N_0 +7$. \label{it:induction_marked3}
+\end{enumerate}
+\end{claim}
 
-  We claim that one can apply these rewrite steps as follows: first, apply them
-  to \kl{boughs} of minimal split level until exhaustion, and then proceed with
-  the next split level, and so on. To a tree $\t$ and a split level $k$, one
-  can associate the multiset of \kl(bough){dimensions} of all \kl{boughs} of
-  level $k$ with \kl(bough){backbone} made of \kl{marked nodes} inside $\t$.
-  Since each rewrite step decreases this multiset for the Dershowitz–Manna
-  ordering this process terminates \cite{DERMAN79}.
+Before getting to the proof of \cref{clm:induction_marked}, we make the following observation that will be useful to obtain suitable markings.
 
+\begin{observation} \label{obs:nondummy_leaf}
+  Given a well-marked nested tree $(\t, \spt, \marking)$, there is a marking $\marking'$ such that in $(\t, \spt, \marking')$ every non-dummy bough of dimension at least $3$ contains a marked leaf. 
+\end{observation}
 
-  Let us first observe that every rewrite step preserves the fact that $\t$ is a
-  \kl{well-marked nested tree}. This is because non-marked nodes are only
-  inserted after a \kl{separating node}. 
+It follows from \cref{obs:nondummy_leaf} that a non-dummy bough (of any level) of dimension at least $N_0+7$ contains at least $\frac{N_0}{3}$ marked leaves.
 
-  Let us now prove that every rewrite step preserves the fact that the graph
-  $\someInterp(\t)$ restricted to vertices corresponding to \kl{marked leaves}
-  is an \kl{induced subgraph} of $\someInterp(\t')$ restricted to vertices
-  corresponding to \kl{marked leaves}. This follows directly from the fact that
-  $h \colon \someInterp(C[B]) \to \someInterp(C[H])$ is an \kl{embedding of
-  graphs} and that $h$ is the identity on \kl(context){leaves} of $C[\square]$.
-
-  From our construction, it is clear that at every level $k$, there are at most
-  $N_0 + 1$ consecutive \kl{marked nodes} in the \kl{bough backbone} of any
-  \kl{bough} of level $k$.
-
-  Let us now prove that the resulting tree $\t'$ is \kl{$L$-bounded} for some
-  $L \in \Nat$. Assume towards a contradiction that there exists arbitrarily
-  long paths of non-\kl(node){dummy} nodes in the resulting tree $\t'$. To a
-  pair of nodes $x \treeleq y$ in such a path, we associate the colour
-  $(\spt'(x), \spt'(x\colon y), \spt'(y))$. By a Ramsey argument, if the path
-  is too long, there exists a sequence $x_0 \treeleq x_1 \treeleq \cdots
-  \treeleq x_{N_0+1}$ of non-\kl(node){dummy} nodes in the path such that
-  $\spt'(x_i) = \spt'(x_j)$ and $\spt'(x_i \colon x_j) = \spt'(x_{i'} \colon
-  x_{j'})$ for every $0 \leq i < j \leq N_0 + 1$ and $0 \leq i' < j' \leq N_0 +
-  1$. Without loss of generality, we can assume that $\spt'(x_i) < \spt'(x_i
-  \colon x_{i+1})$ for every $0 \leq i \leq N_0$.
-  Since we only insert \kl{separating node} prior to a \kl{dummy node}, 
-  we can also assume that all nodes $x_0, x_1, \ldots, x_{N_0+1}$ are
-  \kl{marked nodes}.
-  We have identified a \kl{bough backbone} $x_0, x_1, \ldots, x_{N_0+1}$
-  of \kl{marked nodes} defining a \kl{bough} of level $\spt'(x_0)$,
-  which contradicts the fact that the rewriting procedure terminated.
+\begin{proof}  
+  Suppose that in $\t$ there is a non-dummy bough $B$ of dimension $n$ with backbone $b_0,b_1,b_2,\dots, b_n$ that contains no marked leaf. Define the marking $\marking'$ such that $b_0$ and $b_n$ are marked, $b_1$ is separating and every other node in $B$ is dummy. Observe that $(\t, \spt, \marking')$ is well-marked.
 \end{proof}
+
+\begin{claimproof}[Proof of \cref{clm:induction_marked}]
+  We proceed by induction on $k$, starting with $k=N+1$, and then on the number of bough of level $k$ with $K$ marked leaves. Given a non-dummy bough $B$ with $K$ leaves and dimension larger than $N_0$ (implying that it is good). We will show that $B$ can be split into two non-dummy bough, separated by dummy nodes, with at least one leaf mapped to each of the two new non-dummy bough. This will decrease strictly the number of non-dummy bough with at least $K$ leaves, proving that this process terminates.
+
+  For a well-marked nested tree $(\t, \spt, \marking)$, let $R_{\t}(k,K)$ be the number of non-dummy bough of level $k$ and dimension more than $N_0+7$ in $\t$ with at least $K$ marked leaves.
+  \subparagraph*{Base case} 
+  \begin{itemize}
+    \item For $k =N+1$, every bough of level $N+1$ is of dimension $1$, satisfying \cref{clm:induction_marked}.
+    \item For $k \in \{1,\dots, N\}, K\in \Nat$ if $R_{\t}(k,K)=0$ then \cref{clm:induction_marked} holds. Notice that any well-marked nested tree satisfy $R_{\t}(k,K)=0$.
+    % \item For $L = 0$, define the marking $\marking'$ such that $root$ is marked, and every other node is dummy. 
+    % % $\marking'(root) = \marked$ and for every other node $u$ of $\t$, $\marking'(root) = \dummy$. 
+    % Observe that $(\t, \spt, \marking')$ is well-marked and \cref{clm:induction_marked} holds.
+    % \item For $L = 1$, let $y$ be the only marked leaf of $\t$ and $z$ the first internal node on the path from $root$ to $x$ such that $\spt(z) = \spt(root:y)$, 
+    % define the marking $\marking'$ such that $root,z,y$ are marked, and every other node is dummy. 
+    % The tree is well-marked and \cref{clm:induction_marked} holds.
+  \end{itemize}
+
+  \subparagraph*{Induction} %Let $K>1$ and assume that for every well-marked nested tree with $K'<K$ marked leaves, \cref{clm:induction_marked} holds. Let $k\leq N$ and assume that for every $k'>k$ and well-marked nested tree with $K$ leaves, \cref{clm:induction_marked} holds.
+  Let $k\leq N$ and assume that for every $k'>k$ \cref{clm:induction_marked} holds. 
+  Let $(\t, \spt, \marking)$ be a well-marked nested tree with and $K\in Nat$ such that $R_{\t}(k,K)> R_{\t}(k,K+1)=0$. Assume that for any $(\t', \spt', \marking')$ such that $R_{\t'}(k,K) < R_{\t}(k,K)$, \cref{clm:induction_marked} holds.
+  
+  %Let $(\t, \spt, \marking)$ be a well-marked nested tree with $K$ leaves satisfying \cref{it:induction_marked3} for $k' > k$, furthermore, assume it satisfies \cref{obs:nondummy_leaf}. 
+  Since $R_{\t}(k,K)>  0$ it follows that $(\t, \spt, \marking)$ does not satisfy \cref{it:induction_marked3} for $k$. Then, there is a non-dummy good bough $B$ of level $k$ and dimension $n>N_0+7$ with backbone $b_0,b_1,\dots, b_n$ containing $K$ marked leaves. Note that by definition of $R_{\t}(k,K)$, $B$ must be maximal with respect to these properties.  There is a marked leaf in at least one of the first three blocks of $B$, else $b_2$ would be dummy node by \cref{obs:nondummy_leaf}. Similarly, there is at least on leaf in one of the last three blocks of $B$. Consider now $B' = \BBlock[\t]{b_3}{b_{n-3}}$ the bough defined by the backbone $b_3,b_4,\dots, b_{n-3}$, it has dimension $n-6> N_0 $, therefore it must be a good bough.
+
+  By definition of \kl{good boughs}, there exists a \kl{compatible bough} $H$ with backbone $h_0,h_1,\dots, h_m$,
+  and a map $h \colon \someInterp(C[B']) \to \someInterp(C[H])$ satisfying the
+  three conditions of \cref{good-bough:def}.   
+  Let us define $\t' = C[H]$ and $\spt'$ be its split, which
+  is still \kl{forward Ramseyan} by definition of \kl{compatible boughs}. 
+  By \cref{good-bough:def}, there is at least $3$ consecutive blocks of $H$ that are left untouched by $h$, hence there is $j\leq l-3$ such that $\BBlock[\t']{h_j}{h_l}$ is untouched.
+  We now define the marking $\marking'$ of $\t'$ as follows:
+  \begin{itemize}
+    \item for $u\in C[\square]$, let $\marking'(h(u))= \marking(u)$,
+    \item for every marked leaf $u$ of $B'$, $\marking'(h(u)) = \marked$,
+    \item let $\marking(h_j) = \marking(h_r) = \marked $ and $\marking(h_{j+1}) = \separating$,
+    \item for every $u$ on the path from $h_0$ to $h_i$ and from $h_r$ to $h_m$ let $\marking(u) = \marked$,
+    \item for every marked leaf $u$ of $H$, for every node $v$ on the path from $v$ to $\lca(u,h_m)$ let $\marking(v)= \marked$,
+    \item for every other node $u$ in $H$ let $\marking(u) =\dummy$.
+  \end{itemize}
+  Observe that $(\t', \spt', \marking')$ is a well-marked nested tree such that $(\t, \spt, \marking) \gemb(\t', \spt', \marking')$ and there is a bijection between the marked leaves of $\t$ and $\t'$.
+  Moreover, the backbone of any non-dummy bough of level $k$ and dimension at least $N_0+7$ containing at least $K$ leaves cannot intersect $V(H)$.  Indeed, observe that in $C[\square]$ there is at least one marked leaf of $B$ in $\t'_{root}$ and at least one in either $\t'_{left}$ or $\t'_{right}$. Since there is dummy nodes in $\BBlock[\t']{h_j}{h_l}$, any non-dummy bough of level $k$ intersecting the backbone of $H$ must contain strictly less than $K$ marked leaves. Therefore, $R_{\t'}(k,K) < R_{\t}(k,K)$ and by induction hypothesis there is $(\t'', \spt'', \marking'')$ such that
+  $$(\t, \spt, \marking) \gemb (\t', \spt', \marking') \gemb (\t'', \spt'', \marking''),$$ a mapping which is a bijection between the leaves of $\t$ and $\t'$ and \cref{it:induction_marked3} is satisfied, concluding the proof of the Claim.
+\end{claimproof}
+
+We now show that \cref{clm:induction_marked} implies the conclusion of Lemma. 
+Given a tree  $\t$  equipped with a \kl{forward Ramseyan split} $\spt$, consider the marking $\marking$ of $\t$ such that every node is marked. 
+By \cref{clm:induction_marked} there is $(\t', \spt', \marking')$  and mapping $h$ such that the marked leaves of $\t$ are in bijection with the ones of $\t'$. By \cref{it:induction_marked1} and \cref{cor:gap-embedding-monotone}, it follows that $\someInterp(\t)$ is isomorphic to $\someInterp(\t')$ restricted to the vertices corresponding to \kl{marked leaves}.
+
+It remains to show that $(\t', \spt', \marking')$ is $L$-bounded. 
+Observe that any path between nodes $x$ and $y$ such that $\spt(x:y) =k$ contains at most $2^{i}$ maximal bough of level $k+i$ for $0\leq i \leq N -k$.
+Let $T(k)$ be the maximum length of a bough $B$ of level $k$ and dimension $n$ where every node on the path from $b_0$ to $b_n$ is non-dummy. It 
+follows from the previous observation and \cref{it:induction_marked3} 
+that $T(k) < L$ for some $L\in \Nat$. 
+Hence, any non-dummy path in $T'$ is of length at most $L'$ 
+for some $L'\in \Nat$ that depends only on $N$ and $N_0$, 
+therefore $(\t', \spt', \marking')$ is $L'$-bounded.
+
+\end{proof}
+
+
+% \todo[inline]{OLD PROOF}
+
+% \begin{lemma}
+%     \label{lem:important-nodes}
+%     Assume that there exists a bound $N_0$ on the \kl(bough){dimension} of \kl{bad
+%     boughs}. Then, for every tree $\t$ equipped with a \kl{forward Ramseyan split} $\spt$, 
+%     one can effectively construct a \kl{well-marked nested tree} $(\t', \spt', \marking)$ 
+%     that is \kl{$L$-bounded} for some $L \in \Nat$, and such that
+%     $\someInterp(\t)$ is an \kl{induced subgraph} 
+%     of $\someInterp(\t')$,
+%     when the latter is restricted to vertices corresponding to \kl{marked leaves}.
+% \end{lemma}
+% \begin{proof}
+%   We proceed iteratively, starting from the tree $\t$ where every node is set as
+%   a \kl{marked node}. A rewrite step works as follows: given a \kl{bough
+%   backbone} $b_0, b_1, \ldots, b_n$ defining a \kl{bough} $B$ of level $k$ where
+%   all nodes of the \kl{bough backbone} are \kl{marked nodes} and $n > N_0$, we
+%   know that $B$ is a \kl{good bough} by assumption, and we write $\t = C[B]$.
+
+%   By definition of \kl{good boughs}, there exists a \kl{compatible bough} $H$
+%   and a map $h \colon \someInterp(C[B]) \to \someInterp(C[H])$ satisfying the
+%   three conditions of \cref{good-bough:def}. Let us define $\t' = C[H]$, which
+%   is still \kl{forward Ramseyan} by definition of \kl{compatible boughs}. Let
+%   us now define the vertex-labelling of $\t'$. For nodes of $C[\square]$, we keep
+%   the same vertex-labelling as in $\t$. For nodes of $H$, we identify the three
+%   consecutive \kl(bough){blocks} whose leaves are left untouched by $h$ as
+%   $\BBlock[H]{z_i}{z_{i+1}}$, $\BBlock[H]{z_{i+1}}{z_{i+2}}$, and
+%   $\BBlock[H]{z_{i+2}}{z_{i+3}}$. We label all these nodes as \kl{dummy nodes}
+%   except $z_i$ and $z_{i+3}$, which are labelled as \kl{marked nodes}, and
+%   $z_{i+1}$, which is labelled as a \kl{separating node}. Finally, all other
+%   nodes of $H$ are labelled as \kl{marked nodes}.
+
+%   We claim that one can apply these rewrite steps as follows: first, apply them
+%   to \kl{boughs} of minimal split level until exhaustion, and then proceed with
+%   the next split level, and so on. To a tree $\t$ and a split level $k$, one
+%   can associate the multiset of \kl(bough){dimensions} of all \kl{boughs} of
+%   level $k$ with \kl(bough){backbone} made of \kl{marked nodes} inside $\t$.
+%   Since each rewrite step decreases this multiset for the Dershowitz–Manna
+%   ordering this process terminates \cite{DERMAN79}.
+
+
+%   Let us first observe that every rewrite step preserves the fact that $\t$ is a
+%   \kl{well-marked nested tree}. This is because non-marked nodes are only
+%   inserted after a \kl{separating node}. 
+
+%   Let us now prove that every rewrite step preserves the fact that the graph
+%   $\someInterp(\t)$ restricted to vertices corresponding to \kl{marked leaves}
+%   is an \kl{induced subgraph} of $\someInterp(\t')$ restricted to vertices
+%   corresponding to \kl{marked leaves}. This follows directly from the fact that
+%   $h \colon \someInterp(C[B]) \to \someInterp(C[H])$ is an \kl{embedding of
+%   graphs} and that $h$ is the identity on \kl(context){leaves} of $C[\square]$.
+
+%   From our construction, it is clear that at every level $k$, there are at most
+%   $N_0 + 1$ consecutive \kl{marked nodes} in the \kl{bough backbone} of any
+%   \kl{bough} of level $k$.
+
+%   Let us now prove that the resulting tree $\t'$ is \kl{$L$-bounded} for some
+%   $L \in \Nat$. Assume towards a contradiction that there exists arbitrarily
+%   long paths of non-\kl(node){dummy} nodes in the resulting tree $\t'$. To a
+%   pair of nodes $x \treeleq y$ in such a path, we associate the colour
+%   $(\spt'(x), \spt'(x\colon y), \spt'(y))$. By a Ramsey argument, if the path
+%   is too long, there exists a sequence $x_0 \treeleq x_1 \treeleq \cdots
+%   \treeleq x_{N_0+1}$ of non-\kl(node){dummy} nodes in the path such that
+%   $\spt'(x_i) = \spt'(x_j)$ and $\spt'(x_i \colon x_j) = \spt'(x_{i'} \colon
+%   x_{j'})$ for every $0 \leq i < j \leq N_0 + 1$ and $0 \leq i' < j' \leq N_0 +
+%   1$. Without loss of generality, we can assume that $\spt'(x_i) < \spt'(x_i
+%   \colon x_{i+1})$ for every $0 \leq i \leq N_0$.
+%   Since we only insert \kl{separating node} prior to a \kl{dummy node}, 
+%   we can also assume that all nodes $x_0, x_1, \ldots, x_{N_0+1}$ are
+%   \kl{marked nodes}.
+%   We have identified a \kl{bough backbone} $x_0, x_1, \ldots, x_{N_0+1}$
+%   of \kl{marked nodes} defining a \kl{bough} of level $\spt'(x_0)$,
+%   which contradicts the fact that the rewriting procedure terminated.
+% \end{proof}
+
+
+% \todo[inline]{END OLD PROOF}
+
 
 
 \begin{proof}[Proof of 
@@ -355,14 +456,18 @@ indices $i < j$ such that $G_i$ is a \kl{labelled induced subgraph} of $G_j$.
 
 First, every graph $G_i$ can be represented as $\someInterp(\t_i)$ for some
 tree $\t_i$ equipped with a \kl{forward Ramseyan split} $\spt_i$. Then, by
-\cref{lem:important-nodes}, there exists a finite $L \in \Nat$ such that we can
+\cref{lem:important-nodes}, there exists a $L \in \Nat$ such that we can
 construct \kl{$L$-bounded} \kl{well-marked nested tree} $(\t_i', \spt_i',
-\marking_i)$ such that $G_i$ is an \kl{induced subgraph} of
-$\someInterp(\t_i')$, when the latter is restricted to vertices corresponding
-to \kl{marked leaves}. By labelling the \kl{marked leaves} of $(\t_i', \spt_i',
-\marking_i)$ with $\circ$ if they are not in $G_i$, and with their original
-label in $Y$ otherwise, we obtain a sequence of $Y \cup \set{\circ} $ node-labelled
+\marking_i)$ such that $G_i$ is isomorphic to
+$\someInterp(\t_i')$ restricted to vertices corresponding
+to \kl{marked leaves}. 
+By labelling the \kl{marked leaves} of $(\t_i', \spt_i',
+\marking_i)$ their corresponding label in $Y$ we obtain a sequence of $Y$ node-labelled
 \kl{well-marked nested trees}.
+% By labelling the \kl{marked leaves} of $(\t_i', \spt_i',
+% \marking_i)$ with $\circ$ if they are not in $G_i$, and with their original
+% label in $Y$ otherwise, we obtain a sequence of $Y \cup \set{\circ} $ node-labelled
+%\kl{well-marked nested trees}.
 
 By  \cref{thm:marked-nested-trees-wqo}, there exist two trees $(\t_i', \spt_i',
 \marking_i')$ and $(\t_j', \spt_j', \marking_j')$ in this sequence such that
