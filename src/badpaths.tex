@@ -293,9 +293,6 @@ Let us first make an observation on marking non-dummy bough that will be useful 
 \end{claimproof}
 
 
-From \cref{obs:nondummy_leaf}, we can assume that a non-dummy bough (of any level) of dimension at least $N_0+7$ contains at least $\frac{N_0}{3}$ marked leaves.
-
-
 \begin{claim} \label{clm:induction_marked}  
 For $k\in \{1,\dots, N+1\}$, for every well-marked nested tree $(\t, \spt, \marking)$ there is a well-marked nested tree $(\t', \spt', \marking')$ such that:
 \begin{enumerate}[a]
@@ -308,8 +305,9 @@ For $k\in \{1,\dots, N+1\}$, for every well-marked nested tree $(\t, \spt, \mark
   We proceed by induction on $k$, starting with $k=N+1$, and then on the number of bough of level $k$ with $K$ marked leaves. Given a non-dummy bough $B$ with $K$ leaves and dimension larger than $N_0$ (implying that it is good). We will show that $B$ can be split into two non-dummy bough, separated by dummy nodes, with at least one leaf mapped to each of the two new non-dummy bough. This will decrease strictly the number of non-dummy bough with at least $K$ leaves, proving that this process terminates.
 
   For a well-marked nested tree $(\t, \spt, \marking)$, let $R_{\t}(k,K)$ be the number of non-dummy bough of level $k$ and dimension at least $N_0+7$ in $\t$ with at least $K$ marked leaves.
-  \subparagraph*{Base case}  For $k =N+1$, every bough of level $N+1$ is of dimension $1$, satisfying \cref{clm:induction_marked}. For $k \in \{1,\dots, N\}, K\in \Nat$ if $R_{\t}(k,K)=0$ then \cref{clm:induction_marked} holds. Notice that any well-marked nested tree without marked leaves satisfy $R_{\t}(k,K)=0$.
-    % \item For $L = 0$, define the marking $\marking'$ such that $root$ is marked, and every other node is dummy. 
+  \subparagraph*{Base case}  For $k =N+1$, every bough of level $N+1$ is of dimension $1$, satisfying \cref{clm:induction_marked}. 
+  Observe now that by \cref{obs:nondummy_leaf}, we can assume that any bough with  $K$ marked leaves has dimension at most $3K$. Hence, if for every $k \in \{1,\dots, N\}$ and $K>2$ we have $R_{\t}(k,K)=0$ any non-dummy bough has dimension at most $N_0+7$.
+      % \item For $L = 0$, define the marking $\marking'$ such that $root$ is marked, and every other node is dummy. 
     % % $\marking'(root) = \marked$ and for every other node $u$ of $\t$, $\marking'(root) = \dummy$. 
     % Observe that $(\t, \spt, \marking')$ is well-marked and \cref{clm:induction_marked} holds.
     % \item For $L = 1$, let $y$ be the only marked leaf of $\t$ and $z$ the first internal node on the path from $root$ to $x$ such that $\spt(z) = \spt(root:y)$, 
@@ -319,7 +317,7 @@ For $k\in \{1,\dots, N+1\}$, for every well-marked nested tree $(\t, \spt, \mark
 
   \subparagraph*{Induction} %Let $K>1$ and assume that for every well-marked nested tree with $K'<K$ marked leaves, \cref{clm:induction_marked} holds. Let $k\leq N$ and assume that for every $k'>k$ and well-marked nested tree with $K$ leaves, \cref{clm:induction_marked} holds.
   Let $k\leq N$ and assume that for every $k'>k$ \cref{clm:induction_marked} holds. 
-  Let $(\t, \spt, \marking)$ be a well-marked nested tree with and $K\in Nat$ such that $R_{\t}(k,K)> R_{\t}(k,K+1)=0$. Assume that for any $(\t', \spt', \marking')$ such that $R_{\t'}(k,K) < R_{\t}(k,K)$, \cref{clm:induction_marked} holds.
+  Let $(\t, \spt, \marking)$ be a well-marked nested tree with and $K>2$ such that $R_{\t}(k,K)> R_{\t}(k,K+1)=0$. Assume that for any $(\t', \spt', \marking')$ such that $R_{\t'}(k,K) < R_{\t}(k,K)$, \cref{clm:induction_marked} holds.
   
   %Let $(\t, \spt, \marking)$ be a well-marked nested tree with $K$ leaves satisfying \cref{it:induction_marked3} for $k' > k$, furthermore, assume it satisfies \cref{obs:nondummy_leaf}. 
   Since $R_{\t}(k,K)>  0$ it follows that $(\t, \spt, \marking)$ does not satisfy \cref{it:induction_marked3} for $k$. 
@@ -345,7 +343,10 @@ For $k\in \{1,\dots, N+1\}$, for every well-marked nested tree $(\t, \spt, \mark
     \item for every other node $u$ in $H$ let $\marking(u) =\dummy$.
   \end{itemize}
   Observe that $(\t', \spt', \marking')$ is a well-marked nested tree such that $(\t, \spt, \marking) \gemb(\t', \spt', \marking')$ and there is a bijection between the marked leaves of $\t$ and $\t'$.
-  Moreover, the backbone of any non-dummy bough of level $k$ and dimension at least $N_0+7$ containing at least $K$ leaves cannot intersect $V(H)$.  Indeed, observe that in $C[\square]$ there is at least one marked leaf of $B$ in $\t'_{root}$ and at least one in either $\t'_{left}$ or $\t'_{right}$. Since there is dummy nodes in $\BBlock[\t']{h_j}{h_l}$, any non-dummy bough of level $k$ intersecting the backbone of $H$ must contain strictly less than $K$ marked leaves. Therefore, $R_{\t'}(k,K) < R_{\t}(k,K)$ and by induction hypothesis there is $(\t'', \spt'', \marking'')$ such that
+  Moreover, the backbone of any non-dummy bough of level $k$ and dimension at least $N_0+7$ containing at least $K$ leaves cannot intersect $V(H)$.  
+  Indeed, observe that since $h$ is the identity map on in $C[\square]$ there is at least one marked leaf of $B$ in $\t'_{root}$ and at least one in either $\t'_{left}$ or $\t'_{right}$. 
+  Since there is dummy nodes in $\BBlock[\t']{h_j}{h_l}$, any non-dummy bough of level $k$ intersecting the backbone of $H$ must contain strictly less than $K$ marked leaves. 
+  Therefore, $R_{\t'}(k,K) < R_{\t}(k,K)$ and by induction hypothesis there is $(\t'', \spt'', \marking'')$ such that
   $$(\t, \spt, \marking) \gemb (\t', \spt', \marking') \gemb (\t'', \spt'', \marking''),$$ with a mapping which is a bijection between the leaves of $\t$ and $\t''$ and \cref{it:induction_marked3} is satisfied by $(\t'', \spt'', \marking'')$, concluding the proof of the Claim.
 \end{claimproof}
 
