@@ -514,7 +514,7 @@ the \kl{gap-embedding} ordering.
     \item \label{item:gap-embedding:local} respects local products: if $y$ is the  left (resp. right)
       child of $x$ in $\t_1$, and $y'$ is the  left (resp. right) child of
       $h(x)$ in $\t_2$, then
-      $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{y'}$.
+      $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{y'}$. \todo{useless ?}
 
     \item \label{item:gap-embedding:neighbourhood} respects neighbourhood products: for every $k \in \set{1, \dots, N}$,
       and every node $x \in \t_1$, if $z$ is the closest ancestor of $x$ such that
@@ -525,7 +525,7 @@ the \kl{gap-embedding} ordering.
     \item \label{item:gap-embedding:gluing} is gluing on non-\kl{dummy} nodes: 
     if $\marking_1(y) \in \set{\marked, \separating}$,
     and $x$ is the \kl(tree){parent} of $y$ in $\t_1$,
-    then $h(x)$ is the \kl(tree){parent} of $h(y)$ in $\t_2$.
+    then $h(x)$ is the \kl(tree){parent} of $h(y)$ in $\t_2$. \todo{redefine this properly}
 
   \end{enumerate}
 \end{definition}
@@ -629,7 +629,7 @@ section.
   to $y$.
   If $\spt_1(x\colon y)=N+1$, then $y$ is a child of $x$. Since $y$ is
   \kl(node){marked}, \cref{item:gap-embedding:gluing} yields that $h(y)$ is a child
-  of $h(x)$, and then \cref{item:gap-embedding:local} gives
+  of $h(x)$, and then \cref{item:gap-embedding:local}\mael{also holds by \cref{item:gap-embedding:neighbourhood}, \cref{item:gap-embedding:local} is actually never used elsewhere} gives
   $\tlbl{\t_1}{x}{y} = \tlbl{\t_2}{h(x)}{h(y)}$.
   For the induction steps, will use the following claim.
   \begin{claim}

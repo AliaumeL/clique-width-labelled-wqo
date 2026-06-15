@@ -296,7 +296,7 @@ Let us first make an observation on marking non-dummy bough that will be useful 
 \begin{claim} \label{clm:induction_marked}  
 For $k\in \{1,\dots, N+1\}$, for every well-marked nested tree $(\t, \spt, \marking)$ there is a well-marked nested tree $(\t', \spt', \marking')$ such that:
 \begin{enumerate}[a]
-  \item  $(\t, \spt, \marking) \gemb (\t', \spt', \marking')$ witnessed by a mapping $h$, \label{it:induction_marked1}
+  \item  $(\t, \spt, \marking) \gemb (\t', \spt', \marking')$ witnessed by a mapping $h$, \label{it:induction_marked1} \todo{careful with def of marked embeding}
   \item the mapping $h$ is a bijection between the marked leaves of $\t$ and $\t'$, \label{it:induction_marked2}
   \item every non-dummy bough of level at least $k$ of $(\t', \spt', \marking')$ is of dimension at most $N_0 +6$. \label{it:induction_marked3}
 \end{enumerate}
@@ -305,8 +305,9 @@ For $k\in \{1,\dots, N+1\}$, for every well-marked nested tree $(\t, \spt, \mark
   We proceed by induction on $k$, starting with $k=N+1$, and then on the number of bough of level $k$ with $K$ marked leaves. Given a non-dummy bough $B$ with $K$ leaves and dimension larger than $N_0$ (implying that it is good). We will show that $B$ can be split into two non-dummy bough, separated by dummy nodes, with at least one leaf mapped to each of the two new non-dummy bough. This will decrease strictly the number of non-dummy bough with at least $K$ leaves, proving that this process terminates.
 
   For a well-marked nested tree $(\t, \spt, \marking)$, let $R_{\t}(k,K)$ be the number of non-dummy bough of level $k$ and dimension at least $N_0+7$ in $\t$ with at least $K$ marked leaves.
-  \subparagraph*{Base case}  For $k =N+1$, every bough of level $N+1$ is of dimension $1$, satisfying \cref{clm:induction_marked}. 
-  Observe now that by \cref{obs:nondummy_leaf}, we can assume that any bough with  $K$ marked leaves has dimension at most $3K$. Hence, if for every $k \in \{1,\dots, N\}$ and $K>2$ we have $R_{\t}(k,K)=0$ any non-dummy bough has dimension at most $N_0+7$.
+
+  \subparagraph*{Base case}  %For $k =N+1$, every bough of level $N+1$ is of dimension $1$, satisfying \cref{clm:induction_marked}. 
+  By \cref{obs:nondummy_leaf}, we can assume that any bough with  $K$ marked leaves has dimension at most $3K$. Hence, if for every $k \in \{1,\dots, N\}$ and $K>2$ we have $R_{\t}(k,K)=0$ any non-dummy bough has dimension at most $N_0+7$ and \cref{clm:induction_marked} holds. 
       % \item For $L = 0$, define the marking $\marking'$ such that $root$ is marked, and every other node is dummy. 
     % % $\marking'(root) = \marked$ and for every other node $u$ of $\t$, $\marking'(root) = \dummy$. 
     % Observe that $(\t, \spt, \marking')$ is well-marked and \cref{clm:induction_marked} holds.
@@ -314,7 +315,10 @@ For $k\in \{1,\dots, N+1\}$, for every well-marked nested tree $(\t, \spt, \mark
     % define the marking $\marking'$ such that $root,z,y$ are marked, and every other node is dummy. 
     % The tree is well-marked and \cref{clm:induction_marked} holds.
 
-
+  \maelin{ Maybe don't do an induction, and do something purely Constructive. I think there is problem with how i do induction, or at least it is messy. Maybe the following approach is better : \\
+  Let $k\in \{1,\dots,N\}, K>2$ such that $R_{\t}(k,K)>0$ for every $k'>k$ and $K'<K$ we have $R_{\t}(k',K')=0$. 
+  Then do essentially the same, and observe that the good bough replacement we do, we don't increase the value of $R_{\t}(k',K')$, hence still equal to $0$, but we strictly decrease the value of $R_{\t}(k,K)$. The not increase part follows directly from the fact that any bough of level $k'>k$ is either fully contained in a block of $H$, or fully in the root of child context.
+  }
   \subparagraph*{Induction} %Let $K>1$ and assume that for every well-marked nested tree with $K'<K$ marked leaves, \cref{clm:induction_marked} holds. Let $k\leq N$ and assume that for every $k'>k$ and well-marked nested tree with $K$ leaves, \cref{clm:induction_marked} holds.
   Let $k\leq N$ and assume that for every $k'>k$ \cref{clm:induction_marked} holds. 
   Let $(\t, \spt, \marking)$ be a well-marked nested tree with and $K>2$ such that $R_{\t}(k,K)> R_{\t}(k,K+1)=0$. Assume that for any $(\t', \spt', \marking')$ such that $R_{\t'}(k,K) < R_{\t}(k,K)$, \cref{clm:induction_marked} holds.
@@ -343,22 +347,18 @@ For $k\in \{1,\dots, N+1\}$, for every well-marked nested tree $(\t, \spt, \mark
     \item for every other node $u$ in $H$ let $\marking(u) =\dummy$.
   \end{itemize}
   Observe that $(\t', \spt', \marking')$ is a well-marked nested tree such that $(\t, \spt, \marking) \gemb(\t', \spt', \marking')$ and there is a bijection between the marked leaves of $\t$ and $\t'$.
-  Moreover, the backbone of any non-dummy bough of level $k$ and dimension at least $N_0+7$ containing at least $K$ leaves cannot intersect $V(H)$.  
-  Indeed, observe that since $h$ is the identity map on in $C[\square]$ there is at least one marked leaf of $B$ in $\t'_{root}$ and at least one in either $\t'_{left}$ or $\t'_{right}$. 
-  Since there is dummy nodes in $\BBlock[\t']{h_j}{h_l}$, any non-dummy bough of level $k$ intersecting the backbone of $H$ must contain strictly less than $K$ marked leaves. 
+  Moreover, the backbone of any non-dummy bough of level $k$ or more and dimension at least $N_0+7$ containing at least $K$ leaves cannot intersect $V(H)$.  
+  Indeed, observe that since $h$ is the identity map on in $C[\square]$ there is at least one marked leaf of $B$ in $\t'_{\mathsf{root}}$ and at least one in either $\t'_{\mathsf{left}}$ or $\t'_{\mathsf{right}}$. 
+  Since there is dummy nodes in $\BBlock[\t']{h_j}{h_l}$, any non-dummy bough of level $k$ or more intersecting the backbone of $H$ must contain strictly less than $K$ marked leaves. 
   Therefore, $R_{\t'}(k,K) < R_{\t}(k,K)$ and by induction hypothesis there is $(\t'', \spt'', \marking'')$ such that
-  $$(\t, \spt, \marking) \gemb (\t', \spt', \marking') \gemb (\t'', \spt'', \marking''),$$ with a mapping which is a bijection between the leaves of $\t$ and $\t''$ and \cref{it:induction_marked3} is satisfied by $(\t'', \spt'', \marking'')$, concluding the proof of the Claim.
+  $$(\t, \spt, \marking) \gemb (\t', \spt', \marking') \gemb (\t'', \spt'', \marking''),$$\todo{maybe not gap embeding} with a mapping which is a bijection between the leaves of $\t$ and $\t''$ and \cref{it:induction_marked3} is satisfied by $(\t'', \spt'', \marking'')$, concluding the proof of the Claim.
 \end{claimproof}
 
 We now show that \cref{clm:induction_marked} implies the conclusion of the Lemma. 
 Given a tree  $\t$  equipped with a \kl{forward Ramseyan split} $\spt$, consider the marking $\marking$ of $\t$ such that every node is marked. 
 By \cref{clm:induction_marked} there is $(\t', \spt', \marking')$  and mapping $h$ such that the marked leaves of $\t$ are in bijection with the ones of $\t'$. By \cref{it:induction_marked1} and \cref{cor:gap-embedding-monotone}, it follows that $\someInterp(\t)$ is isomorphic to $\someInterp(\t')$ restricted to the vertices corresponding to \kl{marked leaves}.
 
-It remains to show that $(\t', \spt', \marking')$ is $L$-bounded. 
-Observe that any path between nodes $x$ and $y$ such that $\spt(x:y) =k$ the number of maximal $k+i$-neighbourhoods is at most $2^{i}$ for $0\leq i \leq N -k$.
-Since by \cref{it:induction_marked3}, the dimension of bough of any level is bounded by $N_0+6$, it follows from this and the previous observation that any path of non-dummy nodes in $T'$ is of length at most $L$ 
-for some $L\in \Nat$ that depends only on $N$ and $N_0$. It remains that $(\t', \spt', \marking')$ is $L$-bounded.
-
+It remains to show that $(\t', \spt', \marking')$ is $L$-bounded for some $L\in \Nat$. It is clear that the length of a path of non-dummy nodes depends only on the height $N$ of the split, and the maximum dimension of non-dummy bough (of any level). Since this dimension is bounded by $N_0+7$ \cref{it:induction_marked3}, it follows that there is $L$ that depends only on $\someInterp$ such that $(\t', \spt', \marking')$ is $L$-bounded.
 \end{proof}
 
 
