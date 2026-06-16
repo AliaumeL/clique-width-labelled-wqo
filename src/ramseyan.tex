@@ -735,17 +735,20 @@ section.
 \end{proof}
 
 
+Given $(\t, \spt, \marking)$ a \kl{well-marked nested tree}, we define by $\someInterp_{\marked}(\t)$ the induced subgraph of $\someInterp(\t)$ obtained by considering only \kl{marked leaves}.\mael{t'es ok avec cette def ? ça simplifie l'écriture}
+
 \begin{corollary}
   \label{cor:gap-embedding-monotone}
   Let $(\t_1, \spt_1, \marking_1)$ and
   $(\t_2, \spt_2, \marking_2)$ be two \kl{well-marked nested trees}
   such that
   $(\t_1, \spt_1, \marking_1) \gemb (\t_2, \spt_2, \marking_2)$.
-  Then, the graph interpreted from
-  $(\t_1, \spt_1, \marking_1)$
-  is an \kl{induced subgraph} of the graph interpreted from
-  $(\t_2, \spt_2, \marking_2)$
-  when considering only \kl{marked leaves} as vertices.
+  Then, $\someInterp_{\marked}(\t_1)$ is an induced subgraph of $\someInterp_{\marked}(\t_2)$
+  % the graph interpreted from
+  % $(\t_1, \spt_1, \marking_1)$
+  % is an \kl{induced subgraph} of the graph interpreted from
+  % $(\t_2, \spt_2, \marking_2)$
+  % when considering only \kl{marked leaves} as vertices.
 \end{corollary}
 \begin{proof}
   Follows directly from \cref{lem:gap-embedding-respects-products}

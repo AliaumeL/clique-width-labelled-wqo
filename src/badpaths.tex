@@ -534,10 +534,9 @@ tree $\t_i$ equipped with a \kl{forward Ramseyan split} $\spt_i$. Then, by
 \cref{lem:important-nodes}, there exists a $L \in \Nat$ such that we can
 construct \kl{$L$-bounded} \kl{well-marked nested tree} $(\t_i', \spt_i',
 \marking_i)$ such that $G_i$ is isomorphic to
-$\someInterp(\t_i')$ restricted to vertices corresponding
-to \kl{marked leaves}. 
+$\someInterp_M(\t_i')$. 
 By labelling the \kl{marked leaves} of $(\t_i', \spt_i',
-\marking_i)$ their corresponding label in $Y$ we obtain a sequence of $Y$ node-labelled
+\marking_i)$ by their corresponding label in $Y$ we obtain a sequence of $Y$ node-labelled
 \kl{well-marked nested trees}.
 % By labelling the \kl{marked leaves} of $(\t_i', \spt_i',
 % \marking_i)$ with $\circ$ if they are not in $G_i$, and with their original
@@ -547,9 +546,11 @@ By labelling the \kl{marked leaves} of $(\t_i', \spt_i',
 By  \cref{thm:marked-nested-trees-wqo}, there exist two trees $(\t_i', \spt_i',
 \marking_i')$ and $(\t_j', \spt_j', \marking_j')$ in this sequence such that
 $(\t_i, \spt_i, \marking_i) \gemb (\t_j, \spt_j, \marking_j)$. By
-\cref{cor:gap-embedding-monotone}, the graph interpreted from $(\t_i, \spt_i,
-\marking_i)$ is a \kl{labelled induced subgraph} of the graph interpreted from
-$(\t_j', \spt_j', \marking_j')$ when both are restricted to \kl{marked leaves}.
+\cref{cor:gap-embedding-monotone},  
+$\someInterp_{\marked}(\t_i')$ is an induced subgraph of $\someInterp_{\marked}(\t_j')$.
+% the graph interpreted from $(\t_i, \spt_i,
+% \marking_i)$ is a \kl{labelled induced subgraph} of the graph interpreted from
+% $(\t_j', \spt_j', \marking_j')$ when both are restricted to \kl{marked leaves}.
 We conclude that $G_i$ is a \kl{labelled induced subgraph} of $G_j$, and thus
 $\Label{Y}{\someInterp(\Trees{\Sigma}{})}$ is \kl{well-quasi-ordered}. Therefore,
 the image of $\someInterp$ is \kl{$\forall$-well-quasi-ordered}.
