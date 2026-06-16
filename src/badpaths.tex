@@ -276,13 +276,24 @@ allowing us to apply \cref{thm:marked-nested-trees-wqo}.
     Assume that there exists a bound $N_0$ on the \kl(bough){dimension} of \kl{bad
     boughs}. Then, for every tree $\t$ equipped with a \kl{forward Ramseyan split} $\spt$, 
     one can effectively construct a \kl{well-marked nested tree} $(\t', \spt', \marking')$ 
-    that is \kl{$L$-bounded} for some $L \in \Nat$, and such that $\someInterp(\t)$ is isomorphic to $\someInterp(\t')$ restricted to the vertices corresponding to \kl{marked leaves}.
+    that is \kl{$L$-bounded} for some $L \in \Nat$, and such that 
+    $\someInterp_{\marked}(\t)$ is isomorphic to $\someInterp_{\marked}(\t')$.
+    %$\someInterp(\t)$ is isomorphic to $\someInterp(\t')$ restricted to the vertices corresponding to \kl{marked leaves}.
 \end{lemma}
 
 
 \begin{proof}
 Given a well-marked nested tree $(\t, \spt, \marking)$, we say that a bough of level $k$ is non-dummy if every node in its backbone is non-dummy.
-Let us first make an observation on marking non-dummy bough that will be useful to obtain suitable markings.
+In this proof we will iteratively replace non-dummy good boughs of high dimension with compatible ones, who will contain dummy nodes. 
+While this procedure may increase the dimension of non-dummy bough in one step, it will strictly decrease the number of marked leaves they contain because of the insertion of dummy nodes.
+The following observation allows us to bound the dimension of non-dummy bough with few marked leaves, up to changing the marking.
+%From any tree $(\t, \spt, \marking)$, at any step, we will strictly decrease the number of marked leaves in bough of high dimension. The termination will follow from \cref{obs:nondummy_leaf}, which can guarantee that any bough of high condition contains many leaves.
+%- Ends when every non-dummy bough of level at least $k$ of $(\t', \spt', \marking')$ is of dimension at most $N_0 +6$. 
+  % We proceed by induction on $k$, starting with $k=N+1$, and then on the number of bough of level $k$ with $K$ marked leaves. Given a non-dummy bough $B$ with $K$ leaves and dimension larger than $N_0$ (implying that it is good). We will show that $B$ can be split into two non-dummy bough, separated by dummy nodes, with at least one leaf mapped to each of the two new non-dummy bough. This will decrease strictly the number of non-dummy bough with at least $K$ leaves, proving that this process terminates.
+
+
+
+
 
 \begin{observation} \label{obs:nondummy_leaf}
   Given a well-marked nested tree $(\t, \spt, \marking)$, there is a marking $\marking'$, preserving the marking on leaves, such that in $(\t, \spt, \marking')$ every non-dummy bough of dimension at least $3$ contains a marked leaf. 
@@ -292,9 +303,79 @@ Let us first make an observation on marking non-dummy bough that will be useful 
   Suppose that in $\t$ there is a non-dummy bough $B$ of dimension $n$ with backbone $b_0,b_1,b_2,\dots, b_n$ that contains no marked leaf. Define the marking $\marking'$ such that $b_0$ and $b_n$ are marked, $b_1$ is separating, every other node in $B$ is dummy, and every node $u$ outside $B$ $\marking'(u) = \marking(u)$. Observe that $(\t, \spt, \marking')$ is well-marked.
 \end{claimproof}
 
+For a well-marked nested tree $(\t, \spt, \marking)$, let $R_{\t}(k,K)$ be the number of non-dummy bough of level $k$ and dimension at least $N_0+7$ in $\t$ with at least $K$ marked leaves. 
+We say that a well-marked nested tree $(\t, \spt, \marking)$ is $(k,K)$-critical if $R_{\t}(k,K)\geq R_{\t}(k,K+1)=0$ and $R_{\t}(k',K) = 0$ for every $k'>k$.
 
+\begin{claim} \label{clm:iteration_marked}  
+Let $k\in \{1,\dots, N\}, K > 2$, for any $(k,K)$-critical well-marked nested tree $(\t, \spt, \marking)$ with $R_{\t}(k,K)>0$, there is a  $(k,K)$-critical well-marked nested tree $(\t', \spt', \marking')$ such that:
+\begin{itemize}
+  \item $R_{\t'}(k,K) < R_{\t}(k,K)$, and
+  \item $\someInterp_{\marked}(\t)$ is isomorphic to $\someInterp_{\marked}(\t')$.
+\end{itemize}
+\end{claim}
+
+\begin{claimproof}
+  Let $(\t, \spt, \marking)$ be a $(k,K)$-critical well-marked nested tree.
+  Since $R_{\t}(k,K)>  0$ it follows that in $(\t, \spt, \marking)$ 
+  there is a non-dummy good bough $B$ of level $k$ and dimension $n\geq N_0+7$ with backbone $b_0,b_1,\dots, b_n$ containing $K$ marked leaves. 
+  %Assume that $B$ is maximal, that is, it is not contained in any non-dummy bough of the same level. 
+  %Let $C[\square]$ be the context such that $\t = C[B]$.
+
+  By \cref{obs:nondummy_leaf} we may assume that there is a marked leaf in at least one of the first three blocks  of $B$.
+  Similarly, we may assume that there is at least one leaf in one of the last three blocks of $B$.
+  Consider now $B' = \BBlock[\t]{b_3}{b_{n-3}}$ the bough defined by the backbone $b_3,b_4,\dots, b_{n-3}$, it has dimension $n-6> N_0 $, therefore it must be a good bough. Let $C[\square]$ be the context such that $\t = C[B']$.
+
+  By definition of \kl{good boughs}, there exists a \kl{compatible bough} $H$ with backbone $h_0,h_1,\dots, h_m$,
+  and a map $h \colon \someInterp(C[B']) \to \someInterp(C[H])$ satisfying the three conditions of \cref{good-bough:def}.   
+  Let $\t' = C[H]$ and $\spt'$ be its split, which
+  is still \kl{forward Ramseyan} by definition of \kl{compatible boughs}. 
+  By \cref{good-bough:def}, there is at least $3$ consecutive blocks of $H$ that are left untouched by $h$, hence there is $j\leq l-3$ such that $\BBlock[\t']{h_j}{h_l}$ is untouched.
+  We now define the marking $\marking'$ of $\t'$ as follows:
+  \begin{itemize}
+    \item for $u\in C[\square]$, let $\marking'(u)= \marking(u)$,
+    \item for every marked leaf $u$ of $B'$, $\marking'(h(u)) = \marked$,
+    \item let $\marking(h_j) = \marking(h_l) = \marked $ and $\marking(h_{j+1}) = \separating$,
+    \item for every $u$ on the path from $h_0$ to $h_j$ and from $h_l$ to $h_m$ let $\marking(u) = \marked$,
+    \item for every marked leaf $u$ of $H$, for every node $v$ on the path from $u$ to $\lca(u,h_m)$ let $\marking(v)= \marked$,
+    \item for every other node $u$ in $H$ let $\marking(u) =\dummy$.
+  \end{itemize}
+  It is clear from construction that $(\t', \spt', \marking')$ is a well-marked nested tree. Moreover, since $h$ is an embedding of graphs and the marked leaves of $\t'$ are exactly the ones of $\t$, we have that $\someInterp_{\marked}(\t)$ is isomorphic to $\someInterp_{\marked}(\t')$.
+
+  It remains to show that $(\t', \spt', \marking')$  is $(k,K)$-critical and $R_{\t'}(k,K) < R_{\t}(k,K)$.
+  Recall that $B$ is a non-dummy bough of level $k$ containing $K$ marked leaves. 
+  By replacing $B'$ by $H$, we've inserted dummy nodes between the first three blocks of $B$ and the last three ones, which contain marked leaves. 
+  Therefore, any non-dummy bough of level $k$ or more whose backbone intersects $H$ contains strictly less than $K$ leaves.
+  The number of leaves contained in any other non-dummy bough of level $k$ or more is left unchanged.
+  This concludes the proof of the Claim.
+\end{claimproof}
+
+Iteratively applying the previous Claim, we can prove the following.
+
+\begin{claim} \label{clm:important_marking}
+  For any well-marked nested tree $(\t, \spt, \marking)$ with $R_{\t}(k,K)>0$, there is a well-marked nested tree $(\t', \spt', \marking')$ such that:
+  \begin{itemize}
+      \item $\someInterp_{\marked}(\t)$ is isomorphic to $\someInterp_{\marked}(\t')$, and
+    \item every non-dummy bough of $(\t', \spt', \marking')$ is of dimension at most $N_0 +6$.
+  \end{itemize} 
+\end{claim}
+\begin{claimproof}
+  Let $(\t, \spt, \marking)$ be a well-marked nested tree.
+  By \cref{obs:nondummy_leaf}, we can assume that any bough with  $2$ marked leaves has dimension at most $6$. 
+  Hence, if for every $k \in \{1,\dots, N\}$ and $K=2$ we have $R_{\t}(k,K)=0$, then, by the definition of $R_{\t}(k,K)$ and the previous assumption, any non-dummy bough has dimension at most $N_0+6$.
+  Else, there is $K>2$ and $k\in\{1,\dots ,N\}$ such that  $(\t, \spt, \marking)$ is $(k,K)$-critical and $R_{\t}(k,K)>0$. 
+  Pick $K$ and $k$ to be maximal with respect to this property and apply \cref{clm:iteration_marked} to obtain $(\t', \spt', \marking')$ such that $\someInterp_{\marked}(\t)$ is isomorphic to $\someInterp_{\marked}(\t')$.
+  Since $R_{\t'}(k,K) < R_{\t}(k,K)$ and $(\t', \spt', \marking')$ is $(k,K)$-critical, this step can be applied only a finite amount of time until $R_{\t}(k',K')=0$ for every $k',K'$.
+\end{claimproof}
+
+Given a tree  $\t$  equipped with a \kl{forward Ramseyan split} $\spt$, consider the marking $\marking$ of $\t$ such that every node is marked. 
+By \cref{clm:important_marking} there is $(\t', \spt', \marking')$ such that  $\someInterp_{\marked}(\t)$ is isomorphic to $\someInterp_{\marked}(\t')$.
+To show that $(\t', \spt', \marking')$ is $L$-bounded for some $L\in \Nat$, observe that  the length of a path of non-dummy nodes depends only on the height $N$ of the split, and the maximum dimension of non-dummy bough (of any level). 
+Since by \cref{clm:important_marking} this dimension is bounded by $N_0+6$, it follows that there is $L$ that depends only on $\someInterp$ such that $(\t', \spt', \marking')$ is $L$-bounded.
+\begin{comment}
+  
 \begin{claim} \label{clm:induction_marked}  
-For $k\in \{1,\dots, N+1\}$, for every well-marked nested tree $(\t, \spt, \marking)$ there is a well-marked nested tree $(\t', \spt', \marking')$ such that:
+For $k\in \{1,\dots, N+1\}$, for every well-marked nested tree $(\t, \spt, \marking)$. Assume that for any $(\t', \spt', \marking')$ such that $R_{\t'}(k,K) < R_{\t}(k,K)$, \cref{clm:induction_marked} holds.
+Then, there is a well-marked nested tree $(\t', \spt', \marking')$ such that:
 \begin{enumerate}[a]
   \item  $(\t, \spt, \marking) \gemb (\t', \spt', \marking')$ witnessed by a mapping $h$, \label{it:induction_marked1} \todo{careful with def of marked embeding}
   \item the mapping $h$ is a bijection between the marked leaves of $\t$ and $\t'$, \label{it:induction_marked2}
@@ -354,11 +435,7 @@ For $k\in \{1,\dots, N+1\}$, for every well-marked nested tree $(\t, \spt, \mark
   $$(\t, \spt, \marking) \gemb (\t', \spt', \marking') \gemb (\t'', \spt'', \marking''),$$\todo{maybe not gap embeding} with a mapping which is a bijection between the leaves of $\t$ and $\t''$ and \cref{it:induction_marked3} is satisfied by $(\t'', \spt'', \marking'')$, concluding the proof of the Claim.
 \end{claimproof}
 
-We now show that \cref{clm:induction_marked} implies the conclusion of the Lemma. 
-Given a tree  $\t$  equipped with a \kl{forward Ramseyan split} $\spt$, consider the marking $\marking$ of $\t$ such that every node is marked. 
-By \cref{clm:induction_marked} there is $(\t', \spt', \marking')$  and mapping $h$ such that the marked leaves of $\t$ are in bijection with the ones of $\t'$. By \cref{it:induction_marked1} and \cref{cor:gap-embedding-monotone}, it follows that $\someInterp(\t)$ is isomorphic to $\someInterp(\t')$ restricted to the vertices corresponding to \kl{marked leaves}.
-
-It remains to show that $(\t', \spt', \marking')$ is $L$-bounded for some $L\in \Nat$. It is clear that the length of a path of non-dummy nodes depends only on the height $N$ of the split, and the maximum dimension of non-dummy bough (of any level). Since this dimension is bounded by $N_0+7$ \cref{it:induction_marked3}, it follows that there is $L$ that depends only on $\someInterp$ such that $(\t', \spt', \marking')$ is $L$-bounded.
+\end{comment}
 \end{proof}
 
 
