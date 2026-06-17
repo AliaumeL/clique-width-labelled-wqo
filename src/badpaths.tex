@@ -285,7 +285,7 @@ allowing us to apply \cref{thm:marked-nested-trees-wqo}.
 \begin{proof}
 Given a well-marked nested tree $(\t, \spt, \marking)$, we say that a bough of level $k$ is non-dummy if every node in its backbone is non-dummy.
 In this proof we will iteratively replace non-dummy good boughs of high dimension with compatible ones, who will contain dummy nodes. 
-While this procedure may increase the dimension of non-dummy bough in one step, it will strictly decrease the number of marked leaves they contain because of the insertion of dummy nodes.
+While this procedure may increase the dimension of non-dummy bough in one step, but it will strictly decrease the number of marked leaves they contain because of the insertion of dummy nodes.
 The following observation allows us to bound the dimension of non-dummy bough with few marked leaves, up to changing the marking.
 %From any tree $(\t, \spt, \marking)$, at any step, we will strictly decrease the number of marked leaves in bough of high dimension. The termination will follow from \cref{obs:nondummy_leaf}, which can guarantee that any bough of high condition contains many leaves.
 %- Ends when every non-dummy bough of level at least $k$ of $(\t', \spt', \marking')$ is of dimension at most $N_0 +6$. 
@@ -343,7 +343,7 @@ Let $k\in \{1,\dots, N\}, K > 2$, for any $(k,K)$-critical well-marked nested tr
 
   It remains to show that $(\t', \spt', \marking')$  is $(k,K)$-critical and $R_{\t'}(k,K) < R_{\t}(k,K)$.
   Recall that $B$ is a non-dummy bough of level $k$ containing $K$ marked leaves. 
-  By replacing $B'$ by $H$, we've inserted dummy nodes between the first three blocks of $B$ and the last three ones, which contain marked leaves. 
+  By replacing $B'$ by $H$, we have inserted dummy nodes between the first three blocks of $B$ and the last three ones, which contain marked leaves. 
   Therefore, any non-dummy bough of level $k$ or more whose backbone intersects $H$ contains strictly less than $K$ leaves.
   The number of marked leaves contained in any other non-dummy bough of level $k$ or more is left unchanged.
   This concludes the proof of the Claim.
@@ -352,7 +352,9 @@ Let $k\in \{1,\dots, N\}, K > 2$, for any $(k,K)$-critical well-marked nested tr
 Iteratively applying the previous Claim, we can prove the following.
 
 \begin{claim} \label{clm:important_marking}
-  For any well-marked nested tree $(\t, \spt, \marking)$ with $R_{\t}(k,K)>0$, there is a well-marked nested tree $(\t', \spt', \marking')$ such that:
+  For any well-marked nested tree $(\t, \spt, \marking)$
+  % with $R_{\t}(k,K)>0$, 
+  there is a well-marked nested tree $(\t', \spt', \marking')$ such that:
   \begin{itemize}
       \item $\someInterp_{\marked}(\t)$ is isomorphic to $\someInterp_{\marked}(\t')$, and
     \item every non-dummy bough of $(\t', \spt', \marking')$ is of dimension at most $N_0 +6$.
@@ -360,11 +362,11 @@ Iteratively applying the previous Claim, we can prove the following.
 \end{claim}
 \begin{claimproof}
   Let $(\t, \spt, \marking)$ be a well-marked nested tree.
-  By \cref{obs:nondummy_leaf}, we can assume that any bough with  $2$ marked leaves has dimension at most $6$. 
+  By \cref{obs:nondummy_leaf}, we can assume that any non-dummy bough with  $2$ marked leaves has dimension at most $6$. 
   Hence, if for every $k \in \{1,\dots, N\}$ and $K=2$ we have $R_{\t}(k,K)=0$, then, by the definition of $R_{\t}(k,K)$ and the previous assumption, any non-dummy bough has dimension at most $N_0+6$.
   Else, there is $K>2$ and $k\in\{1,\dots ,N\}$ such that  $(\t, \spt, \marking)$ is $(k,K)$-critical and $R_{\t}(k,K)>0$. 
-  Pick $K$ and $k$ to be maximal with respect to this property and apply \cref{clm:iteration_marked} to obtain $(\t', \spt', \marking')$ such that $\someInterp_{\marked}(\t)$ is isomorphic to $\someInterp_{\marked}(\t')$.
-  Since $R_{\t'}(k,K) < R_{\t}(k,K)$ and $(\t', \spt', \marking')$ is $(k,K)$-critical, this step can be applied only a finite amount of time until $R_{\t}(k',K')=0$ for every $k',K'$.
+  Pick $K$ to be maximal with respect to this property and apply \cref{clm:iteration_marked} to obtain $(\t', \spt', \marking')$ such that $\someInterp_{\marked}(\t)$ is isomorphic to $\someInterp_{\marked}(\t')$.
+  Since $R_{\t'}(k,K) < R_{\t}(k,K)$ and $(\t', \spt', \marking')$ is $(k,K)$-critical, this step can be applied only a finite amount of time until $R_{\t}(k',K')=0$ for every $k'$ and $K'>2$.
 \end{claimproof}
 
 Given a tree  $\t$  equipped with a \kl{forward Ramseyan split} $\spt$, consider the marking $\marking$ of $\t$ such that every node is marked. 
@@ -597,7 +599,7 @@ $C[\square]$ to witness that they are \kl(bough){bad} (see
   this \kl{$l$-neighbourhood}, we have $\tlbl{\t'}{x}{y} \cdot
   \tlbl{\t'}{x'}{y'} = \tlbl{\t'}{x}{y}$.
 
-  First, remark that \kl{$l$-neighbourhoods} with $l < k$ inside $\t'$ are fully
+  First, remark that \kl{$l$-neighbourhoods} with $l > k$ inside $\t'$ are fully
   contained either in $B'$, or $\aTree_{\mathsf{root}}$, or
   $\aTree_{\mathsf{left}}$, or $\aTree_{\mathsf{right}}$. As a consequence,
   nothing needs to be checked on such \kl{$l$-neighbourhoods} since $B'$
@@ -606,7 +608,7 @@ $C[\square]$ to witness that they are \kl(bough){bad} (see
   condition in $\t'$ must involve nodes that are not all contained
   in one of these four subtrees.
 
-  Now, consider \kl{$l$-neighbourhoods} with $l \geq k$.
+  Now, consider \kl{$l$-neighbourhoods} with $l \leq k$.
   In that case, the only \kl{$l$-neighbourhood} of a branch that
   is not fully contained in one of the four subtrees crosses $B'$. Let us 
   distinguish several cases based on the shape of the branch with respect 
@@ -619,8 +621,7 @@ $C[\square]$ to witness that they are \kl(bough){bad} (see
       $\aTree_{\mathsf{root}}$ (possibly in $\square$), goes through $B'$, and ends in $B'$.
   \end{enumerate}
 
-  In the first case, consider two nodes $x \treelt y$ and $x' \treelt y'$ in
-  the \kl{$l$-neighbourhood}. The value $\tlbl{\t'}{x}{y}$ can be
+  In the first case, consider two nodes $x \treelt y$ in  the \kl{$l$-neighbourhood}. The value $\tlbl{\t'}{x}{y}$ can be
   decomposed into a part before entering $B'$, a part inside $B'$, and a part
   after leaving $B'$. By construction, the part inside $B'$ is one of the
   idempotent elements labelling the \kl(bough){backbone} of $B'$. Hence, to
@@ -629,11 +630,11 @@ $C[\square]$ to witness that they are \kl(bough){bad} (see
   number of equations depends on the shape of $C[\square]$, but not on
   the number of elements of $M$ extracted from $B'$).
 
-  In the second case, consider two nodes $x \treelt y$ and $x' \treelt y'$ in
+  In the second case, consider two nodes $x \treelt y$ in
   the \kl{$l$-neighbourhood}. Here, the value $\tlbl{\t'}{x}{y}$ can be
   decomposed into a part before entering $B'$, a part from $b_0'$ to the first
-  node $z$ in $B'$ of level $l$ (which is not on the \kl(bough){backbone} of
-  $B'$ if $l > k$), and a part from $z$ to $y$. Similarly, the equations
+  node $z$ in $B'$ of level $l$ (which is not on the path induced by the \kl(bough){backbone} of
+  $B'$ if $l < k$), and a part from $z$ to $y$. Similarly, the equations
   ensuring that $\t'$ is \kl{forward Ramseyan} in this case can be expressed
   using the values $\tlbl{\t'}{b_0'}{z}$ for every node $z$ in $B'$, and the
   values $\tlbl{\t'}{z}{y}$ for every node $y$ in $B'$ in the same
@@ -687,8 +688,7 @@ $C[\square]$ to witness that they are \kl(bough){bad} (see
   collect the following monoid elements:
   $\tlbl{\aTree_{\mathsf{root}}}{\treeRoot}{z}$,
   $\tlbl{\aTree_{\mathsf{root}}}{z}{x}$, and
-  $\tlbl{\aTree_{\mathsf{root}}}{z}{\square}$, where $z$ is the closest
-  ancestor of $x$ belonging to the path from $\treeRoot$ to $\square$. For a
+  $\tlbl{\aTree_{\mathsf{root}}}{z}{\square}$, where $z= \lca(x,\square)$. For a
   leaf that belongs to the left (resp. right) subtree, we only consider the
   monoid element $m_{\mathsf{left}} \cdot
   \tlbl{\aTree_{\mathsf{left}}}{\treeRoot}{x}$ (resp. $m_{\mathsf{right}} \cdot
@@ -697,6 +697,7 @@ $C[\square]$ to witness that they are \kl(bough){bad} (see
   of an edge between a leaf $y$ in $B$ and a leaf $x$ in $C[\square]$,
   it suffices to know the \kl{bough type} of $y$ and the \kl{context type} of $x$
   (see \cref{monoid-interpretation:eq}, and \cref{partitionning-a-graph:fig}).
+  
   Since there are finitely many possible \kl{context types}
   and \kl{bough types}, if a \kl{bough} $B$ is a \kl{good bough} in $C[B]$
   using a map $h$ and a \kl{compatible bough} $H$,
